@@ -65,29 +65,26 @@ class ItemDB(ModelPlus):
         """
         await engine.find_one(cls, cls.name == name)
 
-    def _compare_rarity(self, other: 'ItemDB'):
-        """
-        Returns a tuple with the rarity value of self and other
-        """
-        r, _ = rarity[self.rarity]
-        ro, _ = rarity[other.rarity]
-        return r, ro
+    @property
+    def color(self):
+        """Returns the color of the item"""
+        return rarity[self.rarity][1]
+
+    @property
+    def rarity_level(self):
+        return rarity[self.rarity][0]
 
     def __lt__(self, other: 'ItemDB'):
-        r, ro = self._compare_rarity(other)
-        return r < ro
+        return self.rarity_level < other.rarity_level
 
     def __le__(self, other: 'ItemDB'):
-        r, ro = self._compare_rarity(other)
-        return r <= ro
+        return self.rarity_level <= other.rarity_level
 
     def __ge__(self, other: 'ItemDB'):
-        r, ro = self._compare_rarity(other)
-        return r >= ro
+        return self.rarity_level > other.rarity_level
 
     def __gt__(self, other: 'ItemDB'):
-        r, ro = self._compare_rarity(other)
-        return r > ro
+        return self.rarity_level >= other.rarity_level
 
     def __mul__(self, other: int):
         return self.price * other
