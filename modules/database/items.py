@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import Optional, Union
 
 from pydantic import root_validator
@@ -8,6 +9,7 @@ from .models import ModelPlus
 __all__ = (
     'ItemDB',
 )
+
 
 rarity = {
     "Contraband": (8, 0xe4ae39),
@@ -71,6 +73,11 @@ class ItemDB(ModelPlus):
         return rarity[self.rarity][1]
 
     @property
+    def asset_url(self):
+        """Returns the asset url for this item"""
+        return "https://community.akamai.steamstatic.com/economy/image/" + self.icon_url
+
+    @property
     def rarity_level(self):
         return rarity[self.rarity][0]
 
@@ -94,3 +101,5 @@ class ItemDB(ModelPlus):
 
     def __radd__(self, other: int):
         return self.price + other
+
+
