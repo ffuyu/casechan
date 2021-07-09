@@ -2,6 +2,9 @@ from odmantic import query, Model
 
 from modules.database.engine import engine
 
+__all__ = (
+    'ModelPlus',
+)
 
 class ModelPlus(Model):
 

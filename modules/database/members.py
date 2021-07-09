@@ -5,7 +5,7 @@ from typing import Optional, Dict, List
 from modules.database.models import ModelPlus
 
 __all__ = (
-    'MemberDB'
+    'MemberDB',
 )
 
 stats_dict = {

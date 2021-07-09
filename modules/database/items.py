@@ -6,7 +6,7 @@ from modules.database.engine import engine
 from modules.database.models import ModelPlus
 
 __all__ = (
-    'ItemDB'
+    'ItemDB',
 )
 
 
