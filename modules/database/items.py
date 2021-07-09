@@ -9,6 +9,17 @@ __all__ = (
     'ItemDB',
 )
 
+rarity = {
+    "Contraband": (8, 0xe4ae39),
+    "Exceedingly Rare Item": (7, 0xEB4B4B),
+    "Covert": (6, 0xEB4B4B),
+    "Classified": (5, 0xD32CE6),
+    "Restricted": (4, 0x8847FF),
+    "Mil-Spec Grade": (3, 0x4B69FF),
+    "Consumer Grade": (2, 0xb0c3d9),
+    "Industrial Grade": (1, 0x5e98d9),
+}
+
 
 class ItemDB(ModelPlus):
     name: str
@@ -54,17 +65,29 @@ class ItemDB(ModelPlus):
         """
         await engine.find_one(cls, cls.name == name)
 
+    def _compare_rarity(self, other: 'ItemDB'):
+        """
+        Returns a tuple with the rarity value of self and other
+        """
+        r, _ = rarity[self.rarity]
+        ro, _ = rarity[other.rarity]
+        return r, ro
+
     def __lt__(self, other: 'ItemDB'):
-        return self.price < other.price
+        r, ro = self._compare_rarity(other)
+        return r < ro
 
     def __le__(self, other: 'ItemDB'):
-        return self.price <= other.price
+        r, ro = self._compare_rarity(other)
+        return r <= ro
 
     def __ge__(self, other: 'ItemDB'):
-        return self.price >= other.price
+        r, ro = self._compare_rarity(other)
+        return r >= ro
 
     def __gt__(self, other: 'ItemDB'):
-        return self.price > other.price
+        r, ro = self._compare_rarity(other)
+        return r > ro
 
     def __mul__(self, other: int):
         return self.price * other
