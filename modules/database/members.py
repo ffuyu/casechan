@@ -2,7 +2,7 @@ from copy import copy
 from datetime import datetime
 from typing import Optional, Dict, List
 
-from modules.database.models import ModelPlus
+from .models import ModelPlus
 
 __all__ = (
     'MemberDB',

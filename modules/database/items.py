@@ -1,9 +1,9 @@
-from typing import Optional
+from typing import Optional, Union
 
 from pydantic import root_validator
 
-from modules.database.engine import engine
-from modules.database.models import ModelPlus
+from .engine import engine
+from .models import ModelPlus
 
 __all__ = (
     'ItemDB',
@@ -53,3 +53,24 @@ class ItemDB(ModelPlus):
             Optional[ItemDB]: None if no item was found
         """
         await engine.find_one(cls, cls.name == name)
+
+    def __lt__(self, other: 'ItemDB'):
+        return self.price < other.price
+
+    def __le__(self, other: 'ItemDB'):
+        return self.price <= other.price
+
+    def __ge__(self, other: 'ItemDB'):
+        return self.price >= other.price
+
+    def __gt__(self, other: 'ItemDB'):
+        return self.price > other.price
+
+    def __mul__(self, other: int):
+        return self.price * other
+
+    def __add__(self, other: 'ItemDB'):
+        return self.price + other.price
+
+    def __radd__(self, other: int):
+        return self.price + other
