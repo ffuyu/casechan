@@ -36,29 +36,11 @@ class ModelPlus(Model):
         await engine.save(self)
 
 
-stats_dict = {
-    "cases": {
-        "received": 0,
-        "given": 0,
-        "opened": 0
-    },
-    "keys": {
-        "received": 0,
-        "given": 0,
-    },
-    "transactions": {
-        "trades_made": 0,
-        "items_sold": 0,
-        "blocked": False
-    }
-}
-
-
 class ItemDB(ModelPlus):
     name: str
-    icon_url: str
-    rarity: str
-    price: float
+    icon_url: Optional[str]
+    rarity: Optional[str]
+    price: Optional[float]
 
     class Config:
         collection = 'items'
@@ -96,6 +78,23 @@ class ItemDB(ModelPlus):
             Optional[ItemDB]: None if no item was found
         """
         await engine.find_one(cls, cls.name == name)
+
+stats_dict = {
+    "cases": {
+        "received": 0,
+        "given": 0,
+        "opened": 0
+    },
+    "keys": {
+        "received": 0,
+        "given": 0,
+    },
+    "transactions": {
+        "trades_made": 0,
+        "items_sold": 0,
+        "blocked": False
+    }
+}
 
 
 class MemberDB(ModelPlus):
