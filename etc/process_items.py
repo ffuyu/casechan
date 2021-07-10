@@ -11,17 +11,17 @@ r = requests.get("https://csgobackpack.net/api/GetItemsList/v2/?prettyprint=true
 b = time.monotonic()
 print(f'Request finished. Time: {b - a:.4f} seconds')
 if r.status_code != 200:
-    print(f'Status code error {r.status_code}. Exiting...')
-    exit()
+    print(f'> Status code error {r.status_code}. Exiting...')
+    exit(1)
 
-print('Converting response object to list of raw items...')
+print('> Converting response object to list of raw items...')
 b = time.monotonic()
 res = r.json()
 raw_items = list(res['items_list'].values())
 c = time.monotonic()
 print(f'Finished. Time: {c - b:.2f}. Total items {len(raw_items)}')
 
-print('Processing items...')
+print('> Processing items...')
 
 b = time.monotonic()
 items = []
@@ -57,7 +57,7 @@ print(f'Finished. Time: {c - b:.2f}. Items: {len(items)}')
 
 async def persist_items(items_):
     to_persist = []
-    print('Persisting items to database...')
+    print('> Persisting items to database...')
     b = time.monotonic()
     for nitem in items_:
         it = await ItemDB.get(True, name=nitem['name'], rarity=nitem['rarity'])
@@ -74,5 +74,5 @@ loop = asyncio.get_event_loop()
 loop.run_until_complete(persist_items(items))
 
 b = time.monotonic()
-print(print(f'Script complete. Total time {b - a:.2f} seconds'))
+print(print(f'> Script complete. Total time {b - a:.2f} seconds'))
 exit(0)
