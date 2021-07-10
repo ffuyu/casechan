@@ -2,6 +2,8 @@ from copy import copy
 from datetime import datetime
 from typing import Optional, Dict, List
 
+from odmantic import Model
+
 from .models import ModelPlus
 
 __all__ = (
@@ -26,7 +28,7 @@ stats_dict = {
 }
 
 
-class MemberDB(ModelPlus):
+class MemberDB(ModelPlus, Model):
     member_id: int
     guild_id: int
     cases: List = []  # ??

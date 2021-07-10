@@ -9,10 +9,17 @@ __all__ = (
 class ModelPlus(Model):
 
     @classmethod
-    async def get_or_create(cls, **kwargs):
+    def quary(cls, **kwargs):
+        return query.and_(*(getattr(cls, kw) == v for kw, v in kwargs.items()))
+
+    @classmethod
+    async def get(cls, create=False, /, **kwargs):
         """
         Searches the collection for a document with specified keys and values
         Args:
+            create (bool):
+                If True a new instance will be created with kwargs
+                This argument is positional only, to prevent collisions with document keys.
             **kwargs: key/values to search for
 
         Returns:
@@ -21,9 +28,9 @@ class ModelPlus(Model):
             AttributeError: If the model does not have the specified attribute set.
             ValidationError: If an object is to be created but required fields are missing
         """
-        q = query.and_(*(getattr(cls, kw) == v for kw, v in kwargs.items()))
+        q = cls.quary(**kwargs)
         doc = await engine.find_one(cls, q)
-        return doc or cls(**kwargs)
+        return doc or cls(**kwargs) if create else None
 
     async def save(self):
         """
