@@ -57,14 +57,25 @@ print(f'Finished. Time: {c - b:.2f}. Items: {len(items)}')
 
 async def persist_items(items_):
     to_persist = []
-    print('> Persisting items to database...')
-    b = time.monotonic()
-    for nitem in items_:
-        it = await ItemDB.get(True, name=nitem['name'], rarity=nitem['rarity'])
-        it.price = nitem['price']
-        to_persist.append(it)
 
-    await engine.save_all(to_persist)
+    async def get_from_db(nitem_):
+        it = await ItemDB.get(True, name=nitem_['name'], rarity=nitem_['rarity'])
+        if it.price != nitem_['price']:
+            it.price = nitem_['price']
+            to_persist.append(it)
+
+    print('> Selecting items from the database that require updating...', flush=True)
+    b = time.monotonic()
+
+    await asyncio.gather(
+        *[get_from_db(nitem) for nitem in items_]
+    )
+
+    print(f'Database items that need to be updated: {len(to_persist)}')
+    if to_persist:
+        print('Updating database...')
+        await engine.save_all(to_persist)
+
 
     c = time.monotonic()
     print(f'Done. Time: {c - b:.2f}')
