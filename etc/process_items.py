@@ -1,6 +1,7 @@
 import asyncio
-import requests
 import time
+
+import requests
 
 from modules.database import ItemDB, engine
 
@@ -75,7 +76,6 @@ async def persist_items(items_):
     if to_persist:
         print('Updating database...')
         await engine.save_all(to_persist)
-
 
     c = time.monotonic()
     print(f'Done. Time: {c - b:.2f}')

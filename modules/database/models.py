@@ -6,6 +6,7 @@ __all__ = (
     'ModelPlus',
 )
 
+
 class ModelPlus(Model):
 
     @classmethod

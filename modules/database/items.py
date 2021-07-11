@@ -1,9 +1,7 @@
 from typing import Optional
 
 from odmantic import Model
-from pydantic import root_validator
 
-from .engine import engine
 from .models import ModelPlus
 
 __all__ = (
@@ -11,14 +9,14 @@ __all__ = (
 )
 
 rarity = {
-    "Contraband":            (8, 0xe4ae39),
+    "Contraband": (8, 0xe4ae39),
     "Exceedingly Rare Item": (7, 0xEB4B4B),
-    "Covert":                (6, 0xEB4B4B),
-    "Classified":            (5, 0xD32CE6),
-    "Restricted":            (4, 0x8847FF),
-    "Mil-Spec Grade":        (3, 0x4B69FF),
-    "Consumer Grade":        (2, 0xb0c3d9),
-    "Industrial Grade":      (1, 0x5e98d9),
+    "Covert": (6, 0xEB4B4B),
+    "Classified": (5, 0xD32CE6),
+    "Restricted": (4, 0x8847FF),
+    "Mil-Spec Grade": (3, 0x4B69FF),
+    "Consumer Grade": (2, 0xb0c3d9),
+    "Industrial Grade": (1, 0x5e98d9),
 }
 
 

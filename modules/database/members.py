@@ -42,10 +42,3 @@ class MemberDB(ModelPlus, Model):
 
     class Config:
         collection = 'members'
-
-    @classmethod
-    def query(cls, *, guild_id: int, member_id: int):
-        """
-        Since ODMantic's default query dialect is kinda hard to read we simplify it with a classmethod
-        """
-        return (cls.guild_id == guild_id) & (cls.member_id == member_id)
