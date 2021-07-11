@@ -2,7 +2,7 @@ import asyncio
 import random
 import time
 
-from modules.database import MemberDB, ItemDB, engine
+from modules.database import Player, Item, engine
 
 
 async def main():
@@ -11,10 +11,10 @@ async def main():
     r = random.Random(67)
 
     print('Retrieving or creating member object...')
-    m = await MemberDB.get(True, member_id=12345, guild_id=67890)
+    m = await Player.get(True, member_id=12345, guild_id=67890)
 
     print('Selecting 3 random items to give to dummy member...')
-    all_items = await engine.find(ItemDB)
+    all_items = await engine.find(Item)
     a, b, c = r.sample(all_items, 3)
 
     print('Updating inventory with selected items...')

@@ -4,11 +4,11 @@ from typing import Optional, Dict, List
 
 from odmantic import Model, query
 
-from . import ItemDB
+from . import Item
 from .models import ModelPlus
 
 __all__ = (
-    'MemberDB',
+    'Player',
 )
 
 stats_dict = {
@@ -29,7 +29,7 @@ stats_dict = {
 }
 
 
-class MemberDB(ModelPlus, Model):
+class Player(ModelPlus, Model):
     member_id: int
     guild_id: int
     cases: List = []  # ??
@@ -42,10 +42,10 @@ class MemberDB(ModelPlus, Model):
     restricted: bool = False
 
     class Config:
-        collection = 'members'
+        collection = 'players'
 
-    async def inv_items(self) -> List[ItemDB]:
-        return await self.engine.find(ItemDB, query.in_(ItemDB.name, list(self.inventory)))
+    async def inv_items(self) -> List[Item]:
+        return await self.engine.find(Item, query.in_(Item.name, list(self.inventory)))
 
     async def inv_total(self) -> float:
         items = [(i, self.inventory[i.name]) for i in await self.inv_items()]

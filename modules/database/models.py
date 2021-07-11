@@ -14,7 +14,7 @@ class ModelPlus(Model):
         return engine
 
     @classmethod
-    def quary(cls, **kwargs):
+    def query(cls, **kwargs):
         return query.and_(*(getattr(cls, kw) == v for kw, v in kwargs.items()))
 
     @classmethod
@@ -33,7 +33,7 @@ class ModelPlus(Model):
             AttributeError: If the model does not have the specified attribute set.
             ValidationError: If an object is to be created but required fields are missing
         """
-        q = cls.quary(**kwargs)
+        q = cls.query(**kwargs)
         doc = await engine.find_one(cls, q)
         return doc or cls(**kwargs) if create else None
 

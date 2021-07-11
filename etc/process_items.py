@@ -3,7 +3,7 @@ import time
 
 import requests
 
-from modules.database import ItemDB, engine
+from modules.database import Item, engine
 
 print('starting up')
 print('> Requesting...')
@@ -28,9 +28,11 @@ b = time.monotonic()
 items = []
 relevant_rarities = ['Contraband', 'Covert', 'Classified', 'Restricted',
                      'Mil-Spec Grade', 'Consumer Grade', 'Industrial Grade']
+
 relevant_keys = ['name', 'icon_url', 'rarity']
 price_periods = ['7_days', '24_hours', '30_days']
 all_time_stats = ['highest_price', 'average', 'median']
+
 for ri in raw_items:
     if ri.get('rarity') not in relevant_rarities:
         continue
@@ -58,31 +60,26 @@ print(f'Finished. Time: {c - b:.2f}. Items: {len(items)}')
 
 async def persist_items(items_):
     to_persist = []
-    db_items = await engine.find(ItemDB)
-
-    async def get_from_db(nitem_):
-        it = next(
-            (i for i in db_items if i.name == nitem_['name'] and i.rarity == nitem_['rarity']),
-            ItemDB(name=nitem_['name'], rarity=nitem_['rarity'])
-        )
-        if it.price != nitem_['price']:
-            it.price = nitem_['price']
-            to_persist.append(it)
+    db_items = await engine.find(Item)
 
     print('> Selecting items from the database that require updating...', flush=True)
-    b = time.monotonic()
+    b_ = time.monotonic()
+    for nitem in items_:
+        it = next(
+            (i for i in db_items if i.name == nitem['name'] and i.rarity == nitem['rarity']),
+            Item(name=nitem['name'], rarity=nitem['rarity'])
+        )
+        if it.price != nitem['price']:
+            it.price = nitem['price']
+            to_persist.append(it)
 
-    await asyncio.gather(
-        *[get_from_db(nitem) for nitem in items_]
-    )
-
-    print(f'Database items that need to be updated: {len(to_persist)}')
+    print(f'\tDatabase items that need to be updated: {len(to_persist)}')
     if to_persist:
-        print('Updating database...')
+        print('> Updating database...')
         await engine.save_all(to_persist)
 
     c = time.monotonic()
-    print(f'Done. Time: {c - b:.2f}')
+    print(f'Done. Time: {c - b_:.2f}')
 
 
 loop = asyncio.get_event_loop()

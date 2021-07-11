@@ -5,7 +5,7 @@ from odmantic import Model
 from .models import ModelPlus
 
 __all__ = (
-    'ItemDB',
+    'Item',
 )
 
 rarity = {
@@ -20,7 +20,7 @@ rarity = {
 }
 
 
-class ItemDB(ModelPlus, Model):
+class Item(ModelPlus, Model):
     name: str
     icon_url: Optional[str]
     rarity: Optional[str]
@@ -43,19 +43,19 @@ class ItemDB(ModelPlus, Model):
     def rarity_level(self):
         return rarity[self.rarity][0]
 
-    def __lt__(self, other: 'ItemDB'):
+    def __lt__(self, other: 'Item'):
         return self.rarity_level < other.rarity_level
 
-    def __le__(self, other: 'ItemDB'):
+    def __le__(self, other: 'Item'):
         return self.rarity_level <= other.rarity_level
 
-    def __ge__(self, other: 'ItemDB'):
+    def __ge__(self, other: 'Item'):
         return self.rarity_level > other.rarity_level
 
-    def __gt__(self, other: 'ItemDB'):
+    def __gt__(self, other: 'Item'):
         return self.rarity_level >= other.rarity_level
 
-    def __add__(self, other: 'ItemDB'):
+    def __add__(self, other: 'Item'):
         return self.price + other.price
 
     def __radd__(self, other: int):

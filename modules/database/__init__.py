@@ -1,4 +1,4 @@
 from .engine import *
 from .items import *
-from .members import *
+from .players import *
 from .models import *
