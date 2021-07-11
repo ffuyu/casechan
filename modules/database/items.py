@@ -55,9 +55,6 @@ class ItemDB(ModelPlus, Model):
     def __gt__(self, other: 'ItemDB'):
         return self.rarity_level >= other.rarity_level
 
-    def __mul__(self, other: int):
-        return self.price * other
-
     def __add__(self, other: 'ItemDB'):
         return self.price + other.price
 

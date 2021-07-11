@@ -58,9 +58,13 @@ print(f'Finished. Time: {c - b:.2f}. Items: {len(items)}')
 
 async def persist_items(items_):
     to_persist = []
+    db_items = await engine.find(ItemDB)
 
     async def get_from_db(nitem_):
-        it = await ItemDB.get(True, name=nitem_['name'], rarity=nitem_['rarity'])
+        it = next(
+            (i for i in db_items if i.name == nitem_['name'] and i.rarity == nitem_['rarity']),
+            ItemDB(name=nitem_['name'], rarity=nitem_['rarity'])
+        )
         if it.price != nitem_['price']:
             it.price = nitem_['price']
             to_persist.append(it)

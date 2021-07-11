@@ -2,8 +2,9 @@ from copy import copy
 from datetime import datetime
 from typing import Optional, Dict, List
 
-from odmantic import Model
+from odmantic import Model, query
 
+from . import ItemDB
 from .models import ModelPlus
 
 __all__ = (
@@ -33,7 +34,7 @@ class MemberDB(ModelPlus, Model):
     guild_id: int
     cases: List = []  # ??
     keys: List = []  # ??
-    inventory: Dict[str, int] = {}  # {item_name: quantity}
+    inventory: Dict[str, int] = {}  # {item.name: quantity}
     stats: dict = copy(stats_dict)
     daily: Optional[datetime] = None
     streak: int = 0
@@ -42,3 +43,10 @@ class MemberDB(ModelPlus, Model):
 
     class Config:
         collection = 'members'
+
+    async def inv_items(self) -> List[ItemDB]:
+        return await self.engine.find(ItemDB, query.in_(ItemDB.name, list(self.inventory)))
+
+    async def inv_total(self) -> float:
+        items = [(i, self.inventory[i.name]) for i in await self.inv_items()]
+        return sum([k.price * v for k, v in items])

@@ -9,6 +9,10 @@ __all__ = (
 
 class ModelPlus(Model):
 
+    @property
+    def engine(self):
+        return engine
+
     @classmethod
     def quary(cls, **kwargs):
         return query.and_(*(getattr(cls, kw) == v for kw, v in kwargs.items()))
@@ -39,3 +43,4 @@ class ModelPlus(Model):
         Uses Upsert method
         """
         await engine.save(self)
+
