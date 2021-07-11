@@ -90,4 +90,3 @@ loop.run_until_complete(persist_items(items))
 
 b = time.monotonic()
 print(print(f'> Script complete. Total time {b - a:.2f} seconds'))
-exit(0)

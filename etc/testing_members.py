@@ -25,5 +25,6 @@ async def main():
     print(f'Saving to database...')
     await m.save()
     print(f'Total time: {time.monotonic()-ta:.2f}')
+
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
