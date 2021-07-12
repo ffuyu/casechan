@@ -1,0 +1,1007 @@
+{
+    "Clutch Case": {
+        "Mil-Spec Grade": [
+            "PP-Bizon | Night Riot",
+            "Five-SeveN | Flame Test",
+            "MP9 | Black Sand",
+            "P2000 | Urban Hazard",
+            "R8 Revolver | Grip",
+            "SG 553 | Aloha",
+            "XM1014 | Oxide Blaze"
+        ],
+        "Restricted": [
+            "Glock-18 | Moonrise",
+            "Negev | Lionfish",
+            "Nova | Wild Six",
+            "MAG-7 | SWAG-7",
+            "UMP-45 | Arctic Wolf"
+        ],
+        "Classified": [
+            "AUG | Stymphalian",
+            "AWP | Mortis",
+            "USP-S | Cortex"
+        ],
+        "Covert": [
+            "M4A4 | Neo-Noir",
+            "MP7 | Bloodsport"
+        ],
+        "Exceedingly Rare Item":[
+            "Hydra Gloves | Case Hardened",
+            "Hydra Gloves | Emerald",
+            "Hydra Gloves | Rattler",
+            "Hydra Gloves | Mangrove",
+
+            "Driver Gloves | Racing Green",
+            "Driver Gloves | Overtake",
+            "Driver Gloves | Imperial Plaid",
+            "Driver Gloves | King Snake",
+
+            "Hand Wraps | Cobalt Skulls",
+            "Hand Wraps | Overprint",
+            "Hand Wraps | Duct Tape",
+            "Hand Wraps | Arboreal",
+
+            "Moto Gloves | POW!",
+            "Moto Gloves | Turtle",
+            "Moto Gloves | Transport",
+            "Moto Gloves | Polygon",
+
+            "Specialist Gloves | Fade",
+            "Specialist Gloves | Crimson Web",
+            "Specialist Gloves | Mogul",
+            "Specialist Gloves | Buckshot",
+
+            "Sport Gloves | Omega",
+            "Sport Gloves | Vice",
+            "Sport Gloves | Amphibious",
+            "Sport Gloves | Bronze Morph"
+        ]
+    },
+    "Operation Broken Fang Case": {
+        "Mil-Spec Grade": [
+            "CZ75-Auto | Vendetta",
+            "P90 | Cocoa Rampage",
+            "G3SG1 | Digital Mesh",
+            "Galil AR | Vandal",
+            "P250 | Contaminant",
+            "M249 | Deep Relief",
+            "MP5-SD | Condition Zero"
+        ],
+        "Restricted": [
+            "AWP | Exoskeleton",
+            "Dual Berettas | Dezastre",
+            "Nova | Clear Polymer",
+            "SSG 08 | Parallax",
+            "UMP-45 | Gold Bismuth"
+        ],
+        "Classified": [
+            "Five-SeveN | Fairy Tale",
+            "M4A4 | Cyber Security",
+            "USP-S | Monster Mashup"
+        ],
+        "Covert": [
+            "M4A1-S | Printstream",
+            "Glock-18 | Neo-Noir"
+        ],
+        "Exceedingly Rare Item": [
+            "Driver Gloves | Queen Jaguar",
+            "Driver Gloves | Rezan the Red",
+            "Driver Gloves | Black Tie",
+            "Driver Gloves | Snow Leopard",
+
+            "Hand Wraps | CAUTION!",
+            "Hand Wraps | Constrictor",
+            "Hand Wraps | Desert Shamagh",
+            "Hand Wraps | Giraffe",
+
+            "Moto Gloves | Finish Line",
+            "Moto Gloves | Blood Pressure",
+            "Moto Gloves | 3rd Commando Company",
+            "Moto Gloves | Smoke Out",
+
+            "Specialist Gloves | Marble Fade",
+            "Specialist Gloves | Tiger Strike",
+            "Specialist Gloves | Lt. Commander",
+            "Specialist Gloves | Field Agent",
+
+            "Sport Gloves | Slingshot",
+            "Sport Gloves | Scarlet Shamagh",
+            "Sport Gloves | Big Game",
+            "Sport Gloves | Nocts",
+
+            "Broken Fang Gloves | Jade",
+            "Broken Fang Gloves | Yellow-banded",
+            "Broken Fang Gloves | Needle Point",
+            "Broken Fang Gloves | Unhinged"
+        ]
+    },
+    "Snakebite Case": {
+        "Mil-Spec Grade": [
+            "SG 553 | Heavy Metal",
+            "Glock-18 | Clear Polymer",
+            "M249 | O.S.I.P.R.",
+            "CZ75-Auto | Circaetus",
+            "UMP-45 | Oscillator",
+            "R8 Revolver | Junk Yard",
+            "Nova | Windblown"
+        ],
+        "Restricted": [
+            "P250 | Cyber Shell",
+            "Negev | dev_texture",
+            "MAC-10 | Button Masher",
+            "Desert Eagle | Trigger Discipline",
+            "AK-47 | Slate"
+        ],
+        "Classified": [
+            "MP9 | Food Chain",
+            "XM1014 | XOXO",
+            "Galil AR | Chromatic Aberration"
+        ],
+        "Covert": [
+            "USP-S | The Traitor",
+            "M4A4 | In Living Color"
+        ],
+        "Exceedingly Rare Item": [
+            "Driver Gloves | Queen Jaguar",
+            "Driver Gloves | Rezan the Red",
+            "Driver Gloves | Black Tie",
+            "Driver Gloves | Snow Leopard",
+
+            "Hand Wraps | CAUTION!",
+            "Hand Wraps | Constrictor",
+            "Hand Wraps | Desert Shamagh",
+            "Hand Wraps | Giraffe",
+
+            "Moto Gloves | Finish Line",
+            "Moto Gloves | Blood Pressure",
+            "Moto Gloves | 3rd Commando Company",
+            "Moto Gloves | Smoke Out",
+
+            "Specialist Gloves | Marble Fade",
+            "Specialist Gloves | Tiger Strike",
+            "Specialist Gloves | Lt. Commander",
+            "Specialist Gloves | Field Agent",
+
+            "Sport Gloves | Slingshot",
+            "Sport Gloves | Scarlet Shamagh",
+            "Sport Gloves | Big Game",
+            "Sport Gloves | Nocts",
+
+            "Broken Fang Gloves | Jade",
+            "Broken Fang Gloves | Yellow-banded",
+            "Broken Fang Gloves | Needle Point",
+            "Broken Fang Gloves | Unhinged"
+        ]
+    },
+    "Fracture Case": {
+        "Mil-Spec Grade": [
+            "Negev | Ultralight",
+            "P2000 | Gnarled",
+            "SG 553 | Ol' Rusty",
+            "SSG 08 | Mainframe 001",
+            "P250 | Cassette",
+            "P90 | Freight",
+            "PP-Bizon | Runic"
+        ],
+        "Restricted": [
+            "MAG-7 | Monster Call",
+            "Tec-9 | Brother",
+            "MAC-10 | Allure",
+            "Galil AR | Connexion",
+            "MP5-SD | Kitbash"
+        ],
+        "Classified": [
+           " M4A4 | Tooth Fairy",
+            "Glock-18 | Vogue",
+            "XM1014 | Entombed"
+        ],
+        "Covert": [
+            "Desert Eagle | Printstream",
+            "AK-47 | Legion of Anubis"
+        ],
+        "Exceedingly Special Item": [
+            "Nomad Knife | Fade",
+            "Nomad Knife | Crimson Web",
+            "Nomad Knife | Slaughter",
+            "Nomad Knife",
+            "Nomad Knife | Blue Steel",
+            "Nomad Knife | Stained",
+            "Nomad Knife | Night Stripe",
+            "Nomad Knife | Boreal Forest",
+            "Nomad Knife | Forest DDPAT",
+            "Nomad Knife | Urban Masked",
+            "Nomad Knife | Safari Mesh",
+            "Nomad Knife | Scorched",
+
+            "Paracord Knife | Fade",
+            "Paracord Knife | Crimson Web",
+            "Paracord Knife | Slaughter",
+            "Paracord Knife",
+            "Paracord Knife | Blue Steel",
+            "Paracord Knife | Stained",
+            "Paracord Knife | Night Stripe",
+            "Paracord Knife | Boreal Forest",
+            "Paracord Knife | Forest DDPAT",
+            "Paracord Knife | Urban Masked",
+            "Paracord Knife | Safari Mesh",
+            "Paracord Knife | Scorched",
+
+            "Skeleton Knife | Fade",
+            "Skeleton Knife | Crimson Web",
+            "Skeleton Knife | Slaughter",
+            "Skeleton Knife",
+            "Skeleton Knife | Blue Steel",
+            "Skeleton Knife | Stained",
+            "Skeleton Knife | Night Stripe",
+            "Skeleton Knife | Boreal Forest",
+            "Skeleton Knife | Forest DDPAT",
+            "Skeleton Knife | Urban Masked",
+            "Skeleton Knife | Safari Mesh",
+            "Skeleton Knife | Scorched",
+
+            "Survival Knife | Fade",
+            "Survival Knife | Crimson Web",
+            "Survival Knife | Slaughter",
+            "Survival Knife",
+            "Survival Knife | Blue Steel",
+            "Survival Knife | Stained",
+            "Survival Knife | Night Stripe",
+            "Survival Knife | Boreal Forest",
+            "Survival Knife | Forest DDPAT",
+            "Survival Knife | Urban Masked",
+            "Survival Knife | Safari Mesh",
+            "Survival Knife | Scorched"
+        ]
+    },
+    "Operation Breakout Case": {
+        "Mil-Spec Grade": [
+            "MP7 | Urban Hazard",
+            "Negev | Desert-Strike",
+            "P2000 | Ivory",
+            "SSG 08 | Abyss",
+            "UMP-45 | Labyrinth"
+        ],
+        "Restricted": [
+            "PP-Bizon | Osiris",
+            "CZ75-Auto | Tigris",
+            "Nova | Koi",
+            "P250 | Supernova"
+        ],
+        "Classified": [
+            "Desert Eagle | Conspiracy",
+            "Five-SeveN | Fowl Play",
+            "Glock-18 | Water Elemental"
+        ],
+        "Covert": [
+            "P90 | Asiimov",
+            "M4A1-S | Cyrex"
+        ],
+        "Exceedingly Rare Item": [
+            "Butterfly Knife",
+            "Butterfly Knife | Slaughter",
+            "Butterfly Knife | Blue Steel",
+            "Butterfly Knife | Crimson Web",
+            "Butterfly Knife | Case Hardened",
+            "Butterfly Knife | Forest DDPAT",
+            "Butterfly Knife | Night",
+            "Butterfly Knife | Stained",
+            "Butterfly Knife | Boreal Forest",
+            "Butterfly Knife | Safari Mesh",
+            "Butterfly Knife | Urban Masked",  
+            "Butterfly Knife | Scorched",
+            "Butterfly Knife | Fade "
+        ]
+    },
+    "Prisma 2 Case": {
+        "Mil-Spec Grade": [
+            "AUG | Tom Cat",
+            "AWP | Capillary",
+            "CZ75-Auto | Distressed",
+            "Desert Eagle | Blue Ply",
+            "MP5-SD | Desert Strike",
+            "Negev | Prototype",
+            "R8 Revolver | Bone Forged"
+        ],
+        "Restricted": [
+            "P2000 | Acid Etched",
+            "Sawed-Off | Apocalypto",
+            "SCAR-20 | Enforcer",
+            "SG 553 | Darkwing",
+            "SSG 08 | Fever Dream"
+        ],
+        "Classified": [
+            "AK-47 | Phantom Disruptor",
+            "MAC-10 | Disco Tech",
+            "MAG-7 | Justice"
+        ],
+        "Covert": [
+            "M4A1-S | Player Two",
+            "Glock-18 | Bullet Queen"
+        ],
+        "Exceedingly Rare Item": [
+            "Stiletto Knife | Marble Fade",
+            "Navaja Knife | Doppler",
+            "Navaja Knife | Tiger Tooth",
+            "Navaja Knife | Marble Fade",
+            "Navaja Knife | Ultraviolet",
+            "Navaja Knife | Damascus Steel",
+            "Navaja Knife | Rust Coat",
+            
+            "Stiletto Knife | Marble Fade",
+            "Stiletto Knife | Doppler",
+            "Stiletto Knife | Tiger Tooth",
+            "Stiletto Knife | Marble Fade",
+            "Stiletto Knife | Ultraviolet",
+            "Stiletto Knife | Damascus Steel",
+            "Stiletto Knife | Rust Coat",
+
+            "Talon Knife | Marble Fade",
+            "Talon Knife | Doppler",
+            "Talon Knife | Tiger Tooth",
+            "Talon Knife | Marble Fade",
+            "Talon Knife | Ultraviolet",
+            "Talon Knife | Damascus Steel",
+            "Talon Knife | Rust Coat",
+
+            "Ursus Knife | Marble Fade",
+            "Ursus Knife | Doppler",
+            "Ursus Knife | Tiger Tooth",
+            "Ursus Knife | Marble Fade",
+            "Ursus Knife | Ultraviolet",
+            "Ursus Knife | Damascus Steel",
+            "Ursus Knife | Rust Coat"
+        ]
+    },
+    "Prisma Case": {
+        "Mil-Spec Grade": [
+            "FAMAS | Crypsis",
+            "AK-47 | Uncharted",
+            "MAC-10 | Whitefish",
+            "Galil AR | Akoben",
+            "MP7 | Mischief",
+            "P250 | Verdigris",
+            "P90 | Off World"
+        ],
+        "Restricted": [
+            "AWP | Atheris",
+            "Tec-9 | Bamboozle",
+            "Desert Eagle | Light Rail",
+            "MP5-SD | Gauss",
+            "UMP-45 | Moonrise"
+        ],
+        "Classified": [
+            "R8 Revolver | Skull Crusher",
+            "AUG | Momentum",
+            "XM1014 | Incinegator"
+        ],
+        "Covert": [
+            "Five-SeveN | Angry Mob",
+            "M4A4 | The Emperor"
+        ],
+        "Exceedingly Rare Item": [
+            "Stiletto Knife | Marble Fade",
+            "Navaja Knife | Doppler",
+            "Navaja Knife | Tiger Tooth",
+            "Navaja Knife | Marble Fade",
+            "Navaja Knife | Ultraviolet",
+            "Navaja Knife | Damascus Steel",
+            "Navaja Knife | Rust Coat",
+            
+            "Stiletto Knife | Marble Fade",
+            "Stiletto Knife | Doppler",
+            "Stiletto Knife | Tiger Tooth",
+            "Stiletto Knife | Marble Fade",
+            "Stiletto Knife | Ultraviolet",
+            "Stiletto Knife | Damascus Steel",
+            "Stiletto Knife | Rust Coat",
+
+            "Talon Knife | Marble Fade",
+            "Talon Knife | Doppler",
+            "Talon Knife | Tiger Tooth",
+            "Talon Knife | Marble Fade",
+            "Talon Knife | Ultraviolet",
+            "Talon Knife | Damascus Steel",
+            "Talon Knife | Rust Coat",
+
+            "Ursus Knife | Marble Fade",
+            "Ursus Knife | Doppler",
+            "Ursus Knife | Tiger Tooth",
+            "Ursus Knife | Marble Fade",
+            "Ursus Knife | Ultraviolet",
+            "Ursus Knife | Damascus Steel",
+            "Ursus Knife | Rust Coat"
+        ]
+    },
+    "Falchion Case": {
+        "Mil-Spec Grade": [
+            "Galil AR | Rocket Pop",
+            "Glock-18 | Bunsen Burner",
+            "Nova | Ranger",
+            "P90 | Elite Build",
+            "UMP-45 | Riot",
+            "USP-S | Torque"
+        ],
+        "Restricted": [
+            "FAMAS | Neural Net",
+            "M4A4 | Evil Daimyo",
+            "MP9 | Ruby Poison Dart",
+            "Negev | Loudmouth",
+            "P2000 | Handgun"
+        ],
+        "Classified": [
+            "CZ75-Auto | Yellow Jacket",
+            "MP7 | Nemesis",
+            "SG 553 | Cyrex"
+        ],
+        "Covert": [
+            "AK-47 | Aquamarine Revenge",
+            "AWP | Hyper Beast"
+        ],
+        "Exceedingly Rare Item": [
+            "Falchion Knife | Boreal Forest",
+            "Falchion Knife | Fade",
+            "Falchion Knife | Case Hardened",
+            "Falchion Knife | Slaughter",
+            "Falchion Knife | Crimson Web",
+            "Falchion Knife | Blue Steel",
+            "Falchion Knife",
+            "Falchion Knife | Forest DDPAT",
+            "Falchion Knife | Night",
+            "Falchion Knife | Stained",
+            "Falchion Knife | Scorched",
+            "Falchion Knife | Urban Masked",
+            "Falchion Knife | Safari Mesh"
+        ]
+    },
+    "Operation Bravo Case": {
+        "Mil-Spec Grade": [
+            "SG 553 | Wave Spray",
+            "Dual Berettas | Black Limba",
+            "Nova | Tempest",
+            "Galil AR | Shattered",
+            "UMP-45 | Bone Pile",
+            "G3SG1 | Demeter"
+        ],
+        "Restricted": [
+            "USP-S | Overgrowth",
+            "M4A4 | Zirka",
+            "MAC-10 | Graven",
+            "M4A1-S | Bright Water"
+        ],
+        "Classified": [
+            "P90 | Emerald Dragon",
+            "P2000 | Ocean Foam",
+            "AWP | Graphite"
+        ],
+        "Covert": [
+            "AK-47 | Fire Serpent",
+            "Desert Eagle | Golden Koi"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet | Fade",
+            "Bayonet",
+            "Bayonet | Slaughter",
+            "Bayonet | Case Hardened",
+            "Bayonet | Crimson Web",
+            "Bayonet | Night",
+            "Bayonet | Blue Steel",
+            "Bayonet | Stained",
+            "Bayonet | Forest DDPAT",
+            "Bayonet | Scorched",
+            "Bayonet | Urban Masked",
+            "Bayonet | Safari Mesh",
+            "Bayonet | Boreal Forest",
+
+            "Flip Knife | Fade",
+            "Flip Knife",
+            "Flip Knife | Slaughter",
+            "Flip Knife | Case Hardened",
+            "Flip Knife | Crimson Web",
+            "Flip Knife | Night",
+            "Flip Knife | Blue Steel",
+            "Flip Knife | Stained",
+            "Flip Knife | Forest DDPAT",
+            "Flip Knife | Scorched",
+            "Flip Knife | Urban Masked",
+            "Flip Knife | Safari Mesh",
+            "Flip Knife | Boreal Forest",
+
+            "Gut Knife | Fade",
+            "Gut Knife",
+            "Gut Knife | Slaughter",
+            "Gut Knife | Case Hardened",
+            "Gut Knife | Crimson Web",
+            "Gut Knife | Night",
+            "Gut Knife | Blue Steel",
+            "Gut Knife | Stained",
+            "Gut Knife | Forest DDPAT",
+            "Gut Knife | Scorched",
+            "Gut Knife | Urban Masked",
+            "Gut Knife | Safari Mesh",
+            "Gut Knife | Boreal Forest",
+
+            "Karambit | Fade",
+            "Karambit",
+            "Karambit | Slaughter",
+            "Karambit | Case Hardened",
+            "Karambit | Crimson Web",
+            "Karambit | Night",
+            "Karambit | Blue Steel",
+            "Karambit | Stained",
+            "Karambit | Forest DDPAT",
+            "Karambit | Scorched",
+            "Karambit | Urban Masked",
+            "Karambit | Safari Mesh",
+            "Karambit | Boreal Forest"
+        ]
+    },
+    "Danger Zone Case": {
+        "Mil-Spec Grade": [
+            "MP9 | Modest Threat",
+            "Glock-18 | Oxide Blaze",
+            "Nova | Wood Fired",
+            "M4A4 | Magnesium",
+            "Sawed-Off | Black Sand",
+            "SG 553 | Danger Close",
+            "Tec-9 | Fubar"
+        ],
+        "Restricted": [
+            "G3SG1 | Scavenger",
+            "Galil AR | Signal",
+            "MAC-10 | Pipe Down",
+            "P250 | Nevermore",
+            "USP-S | Flashback"
+        ],
+        "Classified": [
+            "UMP-45 | Momentum",
+            "Desert Eagle | Mecha Industries",
+            "MP5-SD | Phosphor"
+        ],
+        "Covert": [
+            "AK-47 | Asiimov",
+            "AWP | Neo-Noir"
+        ],
+        "Exceedingly Rare Item": [
+            "Navaja Knife",
+            "Navaja Knife | Slaughter",
+            "Navaja Knife | Blue Steel",
+            "Navaja Knife | Crimson Web",
+            "Navaja Knife | Case Hardened",
+            "Navaja Knife | Forest DDPAT",
+            "Navaja Knife | Stained",
+            "Navaja Knife | Boreal Forest",
+            "Navaja Knife | Safari Mesh",
+            "Navaja Knife | Urban Masked",  
+            "Navaja Knife | Scorched",
+            "Navaja Knife | Night Stripe",
+            "Navaja Knife | Fade ",
+
+            "Stiletto Knife",
+            "Stiletto Knife | Slaughter",
+            "Stiletto Knife | Blue Steel",
+            "Stiletto Knife | Crimson Web",
+            "Stiletto Knife | Case Hardened",
+            "Stiletto Knife | Forest DDPAT",
+            "Stiletto Knife | Stained",
+            "Stiletto Knife | Boreal Forest",
+            "Stiletto Knife | Safari Mesh",
+            "Stiletto Knife | Urban Masked",  
+            "Stiletto Knife | Scorched",
+            "Stiletto Knife | Night Stripe",
+            "Stiletto Knife | Fade ",
+
+            "Talon Knife",
+            "Talon Knife | Slaughter",
+            "Talon Knife | Blue Steel",
+            "Talon Knife | Crimson Web",
+            "Talon Knife | Case Hardened",
+            "Talon Knife | Forest DDPAT",
+            "Talon Knife | Stained",
+            "Talon Knife | Boreal Forest",
+            "Talon Knife | Safari Mesh",
+            "Talon Knife | Urban Masked",  
+            "Talon Knife | Scorched",
+            "Talon Knife | Night Stripe",
+            "Talon Knife | Fade ",
+
+            "Ursus Knife",
+            "Ursus Knife | Slaughter",
+            "Ursus Knife | Blue Steel",
+            "Ursus Knife | Crimson Web",
+            "Ursus Knife | Case Hardened",
+            "Ursus Knife | Forest DDPAT",
+            "Ursus Knife | Stained",
+            "Ursus Knife | Boreal Forest",
+            "Ursus Knife | Safari Mesh",
+            "Ursus Knife | Urban Masked",  
+            "Ursus Knife | Scorched",
+            "Ursus Knife | Night Stripe",
+            "Ursus Knife | Fade "
+        ]
+    },
+    "Cs20 Case": {
+        "Mil-Spec Grade": [
+            "Dual Berettas | Elite 1.6",
+            "Tec-9 | Flash Out",
+            "MAC-10 | Classic Crate",
+            "MAG-7 | Popdog",
+            "SCAR-20 | Assault",
+            "FAMAS | Decommissioned",
+            "Glock-18 | Sacrifice"
+        ],
+        "Restricted": [
+            "M249 | Aztec",
+            "MP5-SD | Agent",
+            "Five-SeveN | Buddy",
+            "P250 | Inferno",
+            "UMP-45 | Plastique"
+        ],
+        "Classified": [
+            "MP9 | Hydra",
+            "P90 | Nostalgia",
+            "AUG | Death by Puppy"
+        ],
+        "Covert": [
+            "AWP | Wildfire",
+            "FAMAS | Commemoration"
+        ],
+        "Exceedingly Rare Item": [
+            "Classic Knife",
+            "Classic Knife | Slaughter",
+            "Classic Knife | Blue Steel",
+            "Classic Knife | Crimson Web",
+            "Classic Knife | Case Hardened",
+            "Classic Knife | Forest DDPAT",
+            "Classic Knife | Stained",
+            "Classic Knife | Boreal Forest",
+            "Classic Knife | Safari Mesh",
+            "Classic Knife | Urban Masked",  
+            "Classic Knife | Scorched",
+            "Classic Knife | Night Stripe",
+            "Classic Knife | Fade "
+        ]
+    },
+    "Horizon Case": {
+        "Mil-Spec Grade": [
+            "AUG | Amber Slipstream",
+            "Dual Berettas | Shred",
+            "Glock-18 | Warhawk",
+            "MP9 | Capillary",
+            "P90 | Traction",
+            "R8 Revolver | Survivalist",
+            "Tec-9 | Snek-9"
+        ],
+        "Restricted": [
+            "CZ75-Auto | Eco",
+            "G3SG1 | High Seas",
+            "Nova | Toy Soldier",
+            "AWP | PAW",
+            "MP7 | Powercore"
+        ],
+        "Classified": [
+            "M4A1-S | Nightmare",
+            "Sawed-Off | Devourer",
+            "FAMAS | Eye of Athena"
+        ],
+        "Covert": [
+            "AK-47 | Neon Rider",
+            "Desert Eagle | Code Red"
+        ],
+        "Exceedingly Rare Item": [
+            "Navaja Knife",
+            "Navaja Knife | Slaughter",
+            "Navaja Knife | Blue Steel",
+            "Navaja Knife | Crimson Web",
+            "Navaja Knife | Case Hardened",
+            "Navaja Knife | Forest DDPAT",
+            "Navaja Knife | Stained",
+            "Navaja Knife | Boreal Forest",
+            "Navaja Knife | Safari Mesh",
+            "Navaja Knife | Urban Masked",  
+            "Navaja Knife | Scorched",
+            "Navaja Knife | Night Stripe",
+            "Navaja Knife | Fade ",
+
+            "Stiletto Knife",
+            "Stiletto Knife | Slaughter",
+            "Stiletto Knife | Blue Steel",
+            "Stiletto Knife | Crimson Web",
+            "Stiletto Knife | Case Hardened",
+            "Stiletto Knife | Forest DDPAT",
+            "Stiletto Knife | Stained",
+            "Stiletto Knife | Boreal Forest",
+            "Stiletto Knife | Safari Mesh",
+            "Stiletto Knife | Urban Masked",  
+            "Stiletto Knife | Scorched",
+            "Stiletto Knife | Night Stripe",
+            "Stiletto Knife | Fade ",
+
+            "Talon Knife",
+            "Talon Knife | Slaughter",
+            "Talon Knife | Blue Steel",
+            "Talon Knife | Crimson Web",
+            "Talon Knife | Case Hardened",
+            "Talon Knife | Forest DDPAT",
+            "Talon Knife | Stained",
+            "Talon Knife | Boreal Forest",
+            "Talon Knife | Safari Mesh",
+            "Talon Knife | Urban Masked",  
+            "Talon Knife | Scorched",
+            "Talon Knife | Night Stripe",
+            "Talon Knife | Fade ",
+
+            "Ursus Knife",
+            "Ursus Knife | Slaughter",
+            "Ursus Knife | Blue Steel",
+            "Ursus Knife | Crimson Web",
+            "Ursus Knife | Case Hardened",
+            "Ursus Knife | Forest DDPAT",
+            "Ursus Knife | Stained",
+            "Ursus Knife | Boreal Forest",
+            "Ursus Knife | Safari Mesh",
+            "Ursus Knife | Urban Masked",  
+            "Ursus Knife | Scorched",
+            "Ursus Knife | Night Stripe",
+            "Ursus Knife | Fade "
+        ]
+    },
+    "Shattered Web Case": {
+        "Mil-Spec Grade": [
+            "MP5-SD | Acid Wash",
+            "Nova | Plume",
+            "G3SG1 | Black Sand",
+            "R8 Revolver | Memento",
+            "Dual Berettas | Balance",
+            "SCAR-20 | Torn",
+            "M249 | Warbird"
+        ],
+        "Restricted": [
+            "PP-Bizon | Embargo",
+            "AK-47 | Rat Rod",
+            "AUG | Arctic Wolf",
+            "MP7 | Neon Ply",
+            "P2000 | Obsidian"
+        ],
+        "Classified": [
+            "Tec-9 | Decimator",
+            "SG 553 | Colony IV",
+            "SSG 08 | Bloodshot"
+        ],
+        "Covert": [
+            "AWP | Containment Breach",
+            "MAC-10 | Stalker"
+        ],
+        "Exceedingly Rare Item": [
+            "Nomad Knife",
+            "Nomad Knife | Slaughter",
+            "Nomad Knife | Blue Steel",
+            "Nomad Knife | Crimson Web",
+            "Nomad Knife | Case Hardened",
+            "Nomad Knife | Forest DDPAT",
+            "Nomad Knife | Stained",
+            "Nomad Knife | Boreal Forest",
+            "Nomad Knife | Safari Mesh",
+            "Nomad Knife | Urban Masked",  
+            "Nomad Knife | Scorched",
+            "Nomad Knife | Night Stripe",
+            "Nomad Knife | Fade ",
+
+            "Paracord Knife",
+            "Paracord Knife | Slaughter",
+            "Paracord Knife | Blue Steel",
+            "Paracord Knife | Crimson Web",
+            "Paracord Knife | Case Hardened",
+            "Paracord Knife | Forest DDPAT",
+            "Paracord Knife | Stained",
+            "Paracord Knife | Boreal Forest",
+            "Paracord Knife | Safari Mesh",
+            "Paracord Knife | Urban Masked",  
+            "Paracord Knife | Scorched",
+            "Paracord Knife | Night Stripe",
+            "Paracord Knife | Fade ",
+
+            "Skeleton Knife",
+            "Skeleton Knife | Slaughter",
+            "Skeleton Knife | Blue Steel",
+            "Skeleton Knife | Crimson Web",
+            "Skeleton Knife | Case Hardened",
+            "Skeleton Knife | Forest DDPAT",
+            "Skeleton Knife | Stained",
+            "Skeleton Knife | Boreal Forest",
+            "Skeleton Knife | Safari Mesh",
+            "Skeleton Knife | Urban Masked",  
+            "Skeleton Knife | Scorched",
+            "Skeleton Knife | Night Stripe",
+            "Skeleton Knife | Fade ",
+
+            "Survival Knife",
+            "Survival Knife | Slaughter",
+            "Survival Knife | Blue Steel",
+            "Survival Knife | Crimson Web",
+            "Survival Knife | Case Hardened",
+            "Survival Knife | Forest DDPAT",
+            "Survival Knife | Stained",
+            "Survival Knife | Boreal Forest",
+            "Survival Knife | Safari Mesh",
+            "Survival Knife | Urban Masked",  
+            "Survival Knife | Scorched",
+            "Survival Knife | Night Stripe",
+            "Survival Knife | Fade "
+        ]
+    },
+    "Shadow Case": {
+        "Mil-Spec Grade": [
+            "Dual Berettas | Dualing Dragons",
+            "FAMAS | Survivor Z",
+            "Glock-18 | Wraiths",
+            "MAC-10 | Rangeen",
+            "MAG-7 | Cobalt Core",
+            "SCAR-20 | Green Marine",
+            "XM1014 | Scumbria"
+        ],
+        "Restricted": [
+            "Galil AR | Stone Cold",
+            "M249 | Nebula Crusader",
+            "MP7 | Special Delivery",
+            "P250 | Wingshot"
+        ],
+        "Classified": [
+            "AK-47 | Frontside Misty",
+            "G3SG1 | Flux",
+            "SSG 08 | Big Iron"
+        ],
+        "Covert": [
+            "M4A1-S | Golden Coil",
+            "USP-S | Kill Confirmed"
+        ],
+        "Exceedingly Rare Item": [
+            "Shadow Daggers",
+            "Shadow Daggers | Slaughter",
+            "Shadow Daggers | Blue Steel",
+            "Shadow Daggers | Crimson Web",
+            "Shadow Daggers | Case Hardened",
+            "Shadow Daggers | Forest DDPAT",
+            "Shadow Daggers | Stained",
+            "Shadow Daggers | Boreal Forest",
+            "Shadow Daggers | Safari Mesh",
+            "Shadow Daggers | Urban Masked",  
+            "Shadow Daggers | Scorched",
+            "Shadow Daggers | Night ",
+            "Shadow Daggers | Fade "
+        ]
+    },
+    "Weapon Case": {
+        "Mil-Spec Grade": [
+            "MP7 | Skulls",
+            "AUG | Wings",
+            "SG 553 | Ultraviolet"
+        ],
+        "Restricted": [
+            "Glock-18 | Dragon Tattoo",
+            "USP-S | Dark Water",
+            "M4A1-S | Dark Water"
+        ],
+        "Classified": [
+            "AK-47 | Case Hardened",
+            "Desert Eagle | Hypnotic"
+        ],
+        "Covert": [
+            "AWP | Lightning Strike"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet",
+            "Bayonet | Slaughter",
+            "Bayonet | Blue Steel",
+            "Bayonet | Crimson Web",
+            "Bayonet | Case Hardened",
+            "Bayonet | Forest DDPAT",
+            "Bayonet | Stained",
+            "Bayonet | Boreal Forest",
+            "Bayonet | Safari Mesh",
+            "Bayonet | Urban Masked",  
+            "Bayonet | Scorched",
+            "Bayonet | Night ",
+            "Bayonet | Fade ",
+
+            "Flip Knife",
+            "Flip Knife | Slaughter",
+            "Flip Knife | Blue Steel",
+            "Flip Knife | Crimson Web",
+            "Flip Knife | Case Hardened",
+            "Flip Knife | Forest DDPAT",
+            "Flip Knife | Stained",
+            "Flip Knife | Boreal Forest",
+            "Flip Knife | Safari Mesh",
+            "Flip Knife | Urban Masked",  
+            "Flip Knife | Scorched",
+            "Flip Knife | Night ",
+            "Flip Knife | Fade ",
+
+            "Gut Knife",
+            "Gut Knife | Slaughter",
+            "Gut Knife | Blue Steel",
+            "Gut Knife | Crimson Web",
+            "Gut Knife | Case Hardened",
+            "Gut Knife | Forest DDPAT",
+            "Gut Knife | Stained",
+            "Gut Knife | Boreal Forest",
+            "Gut Knife | Safari Mesh",
+            "Gut Knife | Urban Masked",  
+            "Gut Knife | Scorched",
+            "Gut Knife | Night ",
+            "Gut Knife | Fade ",
+
+            "Karambit",
+            "Karambit | Slaughter",
+            "Karambit | Blue Steel",
+            "Karambit | Crimson Web",
+            "Karambit | Case Hardened",
+            "Karambit | Forest DDPAT",
+            "Karambit | Stained",
+            "Karambit | Boreal Forest",
+            "Karambit | Safari Mesh",
+            "Karambit | Urban Masked",  
+            "Karambit | Scorched",
+            "Karambit | Night ",
+            "Karambit | Fade "
+        ]
+    },
+    "Glove Case": {
+        "Mil-Spec Grade": [
+            "CZ75-Auto | Polymer",
+            "Glock-18 | Ironwork",
+            "MP7 | Cirrus",
+            "Galil AR | Black Sand",
+            "MP9 | Sand Scale",
+            "MAG-7 | Sonar",
+            "P2000 | Turf"
+        ],
+        "Restricted": [
+            "Dual Berettas | Royal Consorts",
+            "G3SG1 | Stinger",
+            "M4A1-S | Flashback",
+            "Nova | Gila",
+            "USP-S | Cyrex"
+        ],
+        "Classified": [
+            "FAMAS | Mecha Industries",
+            "P90 | Shallow Grave",
+            "Sawed-Off | Wasteland Princess"
+        ],
+        "Covert": [
+            "SSG 08 | Dragonfire",
+            "M4A4 | Buzz Kill"
+        ],
+        "Exceedingly Rare Item": [
+            "Bloodhound Gloves | Snakebite",
+            "Bloodhound Gloves | Bronzed",
+            "Bloodhound Gloves | Charred",
+            "Bloodhound Gloves | Guerrilla",
+
+            "Driver Gloves | Crimson Weave",
+            "Driver Gloves | Lunar Weave",
+            "Driver Gloves | Convoy",
+            "Driver Gloves | Diamondback",
+
+            "Hand Wraps | Slaughter",
+            "Hand Wraps | Badlands",
+            "Hand Wraps | Leather",
+            "Hand Wraps | Spruce DDPAT",
+
+            "Moto Gloves | Spearmint",
+            "Moto Gloves | Boom!",
+            "Moto Gloves | Cool Mint",
+            "Moto Gloves | Eclipse",
+
+            "Specialist Gloves | Crimson Kimono",
+            "Specialist Gloves | Emerald Web",
+            "Specialist Gloves | Forest DDPAT",
+            "Specialist Gloves | Foundation",
+
+            "Sport Gloves | Pandora's Box",
+            "Sport Gloves | Superconductor",
+            "Sport Gloves | Hedge Maze",
+            "Sport Gloves | Arid"
+        ]
+    }
+}
