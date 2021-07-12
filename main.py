@@ -3,13 +3,16 @@ import random
 import time
 
 from modules.cases import Case, all_cases
+from modules.utils import Timer
+
 
 async def main(n: int):
     c = Case()
     a = time.monotonic()
 
     for i in range(n):
-        await c.open_case(random.choice([*all_cases]))
+        async with Timer():
+            await c.open_case(random.choice([*all_cases]))
         if i and i % 1000 == 0:
             print(i)
     b = time.monotonic()

@@ -1,18 +1,19 @@
+import asyncio
+import concurrent.futures
 import json
 import random
+from functools import partial
 
 from modules.database import Item
 
 with open('etc/cases.json') as f:
     all_cases = json.loads(f.read())
 
-
-class RarityNotInCase(Exception):
-    pass
+with open("etc/collections.json", "r", encoding='utf-8') as f:
+    all_collections = json.loads(f.read())
 
 
 class Case:
-
     @property
     def _rarities(self):
         """
@@ -27,18 +28,17 @@ class Case:
             "Exceedingly Rare Item": (0.25575, 99.97442, 0.02558),
         }
 
-    def generate_item(self, case_name: str):
+    def generate_item(self, container_name: str, data: dict):
         rarities = self._rarities
-        possible_rarities = {k: v for k, v in rarities.items() if k in all_cases[case_name]}
+        possible_rarities = {k: v for k, v in rarities.items() if k in data[container_name]}
         rarity = random.choices(population=[*possible_rarities],
                                 weights=[v for v, *_ in possible_rarities.values()],
                                 k=1)[0]
 
-        item_name = random.choice(all_cases[case_name][rarity])
+        item_name = random.choice(data[container_name][rarity])
 
         float_ = 0.0
-        if not item_name:
-            raise
+
         if '|' in item_name:
             exterior_dist = {  # weight, uniform a, uniform b.
                 "Factory New": (3, 0.00, 0.069),
@@ -66,18 +66,36 @@ class Case:
 
         return item_name, float_
 
-    async def open_case(self, case_name):
+    def get_valid_item(self, valid_item_names, container_name, data):
+        item_name, float_ = '', 0.0
+        while item_name not in valid_item_names:
+            item_name, float_ = self.generate_item(container_name, data)
+        return item_name, float_
+
+    async def open_case(self, container_name, type_='case'):
+        """
+        Args:
+            container_name:
+            type_: 'case' or 'collection'
+
+        Returns:
+            generated item and float
+        """
+        try:
+            data = {'case': all_cases, 'collection': all_collections}[type_]
+        except KeyError:
+            raise ValueError(f'type_ must be either "case" or "collection" but was "{type_}"')
 
         items = await Item.item_cache()
 
-        item_name, float_ = '', 0.0
         valid_item_names = [item.name for item in items]
-        counter = 0
-        while item_name not in valid_item_names and counter < 10:
-            item_name, float_ = self.generate_item(case_name)
-            counter += 1
+
+        loop = asyncio.get_running_loop()
+        with concurrent.futures.ThreadPoolExecutor() as pool:
+            result = await loop.run_in_executor(pool, partial(
+                self.get_valid_item, valid_item_names, container_name, data))
+        item_name, float_ = result
 
         item = next((it for it in items if it.name == item_name), None)
-        if not item:
-            raise Exception(f'{item_name} could not be associated to any valid item.')
+
         return item, float_
