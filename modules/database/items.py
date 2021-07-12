@@ -3,6 +3,7 @@ from typing import Optional
 from odmantic import Model
 
 from .models import ModelPlus
+from .engine import engine
 
 __all__ = (
     'Item',
@@ -19,6 +20,7 @@ rarity = {
     "Industrial Grade": (1, 0x5e98d9),
 }
 
+_item_cache = []
 
 class Item(ModelPlus, Model):
     name: str
@@ -28,6 +30,13 @@ class Item(ModelPlus, Model):
 
     class Config:
         collection = 'items'
+
+    @classmethod
+    async def item_cache(cls):
+        global _item_cache
+        if not _item_cache:
+            _item_cache = await engine.find(cls)
+        return _item_cache
 
     @property
     def color(self):

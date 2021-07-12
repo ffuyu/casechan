@@ -27,12 +27,12 @@ print('> Processing items...')
 b = time.monotonic()
 items = []
 relevant_rarities = ['Contraband', 'Covert', 'Classified', 'Restricted',
-                     'Mil-Spec Grade', 'Consumer Grade', 'Industrial Grade']
+                     'Mil-Spec Grade', 'Consumer Grade', 'Industrial Grade',
+                     'Extraordinary']
 
 relevant_keys = ['name', 'icon_url', 'rarity']
 price_periods = ['7_days', '24_hours', '30_days']
 all_time_stats = ['highest_price', 'average', 'median']
-
 for ri in raw_items:
     if ri.get('rarity') not in relevant_rarities:
         continue
@@ -80,7 +80,6 @@ async def persist_items(items_):
 
     c = time.monotonic()
     print(f'Done. Time: {c - b_:.2f}')
-
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(persist_items(items))
