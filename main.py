@@ -1,20 +1,21 @@
 import asyncio
+import random
 import time
 
-from modules.cases import Case
+from modules.cases import Case, all_cases
 
-
-async def main():
+async def main(n: int):
     c = Case()
     a = time.monotonic()
-    for i in range(10_000):
-        await c.open_case('Clutch Case')
-        if i % 1000 == 0:
+
+    for i in range(n):
+        await c.open_case(random.choice([*all_cases]))
+        if i and i % 1000 == 0:
             print(i)
     b = time.monotonic()
-    print('Finished iteration', f'{b - a:.2f} seconds {10_000 / (b - a):.2f} cases/s')
+    print('Finished iteration', f'{b - a:.2f} seconds {n / (b - a):.2f} cases/s')
 
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
+    loop.run_until_complete(main(10_000))

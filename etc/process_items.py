@@ -22,6 +22,7 @@ raw_items = list(res['items_list'].values())
 c = time.monotonic()
 print(f'Finished. Time: {c - b:.2f}. Total items {len(raw_items)}')
 
+print('AWP | Lightning Strike (Field-Tested)' in raw_items)
 print('> Processing items...')
 
 b = time.monotonic()

@@ -7,6 +7,10 @@ with open('etc/cases.json') as f:
     all_cases = json.loads(f.read())
 
 
+class RarityNotInCase(Exception):
+    pass
+
+
 class Case:
 
     @property
@@ -23,12 +27,18 @@ class Case:
             "Exceedingly Rare Item": (0.25575, 99.97442, 0.02558),
         }
 
-    def generate_item(self, case_name: str, rarity: str):
+    def generate_item(self, case_name: str):
         rarities = self._rarities
+        possible_rarities = {k: v for k, v in rarities.items() if k in all_cases[case_name]}
+        rarity = random.choices(population=[*possible_rarities],
+                                weights=[v for v, *_ in possible_rarities.values()],
+                                k=1)[0]
 
         item_name = random.choice(all_cases[case_name][rarity])
 
         float_ = 0.0
+        if not item_name:
+            raise
         if '|' in item_name:
             exterior_dist = {  # weight, uniform a, uniform b.
                 "Factory New": (3, 0.00, 0.069),
@@ -57,24 +67,17 @@ class Case:
         return item_name, float_
 
     async def open_case(self, case_name):
-        rarities = self._rarities
-        rarity = random.choices([*rarities], weights=[v for v, *_ in rarities.values()], k=1)[0]
 
-        item_cache = await Item.item_cache()
-
-        if rarity == 'Exceedingly Rare Item':
-            items = [item for item in item_cache if item.rarity in ['Exceedingly Rare Item', 'Extraordinary']]
-        else:
-            items = [item for item in item_cache if item.rarity == rarity]
+        items = await Item.item_cache()
 
         item_name, float_ = '', 0.0
         valid_item_names = [item.name for item in items]
         counter = 0
-        while item_name not in valid_item_names and counter < 100:
-            item_name, float_ = self.generate_item(case_name, rarity)
+        while item_name not in valid_item_names and counter < 10:
+            item_name, float_ = self.generate_item(case_name)
             counter += 1
+
         item = next((it for it in items if it.name == item_name), None)
         if not item:
             raise Exception(f'{item_name} could not be associated to any valid item.')
-
         return item, float_
