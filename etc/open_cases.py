@@ -6,9 +6,8 @@ m = Player(member_id=123, guild_id=456)
 
 
 async def main():
-    await asyncio.gather(
-        *[m.open_case('Clutch Case') for _ in range(1000)]
-    )
+    for i in range(1000):
+        print(await m.open_case('Clutch Case'))
     print('Finished iteration')
 
 

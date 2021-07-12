@@ -108,7 +108,6 @@ class Player(ModelPlus, Model):
         rarity = random.choices([*rarities], weights=[v for v, *_ in rarities.values()], k=1)[0]
 
         items = await self.engine.find(Item, Item.query(rarity=rarity))
-        print([it.name for it in items if 'Gloves' in it.name])
         item_name, float_ = '', 0.0
         valid_item_names = [item.name for item in items]
         counter = 0
