@@ -1,8 +1,8 @@
 from copy import copy
 from datetime import datetime
-from typing import Optional, Dict, List
+from typing import Optional, Dict, List, Tuple
 
-from odmantic import Model, query
+from odmantic import Model, query, EmbeddedModel
 
 from .items import Item
 from .models import ModelPlus
@@ -34,7 +34,7 @@ class Player(ModelPlus, Model):
     guild_id: int
     cases: List = []  # ??
     keys: List = []  # ??
-    inventory: Dict[str, int] = {}  # {item.name: quantity}
+    inventory: Dict[str, List[Tuple[float, int]]] = {}  # {item.name: tuple of stats (float, seed)}
     stats: dict = copy(stats_dict)
     daily: Optional[datetime] = None
     streak: int = 0
@@ -45,8 +45,14 @@ class Player(ModelPlus, Model):
         collection = 'players'
 
     async def inv_items(self) -> List[Item]:
-        return await self.engine.find(Item, query.in_(Item.name, list(self.inventory)))
+        return await self.engine.find(Item, query.in_(Item.name, [*self.inventory]))
 
     async def inv_total(self) -> float:
         items = [(i, self.inventory[i.name]) for i in await self.inv_items()]
-        return sum([k.price * v for k, v in items])
+        return sum([k.price * len(v) for k, v in items])
+
+    def add_item(self, item_name, stats=tuple()):
+        if item_name not in self.inventory:
+            self.inventory[item_name] = []
+        self.inventory[item_name].append(tuple(stats))
+

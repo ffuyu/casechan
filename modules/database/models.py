@@ -35,7 +35,7 @@ class ModelPlus(Model):
         """
         q = cls.query(**kwargs)
         doc = await engine.find_one(cls, q)
-        return doc or cls(**kwargs) if create else None
+        return doc or (cls(**kwargs) if create else None)
 
     async def save(self):
         """
@@ -43,4 +43,3 @@ class ModelPlus(Model):
         Uses Upsert method
         """
         await engine.save(self)
-

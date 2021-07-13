@@ -1,9 +1,10 @@
 from typing import Optional
 
+from dpytools import Embed
 from odmantic import Model
 
-from .models import ModelPlus
 from .engine import engine
+from .models import ModelPlus
 
 __all__ = (
     'Item',
@@ -21,6 +22,7 @@ rarity = {
 }
 
 _item_cache = []
+
 
 class Item(ModelPlus, Model):
     name: str
@@ -46,11 +48,24 @@ class Item(ModelPlus, Model):
     @property
     def asset_url(self):
         """Returns the asset url for this item"""
-        return "https://community.akamai.steamstatic.com/economy/image/" + self.icon_url
+        return ("https://community.akamai.steamstatic.com/economy/image/" + self.icon_url) if self.icon_url else ''
 
     @property
     def rarity_level(self):
         return rarity[self.rarity][0]
+
+    def to_embed(self, float_=None, seed=None):
+        e = Embed(
+            title=self.name,
+        ).add_field(name='Price', value=f'{self.price:.4f}', inline=False)
+        if self.asset_url:
+            e.set_image(url=self.asset_url)
+
+        if float_:
+            e.add_field(name='Float', value=float_, inline=False)
+        if seed:
+            e.add_field(name='Seed', value=seed, inline=False)
+        return e
 
     def __lt__(self, other: 'Item'):
         return self.rarity_level < other.rarity_level

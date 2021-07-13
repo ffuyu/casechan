@@ -1,24 +1,23 @@
 import asyncio
-import random
-import time
 
-from modules.cases import Case, all_cases
-from modules.utils import Timer
+from modules.cases import open_case
+from modules.database import Item
 
 
 async def main(n: int):
-    c = Case()
-    a = time.monotonic()
+    print('Inventory to embed')
+    inv = {'R8 Revolver | Grip (Minimal Wear)': [(0.09809759804300464, 251)]}
+    item_name = 'R8 Revolver | Grip (Minimal Wear)'
+    item = await Item.get(name=item_name)
+    variants = inv[item_name]
+    print(item.to_embed(*variants[0]).to_dict())
 
-    for i in range(n):
-        async with Timer():
-            await c.open_case(random.choice([*all_cases]))
-        if i and i % 1000 == 0:
-            print(i)
-    b = time.monotonic()
-    print('Finished iteration', f'{b - a:.2f} seconds {n / (b - a):.2f} cases/s')
+    print('open case')
+    item, *stats = await open_case('Clutch Case')
+    print(item, stats)
+
 
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(main(10_000))
+    loop.run_until_complete(main(1))
