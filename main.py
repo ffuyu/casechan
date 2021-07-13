@@ -1,7 +1,7 @@
 import asyncio
 
 from modules.cases import open_case
-from modules.database import Item, Player
+from modules.database import Player
 
 
 async def main(n: int):
@@ -16,8 +16,6 @@ async def main(n: int):
     print(embed.to_dict())
 
     print(p.dict())
-
-
 
 
 if __name__ == '__main__':
