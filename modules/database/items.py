@@ -57,6 +57,7 @@ class Item(ModelPlus, Model):
     def to_embed(self, float_=None, seed=None):
         e = Embed(
             title=self.name,
+            color=self.color
         ).add_field(name='Price', value=f'{self.price:.4f}', inline=False)
         if self.asset_url:
             e.set_image(url=self.asset_url)
