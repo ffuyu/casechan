@@ -37,7 +37,6 @@ async def _persist_items(items):
                 it.price = nitem['price']
                 to_persist.append(it)
 
-        log.info(f'Database items that need to be updated: {len(to_persist)}')
         if to_persist:
             await engine.save_all(to_persist)
             log.info('Database updated')
@@ -45,11 +44,19 @@ async def _persist_items(items):
     log.info(f'Database updated. Items persisted {len(to_persist)}. Time: {t.t:.4f} seconds')
 
 
-def update_item_database():
+def update_item_database(loop=None):
+    """
+    Updates the item's database
+    Part of this function runs asynchronous using the an asyncio loop either specified or from asyncio.get_event_loop
+    It should be run before starting the bot.
+
+    Args:
+        loop: optional the asyncio loop to use for persisting database items
+    """
     items = []
 
     with Timer() as total_time:
-        print(f'> Updating items database...')
+        log.info(f'> Updating items database...')
         with Timer() as t:
             r = requests.get("https://csgobackpack.net/api/GetItemsList/v2/?prettyprint=true&details=true")
         log.info(f'Requesting data done. Time: {t.t:.2f} seconds')
@@ -61,7 +68,7 @@ def update_item_database():
 
         res = r.json()
         raw_items = list(res['items_list'].values())
-
+        log.info('Processing received items')
         with Timer() as t:
             for raw_item in raw_items:
                 if raw_item.get('rarity') not in relevant_rarities:
@@ -84,11 +91,11 @@ def update_item_database():
 
                 items.append(item)
 
-        log.info(f'Finished. Time: {t.t:.4f}. Items: {len(items)}')
-
-        loop = asyncio.get_event_loop()
+        log.info(f'Finished processing items Time: {t.t:.4f} seconds. Items: {len(items)}')
+        if not loop:
+            loop = asyncio.get_event_loop()
         loop.run_until_complete(_persist_items(items))
 
-    print(f'> Script complete. Total time {total_time.t:.2f} seconds')
+    log.info(f'> Script complete. Total time {total_time.t:.2f} seconds')
 
 
