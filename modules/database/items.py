@@ -66,6 +66,7 @@ class Item(ModelPlus, Model):
             e.add_field(name='Float', value=float_, inline=False)
         if seed:
             e.add_field(name='Seed', value=seed, inline=False)
+
         return e
 
     def __lt__(self, other: 'Item'):

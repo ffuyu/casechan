@@ -1,5 +1,9 @@
 import time
 
+__all__ = (
+    'Timer',
+)
+
 class Timer:
     def __init__(self):
         self.a, self.b, self.c = 0, 0, 0

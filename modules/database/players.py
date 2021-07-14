@@ -56,3 +56,5 @@ class Player(ModelPlus, Model):
             self.inventory[item_name] = []
         self.inventory[item_name].append(tuple(stats))
 
+
+
