@@ -1,4 +1,5 @@
 from discord.ext import commands
+from discord.ext.commands.context import Context
 
 
 class Cog(commands.Cog, name='Cog Cookie Cutter'):

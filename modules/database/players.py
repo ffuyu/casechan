@@ -56,5 +56,11 @@ class Player(ModelPlus, Model):
             self.inventory[item_name] = []
         self.inventory[item_name].append(tuple(stats))
 
+    def add_case(self, case_name, amount:int):
+        pass
+    
+    def add_key(self, key_name, amount:int):
+        pass
+
 
 
