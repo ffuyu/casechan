@@ -1,6 +1,15 @@
+from discord.colour import Colour
 from discord.ext import commands
+from dpytools import Color
+from pretty_help import PrettyHelp
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or('c.'), case_insensitive=True, help_command=None, owner_ids={717747572076314745})
+from modules.constants import owners_ids, DEFAULT_PREFIX
+
+bot = commands.Bot(command_prefix=commands.when_mentioned_or(DEFAULT_PREFIX),
+                   case_insensitive=True,
+                   help_command=PrettyHelp(color=Colour.random(), no_category="General"),
+                   owner_ids=owners_ids)
+                   
 cogs = {"core"}
 
 @bot.event

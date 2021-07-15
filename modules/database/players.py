@@ -23,8 +23,7 @@ stats_dict = {
     },
     "transactions": {
         "trades_made": 0,
-        "items_sold": 0,
-        "blocked": False
+        "items_sold": 0
     }
 }
 
@@ -32,14 +31,15 @@ stats_dict = {
 class Player(ModelPlus, Model):
     member_id: int
     guild_id: int
-    cases: List = []  # ??
-    keys: List = []  # ??
+    cases: Dict[str, int] = {}  # {case.name: number}
+    keys: Dict[str, int] = {}  # {key.name: number}
     inventory: Dict[str, List[Tuple[float, int]]] = {}  # {item.name: tuple of stats (float, seed)}
     stats: dict = copy(stats_dict)
     daily: Optional[datetime] = None
     streak: int = 0
     balance: float = 0.0
     restricted: bool = False
+    trade_banned: bool = False
 
     class Config:
         collection = 'players'
@@ -56,11 +56,23 @@ class Player(ModelPlus, Model):
             self.inventory[item_name] = []
         self.inventory[item_name].append(tuple(stats))
 
-    def add_case(self, case_name, amount:int):
-        pass
-    
-    def add_key(self, key_name, amount:int):
-        pass
+    def mod_case(self, case_name, amount: int):
+        if case_name not in self.cases:
+            self.cases[case_name] = 0
+
+        if self.cases[case_name] + amount < 0:
+            self.cases[case_name] = 0
+        else:
+            self.cases[case_name] += amount
+
+    def mod_key(self, key_name, amount: int):
+        if key_name not in self.keys:
+            self.keys[key_name] = 0
+
+        if self.keys[key_name] + amount < 0:
+            self.keys[key_name] = 0
+        else:
+            self.keys[key_name] += amount
 
 
 
