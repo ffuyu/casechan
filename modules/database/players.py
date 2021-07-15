@@ -56,23 +56,42 @@ class Player(ModelPlus, Model):
             self.inventory[item_name] = []
         self.inventory[item_name].append(tuple(stats))
 
-    def mod_case(self, case_name, amount: int):
-        if case_name not in self.cases:
-            self.cases[case_name] = 0
+    def _mod_case_or_key(self, attr_name, name, n: int):
+        """
+        Private method for modifying cases or keys
+        Args:
+            attr_name: 'cases' or 'keys'
+            name: name of the key
+            n: amount to modify it with
+        """
+        attr = getattr(self, attr_name)
+        attr.setdefault(name, 0)
+        attr[name] += n
+        if attr[name] <= 0:
+            del attr[name]
 
-        if self.cases[case_name] + amount < 0:
-            self.cases[case_name] = 0
-        else:
-            self.cases[case_name] += amount
+    def mod_case(self, case_name, n: int = 1):
+        """
+        Modifies the amount of keys in the player's inventory.
+        Same as self.mod_case but, for keys
+        Args:
+            key_name: The name of the key
+            n: amount to modify the inventory with
+        Returns:
+            None
+        """
+        self._mod_case_or_key('cases', case_name, n)
 
-    def mod_key(self, key_name, amount: int):
-        if key_name not in self.keys:
-            self.keys[key_name] = 0
-
-        if self.keys[key_name] + amount < 0:
-            self.keys[key_name] = 0
-        else:
-            self.keys[key_name] += amount
-
+    def mod_key(self, key_name, n: int = 1):
+        """
+        Modifies the amount of keys in the player's inventory.
+        Same as self.mod_case but, for keys
+        Args:
+            key_name: The name of the key
+            n: amount to modify the inventory with
+        Returns:
+            None
+        """
+        self._mod_case_or_key('keys', key_name, n)
 
 
