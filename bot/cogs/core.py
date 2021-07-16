@@ -55,9 +55,7 @@ class CoreCog(commands.Cog, name='Core'):
             player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
             print(player)
             if container in player.cases and '%s Key' % container in player.keys:
-                opening = await open_case(container)
-                item = opening[0]
-                stats = (opening[1], opening[2])
+                item, *stats = await open_case(container)
                 player.add_item(item.name, stats)
                 player.mod_case(container, -1)
                 player.mod_key(get_key(container), -1)
@@ -68,7 +66,7 @@ class CoreCog(commands.Cog, name='Core'):
                     embed=Embed(
                         description = '**%s**' % item.name,
                         color = item.color
-                    ).set_image(url='https://community.akamai.steamstatic.com/economy/image/%s'%item.icon_url).set_footer(text='Float %f | Price: $%.2f' % (stats[0], stats[1]))
+                    ).set_image(url='https://community.akamai.steamstatic.com/economy/image/%s'%item.icon_url).set_footer(text='Price %.4f Float %f | Seed: %.2f' % (item.price, stats[0], stats[1]))
                 )
             else:
                 await ctx.send('You don\'t have **%s** or its key!' % container)
