@@ -10,7 +10,7 @@ bot = commands.Bot(command_prefix=get_command_prefix,
                    help_command=PrettyHelp(color=Colour.random(), no_category="General"),
                    owner_ids=owners_ids)
 
-cogs = {'core', 'configuration'}
+cogs = {'core', 'configuration', 'owner'}
 
 
 @bot.event

@@ -26,7 +26,7 @@ class GuildConfig(ModelPlus, Model):
     @classmethod
     async def _refresh_cache(cls):
         global _guilds_cache
-        _guilds_cache = {guild_id: g for g in await engine.find(cls)}
+        _guilds_cache = {g.guild_id: g for g in await engine.find(cls)}
         log.info(f'Guild configuration cache updated. {len(_guilds_cache)} guilds in the cache.')
 
     @classmethod

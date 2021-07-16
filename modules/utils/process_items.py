@@ -1,8 +1,10 @@
 import asyncio
 import logging
+from concurrent.futures import ProcessPoolExecutor
 from datetime import datetime
+from functools import partial
 
-import requests
+from aiohttp import ClientSession
 
 from modules.database import Item, engine
 from .timer import Timer
@@ -13,75 +15,65 @@ __all__ = (
 
 log = logging.getLogger(__name__)
 
-relevant_rarities = ['Contraband', 'Covert', 'Classified', 'Restricted',
-                     'Mil-Spec Grade', 'Consumer Grade', 'Industrial Grade',
-                     'Extraordinary']
+_relevant_rarities = ['Contraband', 'Covert', 'Classified', 'Restricted',
+                      'Mil-Spec Grade', 'Consumer Grade', 'Industrial Grade',
+                      'Extraordinary']
 
-relevant_keys = ['name', 'icon_url', 'rarity']
-price_periods = ['7_days', '24_hours', '30_days']
-all_time_stats = ['highest_price', 'average', 'median']
+_relevant_keys = ['name', 'icon_url', 'rarity']
+_price_periods = ['7_days', '24_hours', '30_days']
+_all_time_stats = ['median', 'average', 'highest_price']
 
 
-async def _persist_items(items):
+def _select_items_to_persist(items_, db_items_) -> list:
     to_persist = []
-    db_items = await engine.find(Item)
 
-    log.info('Persisting new item data to database')
     with Timer() as t:
-        for nitem in items:
+        for nitem in items_:
             it = next(
-                (i for i in db_items if i.name == nitem['name'] and i.rarity == nitem['rarity']),
+                (i for i in db_items_ if i.name == nitem['name'] and i.rarity == nitem['rarity']),
                 Item(name=nitem['name'], rarity=nitem['rarity'], icon_url=nitem.get('icon_url'))
             )
             if it.price != nitem['price']:
                 it.price = nitem['price']
                 to_persist.append(it)
+    log.info(f'> {len(to_persist)} Need to be persisted to the database. Computing time: {t.t:2f} seconds')
 
-        if to_persist:
-            await engine.save_all(to_persist)
-
-    log.info(f'Database updated. Items persisted {len(to_persist)}. Time: {t.t:.4f} seconds')
+    return to_persist
 
 
-def update_item_database(loop=None):
+async def update_item_database():
     """
     Updates the item's database
-    Part of this function runs asynchronous using the an asyncio loop either specified or from asyncio.get_event_loop
-    It should be run before starting the bot.
-
-    Args:
-        loop: optional the asyncio loop to use for persisting database items
     """
     items = []
 
     with Timer() as total_time:
-        log.info(f'> Updating items database...')
+        log.info(f'> Updating item database...')
         with Timer() as t:
-            r = requests.get("https://csgobackpack.net/api/GetItemsList/v2/?prettyprint=true&details=true")
-        log.info(f'Requesting data done. Time: {t.t:.2f} seconds')
-
-        if r.status_code != 200:
-            log.critical(f'Requesting to API returned status code {r.status_code} '
-                         f'{datetime.utcnow().strftime("%x %X")}')
-            raise RuntimeError(f'> Status code error {r.status_code}. Halting')
-
-        res = r.json()
+            async with ClientSession() as cs:
+                async with cs.get("https://csgobackpack.net/api/GetItemsList/v2/?prettyprint=true&details=true") as r:
+                    if r.status != 200:
+                        log.critical(f'Requesting to API returned status code {r.status} '
+                                     f'{datetime.utcnow().strftime("%x %X")}')
+                        raise RuntimeError(f'> Status code error {r.status}. Halting')
+                    else:
+                        res = await r.json()
+        log.info(f'Obtained raw items from API. Time: {t.t:.4f}')
         raw_items = list(res['items_list'].values())
-        log.info('Processing received items')
         with Timer() as t:
             for raw_item in raw_items:
-                if raw_item.get('rarity') not in relevant_rarities:
+                if raw_item.get('rarity') not in _relevant_rarities:
                     continue
-                item = {k: v for k, v in raw_item.items() if k in relevant_keys}
+                item = {k: v for k, v in raw_item.items() if k in _relevant_keys}
                 # get price
                 rprice = raw_item.get('price')
                 if rprice:
-                    for key in price_periods:
+                    for key in _price_periods:
                         if p := rprice.get(key):
                             item['price'] = float(p['median'])
                             break
                     if 'price' not in item and (at := rprice.get('all_time')):
-                        for key in all_time_stats:
+                        for key in _all_time_stats:
                             if p := at.get(key, False):
                                 item['price'] = float(p)
                                 break
@@ -91,10 +83,19 @@ def update_item_database(loop=None):
                 items.append(item)
 
         log.info(f'Finished processing items Time: {t.t:.4f} seconds. Items: {len(items)}')
-        if not loop:
-            loop = asyncio.get_event_loop()
-        loop.run_until_complete(_persist_items(items))
+        with Timer() as t:
+            db_items = await engine.find(Item)
+        log.info(f'Getting old items from database took {t.t:.2f} seconds')
+
+        loop = asyncio.get_running_loop()
+
+        with ProcessPoolExecutor() as pool:
+            to_persist = await loop.run_in_executor(
+                pool, partial(_select_items_to_persist, items, db_items))
+
+        if to_persist:
+            with Timer() as t:
+                await engine.save_all(to_persist)
+            log.info(f'Database updated. Time: {t.t:.4f} seconds')
 
     log.info(f'> Script complete. Total time {total_time.t:.2f} seconds')
-
-
