@@ -39,7 +39,6 @@ async def _persist_items(items):
 
         if to_persist:
             await engine.save_all(to_persist)
-            log.info('Database updated')
 
     log.info(f'Database updated. Items persisted {len(to_persist)}. Time: {t.t:.4f} seconds')
 
