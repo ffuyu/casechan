@@ -86,7 +86,6 @@ class ItemConverter(Converter):
                 _names_cache = await ctx.bot.loop.run_in_executor(pool, partial(self._item_names, item_cache))
 
         names = _names_cache
-
         if argument in names:
             target = names[argument]
         else:

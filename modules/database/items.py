@@ -48,7 +48,12 @@ class Item(ModelPlus, Model):
     @property
     def color(self):
         """Returns the color of the item"""
-        return rarity[self.rarity][1]
+        if self.rarity == 'Extraordinary':
+            r = 'Exceedingly Rare Item'
+        else:
+            r = self.rarity
+        
+        return rarity[r][1]
 
     @property
     def asset_url(self):
