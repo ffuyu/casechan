@@ -17,11 +17,15 @@ from typing import Optional
 from discord.ext import commands
 from discord import Member, Embed, Colour
 from discord.ext.commands.context import Context
+from dpytools import Color
+
 from modules.cases import all_cases
-from modules.database import Player
+from modules.database import Player, Item
 from dpytools.embeds import paginate_to_embeds
 from DiscordUtils.Pagination import CustomEmbedPaginator
 from modules.cases import open_case
+from modules.utils import ItemConverter
+
 
 def _case(argument:str) -> str:
     for case in all_cases:
@@ -125,6 +129,19 @@ class CoreCog(commands.Cog, name='Core'):
         player.mod_key('Horizon Case Key', 5)
         await player.save()
         print(player)
+
+    @commands.command()
+    async def price(self, ctx, *, query: ItemConverter):
+        """
+        Shows item info with specified query
+        Args:
+            query: the name of the item to search
+        """
+        if query:
+            query: Item
+            await ctx.send(embed=query.to_embed())
+        else:
+            await ctx.send(embed=Embed(description='Item not found', color=Color.RED))
 
 
 def setup(bot):

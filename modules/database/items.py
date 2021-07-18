@@ -34,10 +34,15 @@ class Item(ModelPlus, Model):
         collection = 'items'
 
     @classmethod
-    async def item_cache(cls):
+    async def _refresh_item_cache(cls):
         global _item_cache
-        if not _item_cache:
-            _item_cache = await engine.find(cls)
+        _item_cache = await engine.find(cls)
+
+    @classmethod
+    async def item_cache(cls, *, force_refresh=False):
+        global _item_cache
+        if not _item_cache or force_refresh:
+            await cls._refresh_item_cache()
         return _item_cache
 
     @property
@@ -58,7 +63,7 @@ class Item(ModelPlus, Model):
         e = Embed(
             title=self.name,
             color=self.color
-        ).add_field(name='Price', value=f'{self.price:.4f}', inline=False)
+        ).add_field(name='Price', value=f'${self.price:.4f}', inline=False)
         if self.asset_url:
             e.set_image(url=self.asset_url)
 
