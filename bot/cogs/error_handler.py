@@ -7,7 +7,7 @@ from discord.ext.commands import (
 from dpytools import Embed, Color
 
 
-class Cog(commands.Cog, name='Cog Cookie Cutter'):
+class ErrorCog(commands.Cog, name='Error Handler'):
     def __init__(self, bot):
         self.bot = bot
         print(f'Cog: {self.qualified_name} loaded')
@@ -39,10 +39,9 @@ class Cog(commands.Cog, name='Cog Cookie Cutter'):
             if ctx.channel.permissions_for(me).send_messages:
                 embed.description = ("I cannot perform the action you requested because I'm missing permissions "
                                      "or because my role is too low.")
-        elif isinstance(error, MissingRequiredArgument):
-            embed.description = (f"{' '.join([x.replace('_', ' ') for x in error.args])} is a required argument that is missing")
         else:
             embed.description = str(error)
+
         try:
             await ctx.send(embed=embed)
         except:
@@ -53,4 +52,4 @@ class Cog(commands.Cog, name='Cog Cookie Cutter'):
 
 
 def setup(bot):
-    bot.add_cog(Cog(bot))
+    bot.add_cog(ErrorCog(bot))

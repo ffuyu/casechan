@@ -18,6 +18,7 @@ class ConfigCog(commands.Cog, name='configuration'):
     @is_admin()
     @commands.group(name='config')
     async def config(self, ctx):
+        """Admin restricted, bot configuration commands"""
         pass
 
     @config.command()
