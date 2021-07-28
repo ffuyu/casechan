@@ -35,7 +35,7 @@ def _case(argument:str) -> str:
     return None
 
 def get_key(container:str) -> str:
-    return '%s Key'%container
+    return '%s Key' % container
 
 
 class CoreCog(commands.Cog, name='Core'):
@@ -120,14 +120,7 @@ class CoreCog(commands.Cog, name='Core'):
 
             return await paginator.run(pages)
         return await ctx.reply('**{}** has no items to display'.format(user))
-
-    @commands.command()
-    async def give(self, ctx:Context):
-        player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-        player.mod_case('Horizon Case', 5)
-        player.mod_key('Horizon Case Key', 5)
-        await player.save()
-
+        
 
     @commands.command()
     async def price(self, ctx, *, query: ItemConverter):

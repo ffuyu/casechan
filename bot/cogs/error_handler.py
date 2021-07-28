@@ -7,7 +7,7 @@ from discord.ext.commands import (
 from dpytools import Embed, Color
 
 
-class ErrorCog(commands.Cog, name='Error Handler'):
+class ErrorHandlerCog(commands.Cog, name='Error Handler'):
     def __init__(self, bot):
         self.bot = bot
         print(f'Cog: {self.qualified_name} loaded')
@@ -41,7 +41,6 @@ class ErrorCog(commands.Cog, name='Error Handler'):
                                      "or because my role is too low.")
         else:
             embed.description = str(error)
-
         try:
             await ctx.send(embed=embed)
         except:
@@ -52,4 +51,4 @@ class ErrorCog(commands.Cog, name='Error Handler'):
 
 
 def setup(bot):
-    bot.add_cog(ErrorCog(bot))
+    bot.add_cog(ErrorHandlerCog(bot))

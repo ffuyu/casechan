@@ -6,7 +6,7 @@ from dpytools.checks import is_admin
 from modules.database import GuildConfig
 
 
-class ConfigCog(commands.Cog, name='configuration'):
+class ConfigCog(commands.Cog, name='Configuration'):
     """Set's up the bot's configuration for your server"""
     def __init__(self, bot):
         self.bot = bot
@@ -16,7 +16,7 @@ class ConfigCog(commands.Cog, name='configuration'):
         print(f'Cog: {self.qualified_name} unloaded')
 
     @is_admin()
-    @commands.group(name='config')
+    @commands.group(name='set')
     async def config(self, ctx):
         """Admin restricted, bot configuration commands"""
         pass
