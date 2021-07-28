@@ -72,7 +72,7 @@ class CoreCog(commands.Cog, name='Core'):
                     embed=Embed(
                         description = '**%s**' % item.name,
                         color = item.color
-                    ).set_image(url='https://community.akamai.steamstatic.com/economy/image/%s'%item.icon_url).set_footer(text='Float %f | Price: $%.2f' % (stats[0], stats[1]))
+                    ).set_image(url='https://community.akamai.steamstatic.com/economy/image/%s'%item.icon_url).set_footer(text='Float %f | Price: $%.2f' % (stats[0], item.price))
                 )
             else:
                 await ctx.send('You don\'t have **%s** or its key!' % container)
@@ -87,23 +87,23 @@ class CoreCog(commands.Cog, name='Core'):
         if ctx.invoked_with == 'cases':
             if player.cases:
                 return await ctx.send(embed=Embed(
-                    title = '{}\'s Cases'.format(user) % user,
+                    title = '{}\'s Cases'.format(user),
                     description = '\n'.join(f'{v}x {k}' for k,v in player.cases.items())
 ,
                     color = Colour.random()
                 ))
 
-            return await ctx.send('**{}** has no cases to display'.format(user)) # FIXME (replace with an embed)
+            return await ctx.send(f'**{user}** has no cases to display') # FIXME (replace with an embed)
 
         elif ctx.invoked_with == 'keys':
             if player.keys:
                 return await ctx.send(embed=Embed(
                     title = '{}\'s Keys'.format(user),
-                    description = '\n'.join(player.keys),
+                    description = '\n'.join(f'{v}x {k}' for k,v in player.keys.items()),
                     color = Colour.random()
                 ))
 
-            return await ctx.send('**{}** has no keys to display'.format(user)) # FIXME (replace with an embed)
+            return await ctx.send(f'**{user}** has no keys to display') # FIXME (replace with an embed)
 
 
     @commands.command(aliases=['inv'])
@@ -112,7 +112,7 @@ class CoreCog(commands.Cog, name='Core'):
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
         inv_items = await player.inv_items()
         if inv_items:
-            pages = paginate_to_embeds(description='\n'.join([item.name for item in inv_items]), title='{}\'s Inventory'.format(user) % user, max_size=400, color=Colour.random())
+            pages = paginate_to_embeds(description='\n'.join([item.name for item in inv_items]), title='{}\'s Inventory'.format(user), max_size=400, color=Colour.random())
             paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
             if len(pages) > 1:
                 paginator.add_reaction('⬅️', "back")
@@ -124,11 +124,10 @@ class CoreCog(commands.Cog, name='Core'):
     @commands.command()
     async def give(self, ctx:Context):
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-        print(player)
         player.mod_case('Horizon Case', 5)
         player.mod_key('Horizon Case Key', 5)
         await player.save()
-        print(player)
+
 
     @commands.command()
     async def price(self, ctx, *, query: ItemConverter):

@@ -33,15 +33,16 @@ class Cog(commands.Cog, name='Cog Cookie Cutter'):
         elif isinstance(error, NoPrivateMessage):
             embed.description = "This command only works inside a server"
         elif isinstance(error, (CheckFailure, BadArgument)):
-            embed.description = f"{error.__cause__ if error.__cause__ else error}"
+            embed.description = f"{error.__cause__ or error}"
         elif isinstance(error, Forbidden):
             me = ctx.guild.me
             if ctx.channel.permissions_for(me).send_messages:
                 embed.description = ("I cannot perform the action you requested because I'm missing permissions "
                                      "or because my role is too low.")
+        elif isinstance(error, MissingRequiredArgument):
+            embed.description = (f"{' '.join([x.replace('_', ' ') for x in error.args])} is a required argument that is missing")
         else:
             embed.description = str(error)
-
         try:
             await ctx.send(embed=embed)
         except:
