@@ -33,7 +33,7 @@ _replacements = {
     "ibp": "ibuypower",
     "ruby": "doppler",
     "sapphire": "doppler",
-    "ak": "ak 47",
+    "ak": "ak-47",
     "scout": "ssg08",
     "deagle": "desert eagle",
     "kara": "karambit",
@@ -49,11 +49,9 @@ class ItemConverter(Converter):
     @staticmethod
     def _replace_abbr(string):
         out = string.split()
-        for word in out:
-            w = word
-            for k, v in _replacements.items():
-                w = w.replace(k, v)
-            out[out.index(word)] = w
+        for i, word in enumerate(out):
+            if word in _replacements:
+                out[i] = _replacements[word]
         return ' '.join(out)
 
     @staticmethod
