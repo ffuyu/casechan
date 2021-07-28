@@ -28,7 +28,7 @@ _replacements = {
     "ww": "well worn",
     "bs": "battle-scarred",
     "so": "souvenir",
-    "st": "stattrak",
+    "st": "stattrak™",
     "bfk": "butterfly knife",
     "ibp": "ibuypower",
     "ruby": "doppler",
