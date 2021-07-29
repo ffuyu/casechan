@@ -96,6 +96,8 @@ class ItemConverter(Converter):
                 target = names[t]
 
         if not target:
-            log.info(f'Item not found with query: {argument}')
+            e = ValueError(f'Item not found with query: {argument}')
+            log.info(e)
+            raise e
 
         return target

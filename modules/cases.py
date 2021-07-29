@@ -10,6 +10,8 @@ __all__ = (
     'open_case',
     'all_cases',
     'all_collections',
+    'case_assets',
+    'Case',
 )
 
 with open('etc/cases.json') as f:
