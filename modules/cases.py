@@ -18,6 +18,9 @@ with open('etc/cases.json') as f:
 with open("etc/collections.json", "r", encoding='utf-8') as f:
     all_collections = json.loads(f.read())
 
+with open('etc/case_assets.json') as f:
+    case_assets = json.loads(f.read())
+
 _rarities = {  # grade weight, st weight 1 & 2
     "Mil-Spec Grade": (79.92327, 92.00767, 7.99233),
     "Restricted": (15.98465, 98.40153, 1.59847),
@@ -102,3 +105,15 @@ async def open_case(container_name, type_='case'):
     item = next((it for it in items if it.name == item_name), None)
 
     return item, float_, seed
+
+
+class Case:
+    def __init__(self, name: str):
+        if name not in all_cases:
+            raise ValueError(f'"{name}" is not a valid case name')
+        self.name = name
+        self.asset = case_assets[name]
+        self.items = all_cases[name]
+
+    async def open(self):
+        return await open_case(container_name=self.name)
