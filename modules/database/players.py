@@ -2,7 +2,7 @@ from copy import copy
 from datetime import datetime
 from typing import Optional, Dict, List, Tuple
 
-from odmantic import Model, query, EmbeddedModel
+from odmantic import Model, query
 
 from .items import Item
 from .models import ModelPlus
@@ -52,9 +52,24 @@ class Player(ModelPlus, Model):
         return sum([k.price * len(v) for k, v in items])
 
     def add_item(self, item_name, stats=tuple()):
-        if item_name not in self.inventory:
-            self.inventory[item_name] = []
-        self.inventory[item_name].append(tuple(stats))
+        item_inv = self.inventory.setdefault(item_name, [])
+        item_inv.append(tuple(stats))
+
+    def rem_item(self, item_name, stats=tuple()):
+        """Removes an item from the user's inventory
+        Args:
+            item_name: the name of the item to remove
+            stats: The stats of the specific item to remove
+                If no stats are specified then an empty tuple will be used
+        Raises:
+            ValueError:
+                If no item is present with selected name or stats
+        """
+        item = next((item for item in self.inventory.get(item_name, []) if item == stats), None)
+        if not item:
+            raise ValueError(f'Item {item_name} with stats "{stats}" is '
+                             f'not present in the player\'s inventory')
+        self.inventory[item_name].remove(item)
 
     def _mod_case_or_key(self, attr_name, name, n: int):
         """
@@ -93,5 +108,3 @@ class Player(ModelPlus, Model):
             None
         """
         self._mod_case_or_key('keys', key_name, n)
-
-
