@@ -2,7 +2,7 @@ from copy import copy
 from datetime import datetime
 from typing import Optional, Dict, List, Tuple
 
-from odmantic import Model, query
+from odmantic import Model, query, EmbeddedModel, Reference
 
 from .items import Item
 from .models import ModelPlus
@@ -33,7 +33,7 @@ class Player(ModelPlus, Model):
     guild_id: int
     cases: Dict[str, int] = {}  # {case.name: number}
     keys: Dict[str, int] = {}  # {key.name: number}
-    inventory: Dict[str, List[Tuple[float, int]]] = {}  # {item.name: tuple of stats (float, seed)}
+    inventory: Dict[str, List[Tuple[float, int]]] = {}  # {item.name: [tuple of stats (float, seed)]}
     stats: dict = copy(stats_dict)
     daily: Optional[datetime] = None
     streak: int = 0
@@ -43,6 +43,28 @@ class Player(ModelPlus, Model):
 
     class Config:
         collection = 'players'
+
+    async def get_item_variants_embeds(self, item_name: str, minimal: bool = False):
+        """Gets a list of embeds each corresponding to an item variant present in the player's inventory
+        Args:
+            item_name: the name of the item to look for
+            minimal (bool): whether to return the minimal thumbnail or full image
+        """
+        all_stats = self.inventory[item_name]
+        item = await Item.get(name=item_name)
+        embeds = [
+            item.to_embed(*stats, minimal)
+            for stats in all_stats
+        ]
+        return embeds
+
+    async def get_item_embed(self, item_name: str, stats=tuple(), minimal: bool = False):
+        """Gets back an inventory item embed"""
+        if stats not in self.inventory[item_name]:
+            raise ValueError(f'No "{item_name}" with stats "{stats}" '
+                             f'found in the player\'s inventory')
+        item = await Item.get(name=item_name)
+        return item.to_embed(*stats, minimal)
 
     async def inv_items(self) -> List[Item]:
         return await self.engine.find(Item, query.in_(Item.name, [*self.inventory]))
