@@ -64,14 +64,15 @@ class Item(ModelPlus, Model):
     def rarity_level(self):
         return rarity[self.rarity][0]
 
-    def to_embed(self, float_=None, seed=None):
+    def to_embed(self, float_=None, seed=None, minimal=False):
         e = Embed(
-            title=self.name,
+            description = f"**{self.name}**",
             color=self.color
-        ).add_field(name='Price', value=f'${self.price:.4f}', inline=False)
-        if self.asset_url:
-            e.set_image(url=self.asset_url)
+        ).add_field(name='Price', value=f'${self.price:.2f}', inline=False)
 
+        if self.asset_url:
+            e.set_image(url=self.asset_url) if not minimal else e.set_thumbnail(url=self.asset_url)
+        
         if float_:
             e.add_field(name='Float', value=float_, inline=False)
         if seed:

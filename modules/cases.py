@@ -112,8 +112,13 @@ class Case:
         if name not in all_cases:
             raise ValueError(f'"{name}" is not a valid case name')
         self.name = name
-        self.asset = case_assets[name]
+        self.asset = 'https://community.akamai.steamstatic.com/economy/image/{}'.format(case_assets[name])
         self.items = all_cases[name]
+        self.key = '{} Key'.format(name)
+
+    def __str__(self):
+        return self.name
 
     async def open(self):
         return await open_case(container_name=self.name)
+
