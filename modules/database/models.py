@@ -37,9 +37,31 @@ class ModelPlus(Model):
         doc = await engine.find_one(cls, q)
         return doc or (cls(**kwargs) if create else None)
 
+    @classmethod
+    async def find(cls, limit=None, sort=None, /, **kwargs):
+        """
+        Executes a "find" query with this collection.
+        Query parameters are passed as "and".
+        Args:
+            limit (Optional[int]): the maximum amount of items to get.
+            sort (Optional[Any]): Odmantic sort expression
+            **kwargs: key/values to search for
+        Returns:
+            List[cls] a list of instances of this class with the query parameters, stored in the database
+        """
+        q = cls.query(**kwargs)
+        return await engine.find(cls, q, sort=sort, limit=limit)
+
     async def save(self):
         """
         Persists the instance to the database
         Uses Upsert method
         """
         await engine.save(self)
+
+    async def delete(self):
+        """
+        Deletes this document from the database
+        This method cannot delete the instance itself.
+        """
+        await engine.delete(self)
