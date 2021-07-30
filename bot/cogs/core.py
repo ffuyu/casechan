@@ -157,7 +157,9 @@ class CoreCog(commands.Cog, name='Core'):
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
         if player.inventory:
             print(player.inventory)
-            pages = paginate_to_embeds(description='\n'.join(['**{}x** {}'.format(len(player.inventory.get(item)),item) for item in player.inventory]), title='{}\'s Inventory'.format(user), max_size=400, color=Colour.random())
+            pages = paginate_to_embeds(description='\n'.join(['**{}x** {}'.format(len(player.inventory.get(item)), item)
+                                                              for item in player.inventory]),
+                                       title='{}\'s Inventory'.format(user), max_size=400, color=Colour.random())
             paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
             if len(pages) > 1:
                 paginator.add_reaction('⬅️', "back")
