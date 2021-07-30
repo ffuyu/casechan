@@ -1,16 +1,13 @@
 from typing import Optional
 from asyncio.tasks import wait
 from discord.ext.commands.cooldowns import BucketType
-
+from discord import Embed
 from discord.ext.commands.core import max_concurrency
-from bot.cogs.core import _case
-from discord import Embed, User
 from discord.ext import commands
 from discord.ext.commands.context import Context
 from dpytools import Color
 
 from modules.utils import update_item_database
-from modules.database.players import Player
 
 
 class OwnerCog(commands.Cog, name='owner'):
@@ -26,6 +23,7 @@ class OwnerCog(commands.Cog, name='owner'):
     async def owner(self, ctx:Context):
         pass
 
+    @max_concurrency(1, BucketType.default, wait=False)
     @owner.command(name='update-items', hidden=True)
     async def _update_items(self, ctx:Context):
         """Updates the item's database"""

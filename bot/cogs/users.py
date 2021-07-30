@@ -1,9 +1,9 @@
+from modules.utils.case_converter import CaseConverter
 from typing import Optional
 from modules.database.players import Player
 from discord.ext import commands
 from discord.ext.commands.context import Context
 from discord.ext.commands.core import max_concurrency
-from bot.cogs.core import _case
 
 
 class UsersCog(commands.Cog, name='Users'):
@@ -21,7 +21,7 @@ class UsersCog(commands.Cog, name='Users'):
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
-    async def givecase(self, ctx:Context, guild_id:Optional[int], user_id:Optional[int], amount:Optional[int]=1, *, container:Optional[_case]):
+    async def givecase(self, ctx:Context, guild_id:Optional[int], user_id:Optional[int], amount:Optional[int]=1, *, container:Optional[CaseConverter]):
         amount = amount if amount > 1 else 1
         """Gives the specified user in specified guild a case and the case key."""
         player = await Player.get(True, member_id=user_id or ctx.author.id, guild_id=guild_id or ctx.guild.id)
@@ -32,7 +32,7 @@ class UsersCog(commands.Cog, name='Users'):
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
-    async def takecase(self, ctx:Context, guild_id:Optional[int], user_id:Optional[int], amount:Optional[int]=-1, *, container:Optional[_case]):
+    async def takecase(self, ctx:Context, guild_id:Optional[int], user_id:Optional[int], amount:Optional[int]=-1, *, container:Optional[CaseConverter]):
         amount = amount if amount < 0 else -1
         """Gives the specified user in specified guild a case and the case key."""
         player = await Player.get(True, member_id=user_id or ctx.author.id, guild_id=guild_id or ctx.guild.id)

@@ -4,6 +4,7 @@ from discord.colour import Colour
 from discord.ext import commands
 from discord.flags import Intents
 from pretty_help import PrettyHelp
+from dislash import *
 
 from modules.constants import owners_ids
 from modules.utils import get_command_prefix
@@ -16,6 +17,8 @@ bot = commands.Bot(command_prefix=get_command_prefix,
                    intents=intents,
                    help_command=PrettyHelp(color=Colour.random(), no_category="General"),
                    owner_ids=owners_ids)
+
+SlashClient(bot)
 
 @bot.event
 async def on_ready():

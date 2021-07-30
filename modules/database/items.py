@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 from dpytools import Embed
 from odmantic import Model
@@ -97,3 +97,7 @@ class Item(ModelPlus, Model):
 
     def __radd__(self, other: int):
         return self.price + other
+
+def sort_items(items:List[Item], highest_first:bool=True) -> list:
+    sorted_list = sorted(items, key=lambda item: item.price, reverse=highest_first)
+    return sorted_list

@@ -16,6 +16,7 @@ __all__ = (
 
 with open('etc/cases.json') as f:
     all_cases = json.loads(f.read())
+    all_keys = ['{} Key'.format(x) for x in all_cases]
 
 with open("etc/collections.json", "r", encoding='utf-8') as f:
     all_collections = json.loads(f.read())
@@ -114,7 +115,7 @@ class Case:
         if name not in all_cases:
             raise ValueError(f'"{name}" is not a valid case name')
         self.name = name
-        self.asset = 'https://community.akamai.steamstatic.com/economy/image/{}'.format(case_assets[name])
+        self.asset = case_assets[name]
         self.items = all_cases[name]
         self.key = '{} Key'.format(name)
 
@@ -123,4 +124,17 @@ class Case:
 
     async def open(self):
         return await open_case(container_name=self.name)
+
+class Key:
+    def __init__(self, name: str):
+        if name not in all_keys:
+            raise ValueError(f'"{name}" is not a valid key name')
+        self.name = name
+        self.case = Case(self.name.replace(' Key', ''))
+
+    def __str__(self):
+        return self.name
+
+    async def use(self):
+        return await open_case(container_name=self.case.name)
 

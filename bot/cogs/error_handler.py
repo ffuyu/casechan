@@ -4,6 +4,7 @@ from discord.ext.commands import (
     CheckFailure, CommandNotFound, NoPrivateMessage, MemberNotFound, BadArgument,
     MissingRequiredArgument, MaxConcurrencyReached, RoleNotFound, CommandOnCooldown
 )
+from discord.ext.commands.errors import BadUnionArgument
 from dpytools import Embed, Color
 
 
@@ -20,7 +21,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
         expected = {
             CheckFailure, CommandNotFound, NoPrivateMessage, MemberNotFound,
             BadArgument, MissingRequiredArgument, MaxConcurrencyReached, CommandOnCooldown,
-            Forbidden, RoleNotFound
+            Forbidden, RoleNotFound, BadUnionArgument
         }
 
         embed = Embed(

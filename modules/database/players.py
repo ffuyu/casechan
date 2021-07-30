@@ -91,7 +91,8 @@ class Player(ModelPlus, Model):
         if not item:
             raise ValueError(f'Item {item_name} with stats "{stats}" is '
                              f'not present in the player\'s inventory')
-        self.inventory[item_name].remove(item)
+
+        self.inventory.pop(item_name)
 
     def _mod_case_or_key(self, attr_name, name, n: int):
         """

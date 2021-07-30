@@ -6,3 +6,4 @@ DiscordUtils
 discord-pretty-help
 python-dotenv
 requests
+dislash.py

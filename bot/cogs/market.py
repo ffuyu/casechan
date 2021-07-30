@@ -1,14 +1,15 @@
-import os
+from modules.cases import Case, Key
 from discord.ext.commands.cooldowns import BucketType
 from modules.utils.item_converter import ItemConverter
-from typing import Optional
+from modules.utils.case_converter import CaseConverter
+from modules.utils.key_converter import KeyConverter
+from typing import Optional, Union
 from discord.ext import commands
 from modules.database.players import Player
 from modules.database.items import Item
 from discord.ext import commands
 from discord.ext.commands.context import Context
 from discord.ext.commands.core import guild_only, max_concurrency
-from bot.cogs.core import _case
 import random
 
 
@@ -36,7 +37,7 @@ class MarketCog(commands.Cog, name='Market'):
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
-    async def buy(self, ctx, amount:Optional[int]=1, *, item:Optional[ItemConverter]):
+    async def buy(self, ctx, amount:Optional[int]=1, *, item:Optional[Union[ItemConverter, CaseConverter, KeyConverter]]):
         """Buy a skin from the market using your balance"""
         amount = amount if amount > 1 else 1
         if item:
@@ -62,23 +63,32 @@ class MarketCog(commands.Cog, name='Market'):
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
-    async def sell(self, ctx, amount:Optional[int]=1, *, item:Optional[ItemConverter]):
+    async def sell(self, ctx, amount:Optional[int]=1, *, item:Optional[Union[ItemConverter, CaseConverter, KeyConverter]]):
         """Sell a skin to the market and get balance"""
         amount = amount if amount > 1 else 1
-        if item:
+        if isinstance(item, Item):
             player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-            if item.name in [x.name for x in await player.inv_items()]:
+            if [x for x in player.inventory.keys()].count(item.name) >= amount:
                 if not player.trade_banned:
                     if item.price > 0.00:
-                        
-                        # player.add_item(item.name, (generate_float(), random.SystemRandom().randint(0, 1000))) # TODO Replace with remove_item function
-                        player.balance += ((item.price * amount) * 0.15)
-                        await player.save()
-                        return await ctx.send('You have sold **{}x {}** successfully. You have received ${:.2f}.'.format(amount, item.name, ((item.price * amount) * 0.15)))
-
+            
+                        stats = player.inventory.get(item.name, [])
+                        if stats:
+                            player.rem_item(item.name, stats[0])
+                            player.balance += ((item.price * amount) * 0.15)
+                            await player.save()
+                            return await ctx.send('You have sold **{}x {}** successfully. You have received ${:.2f}.'.format(amount, item.name, ((item.price * amount) * 0.15)))
+                            
+                        return await ctx.send('An error occured while selling your item. Perhaps the item is corrupted.')
                     return await ctx.send('You cannot sell this item now. Reason: Item has no price data.')
                 return await ctx.send('You cannot sell this item now. Reason: Account trade banned.')
             return await ctx.send('You cannot sell this item now. Reason: Item not found on inventory.')
+
+        if isinstance(item, Case):
+            return await ctx.send(item)
+
+        if isinstance(item, Key):
+            return await ctx.send(item)
 
         return await ctx.send('Item not found')
 
