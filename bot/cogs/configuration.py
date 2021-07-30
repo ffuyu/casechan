@@ -16,7 +16,7 @@ class ConfigCog(commands.Cog, name='Configuration'):
         print(f'Cog: {self.qualified_name} unloaded')
 
     @is_admin()
-    @commands.group(name='set')
+    @commands.group(aliases=['set'])
     async def config(self, ctx):
         """Admin restricted, bot configuration commands"""
         pass

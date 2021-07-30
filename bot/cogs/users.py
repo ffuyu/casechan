@@ -3,8 +3,24 @@ from typing import Optional
 from modules.database.players import Player
 from discord.ext import commands
 from discord.ext.commands.context import Context
+from modules.cases import Case
 from discord.ext.commands.core import max_concurrency
 
+async def _alter_case(ctx: Context,
+                      amount: int,
+                      container: Case,
+                      msg: str,
+                      guild_id: Optional[int] = None,
+                      user_id: Optional[int] = None,
+                      ):
+    """Handles the logic to modify cases for specified user"""
+    guild_id = guild_id or ctx.guild.id
+    user_id = user_id or ctx.author.id
+    player = await Player.get(True, member_id=user_id or ctx.author.id, guild_id=guild_id or ctx.guild.id)
+    player.mod_case(container.name, amount)
+    player.mod_key(container.key, amount)
+    await player.save()
+    await ctx.send(msg)
 
 class UsersCog(commands.Cog, name='Users'):
     def __init__(self, bot):
@@ -22,24 +38,20 @@ class UsersCog(commands.Cog, name='Users'):
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
     async def givecase(self, ctx:Context, guild_id:Optional[int], user_id:Optional[int], amount:Optional[int]=1, *, container:Optional[CaseConverter]):
-        amount = amount if amount > 1 else 1
         """Gives the specified user in specified guild a case and the case key."""
-        player = await Player.get(True, member_id=user_id or ctx.author.id, guild_id=guild_id or ctx.guild.id)
-        player.mod_case(container.name, amount)
-        player.mod_key(container.key, amount)
-        await player.save()
-        await ctx.send(f"Gave **x{amount} {container}** to **{guild_id or ctx.guild.id}/{user_id or ctx.author}**")
+        container: Case
+        amount = amount if amount > 1 else 1
+        msg = f"Gave **x{amount} {container}** to **{guild_id or ctx.guild.id}/{user_id or ctx.author}**"
+        await _alter_case(ctx, amount, container, msg, guild_id, user_id)
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
     async def takecase(self, ctx:Context, guild_id:Optional[int], user_id:Optional[int], amount:Optional[int]=-1, *, container:Optional[CaseConverter]):
-        amount = amount if amount < 0 else -1
         """Gives the specified user in specified guild a case and the case key."""
-        player = await Player.get(True, member_id=user_id or ctx.author.id, guild_id=guild_id or ctx.guild.id)
-        player.mod_case(container.name, amount)
-        player.mod_key(container.key, amount)
-        await player.save()
-        await ctx.send(f"Took **x{abs(amount)} {container}** from **{guild_id or ctx.guild.id}/{user_id or ctx.author}**")
+        container: Case
+        amount = amount if amount < 0 else -1
+        msg = f"Took **x{abs(amount)} {container}** from **{guild_id or ctx.guild.id}/{user_id or ctx.author}**"
+        await _alter_case(ctx, amount, container, msg, guild_id, user_id)
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
