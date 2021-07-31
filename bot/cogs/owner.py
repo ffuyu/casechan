@@ -1,5 +1,3 @@
-from typing import Optional
-from asyncio.tasks import wait
 from discord.ext.commands.cooldowns import BucketType
 from discord import Embed
 from discord.ext.commands.core import max_concurrency

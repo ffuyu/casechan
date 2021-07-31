@@ -5,6 +5,7 @@ from discord.ext import commands
 from discord.ext.commands.context import Context
 from modules.cases import Case
 from discord.ext.commands.core import max_concurrency
+from discord import Guild, User
 
 async def _alter_case(ctx: Context,
                       amount: int,
@@ -37,21 +38,25 @@ class UsersCog(commands.Cog, name='Users'):
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
-    async def givecase(self, ctx:Context, guild_id:Optional[int], user_id:Optional[int], amount:Optional[int]=1, *, container:Optional[CaseConverter]):
+    async def givecase(self, ctx:Context, guild:Optional[Guild], user:Optional[User], amount:Optional[int]=1, *, container:Optional[CaseConverter]):
         """Gives the specified user in specified guild a case and the case key."""
         container: Case
+        guild = guild or ctx.guild
+        user = user or ctx.author
         amount = amount if amount > 1 else 1
-        msg = f"Gave **x{amount} {container}** to **{guild_id or ctx.guild.id}/{user_id or ctx.author}**"
-        await _alter_case(ctx, amount, container, msg, guild_id, user_id)
+        msg = f"Gave **x{amount} {container}** to **{guild.id or ctx.guild.id}/{user.id or ctx.author}**"
+        await _alter_case(ctx, amount, container, msg, guild.id, user.id)
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
-    async def takecase(self, ctx:Context, guild_id:Optional[int], user_id:Optional[int], amount:Optional[int]=-1, *, container:Optional[CaseConverter]):
+    async def takecase(self, ctx:Context, guild:Optional[int], user:Optional[int], amount:Optional[int]=-1, *, container:Optional[CaseConverter]):
         """Gives the specified user in specified guild a case and the case key."""
         container: Case
+        guild = guild or ctx.guild
+        user = user or ctx.author
         amount = amount if amount < 0 else -1
-        msg = f"Took **x{abs(amount)} {container}** from **{guild_id or ctx.guild.id}/{user_id or ctx.author}**"
-        await _alter_case(ctx, amount, container, msg, guild_id, user_id)
+        msg = f"Took **x{abs(amount)} {container}** from **{guild.id or ctx.guild.id}/{user.id or ctx.author}**"
+        await _alter_case(ctx, amount, container, msg, guild.id, user.id)
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()

@@ -97,6 +97,10 @@ class Player(ModelPlus, Model):
         if not self.inventory[item_name]:
             self.inventory.pop(item_name)
 
+    def item_count(self, item_name):
+        inv = self.inventory.get(item_name, [])
+        return len(inv)
+
     def _mod_case_or_key(self, attr_name, name, n: int):
         """
         Private method for modifying cases or keys

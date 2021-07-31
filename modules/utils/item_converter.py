@@ -24,8 +24,8 @@ _replacements = {
     "katow": "katowice",
     "fn": "factory new",
     "mw": "minimal wear",
-    "ft": "field tested",
-    "ww": "well worn",
+    "ft": "field-tested",
+    "ww": "well-worn",
     "bs": "battle-scarred",
     "so": "souvenir",
     "st": "stattrak™",
@@ -39,6 +39,11 @@ _replacements = {
     "kara": "karambit",
     "navi": "natus vincere",
     "cz": "cz75-auto",
+    "xm": "xm1014",
+    "mp5": "mp5-sd",
+    "globes": "gloves",
+    "m4": "m4a4",
+    "m4a1": "m4a1-s"
 }
 
 _names_cache = []

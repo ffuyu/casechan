@@ -1,3 +1,5 @@
+from copy import Error
+from modules.errors import InsufficientBalance, ItemMissingPrice, ItemMissingStats, ItemNotFound, ItemUnavailable, MissingItem, MissingSpace, NotMarketable, NotTradeable, StateNotEqual, TradeNotAllowed
 from modules.cases import Case, Key
 from discord.ext.commands.cooldowns import BucketType
 from modules.utils.item_converter import ItemConverter
@@ -17,16 +19,16 @@ def generate_float(exterior:str) -> float:
     ranges = {
         "Battle-Scarred": (0.44, 0.99),
         "Well-Worn": (0.37, 0.439),
-        "Field-Tested": (0.15, 0.369),
+        "Field-Tested": (0.85, 0.369),
         "Minimal Wear": (0.07, 0.149),
         "Factory New": (0.00, 0.069)
     }
     range = ranges.get(exterior)
-    print(range)
     return random.SystemRandom().uniform(a=range[0], b=range[1])
 
 
 class MarketCog(commands.Cog, name='Market'):
+    """Contains market commands that lets players buy/sell items"""
     def __init__(self, bot):
         self.bot = bot
         print(f'Cog: {self.qualified_name} loaded')
@@ -42,23 +44,23 @@ class MarketCog(commands.Cog, name='Market'):
         amount = amount if amount > 1 else 1
         if item:
             player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-            await ctx.send(generate_float(item.name[item.name.find('(')+1:item.name.find(')')]))
             if player.balance >= (item.price * amount):
-                if (1000 - len(player.inv_items())) >= amount:
+                if (1000 - len(player.inventory)) >= amount:
                     if not player.trade_banned:
                         if item.price > 0.00:
                             
-                            player.add_item(item.name, (generate_float(), random.SystemRandom().randint(0, 1000)))
+                            for _ in range(amount-1):
+                                player.add_item(item.name, (generate_float(item.name[item.name.find('(')+1:item.name.find(')')]), random.SystemRandom().randint(0, 1000)))
                             player.balance -= (item.price * amount)
-                            player.save()
-                            return await ctx.send(f'You have purchased **{amount}x {item.name}** successfully. You have been charged {item.price * amount}')
+                            await player.save()
+                            return await ctx.send('You have purchased **{}x {}** successfully. You have been charged **${:.2f}**.'.format(amount, item.name, item.price * amount))
 
-                        return await ctx.send('You cannot buy this item now. Reason: Item has no price data.')
-                    return await ctx.send('You cannot buy this item now. Reason: Account trade banned.') 
-                return await ctx.send('You cannot buy this item now. Reason: Inventory limit reached.')
-            return await ctx.send('You cannot buy this item now. Reason: Insufficient balance.')
+                        raise ItemUnavailable('You cannot buy this item now. Reason: Item has no price data.')
+                    raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.') 
+                raise MissingSpace('You cannot buy this item now. Reason: Inventory limit reached.')
+            raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
 
-        return await ctx.send('Item not found')
+        raise ItemNotFound('Item not found')
 
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
@@ -75,23 +77,52 @@ class MarketCog(commands.Cog, name='Market'):
                         stats = player.inventory.get(item.name, [])
                         if stats:
                             player.rem_item(item.name, stats[0])
-                            player.balance += ((item.price * amount) * 0.15)
+                            player.balance += ((item.price * amount) * 0.85)
                             await player.save()
-                            return await ctx.send('You have sold **{}x {}** successfully. You have received ${:.2f}.'.format(amount, item.name, ((item.price * amount) * 0.15)))
+                            return await ctx.send('You have sold **{}x {}** and received **${:.2f}**.'.format(amount, item.name, ((item.price * 0.85) * amount)))
                             
-                        return await ctx.send('An error occured while selling your item. Perhaps the item is corrupted.')
-                    return await ctx.send('You cannot sell this item now. Reason: Item has no price data.')
-                return await ctx.send('You cannot sell this item now. Reason: Account trade banned.')
-            return await ctx.send('You cannot sell this item now. Reason: Item not found on inventory.')
+                        raise ItemMissingStats('An error occured while selling your item. Perhaps the item is corrupted.')
+                    raise ItemMissingPrice('You cannot sell this item now. Reason: Item has no price data.')
+                raise TradeNotAllowed('You cannot sell items. Reason: Account trade banned.')
+            raise MissingItem('You cannot sell this item now. Reason: Item not found on inventory.')
 
-        if isinstance(item, Case):
-            return await ctx.send(item)
+        if isinstance(item, (Case, Key)):
+            raise NotMarketable('This item cannot be sold.')
 
-        if isinstance(item, Key):
-            return await ctx.send(item)
+        raise ItemNotFound('Item not found.')
 
-        return await ctx.send('Item not found')
+    @guild_only()
+    @max_concurrency(1, BucketType.member, wait=False)
+    @commands.command()
+    async def sellall(self, ctx, *, item:Optional[Union[ItemConverter, CaseConverter, KeyConverter]]):
+        player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
+        if isinstance(item, Item):
+            amount = player.item_count(item.name)
+            if amount:
+                player.inventory.pop(item.name)
+                player.balance += (item.price * 0.85)
+                await player.save()
+                return await ctx.send('You have sold **{}x {}** and received **${:.2f}**.'.format(amount, item.name, ((item.price * 0.85) * amount)))
+            raise MissingItem('You don\'t have any **{}** to sell.'.format(item.name))
 
+        if isinstance(item, (Case, Key)):
+            raise NotMarketable('This item cannot be sold.')
 
+        if not item:
+            items = list(player.inventory.keys())
+            if items:
+                for item in items:
+                    amount = player.item_count(item)
+                    if amount:
+                        item_ = await Item.get(False, name=item)
+                        if item_:               
+                            player.inventory.pop(item_.name)
+                            player.balance += (item_.price * 0.85)
+                        
+                await player.save()
+                return await ctx.send('You have sold **{}x {}** and received **${:.2f}**.'.format(amount, item_.name, ((item_.price * 0.85) * amount)))
+            raise ItemNotFound('You have no items to sell.')
+        raise ItemNotFound('Item not found.')
+        
 def setup(bot):
     bot.add_cog(MarketCog(bot))

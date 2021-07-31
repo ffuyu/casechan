@@ -111,8 +111,8 @@ class CoreCog(commands.Cog, name='Core'):
                     await inter.reply('Claimed **{}** successfully'.format(item.name), ephemeral=True)
 
                 elif inter.clicked_button.custom_id == 'sell':
-                    player.balance += (item.price * 0.15)
-                    await inter.send('You have sold **{}** and received ${:.2f}'.format(item.name, (item.price * 0.15)), ephemeral=True)
+                    player.balance += (item.price * 0.85)
+                    await inter.send('You have sold **{}** and received ${:.2f}'.format(item.name, (item.price * 0.85)), ephemeral=True)
 
                 elif inter.clicked_button.custom_id == 'discard':
                     await inter.send('You have discarded **{}**.'.format(item.name), ephemeral=True)
@@ -156,7 +156,6 @@ class CoreCog(commands.Cog, name='Core'):
         user = user or ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
         if player.inventory:
-            print(player.inventory)
             pages = paginate_to_embeds(description='\n'.join(['**{}x** {}'.format(len(player.inventory.get(item)), item)
                                                               for item in player.inventory]),
                                        title='{}\'s Inventory'.format(user), max_size=400, color=Colour.random())
@@ -169,7 +168,7 @@ class CoreCog(commands.Cog, name='Core'):
         return await ctx.reply('**{}** has no items to display'.format(user))
         
     @guild_only()
-    @commands.command(aliases=["bal", "b"])
+    @commands.command(aliases=["bal", "b", "networth", "nw"])
     async def balance(self, ctx, user:Optional[Member]):
         user = user or ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
@@ -209,7 +208,7 @@ class CoreCog(commands.Cog, name='Core'):
         guilds_dictionary = {}
         all_guilds = await engine.find(GuildConfig)
         for guild in all_guilds:
-            users = await Player.find(guild_id=ctx.guild.id)
+            users = await Player.find(guild_id=guild.guild_id)
             guild_object = self.bot.get_guild(guild.guild_id)
             guilds_dictionary[guild_object.name] = sum([await x.inv_total() for x in users])
 
@@ -224,7 +223,7 @@ class CoreCog(commands.Cog, name='Core'):
         await ctx.send(embed=embed)
 
     @commands.command(aliases=['inspect'])
-    async def price(self, ctx:Context, *, query: ItemConverter):
+    async def price(self, ctx:Context, *, query: Optional[ItemConverter]):
         """
         Shows item price & asset with specified query
         Args:
@@ -232,7 +231,7 @@ class CoreCog(commands.Cog, name='Core'):
         """
         if query:
             query: Item
-            await ctx.send(embed=query.to_embed(minimal=True if ctx.invoked_with != 'inspect' else False))
+            await ctx.send(embed=query.to_embed(minimal=True if ctx.invoked_with == 'price' else False))
         else:
             await ctx.send(embed=Embed(description='Item not found', color=Color.RED))
 

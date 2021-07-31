@@ -1,3 +1,4 @@
+from os import stat
 from discord.ext.commands import Converter
 
 from ..cases import Case, all_cases
@@ -12,7 +13,15 @@ class CaseConverter(Converter):
 
     async def convert(self, ctx, argument):
         for case in all_cases:
-            if case.lower() == argument.lower() or case.lower() == '%s case' % argument.lower():
+            lwcs = case.lower()
+            lwar = argument.lower()
+            statements = [
+                lwcs == lwar,
+                lwcs == f'{lwar} case',
+                lwcs == f'operation {lwar}',
+                lwcs == f'operation {lwar} case'
+            ]
+            if any(statements):
                 return Case(case)
         else:
             raise ValueError(f'No case with name "{argument}"')

@@ -22,7 +22,7 @@ class ConfigCog(commands.Cog, name='Configuration'):
         pass
 
     @config.command()
-    async def prefix(self, ctx, new_prefix: str):
+    async def prefix(self, ctx, *, new_prefix: str):
         """
         Sets the new prefix for the server
         Args:
@@ -35,6 +35,11 @@ class ConfigCog(commands.Cog, name='Configuration'):
             description=f'Done, prefix updated to "`{new_prefix}`"',
             color=Color.LIME
         ))
+
+    @commands.command()
+    async def prefix(self, ctx):
+        guild = await GuildConfig.get(True, guild_id=ctx.guild.id)
+        await ctx.send(f'My prefix in this guild is: {guild.prefix}')
 
 
 def setup(bot):
