@@ -1,18 +1,20 @@
-from copy import Error
+import random
+
+from typing import Optional, Union
+
 from modules.errors import ExceededBuyLimit, InsufficientBalance, ItemMissingPrice, ItemMissingStats, ItemNotFound, ItemUnavailable, MissingItem, MissingSpace, NotMarketable, NotTradeable, StateNotEqual, TradeNotAllowed
 from modules.cases import Case, Key
-from discord.ext.commands.cooldowns import BucketType
 from modules.utils.item_converter import ItemConverter
 from modules.utils.case_converter import CaseConverter
 from modules.utils.key_converter import KeyConverter
-from typing import Optional, Union
-from discord.ext import commands
 from modules.database.players import Player
 from modules.database.items import Item
+
+from discord.ext import commands
 from discord.ext import commands
 from discord.ext.commands.context import Context
 from discord.ext.commands.core import guild_only, max_concurrency
-import random
+from discord.ext.commands.cooldowns import BucketType
 
 
 def generate_stats(exterior:str):
@@ -41,13 +43,18 @@ class MarketCog(commands.Cog, name='Market'):
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
     async def buy(self, ctx, amount:Optional[int]=1, *, item:Optional[Union[ItemConverter, CaseConverter, KeyConverter]]):
-        """Buy a skin from the market using your balance"""
+        """
+        Buy a skin from the market using your balance
+        Args:
+            amount: quantity of the item you want to buy
+            item: item you want to buy, it can be a case, key or an item
+        """
         amount = amount if amount > 1 else 1
         if amount > 1000:
             raise ExceededBuyLimit('You can\'t buy more than 1000 items at once.')
         
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-        
+
         if isinstance(item, Item):
             if player.balance >= (item.price * amount):
                 if (1000 - len(player.inventory)) >= amount:
@@ -104,16 +111,16 @@ class MarketCog(commands.Cog, name='Market'):
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
-    async def sell(self, ctx, amount:Optional[int]=1, *, item:Optional[Union[KeyConverter, CaseConverter, ItemConverter]]):
+    async def sell(self, ctx, *, item:Optional[Union[KeyConverter, CaseConverter, ItemConverter]]):
         """
         Sell a skin to the market and get balance
         Args:
             item: the name of the item you want to sell
         """
-        amount = amount if amount > 1 else 1
+        amount = 1
         if isinstance(item, Item):
             player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-            if [x for x in player.inventory.keys()].count(item.name) >= amount:
+            if player.item_count(item.name) >= amount:
                 if not player.trade_banned:
                     if item.price > 0.00:
             

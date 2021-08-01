@@ -20,7 +20,7 @@ from modules.cases import Case, Key
 from modules.database import Player
 from modules.errors import InsufficientBalance, MissingCase, MissingKey
 
-class CaseHuntingCog(commands.Cog, name='CaseHunt'):
+class GamblingCog(commands.Cog, name='Gambling'):
     def __init__(self, bot):
         self.bot = bot
         print(f'Cog: {self.qualified_name} loaded')
@@ -32,6 +32,12 @@ class CaseHuntingCog(commands.Cog, name='CaseHunt'):
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command(aliases=['casehunt', 'keyhunt', 'gamble', 'bet'])
     async def hunt(self, ctx, amount:Optional[Union[int, float]]=1, *, item:Optional[Union[CaseConverter, KeyConverter, int]]):
+        """
+        Gamble your cases, keys or your balance!
+        Args:
+            amount: amount of case/key you want to bet
+            item: item you want to bet, it can be a case, key or the amount of money
+        """
         amount = amount if amount > 1 else 1
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
         reward_place = random.randint(1, 9)
@@ -129,4 +135,4 @@ class CaseHuntingCog(commands.Cog, name='CaseHunt'):
             
 
 def setup(bot):
-    bot.add_cog(CaseHuntingCog(bot))
+    bot.add_cog(GamblingCog(bot))
