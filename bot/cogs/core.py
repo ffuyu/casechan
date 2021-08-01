@@ -13,21 +13,27 @@ as follows:
 
 import asyncio
 
-from dislash.interactions.message_components import ActionRow, Button, ButtonStyle
-from modules.database.items import sort_items
-
-from discord.ext.commands.core import guild_only, max_concurrency
 from typing import Optional
+from dpytools.embeds import paginate_to_embeds
+from DiscordUtils.Pagination import CustomEmbedPaginator
+
+from dislash.interactions.slash_interaction import Interaction
+from dislash.interactions.message_components import ActionRow, Button, ButtonStyle
+
+from modules.cases import Case
+from modules.errors import MissingCase, MissingKey, MissingSpace
+from modules.database.items import sort_items
+from modules.utils.case_converter import CaseConverter
+from modules.utils import ItemConverter
+from modules.database import Player, Item, engine, GuildConfig
+
 from discord.ext import commands
 from discord import Member, Embed, Colour, Guild
 from discord.ext.commands.context import Context
 from dpytools import Color
 
-from modules.utils.case_converter import CaseConverter
-from modules.database import Player, Item, engine, GuildConfig
-from dpytools.embeds import paginate_to_embeds
-from DiscordUtils.Pagination import CustomEmbedPaginator
-from modules.utils import ItemConverter
+from discord.ext.commands.core import guild_only, max_concurrency
+
 
 def disable_row(row:ActionRow) -> ActionRow:
     for button in row.buttons:
@@ -53,71 +59,86 @@ class CoreCog(commands.Cog, name='Core'):
         """
         Opens a case from your cases
         """
+        container: Case
         if container:
             player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-            if container.name in player.cases and container.key in player.keys:
-                # Opening animation
-                opening_embed = Embed(
-                    description = '**{}**'.format(container),
-                    color = Colour.random()
-                ).set_image(url=container.asset).set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
+            inv_size = sum([player.item_count(x) for x in player.inventory])
+            # Checks
+            if inv_size >= 1000:
+                raise MissingSpace('You can\'t open more cases, your inventory is full!')
+            if container.name not in player.cases:
+                raise MissingCase(f'You are missing {container}.')
+            if container.key not in player.keys:
+                raise MissingKey(f'You are missing {container.key}.')
+
+            # Opening animation
+            opening_embed = Embed(
+                description = '**{}**'.format(container),
+                color = Colour.random()
+            ).set_image(url=container.asset).set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
+        
+            message = await ctx.send(embed=opening_embed, reference=ctx.message)
+            await asyncio.sleep(5)
+
+            # Displaying results
+            item, *stats = await container.open()
+            player.mod_case(container.name, -1)
+            player.mod_key(container.key, -1)
+            player.stats['cases']['opened'] += 1
+            await player.save()
+
+            # Buttons
+            row = ActionRow(
+                Button(
+                    style=ButtonStyle.grey,
+                    label="Claim",
+                    custom_id="claim",
+                    emoji='📥',
+                ),
+                Button(
+                    style=ButtonStyle.green,
+                    label="Sell",
+                    custom_id="sell",
+                    emoji='💸'
+                ),
+                Button(
+                    style=ButtonStyle.grey,
+                    label=f"{inv_size}/1000",
+                    custom_id="invsize",
+                    disabled=True
+                )
+            )
             
-                message = await ctx.send(embed=opening_embed, reference=ctx.message)
-                await asyncio.sleep(5)
-                # Displaying results
+            results = Embed(
+                description = '**{}**'.format(item.name),
+                color = item.color
+            )
+            results.set_image(url='https://community.akamai.steamstatic.com/economy/image/{}'.format(item.icon_url))\
+                    .set_footer(text='Float %f | Paint Seed: %d | Price: $%.2f' % (stats[0], stats[1], item.price))\
+                    .set_author(name=container, icon_url=container.asset)
 
-                item, *stats = await container.open()
-                
-                player.mod_case(container.name, -1)
-                player.mod_key(container.key, -1)
-                await player.save()
-                # Buttons
-                row = ActionRow(
-                    Button(
-                        style=ButtonStyle.grey,
-                        label="Claim",
-                        custom_id="claim",
-                        emoji='📥',
-                    ),
-                    Button(
-                        style=ButtonStyle.green,
-                        label="Sell",
-                        custom_id="sell",
-                        emoji='💸'
-                    )
-                )
-                
-                results = Embed(
-                    description = '**{}**'.format(item.name),
-                    color = item.color
-                )
-                results.set_image(url='https://community.akamai.steamstatic.com/economy/image/{}'.format(item.icon_url))\
-                        .set_footer(text='Float %f | Paint Seed: %d | Price: $%.2f' % (stats[0], stats[1], item.price))\
-                        .set_author(name=container, icon_url=container.asset)
+            await message.edit(embed=results, components=[row])
 
-                await message.edit(embed=results, components=[row])
+            def check(inter):
+                return inter.author == ctx.author
 
-                def check(inter):
-                    return inter.author == ctx.author
-
-                try:
-                    inter = await message.wait_for_button_click(check=check, timeout=15)
-                except:
-                    player.add_item(item.name, stats)
-                else:
-                    if inter.clicked_button.custom_id == 'claim':
-                        player.add_item(item.name, stats)
-                        await inter.reply('Claimed **{}** successfully'.format(item.name), ephemeral=True)
-
-                    elif inter.clicked_button.custom_id == 'sell':
-                        player.balance += (item.price * 0.85)
-                        await inter.send('You have sold **{}** and received ${:.2f}'.format(item.name, (item.price * 0.85)), ephemeral=True)
-                finally:
-                    await player.save()
-                    return await message.edit(components=[disable_row(row)]) # NOTE custom function used because row.disable_buttons() does not work.
-                
+            try:
+                inter = await message.wait_for_button_click(check=check, timeout=15)
+                inter: Interaction
+            except:
+                player.add_item(item.name, stats)
             else:
-                return await ctx.send('You don\'t have **%s** or its key!' % container)
+                if inter.clicked_button.custom_id == 'claim':
+                    player.add_item(item.name, stats)
+                    await inter.reply('Claimed **{}** successfully'.format(item.name), ephemeral=True)
+
+                elif inter.clicked_button.custom_id == 'sell':
+                    player.balance += (item.price * 0.85)
+                    await inter.send('You have sold **{}** and received ${:.2f}'.format(item.name, (item.price * 0.85)), ephemeral=True)
+            finally:
+                await player.save()
+                return await message.edit(components=[disable_row(row)]) # NOTE custom function used because row.disable_buttons() does not work.
+            
         else:
             return await ctx.send('Not a valid case name!')
 
@@ -129,24 +150,31 @@ class CoreCog(commands.Cog, name='Core'):
         
         if ctx.invoked_with == 'cases':
             if player.cases:
-                return await ctx.send(embed=Embed(
-                    title = '{}\'s Cases'.format(user),
-                    description = '\n'.join(f'**{v}x** {k}' for k,v in player.cases.items())
-,
-                    color = Colour.random()
-                ))
+                pages = paginate_to_embeds(description='\n'.join(f'**{v}x** {k[:20]+"..." if len(k) > 22 else k}' for k,v in player.cases.items()),
+                                        title='{}\'s Cases'.format(user), max_size=130, color=Colour.random())
+
+                paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
+                if len(pages) > 1:
+                    paginator.add_reaction('⬅️', "back")
+                    paginator.add_reaction('➡️', "next")
+
+                return await paginator.run(pages)
 
             return await ctx.send(f'**{user}** has no cases to display') # FIXME (replace with an embed)
 
         elif ctx.invoked_with == 'keys':
             if player.keys:
-                return await ctx.send(embed=Embed(
-                    title = '{}\'s Keys'.format(user),
-                    description = '\n'.join(f'**{v}x** {k}' for k,v in player.keys.items()),
-                    color = Colour.random()
-                ))
+                pages = paginate_to_embeds(description='\n'.join(f'**{v}x** {k[:20]+"..." if len(k) > 22 else k}' for k,v in player.keys.items()),
+                                        title='{}\'s Keys'.format(user), max_size=150, color=Colour.random())
 
-            return await ctx.send(f'**{user}** has no keys to display') # FIXME (replace with an embed)
+                paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
+                if len(pages) > 1:
+                    paginator.add_reaction('⬅️', "back")
+                    paginator.add_reaction('➡️', "next")
+
+                return await paginator.run(pages)
+
+        return await ctx.send(f'**{user}** has no cases to display') # FIXME (replace with an embed)
 
 
     @commands.command(aliases=['inv'])

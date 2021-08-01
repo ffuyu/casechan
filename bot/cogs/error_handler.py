@@ -1,5 +1,5 @@
 from copy import Error
-from modules.errors import ItemNotFound, MissingItem, NotMarketable
+from modules.errors import DailyError, HourlyError, InsufficientBalance, ItemNotFound, MissingCase, MissingItem, MissingKey, MissingSpace, NotMarketable, WeeklyError
 from discord import Forbidden
 from discord.ext import commands
 from discord.ext.commands import (
@@ -23,7 +23,8 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             CheckFailure, CommandNotFound, NoPrivateMessage, MemberNotFound,
             BadArgument, MissingRequiredArgument, MaxConcurrencyReached, CommandOnCooldown,
             Forbidden, RoleNotFound, BadUnionArgument, BotMissingPermissions, CommandError, 
-            MissingItem, NotMarketable, ItemNotFound
+            MissingItem, NotMarketable, ItemNotFound, DailyError, HourlyError, WeeklyError,
+            MissingSpace, MissingCase, MissingKey, InsufficientBalance
             }
         embed = Embed(
             title="Command Error:",
@@ -46,6 +47,8 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             embed.description = str(error)
         elif isinstance(error, NotOwner):
             embed.description = 'You are not allowed to use this command!'
+        elif isinstance(error, MaxConcurrencyReached):
+            embed.description = f'This command can only be used by {error.number} {error.per} at same time.'
         else:
             embed.description = str(error)
         try:

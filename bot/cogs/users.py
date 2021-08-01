@@ -62,7 +62,7 @@ class UsersCog(commands.Cog, name='Users'):
             user = user or ctx.author
             amount = amount if amount > 1 else 1
             msg = f"Took **x{abs(amount)} {container}** from **{guild.id or ctx.guild.id}/{user.id or ctx.author}**"
-            return await _alter_case(ctx, amount, container, msg, guild.id, user.id)
+            return await _alter_case(ctx, -amount, container, msg, guild.id, user.id)
         raise CaseNotFound('Specified case could not be found')
 
     @max_concurrency(1, commands.BucketType.default, wait=True)

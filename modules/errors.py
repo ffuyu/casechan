@@ -78,3 +78,11 @@ class NotMarketable(MarketError):
 class StateNotEqual(MarketError):
     pass
 
+
+
+class DailyError(CommandError):
+    pass
+class HourlyError(DailyError):
+    pass
+class WeeklyError(DailyError):
+    pass

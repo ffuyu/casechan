@@ -1,5 +1,5 @@
 from copy import copy
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Optional, Dict, List, Tuple
 
 from odmantic import Model, query, EmbeddedModel, Reference
@@ -13,13 +13,7 @@ __all__ = (
 
 stats_dict = {
     "cases": {
-        "received": 0,
-        "given": 0,
         "opened": 0
-    },
-    "keys": {
-        "received": 0,
-        "given": 0,
     },
     "transactions": {
         "trades_made": 0,
@@ -35,11 +29,14 @@ class Player(ModelPlus, Model):
     keys: Dict[str, int] = {}  # {key.name: number}
     inventory: Dict[str, List[Tuple[float, int]]] = {}  # {item.name: [tuple of stats (float, seed)]}
     stats: dict = copy(stats_dict)
-    daily: Optional[datetime] = None
+    daily: Optional[datetime] = datetime.now() - timedelta(days=1)
+    hourly: Optional[datetime] = datetime.now() - timedelta(hours=1)
+    weekly: Optional[datetime] = datetime.now() - timedelta(weeks=1)
     streak: int = 0
     balance: float = 0.0
     restricted: bool = False
     trade_banned: bool = False
+    created_at: datetime = datetime.now()
 
     class Config:
         collection = 'players'
