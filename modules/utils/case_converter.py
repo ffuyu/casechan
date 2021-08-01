@@ -19,7 +19,9 @@ class CaseConverter(Converter):
                 lwcs == lwar,
                 lwcs == f'{lwar} case',
                 lwcs == f'operation {lwar}',
-                lwcs == f'operation {lwar} case'
+                lwcs == f'operation {lwar} case',
+                lwcs == f'cs:go {lwar}',
+                lwcs == f'cs:go {lwar} case'
             ]
             if any(statements):
                 return Case(case)

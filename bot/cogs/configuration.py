@@ -1,5 +1,6 @@
 from discord import Embed
 from discord.ext import commands
+from discord.ext.commands.core import guild_only
 from dpytools import Color
 from dpytools.checks import is_admin
 
@@ -36,10 +37,11 @@ class ConfigCog(commands.Cog, name='Configuration'):
             color=Color.LIME
         ))
 
-    @commands.command()
-    async def prefix(self, ctx):
+    @guild_only()
+    @commands.command(name='prefix')
+    async def prefix_(self, ctx):
         guild = await GuildConfig.get(True, guild_id=ctx.guild.id)
-        await ctx.send(f'My prefix in this guild is: {guild.prefix}')
+        await ctx.send(f'My prefix in this guild is: "`{guild.prefix}`"')
 
 
 def setup(bot):

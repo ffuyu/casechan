@@ -50,11 +50,13 @@ class ItemMissingPrice(ItemError):
     pass
 
 
-class OpeningError(CommandError):
+class CaseError(CommandError):
     pass
-class MissingCase(OpeningError):
+class MissingCase(CaseError):
     pass
-class MissingKey(OpeningError):
+class MissingKey(CaseError):
+    pass
+class CaseNotFound(CaseError):
     pass
 
 

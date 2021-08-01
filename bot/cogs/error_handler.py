@@ -1,5 +1,5 @@
 from copy import Error
-from modules.errors import MissingItem, NotMarketable
+from modules.errors import ItemNotFound, MissingItem, NotMarketable
 from discord import Forbidden
 from discord.ext import commands
 from discord.ext.commands import (
@@ -22,14 +22,15 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
         expected = {
             CheckFailure, CommandNotFound, NoPrivateMessage, MemberNotFound,
             BadArgument, MissingRequiredArgument, MaxConcurrencyReached, CommandOnCooldown,
-            Forbidden, RoleNotFound, BadUnionArgument, BotMissingPermissions, CommandError, MissingItem, NotMarketable
+            Forbidden, RoleNotFound, BadUnionArgument, BotMissingPermissions, CommandError, 
+            MissingItem, NotMarketable, ItemNotFound
             }
         embed = Embed(
             title="Command Error:",
             color=Color.RED,
         )
 
-        if isinstance(error, (CommandNotFound, ValueError, CommandError)):
+        if isinstance(error, (CommandNotFound)):
             return
         elif isinstance(error, NoPrivateMessage):
             embed.description = "This command only works inside a server"

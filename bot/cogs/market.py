@@ -49,7 +49,7 @@ class MarketCog(commands.Cog, name='Market'):
                     if not player.trade_banned:
                         if item.price > 0.00:
                             
-                            for _ in range(amount-1):
+                            for _ in range(amount):
                                 player.add_item(item.name, (generate_float(item.name[item.name.find('(')+1:item.name.find(')')]), random.SystemRandom().randint(0, 1000)))
                             player.balance -= (item.price * amount)
                             await player.save()
@@ -102,7 +102,7 @@ class MarketCog(commands.Cog, name='Market'):
                 player.inventory.pop(item.name)
                 player.balance += (item.price * 0.85)
                 await player.save()
-                return await ctx.send('You have sold **{}x {}** and received **${:.2f}**.'.format(amount, item.name, ((item.price * 0.85) * amount)))
+                return await ctx.send('You have sold **{}x {}(s)** and received **${:.2f}**.'.format(amount, item.name, ((item.price * 0.85) * amount)))
             raise MissingItem('You don\'t have any **{}** to sell.'.format(item.name))
 
         if isinstance(item, (Case, Key)):
@@ -111,16 +111,20 @@ class MarketCog(commands.Cog, name='Market'):
         if not item:
             items = list(player.inventory.keys())
             if items:
+                total_received = 0.0
+                total_items = 0
                 for item in items:
                     amount = player.item_count(item)
+                    total_items += amount
                     if amount:
                         item_ = await Item.get(False, name=item)
                         if item_:               
                             player.inventory.pop(item_.name)
-                            player.balance += (item_.price * 0.85)
+                            player.balance += ((item_.price * 0.85) * amount)
+                            total_received += ((item_.price * 0.85) * amount)
                         
                 await player.save()
-                return await ctx.send('You have sold **{}x {}** and received **${:.2f}**.'.format(amount, item_.name, ((item_.price * 0.85) * amount)))
+                return await ctx.send('You have sold **{} items** and received **${:.2f}**.'.format(total_items, total_received))
             raise ItemNotFound('You have no items to sell.')
         raise ItemNotFound('Item not found.')
         

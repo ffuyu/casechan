@@ -1,3 +1,4 @@
+from modules.errors import CaseNotFound
 from modules.utils.case_converter import CaseConverter
 from typing import Optional
 from modules.database.players import Player
@@ -40,23 +41,29 @@ class UsersCog(commands.Cog, name='Users'):
     @user.command()
     async def givecase(self, ctx:Context, guild:Optional[Guild], user:Optional[User], amount:Optional[int]=1, *, container:Optional[CaseConverter]):
         """Gives the specified user in specified guild a case and the case key."""
-        container: Case
-        guild = guild or ctx.guild
-        user = user or ctx.author
-        amount = amount if amount > 1 else 1
-        msg = f"Gave **x{amount} {container}** to **{guild.id or ctx.guild.id}/{user.id or ctx.author}**"
-        await _alter_case(ctx, amount, container, msg, guild.id, user.id)
+        container: Case()
+        print(container)
+        if container:
+            guild = guild or ctx.guild
+            user = user or ctx.author
+            amount = amount if amount > 1 else 1
+            msg = f"Gave **x{amount} {container}** to **{guild.id or ctx.guild.id}/{user.id or ctx.author}**"
+            return await _alter_case(ctx, amount, container, msg, guild.id, user.id)
+        raise CaseNotFound('Specified case could not be found')
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
-    async def takecase(self, ctx:Context, guild:Optional[int], user:Optional[int], amount:Optional[int]=-1, *, container:Optional[CaseConverter]):
+    async def takecase(self, ctx:Context, guild:Optional[Guild], user:Optional[User], amount:Optional[int]=1, *, container:Optional[CaseConverter]):
         """Gives the specified user in specified guild a case and the case key."""
-        container: Case
-        guild = guild or ctx.guild
-        user = user or ctx.author
-        amount = amount if amount < 0 else -1
-        msg = f"Took **x{abs(amount)} {container}** from **{guild.id or ctx.guild.id}/{user.id or ctx.author}**"
-        await _alter_case(ctx, amount, container, msg, guild.id, user.id)
+        container: Case()
+        print(container)
+        if container:
+            guild = guild or ctx.guild
+            user = user or ctx.author
+            amount = amount if amount > 1 else 1
+            msg = f"Took **x{abs(amount)} {container}** from **{guild.id or ctx.guild.id}/{user.id or ctx.author}**"
+            return await _alter_case(ctx, amount, container, msg, guild.id, user.id)
+        raise CaseNotFound('Specified case could not be found')
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()

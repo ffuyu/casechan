@@ -74,7 +74,7 @@ class CoreCog(commands.Cog, name='Core'):
                 # Buttons
                 row = ActionRow(
                     Button(
-                        style=ButtonStyle.blurple,
+                        style=ButtonStyle.grey,
                         label="Claim",
                         custom_id="claim",
                         emoji='📥',
@@ -84,41 +84,38 @@ class CoreCog(commands.Cog, name='Core'):
                         label="Sell",
                         custom_id="sell",
                         emoji='💸'
-                    ),
-                    Button(
-                        style=ButtonStyle.red,
-                        label="Discard",
-                        custom_id="discard",
-                        emoji='🗑️'
                     )
                 )
-
-                await message.edit(
-                    embed=Embed(
-                        description = '**{}**'.format(item.name),
-                        color = item.color
-                    ).set_image(url='https://community.akamai.steamstatic.com/economy/image/{}'.format(item.icon_url))\
-                     .set_footer(text='Float %f | Paint Seed: %d | Price: $%.2f' % (stats[0], stats[1], item.price))\
-                     .set_author(name=container, icon_url=container.asset), components=[row]
+                
+                results = Embed(
+                    description = '**{}**'.format(item.name),
+                    color = item.color
                 )
+                results.set_image(url='https://community.akamai.steamstatic.com/economy/image/{}'.format(item.icon_url))\
+                        .set_footer(text='Float %f | Paint Seed: %d | Price: $%.2f' % (stats[0], stats[1], item.price))\
+                        .set_author(name=container, icon_url=container.asset)
+
+                await message.edit(embed=results, components=[row])
+
                 def check(inter):
                     return inter.author == ctx.author
 
-                inter = await message.wait_for_button_click(check=check)
-
-                if inter.clicked_button.custom_id == 'claim':
+                try:
+                    inter = await message.wait_for_button_click(check=check, timeout=5)
+                except:
                     player.add_item(item.name, stats)
-                    await inter.reply('Claimed **{}** successfully'.format(item.name), ephemeral=True)
+                else:
+                    if inter.clicked_button.custom_id == 'claim':
+                        player.add_item(item.name, stats)
+                        await inter.reply('Claimed **{}** successfully'.format(item.name), ephemeral=True)
 
-                elif inter.clicked_button.custom_id == 'sell':
-                    player.balance += (item.price * 0.85)
-                    await inter.send('You have sold **{}** and received ${:.2f}'.format(item.name, (item.price * 0.85)), ephemeral=True)
-
-                elif inter.clicked_button.custom_id == 'discard':
-                    await inter.send('You have discarded **{}**.'.format(item.name), ephemeral=True)
-
-                await player.save()
-                return await message.edit(components=[disable_row(row)]) # NOTE custom function used because row.disable_buttons() does not work.
+                    elif inter.clicked_button.custom_id == 'sell':
+                        player.balance += (item.price * 0.85)
+                        await inter.send('You have sold **{}** and received ${:.2f}'.format(item.name, (item.price * 0.85)), ephemeral=True)
+                finally:
+                    await player.save()
+                    return await message.edit(components=[disable_row(row)]) # NOTE custom function used because row.disable_buttons() does not work.
+                
             else:
                 return await ctx.send('You don\'t have **%s** or its key!' % container)
         else:
@@ -183,7 +180,7 @@ class CoreCog(commands.Cog, name='Core'):
         )
         
     @guild_only()
-    @commands.command()
+    @commands.command(aliases=['lb'])
     async def leaderboard(self, ctx:Context):
         """View the inventory worth leaderboard for the server"""
         users = await Player.find(guild_id=ctx.guild.id)
