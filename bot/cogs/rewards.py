@@ -9,6 +9,7 @@ from modules.database.players import Player
 from modules.cases import Case, all_cases
 from modules.errors import DailyError, WeeklyError, HourlyError
 
+
 class RewardsCog(commands.Cog, name='Rewards'):
     """
     Contains hourly, daily and weekly commands
@@ -43,7 +44,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
             
             return await ctx.send(f'Claimed **{amount}x** cases from hourly rewards.')
 
-        raise HourlyError(f'You have to wait {datetime.timedelta(seconds=(player.hourly - datetime.datetime.now()).seconds)} to claim your next hourly rewards.')
+        raise HourlyError(f'You have to wait {"more"} to claim your next hourly rewards.')
 
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
@@ -80,7 +81,6 @@ class RewardsCog(commands.Cog, name='Rewards'):
         """
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
         if datetime.datetime.now() - ctx.author.created_at < datetime.timedelta(weeks=1):
-            print(ctx.author.created_at - datetime.datetime.now())
             raise WeeklyError('Your account is ineligible to claim weekly rewards.')
 
         if (datetime.datetime.now() - player.weekly) > datetime.timedelta(weeks=1):
@@ -97,7 +97,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
             
             return await ctx.send(f'Claimed **{amount}x** cases from weekly rewards.')
 
-        raise HourlyError(f'You have to wait {datetime.timedelta(seconds=(player.weekly - datetime.datetime.now()).seconds)} to claim your next weekly rewards.')
+        raise WeeklyError(f'You have to wait {"more"} to claim your next weekly rewards.')
 
 def setup(bot):
     bot.add_cog(RewardsCog(bot))
