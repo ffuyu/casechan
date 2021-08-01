@@ -43,7 +43,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
             
             return await ctx.send(f'Claimed **{amount}x** cases from hourly rewards.')
 
-        raise HourlyError(f'You have to wait {datetime.timedelta(seconds=(player.daily - datetime.datetime.now()).seconds)} to claim your next hourly rewards.')
+        raise HourlyError(f'You have to wait {datetime.timedelta(seconds=(player.hourly - datetime.datetime.now()).seconds)} to claim your next hourly rewards.')
 
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
@@ -97,7 +97,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
             
             return await ctx.send(f'Claimed **{amount}x** cases from weekly rewards.')
 
-        raise HourlyError(f'You have to wait {datetime.timedelta(seconds=(player.daily - datetime.datetime.now()).seconds)} to claim your next weekly rewards.')
+        raise HourlyError(f'You have to wait {datetime.timedelta(seconds=(player.weekly - datetime.datetime.now()).seconds)} to claim your next weekly rewards.')
 
 def setup(bot):
     bot.add_cog(RewardsCog(bot))
