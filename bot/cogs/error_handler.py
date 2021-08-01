@@ -6,7 +6,7 @@ from discord.ext.commands import (
     CheckFailure, CommandNotFound, NoPrivateMessage, MemberNotFound, BadArgument,
     MissingRequiredArgument, MaxConcurrencyReached, RoleNotFound, CommandOnCooldown
 )
-from discord.ext.commands.errors import BadUnionArgument, BotMissingPermissions, CommandError
+from discord.ext.commands.errors import BadUnionArgument, BotMissingPermissions, CommandError, NotOwner
 from dpytools import Embed, Color
 
 class ErrorHandlerCog(commands.Cog, name='Error Handler'):
@@ -44,6 +44,8 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
                                      "or because my role is too low.")
         elif isinstance(error, BotMissingPermissions):
             embed.description = str(error)
+        elif isinstance(error, NotOwner):
+            embed.description = 'You are not allowed to use this command!'
         else:
             embed.description = str(error)
         try:

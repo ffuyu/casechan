@@ -1,5 +1,4 @@
 import logging, os
-from modules.utils import update_item_database
 from bot import bot
 from dotenv import load_dotenv
 
