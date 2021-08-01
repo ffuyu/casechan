@@ -65,6 +65,9 @@ class Player(ModelPlus, Model):
 
     async def inv_items(self) -> List[Item]:
         return await self.engine.find(Item, query.in_(Item.name, [*self.inventory]))
+    
+    def inv_items_count(self):
+        return sum([self.item_count(x) for x in self.inventory])
 
     async def inv_total(self) -> float:
         items = [(i, self.inventory[i.name]) for i in await self.inv_items()]

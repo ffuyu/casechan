@@ -62,7 +62,7 @@ class CoreCog(commands.Cog, name='Core'):
         container: Case
         if container:
             player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-            inv_size = sum([player.item_count(x) for x in player.inventory])
+            inv_size = player.inv_items_count()
             # Checks
             if inv_size >= 1000:
                 raise MissingSpace('You can\'t open more cases, your inventory is full!')
