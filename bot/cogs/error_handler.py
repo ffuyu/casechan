@@ -24,7 +24,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             BadArgument, MissingRequiredArgument, MaxConcurrencyReached, CommandOnCooldown,
             Forbidden, RoleNotFound, BadUnionArgument, BotMissingPermissions, CommandError, 
             MissingItem, NotMarketable, ItemNotFound, DailyError, HourlyError, WeeklyError,
-            MissingSpace, MissingCase, MissingKey, InsufficientBalance
+            MissingSpace, MissingCase, MissingKey, InsufficientBalance, NotOwner
             }
         embed = Embed(
             title="Command Error:",
