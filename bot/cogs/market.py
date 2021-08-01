@@ -15,7 +15,7 @@ from discord.ext.commands.core import guild_only, max_concurrency
 import random
 
 
-def generate_float(exterior:str) -> float:
+def generate_stats(exterior:str):
     ranges = {
         "Battle-Scarred": (0.44, 0.99),
         "Well-Worn": (0.37, 0.439),
@@ -24,8 +24,9 @@ def generate_float(exterior:str) -> float:
         "Factory New": (0.00, 0.069)
     }
     range = ranges.get(exterior)
-    return random.SystemRandom().uniform(a=range[0], b=range[1])
-
+    float_ = random.SystemRandom().uniform(a=range[0], b=range[1])
+    seed = random.SystemRandom().randint(1, 1000)
+    return float_, seed
 
 class MarketCog(commands.Cog, name='Market'):
     """Contains market commands that lets players buy/sell items"""
@@ -42,16 +43,19 @@ class MarketCog(commands.Cog, name='Market'):
     async def buy(self, ctx, amount:Optional[int]=1, *, item:Optional[Union[ItemConverter, CaseConverter, KeyConverter]]):
         """Buy a skin from the market using your balance"""
         amount = amount if amount > 1 else 1
+        player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
         if isinstance(item, Item):
-            player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
             if player.balance >= (item.price * amount):
                 if (1000 - len(player.inventory)) >= amount:
                     if not player.trade_banned:
                         if item.price > 0.00:
                             
                             for _ in range(amount):
-                                player.add_item(item.name, (generate_float(item.name[item.name.find('(')+1:item.name.find(')')]), random.SystemRandom().randint(0, 1000)))
+                                stats = generate_stats(item.name[item.name.find('(')+1:item.name.find(')')])
+                                player.add_item(item.name, stats)
+                                print(stats)
                             player.balance -= (item.price * amount)
+
                             await player.save()
                             return await ctx.send('You have purchased **{}x {}** successfully. You have been charged **${:.2f}**.'.format(amount, item.name, item.price * amount))
 
@@ -60,8 +64,36 @@ class MarketCog(commands.Cog, name='Market'):
                 raise MissingSpace('You cannot buy this item now. Reason: Inventory limit reached.')
             raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
         
-        if isinstance(item, (Case, Key)):
-            raise NotMarketable('This item cannot be bought.')
+
+        # These instances are intentionally separated due to case prices will have some complex stuff going in them separately.
+
+        if isinstance(item, Case):
+            if not player.trade_banned:
+                if player.balance >= (0.00 * amount):
+                    
+                    player.mod_case(item.name, amount)
+                    player.balance -= (0.00 * amount)
+                    await player.save()
+
+                    return await ctx.send('You have purchased **{}x {}** successfully. You have received this item for **free**'.format(amount, item.name))
+                    # return await ctx.send('You have purchased **{}x {}** successfully. You have been charged **${:.2f}**.'.format(amount, item.name, 0.0 * amount))
+                
+                raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
+            raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.') 
+
+        if isinstance(item, Key):
+            if not player.trade_banned:
+                if player.balance >= (0.00 * amount):
+                
+                    player.mod_key(item.name, amount)
+                    player.balance -= (0.00 * amount)
+                    await player.save()
+
+                    return await ctx.send('You have purchased **{}x {}** successfully. You have received this item for **free**'.format(amount, item.name))
+                    # return await ctx.send('You have purchased **{}x {}** successfully. You have been charged **${:.2f}**.'.format(amount, item.name, 0.0 * amount))
+
+                raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
+            raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')     
 
         raise ItemNotFound('Item not found')
 
