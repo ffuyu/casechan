@@ -42,7 +42,7 @@ class MarketCog(commands.Cog, name='Market'):
     async def buy(self, ctx, amount:Optional[int]=1, *, item:Optional[Union[ItemConverter, CaseConverter, KeyConverter]]):
         """Buy a skin from the market using your balance"""
         amount = amount if amount > 1 else 1
-        if item:
+        if isinstance(item, Item):
             player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
             if player.balance >= (item.price * amount):
                 if (1000 - len(player.inventory)) >= amount:
@@ -59,14 +59,21 @@ class MarketCog(commands.Cog, name='Market'):
                     raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.') 
                 raise MissingSpace('You cannot buy this item now. Reason: Inventory limit reached.')
             raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
+        
+        if isinstance(item, (Case, Key)):
+            raise NotMarketable('This item cannot be bought.')
 
         raise ItemNotFound('Item not found')
 
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
-    async def sell(self, ctx, amount:Optional[int]=1, *, item:Optional[Union[ItemConverter, CaseConverter, KeyConverter]]):
-        """Sell a skin to the market and get balance"""
+    async def sell(self, ctx, amount:Optional[int]=1, *, item:Optional[Union[KeyConverter, CaseConverter, ItemConverter]]):
+        """
+        Sell a skin to the market and get balance
+        Args:
+            item: the name of the item you want to sell
+        """
         amount = amount if amount > 1 else 1
         if isinstance(item, Item):
             player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
@@ -95,6 +102,11 @@ class MarketCog(commands.Cog, name='Market'):
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
     async def sellall(self, ctx, *, item:Optional[Union[ItemConverter, CaseConverter, KeyConverter]]):
+        """
+        Bulk sells the specified item or all items if none specified
+        Args:
+            item: the name of the item you want to sell, leave empty to sell everything
+        """
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
         if isinstance(item, Item):
             amount = player.item_count(item.name)

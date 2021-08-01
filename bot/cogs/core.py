@@ -19,7 +19,7 @@ from modules.database.items import sort_items
 from discord.ext.commands.core import guild_only, max_concurrency
 from typing import Optional
 from discord.ext import commands
-from discord import Member, Embed, Colour
+from discord import Member, Embed, Colour, Guild
 from discord.ext.commands.context import Context
 from dpytools import Color
 
@@ -51,7 +51,7 @@ class CoreCog(commands.Cog, name='Core'):
     @commands.command(name='open')
     async def _open(self, ctx:Context, *, container:Optional[CaseConverter]):
         """
-        Opens a case from your inventory
+        Opens a case from your cases
         """
         if container:
             player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
@@ -101,7 +101,7 @@ class CoreCog(commands.Cog, name='Core'):
                     return inter.author == ctx.author
 
                 try:
-                    inter = await message.wait_for_button_click(check=check, timeout=5)
+                    inter = await message.wait_for_button_click(check=check, timeout=15)
                 except:
                     player.add_item(item.name, stats)
                 else:
@@ -123,6 +123,7 @@ class CoreCog(commands.Cog, name='Core'):
 
     @commands.command(aliases=['keys'])
     async def cases(self, ctx:Context, user:Optional[Member]):
+        """List the cases you currently have."""
         user = user or ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
         
@@ -150,6 +151,7 @@ class CoreCog(commands.Cog, name='Core'):
 
     @commands.command(aliases=['inv'])
     async def inventory(self, ctx:Context, user:Optional[Member]):
+        """View your inventory"""
         user = user or ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
         if player.inventory:
@@ -167,6 +169,7 @@ class CoreCog(commands.Cog, name='Core'):
     @guild_only()
     @commands.command(aliases=["bal", "b", "networth", "nw"])
     async def balance(self, ctx, user:Optional[Member]):
+        """Displays your wallet, inventory and net worth all at once"""
         user = user or ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
         inv_total = await player.inv_total()
@@ -181,14 +184,15 @@ class CoreCog(commands.Cog, name='Core'):
         
     @guild_only()
     @commands.command(aliases=['lb'])
-    async def leaderboard(self, ctx:Context):
+    async def leaderboard(self, ctx:Context, guild:Optional[Guild]):
         """View the inventory worth leaderboard for the server"""
-        users = await Player.find(guild_id=ctx.guild.id)
+        guild = guild or ctx.guild
+        users = await Player.find(guild_id=guild.id)
         users_dictionary = {}
         for user in users:
-            member = ctx.guild.get_member(user.member_id)
+            member = guild.get_member(user.member_id)
             if member:
-                users_dictionary[member] = await user.inv_total()
+                users_dictionary[member.name] = await user.inv_total()
 
         leaderboard = dict(sorted(users_dictionary.items(), key=lambda item: item[1], reverse=True))
         

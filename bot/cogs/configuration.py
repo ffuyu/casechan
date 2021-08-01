@@ -40,6 +40,7 @@ class ConfigCog(commands.Cog, name='Configuration'):
     @guild_only()
     @commands.command(name='prefix')
     async def prefix_(self, ctx):
+        """Displays the current prefix in the server"""
         guild = await GuildConfig.get(True, guild_id=ctx.guild.id)
         await ctx.send(f'My prefix in this guild is: "`{guild.prefix}`"')
 
