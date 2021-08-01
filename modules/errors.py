@@ -69,6 +69,7 @@ class MissingItem(InventoryError):
     pass
 
 
+
 class MarketError(CommandError):
     pass
 class InsufficientBalance(MarketError):
@@ -76,6 +77,8 @@ class InsufficientBalance(MarketError):
 class NotMarketable(MarketError):
     pass
 class StateNotEqual(MarketError):
+    pass
+class ExceededBuyLimit(MarketError):
     pass
 
 

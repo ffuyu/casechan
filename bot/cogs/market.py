@@ -1,5 +1,5 @@
 from copy import Error
-from modules.errors import InsufficientBalance, ItemMissingPrice, ItemMissingStats, ItemNotFound, ItemUnavailable, MissingItem, MissingSpace, NotMarketable, NotTradeable, StateNotEqual, TradeNotAllowed
+from modules.errors import ExceededBuyLimit, InsufficientBalance, ItemMissingPrice, ItemMissingStats, ItemNotFound, ItemUnavailable, MissingItem, MissingSpace, NotMarketable, NotTradeable, StateNotEqual, TradeNotAllowed
 from modules.cases import Case, Key
 from discord.ext.commands.cooldowns import BucketType
 from modules.utils.item_converter import ItemConverter
@@ -43,7 +43,11 @@ class MarketCog(commands.Cog, name='Market'):
     async def buy(self, ctx, amount:Optional[int]=1, *, item:Optional[Union[ItemConverter, CaseConverter, KeyConverter]]):
         """Buy a skin from the market using your balance"""
         amount = amount if amount > 1 else 1
+        if amount > 1000:
+            raise ExceededBuyLimit('You can\'t buy more than 1000 items at once.')
+        
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
+        
         if isinstance(item, Item):
             if player.balance >= (item.price * amount):
                 if (1000 - len(player.inventory)) >= amount:
