@@ -37,7 +37,6 @@ def _select_items_to_persist(items_, db_items_) -> list:
                 it.price = nitem['price']
                 to_persist.append(it)
     log.info(f'> {len(to_persist)} Need to be persisted to the database. Computing time: {t.t:2f} seconds')
-
     return to_persist
 
 
@@ -64,17 +63,22 @@ async def update_item_database():
             for raw_item in raw_items:
                 if raw_item.get('rarity') not in _relevant_rarities:
                     continue
+                # debug
                 item = {k: v for k, v in raw_item.items() if k in _relevant_keys}
                 # get price
                 rprice = raw_item.get('price')
+
                 if rprice:
+                    if isinstance(rprice, (float, int)):
+                        item['price'] = float(rprice)
+                        break
                     for key in _price_periods:
-                        if p := rprice.get(key):
-                            item['price'] = float(p['median'])
+                        if (p := rprice.get(key)) and (ps := float(p['median'])):
+                            item['price'] = ps
                             break
                     if 'price' not in item and (at := rprice.get('all_time')):
                         for key in _all_time_stats:
-                            if p := at.get(key, False):
+                            if p := at.get(key):
                                 item['price'] = float(p)
                                 break
                 if 'price' not in item:
@@ -88,10 +92,8 @@ async def update_item_database():
         log.info(f'Getting old items from database took {t.t:.2f} seconds')
 
         loop = asyncio.get_running_loop()
-
-        with ProcessPoolExecutor() as pool:
-            to_persist = await loop.run_in_executor(
-                pool, partial(_select_items_to_persist, items, db_items))
+        to_persist = await loop.run_in_executor(
+                None, partial(_select_items_to_persist, items, db_items))
 
         if to_persist:
             with Timer() as t:

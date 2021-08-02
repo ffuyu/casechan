@@ -1,6 +1,3 @@
-from copy import Error
-from modules.errors import DailyError, ExceededBuyLimit, HourlyError, InsufficientBalance, ItemNotFound, MissingCase, MissingItem, MissingKey, MissingSpace, NotMarketable, TradeNotAllowed, WeeklyError
-from discord import Forbidden
 from discord.ext import commands
 from discord.ext.commands import (
     CheckFailure, CommandNotFound, NoPrivateMessage, MemberNotFound, BadArgument,
@@ -8,6 +5,10 @@ from discord.ext.commands import (
 )
 from discord.ext.commands.errors import BadUnionArgument, BotMissingPermissions, CommandError, NotOwner
 from dpytools import Embed, Color
+
+from modules.errors import DailyError, ExceededBuyLimit, HourlyError, InsufficientBalance, ItemNotFound, MissingCase, \
+    MissingItem, MissingKey, MissingSpace, NotMarketable, TradeNotAllowed, WeeklyError
+
 
 class ErrorHandlerCog(commands.Cog, name='Error Handler'):
     def __init__(self, bot):
@@ -22,11 +23,11 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
         expected = {
             CheckFailure, CommandNotFound, NoPrivateMessage, MemberNotFound,
             BadArgument, MissingRequiredArgument, MaxConcurrencyReached, CommandOnCooldown,
-            Forbidden, RoleNotFound, BadUnionArgument, BotMissingPermissions, CommandError, 
+            Forbidden, RoleNotFound, BadUnionArgument, BotMissingPermissions, CommandError,
             MissingItem, NotMarketable, ItemNotFound, DailyError, HourlyError, WeeklyError,
             MissingSpace, MissingCase, MissingKey, InsufficientBalance, NotOwner, TradeNotAllowed,
             ExceededBuyLimit
-            }
+        }
         embed = Embed(
             title="Command Error:",
             color=Color.FIRE_ORANGE,

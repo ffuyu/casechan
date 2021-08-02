@@ -76,13 +76,13 @@ class UsersCog(commands.Cog, name='Users'):
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
-    async def delete(self, ctx:Context, guild_id:Optional[int], user_id:Optional[int]):
+    async def delete(self, ctx: Context, guild_id: Optional[int], user_id:Optional[int]):
         """
         Deletes a user from the database
         """
         player = await Player.get(True, member_id=user_id or ctx.author.id, guild_id=guild_id or ctx.guild.id)
         
-        # await player.save()
+        await player.save()
         await ctx.send(f"**{guild_id or ctx.guild.id}/{user_id or ctx.author.id}** has been deleted from database.")
 
 

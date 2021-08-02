@@ -1,8 +1,6 @@
-from os import replace
-from dislash.interactions.slash_interaction import Interaction
-from bot.cogs.core import disable_row
 from discord.ext.commands import Converter
 from dislash import ActionRow, Button, ButtonStyle
+
 from ..cases import Key, all_keys
 
 __all__ = (

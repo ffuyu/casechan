@@ -13,4 +13,5 @@ __all__ = (
 
 client = AsyncIOMotorClient(DATABASE_URL)
 
-engine = AIOEngine(motor_client=client, database='casechan')  # engine runs on local database only for the moment.
+engine = AIOEngine(motor_client=client, database='casechan')
+# engine = AIOEngine(database='casechan')  # local db
