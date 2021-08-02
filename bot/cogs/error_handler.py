@@ -29,7 +29,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             }
         embed = Embed(
             title="Command Error:",
-            color=Color.RED,
+            color=Color.FIRE_ORANGE,
         )
 
         if isinstance(error, (CommandNotFound)):

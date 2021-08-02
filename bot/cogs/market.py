@@ -140,7 +140,7 @@ class MarketCog(commands.Cog, name='Market'):
         if isinstance(item, (Case, Key)):
             raise NotMarketable('This item cannot be sold.')
 
-        raise ItemNotFound('Item not found.')
+        raise ItemNotFound('Please specify an item to sell')
 
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
@@ -184,7 +184,6 @@ class MarketCog(commands.Cog, name='Market'):
                 await player.save()
                 return await ctx.send('You have sold **{} items** and received **${:.2f}**.'.format(total_items, total_received))
             raise ItemNotFound('You have no items to sell.')
-        raise ItemNotFound('Item not found.')
         
 def setup(bot):
     bot.add_cog(MarketCog(bot))
