@@ -9,6 +9,7 @@ from modules.database import GuildConfig
 
 class ConfigCog(commands.Cog, name='Configuration'):
     """Set's up the bot's configuration for your server"""
+
     def __init__(self, bot):
         self.bot = bot
         print(f'Cog: {self.qualified_name} loaded')

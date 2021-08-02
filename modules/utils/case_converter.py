@@ -1,4 +1,3 @@
-from os import stat
 from discord.ext.commands import Converter
 
 from ..cases import Case, all_cases

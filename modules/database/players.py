@@ -2,7 +2,7 @@ from copy import copy
 from datetime import datetime, timedelta
 from typing import Optional, Dict, List, Tuple
 
-from odmantic import Model, query, EmbeddedModel, Reference
+from odmantic import Model, query
 
 from .items import Item
 from .models import ModelPlus
@@ -65,7 +65,7 @@ class Player(ModelPlus, Model):
 
     async def inv_items(self) -> List[Item]:
         return await self.engine.find(Item, query.in_(Item.name, [*self.inventory]))
-    
+
     def inv_items_count(self):
         return sum([self.item_count(x) for x in self.inventory])
 

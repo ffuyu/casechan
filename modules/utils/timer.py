@@ -7,7 +7,7 @@ __all__ = (
 
 class Timer:
     def __init__(self):
-        self.a, self.b, self.c = 0, 0, 0
+        self.a, self.b, = 0, 0
 
     def __enter__(self):
         self.a = time.perf_counter()
