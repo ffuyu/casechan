@@ -37,6 +37,8 @@ _replacements = {
     "scout": "ssg08",
     "deagle": "desert eagle",
     "kara": "karambit",
+    "talon": "talon knife",
+    "m9": "m9 bayonet",
     "navi": "natus vincere",
     "cz": "cz75-auto",
     "xm": "xm1014",
