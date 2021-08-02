@@ -1,5 +1,5 @@
 from copy import Error
-from modules.errors import DailyError, ExceededBuyLimit, HourlyError, InsufficientBalance, ItemNotFound, MissingCase, MissingItem, MissingKey, MissingSpace, NotMarketable, WeeklyError
+from modules.errors import DailyError, ExceededBuyLimit, HourlyError, InsufficientBalance, ItemNotFound, MissingCase, MissingItem, MissingKey, MissingSpace, NotMarketable, TradeNotAllowed, WeeklyError
 from discord import Forbidden
 from discord.ext import commands
 from discord.ext.commands import (
@@ -24,7 +24,8 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             BadArgument, MissingRequiredArgument, MaxConcurrencyReached, CommandOnCooldown,
             Forbidden, RoleNotFound, BadUnionArgument, BotMissingPermissions, CommandError, 
             MissingItem, NotMarketable, ItemNotFound, DailyError, HourlyError, WeeklyError,
-            MissingSpace, MissingCase, MissingKey, InsufficientBalance, NotOwner, ExceededBuyLimit
+            MissingSpace, MissingCase, MissingKey, InsufficientBalance, NotOwner, TradeNotAllowed,
+            ExceededBuyLimit
             }
         embed = Embed(
             title="Command Error:",
