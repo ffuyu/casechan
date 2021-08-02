@@ -21,6 +21,9 @@ from modules.database import Player
 from modules.errors import InsufficientBalance, MissingCase, MissingKey
 
 class GamblingCog(commands.Cog, name='Gambling'):
+    """
+    Contains gambling commands
+    """
     def __init__(self, bot):
         self.bot = bot
         print(f'Cog: {self.qualified_name} loaded')
