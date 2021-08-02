@@ -128,6 +128,7 @@ class MarketCog(commands.Cog, name='Market'):
                         if stats:
                             player.rem_item(item.name, stats[0])
                             player.balance += ((item.price * amount) * 0.85)
+                            player.stats['transactions']['items_sold'] += 1
                             await player.save()
                             return await ctx.send('You have sold **{}x {}** and received **${:.2f}**.'.format(amount, item.name, ((item.price * 0.85) * amount)))
                             
@@ -156,6 +157,7 @@ class MarketCog(commands.Cog, name='Market'):
             if amount:
                 player.inventory.pop(item.name)
                 player.balance += (item.price * 0.85)
+                player.stats['transactions']['items_sold'] += amount
                 await player.save()
                 return await ctx.send('You have sold **{}x {}(s)** and received **${:.2f}**.'.format(amount, item.name, ((item.price * 0.85) * amount)))
             raise MissingItem('You don\'t have any **{}** to sell.'.format(item.name))
@@ -176,6 +178,7 @@ class MarketCog(commands.Cog, name='Market'):
                         if item_:               
                             player.inventory.pop(item_.name)
                             player.balance += ((item_.price * 0.85) * amount)
+                            player.stats['transactions']['items_sold'] += amount
                             total_received += ((item_.price * 0.85) * amount)
                         
                 await player.save()
