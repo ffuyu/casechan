@@ -89,3 +89,12 @@ class HourlyError(DailyError):
     pass
 class WeeklyError(DailyError):
     pass
+
+class PromoError(CommandError):
+    pass
+class CodeExpired(PromoError):
+    pass
+class CodeUnavailable(PromoError):
+    pass
+class AlreadyClaimed(PromoError):
+    pass
