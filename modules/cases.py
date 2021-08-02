@@ -21,7 +21,7 @@ with open('etc/cases.json') as f:
 with open("etc/collections.json", "r", encoding='utf-8') as f:
     all_collections = json.loads(f.read())
 
-with open('etc/case_assets.json') as f:
+with open('etc/case_assets.json', 'r', encoding='utf-8') as f:
     case_assets = json.loads(f.read())
 
 _rarities = {  # grade weight, st weight 1 & 2

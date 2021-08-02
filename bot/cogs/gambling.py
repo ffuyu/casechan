@@ -41,7 +41,6 @@ class GamblingCog(commands.Cog, name='Gambling'):
         amount = amount if amount > 1 else 1
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
         reward_place = random.randint(1, 9)
-        print(reward_place)
         rows = []
         color = 4
 
@@ -78,6 +77,10 @@ class GamblingCog(commands.Cog, name='Gambling'):
             player.balance -= item
 
 
+        elif not item and not amount:
+            return await ctx.send('You need to place a bet with cases, keys or balance.')
+
+
         for y in range(3): 
             rows.append(ActionRow(
                 Button(
@@ -98,23 +101,23 @@ class GamblingCog(commands.Cog, name='Gambling'):
                 
         
         # reward_place = random.choice(random.choice(list([x.custom_id for x in row.buttons] for row in rows)))
-        components = [row for row in rows]
+
+        message = await ctx.send(content=quest_message, components=rows)
         components_disabled = [disable_row(row) for row in rows]
-        message = await ctx.send(content=quest_message, components=components)
 
         def check(inter):
             return inter.author == ctx.author
-
         try:
             inter = await message.wait_for_button_click(check=check, timeout=30)
             inter: Interaction
         except:
+            # refund user in case of any exception, mainly timing out
             if isinstance(item, Case):
                 player.mod_case(item.name, amount)
             elif isinstance(item, Key):
                 player.mod_key(item.name, amount)
             elif isinstance(item, int):
-                player.balance += item*2
+                player.balance += item
         else:
             if inter.clicked_button.custom_id == str(reward_place):
                 if isinstance(item, Case):
@@ -126,7 +129,6 @@ class GamblingCog(commands.Cog, name='Gambling'):
 
                 await inter.reply(win_message)
             else:
-                print(inter.clicked_button.custom_id, str(reward_place))
                 await inter.reply(loss_message)
             
         finally:

@@ -1,5 +1,7 @@
 import datetime, random
 
+from humanize import naturaldelta
+
 from discord.ext import commands
 from discord.ext.commands.context import Context
 from discord.ext.commands.cooldowns import BucketType
@@ -29,12 +31,12 @@ class RewardsCog(commands.Cog, name='Rewards'):
         Claim your hourly rewards
         """
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-        # player.daily = datetime.datetime.now() - datetime.timedelta(days=5)
-        if (datetime.datetime.now() - player.hourly) > datetime.timedelta(hours=1):
+        # player.daily = datetime.datetime.utcnow() - datetime.timedelta(days=5)
+        if (datetime.datetime.utcnow() - player.hourly) > datetime.timedelta(hours=1):
 
-            player.hourly = datetime.datetime.now()
+            player.hourly = datetime.datetime.utcnow()
             amount = random.randint(4,7) \
-                if ctx.author.created_at - datetime.datetime.now() < datetime.timedelta(weeks=1) else 1
+                if ctx.author.created_at - datetime.datetime.utcnow() < datetime.timedelta(weeks=1) else 1
             
             for _ in range(amount):
                 case = Case(random.choice([x for x in all_cases]))
@@ -44,7 +46,10 @@ class RewardsCog(commands.Cog, name='Rewards'):
             
             return await ctx.send(f'Claimed **{amount}x** cases from hourly rewards.')
 
-        raise HourlyError(f'You have to wait {"more"} to claim your next hourly rewards.')
+        a = datetime.datetime.utcnow()
+        b = a + datetime.timedelta(hours=1)
+
+        raise HourlyError(f'You have to wait {naturaldelta(a-b)} to claim your next weekly rewards.')
 
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
@@ -53,15 +58,15 @@ class RewardsCog(commands.Cog, name='Rewards'):
         Claim your daily rewards
         """
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-        # player.daily = datetime.datetime.now() - datetime.timedelta(days=5)
-        if (datetime.datetime.now() - player.daily) > datetime.timedelta(days=1):
-            if (datetime.datetime.now() - player.daily) > datetime.timedelta(days=2):
+        # player.daily = datetime.datetime.utcnow() - datetime.timedelta(days=5)
+        if (datetime.datetime.utcnow() - player.daily) > datetime.timedelta(days=1):
+            if (datetime.datetime.utcnow() - player.daily) > datetime.timedelta(days=2):
                 player.streak = 0
 
-            player.daily = datetime.datetime.now()
+            player.daily = datetime.datetime.utcnow()
             player.streak += 1
             amount = random.randint(player.streak, player.streak+10) \
-                if ctx.author.created_at - datetime.datetime.now() < datetime.timedelta(days=7) else 2
+                if ctx.author.created_at - datetime.datetime.utcnow() < datetime.timedelta(days=7) else 2
             
             for _ in range(amount):
                 case = Case(random.choice([x for x in all_cases]))
@@ -71,7 +76,10 @@ class RewardsCog(commands.Cog, name='Rewards'):
             
             return await ctx.send(f'Claimed **{amount}x** cases from daily rewards.')
 
-        raise DailyError(f'You have to wait {datetime.timedelta(seconds=(player.daily - datetime.datetime.now()).seconds)} to claim your next daily rewards.')
+        a = datetime.datetime.utcnow()
+        b = a + datetime.timedelta(days=1)
+
+        raise DailyError(f'You have to wait {naturaldelta(a-b)} to claim your next weekly rewards.')
 
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
@@ -80,12 +88,12 @@ class RewardsCog(commands.Cog, name='Rewards'):
         Claim your weekly rewards
         """
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-        if datetime.datetime.now() - ctx.author.created_at < datetime.timedelta(weeks=1):
+        if datetime.datetime.utcnow() - ctx.author.created_at < datetime.timedelta(weeks=1):
             raise WeeklyError('Your account is ineligible to claim weekly rewards.')
 
-        if (datetime.datetime.now() - player.weekly) > datetime.timedelta(weeks=1):
+        if (datetime.datetime.utcnow() - player.weekly) > datetime.timedelta(weeks=1):
 
-            player.weekly = datetime.datetime.now()
+            player.weekly = datetime.datetime.utcnow()
             range_ = random.choices([(25, 50), (50, 100), (100, 250), (250, 500), (500, 1000)], weights=[50, 25, 20, 4.9, 0.1], k=1)[0]
             amount = random.randint(range_[0], range_[1])
             
@@ -96,8 +104,10 @@ class RewardsCog(commands.Cog, name='Rewards'):
             await player.save()
             
             return await ctx.send(f'Claimed **{amount}x** cases from weekly rewards.')
+        a = datetime.datetime.utcnow()
+        b = a + datetime.timedelta(weeks=1)
 
-        raise WeeklyError(f'You have to wait {"more"} to claim your next weekly rewards.')
+        raise WeeklyError(f'You have to wait {naturaldelta(a-b)} to claim your next weekly rewards.')
 
 def setup(bot):
     bot.add_cog(RewardsCog(bot))
