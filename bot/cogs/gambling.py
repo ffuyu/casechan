@@ -66,7 +66,7 @@ class GamblingCog(commands.Cog, name='Gambling'):
             player.mod_key(item.name, amount)
 
 
-        if not item and amount:
+        if not item and amount > 1:
             item = amount
             if not player.balance >= item:
                 raise InsufficientBalance('You have insufficient balance to place this bet.')
@@ -77,7 +77,7 @@ class GamblingCog(commands.Cog, name='Gambling'):
             player.balance -= item
 
 
-        elif not item and not amount:
+        elif not item and amount:
             return await ctx.send('You need to place a bet with cases, keys or balance.')
 
 

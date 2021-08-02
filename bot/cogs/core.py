@@ -204,7 +204,7 @@ class CoreCog(commands.Cog, name='Core'):
         await ctx.send(
             embed=Embed(
                 color = Colour.random()
-            ).set_author(name=ctx.author, icon_url=ctx.author.avatar_url)\
+            ).set_author(name=user, icon_url=user.avatar_url)\
              .add_field(name="Wallet", value='${:.2f}'.format(player.balance), inline=True)
              .add_field(name="Inventory", value='${:.2f}'.format(inv_total), inline=True)
              .add_field(name="Net worth", value='${:.2f}'.format(player.balance+inv_total), inline=True)
