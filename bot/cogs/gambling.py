@@ -8,9 +8,6 @@ from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import guild_only, max_concurrency
 from discord.ext import commands
 
-from discord.colour import Colour
-from discord import Embed
-
 from dislash.interactions.message_components import Button, ActionRow
 from dislash.interactions.slash_interaction import Interaction
 
@@ -18,7 +15,7 @@ from modules.utils.case_converter import CaseConverter
 from modules.utils.key_converter import KeyConverter
 from modules.cases import Case, Key
 from modules.database import Player
-from modules.errors import InsufficientBalance, MissingCase, MissingKey
+from modules.errors import BetTooLow, InsufficientBalance, InvalidBet, MissingCase, MissingKey
 
 class GamblingCog(commands.Cog, name='Gambling'):
     """
@@ -45,14 +42,14 @@ class GamblingCog(commands.Cog, name='Gambling'):
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
         reward_place = random.randint(1, 9)
         rows = []
-        color = 4
-
+        color = random.randint(1, 4)
+        multiplier = random.randint(3, 9)
         if isinstance(item, Case):
             item: Case
             if not player.cases[item.name] >= amount:
                 raise MissingCase(f'You are missing **{amount}x {item.name}** to place a bet.')
-            quest_message = 'Guess and press the correct button, win **{}x {}**!'.format(amount*9, item.name)
-            win_message = 'You\'ve won **x{}** **{}**!'.format(amount*9, item.name)
+            quest_message = 'Guess and press the correct button, win **{}x {}**!'.format(amount*multiplier, item.name)
+            win_message = 'You\'ve won **x{}** **{}**!'.format(amount*multiplier, item.name)
             loss_message = 'You\'ve lost **x{} {}**!'.format(amount, item.name)
 
             player.mod_case(item.name, amount)
@@ -62,15 +59,17 @@ class GamblingCog(commands.Cog, name='Gambling'):
             item: Key
             if not player.keys[item.name] >= amount:
                 raise MissingCase(f'You are missing **{amount}x {item.name}** to place a bet.')
-            quest_message = 'Guess and press the correct button, win **{}x {}**!'.format(amount*9, item.name)
-            win_message = 'You\'ve won **x{}** **{}**!'.format(amount*9, item.name)
+            quest_message = 'Guess and press the correct button, win **{}x {}**!'.format(amount*multiplier, item.name)
+            win_message = 'You\'ve won **x{}** **{}**!'.format(amount*multiplier, item.name)
             loss_message = 'You\'ve lost **x{} {}**!'.format(amount, item.name)
             
             player.mod_key(item.name, amount)
 
 
-        if not item and amount > 1:
+        if not item and amount > 0:
             item = amount
+            if amount < 10:
+                raise BetTooLow('You can\'t place a bet under **$10**')
             if not player.balance >= item:
                 raise InsufficientBalance('You have insufficient balance to place this bet.')
             quest_message = 'Guess and press the correct button, win **${}**!'.format(item*2)
@@ -80,8 +79,8 @@ class GamblingCog(commands.Cog, name='Gambling'):
             player.balance -= item
 
 
-        elif not item and amount:
-            return await ctx.send('You need to place a bet with cases, keys or balance.')
+        elif (not item and amount) or (isinstance(item, int) and isinstance(amount, (int, float))):
+            raise InvalidBet('You need to place a bet with cases, keys or balance.')
 
 
         for y in range(3): 

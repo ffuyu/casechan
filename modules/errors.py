@@ -94,7 +94,22 @@ class PromoError(CommandError):
     pass
 class CodeExpired(PromoError):
     pass
-class CodeUnavailable(PromoError):
+class CodeInvalid(PromoError):
+    pass
+class CodeClaimed(PromoError):
+    pass
+class ReachedMaxUses(PromoError):
     pass
 class AlreadyClaimed(PromoError):
+    pass
+class ExistingCode(PromoError):
+    pass
+
+
+
+class BetError(CommandError):
+    pass
+class InvalidBet(BetError):
+    pass
+class BetTooLow(BetError):
     pass

@@ -1,11 +1,17 @@
-from copy import Error
-from modules.errors import DailyError, ExceededBuyLimit, HourlyError, InsufficientBalance, ItemNotFound, MissingCase, MissingItem, MissingKey, MissingSpace, NotMarketable, TradeNotAllowed, WeeklyError
+from modules.errors import (
+    AlreadyClaimed, BetTooLow, CodeClaimed, CodeExpired, CodeInvalid, DailyError, 
+    ExceededBuyLimit, ExistingCode, HourlyError, InsufficientBalance, InvalidBet, 
+    ItemNotFound, MissingCase, MissingItem, MissingKey, MissingSpace,
+     NotMarketable, TradeNotAllowed, WeeklyError
+)
+
 from discord import Forbidden
 from discord.ext import commands
 from discord.ext.commands import (
     CheckFailure, CommandNotFound, NoPrivateMessage, MemberNotFound, BadArgument,
     MissingRequiredArgument, MaxConcurrencyReached, RoleNotFound, CommandOnCooldown
 )
+
 from discord.ext.commands.errors import BadUnionArgument, BotMissingPermissions, CommandError, NotOwner
 from dpytools import Embed, Color
 
@@ -25,7 +31,8 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             Forbidden, RoleNotFound, BadUnionArgument, BotMissingPermissions, CommandError, 
             MissingItem, NotMarketable, ItemNotFound, DailyError, HourlyError, WeeklyError,
             MissingSpace, MissingCase, MissingKey, InsufficientBalance, NotOwner, TradeNotAllowed,
-            ExceededBuyLimit
+            ExceededBuyLimit, CodeExpired, CodeClaimed, CodeInvalid, AlreadyClaimed, ExistingCode,
+            InvalidBet, BetTooLow
             }
         embed = Embed(
             title="Command Error:",
@@ -49,7 +56,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
         elif isinstance(error, NotOwner):
             embed.description = 'You are not allowed to use this command!'
         elif isinstance(error, MaxConcurrencyReached):
-            embed.description = f'This command can only be used by {error.number} {error.per} at same time.'
+            embed.description = f'This command can only be used by {error.number} {str(error.per).split(".")[1]} at same time.'
         else:
             embed.description = str(error)
         try:
