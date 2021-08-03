@@ -350,31 +350,31 @@
             "Butterfly Knife | Fade"
         ]
     },
-    "Prisma 2 Case": {
+    "Prisma Case": {
         "Mil-Spec Grade": [
-            "AUG | Tom Cat",
-            "AWP | Capillary",
-            "CZ75-Auto | Distressed",
-            "Desert Eagle | Blue Ply",
-            "MP5-SD | Desert Strike",
-            "Negev | Prototype",
-            "R8 Revolver | Bone Forged"
+            "FAMAS | Crypsis",
+            "AK-47 | Uncharted",
+            "MAC-10 | Whitefish",
+            "Galil AR | Akoben",
+            "MP7 | Mischief",
+            "P250 | Verdigris",
+            "P90 | Off World"
         ],
         "Restricted": [
-            "P2000 | Acid Etched",
-            "Sawed-Off | Apocalypto",
-            "SCAR-20 | Enforcer",
-            "SG 553 | Darkwing",
-            "SSG 08 | Fever Dream"
+            "AWP | Atheris",
+            "Tec-9 | Bamboozle",
+            "Desert Eagle | Light Rail",
+            "MP5-SD | Gauss",
+            "UMP-45 | Moonrise"
         ],
         "Classified": [
-            "AK-47 | Phantom Disruptor",
-            "MAC-10 | Disco Tech",
-            "MAG-7 | Justice"
+            "R8 Revolver | Skull Crusher",
+            "AUG | Momentum",
+            "XM1014 | Incinegator"
         ],
         "Covert": [
-            "M4A1-S | Player Two",
-            "Glock-18 | Bullet Queen"
+            "Five-SeveN | Angry Mob",
+            "M4A4 | The Emperor"
         ],
         "Exceedingly Rare Item": [
             "Stiletto Knife | Marble Fade",
@@ -410,31 +410,31 @@
             "Ursus Knife | Rust Coat"
         ]
     },
-    "Prisma Case": {
+    "Prisma 2 Case": {
         "Mil-Spec Grade": [
-            "FAMAS | Crypsis",
-            "AK-47 | Uncharted",
-            "MAC-10 | Whitefish",
-            "Galil AR | Akoben",
-            "MP7 | Mischief",
-            "P250 | Verdigris",
-            "P90 | Off World"
+            "AUG | Tom Cat",
+            "AWP | Capillary",
+            "CZ75-Auto | Distressed",
+            "Desert Eagle | Blue Ply",
+            "MP5-SD | Desert Strike",
+            "Negev | Prototype",
+            "R8 Revolver | Bone Forged"
         ],
         "Restricted": [
-            "AWP | Atheris",
-            "Tec-9 | Bamboozle",
-            "Desert Eagle | Light Rail",
-            "MP5-SD | Gauss",
-            "UMP-45 | Moonrise"
+            "P2000 | Acid Etched",
+            "Sawed-Off | Apocalypto",
+            "SCAR-20 | Enforcer",
+            "SG 553 | Darkwing",
+            "SSG 08 | Fever Dream"
         ],
         "Classified": [
-            "R8 Revolver | Skull Crusher",
-            "AUG | Momentum",
-            "XM1014 | Incinegator"
+            "AK-47 | Phantom Disruptor",
+            "MAC-10 | Disco Tech",
+            "MAG-7 | Justice"
         ],
         "Covert": [
-            "Five-SeveN | Angry Mob",
-            "M4A4 | The Emperor"
+            "M4A1-S | Player Two",
+            "Glock-18 | Bullet Queen"
         ],
         "Exceedingly Rare Item": [
             "Stiletto Knife | Marble Fade",
