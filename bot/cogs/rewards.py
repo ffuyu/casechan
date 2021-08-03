@@ -46,10 +46,10 @@ class RewardsCog(commands.Cog, name='Rewards'):
 
             return await ctx.send(f'Claimed **{amount}x** cases from hourly rewards.')
 
-        a = player.weekly + datetime.timedelta(hours=1) - datetime.datetime.utcnow()
+        a = player.hourly + datetime.timedelta(hours=1) - datetime.datetime.utcnow()
 
 
-        raise HourlyError(f'You have to wait {naturaldelta(a)} to claim your next weekly rewards.')
+        raise HourlyError(f'You have to wait {naturaldelta(a)} to claim your next hourly rewards.')
 
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
@@ -76,9 +76,9 @@ class RewardsCog(commands.Cog, name='Rewards'):
 
             return await ctx.send(f'Claimed **{amount}x** cases from daily rewards.')
 
-        a = player.weekly + datetime.timedelta(days=1) - datetime.datetime.utcnow()
+        a = player.daily + datetime.timedelta(days=1) - datetime.datetime.utcnow()
 
-        raise DailyError(f'You have to wait {naturaldelta(a)} to claim your next weekly rewards.')
+        raise DailyError(f'You have to wait {naturaldelta(a)} to claim your next daily rewards.')
 
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
