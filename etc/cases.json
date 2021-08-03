@@ -1003,5 +1003,70 @@
             "Sport Gloves | Hedge Maze",
             "Sport Gloves | Arid"
         ]
+    },
+    "Chroma Case": {
+        "Mil-Spec Grade": [
+            "Glock-18 | Catacombs",
+            "M249 | System Lock",
+            "MP9 | Deadly Poison",
+            "SCAR-20 | Grotto",
+            "XM1014 | Quicksilver"
+        ],
+        "Restricted": [
+            "Dual Berettas | Urban Shock",
+            "Desert Eagle | Naga",
+            "MAC-10 | Malachite",
+            "Sawed-Off | Serenity"
+        ],
+        "Classified": [
+            "AK-47 | Cartel",
+            "M4A4 | 龍王 (Dragon King)",
+            "P250 | Muertos"
+        ],
+        "Covert": [
+            "AWP | Man-o'-war",
+            "Galil AR | Chatterbox"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet | Marble Fade",
+            "Bayonet | Doppler",
+            "Bayonet | Tiger Tooth",
+            "Bayonet | Marble Fade",
+            "Bayonet | Ultraviolet",
+            "Bayonet | Damascus Steel",
+            "Bayonet | Rust Coat",
+
+            "Flip Knife | Marble Fade",
+            "Flip Knife | Doppler",
+            "Flip Knife | Tiger Tooth",
+            "Flip Knife | Marble Fade",
+            "Flip Knife | Ultraviolet",
+            "Flip Knife | Damascus Steel",
+            "Flip Knife | Rust Coat",
+
+            "Gut Knife | Marble Fade",
+            "Gut Knife | Doppler",
+            "Gut Knife | Tiger Tooth",
+            "Gut Knife | Marble Fade",
+            "Gut Knife | Ultraviolet",
+            "Gut Knife | Damascus Steel",
+            "Gut Knife | Rust Coat",
+
+            "Karambit | Marble Fade",
+            "Karambit | Doppler",
+            "Karambit | Tiger Tooth",
+            "Karambit | Marble Fade",
+            "Karambit | Ultraviolet",
+            "Karambit | Damascus Steel",
+            "Karambit | Rust Coat",
+
+            "M9 Bayonet | Marble Fade",
+            "M9 Bayonet | Doppler",
+            "M9 Bayonet | Tiger Tooth",
+            "M9 Bayonet | Marble Fade",
+            "M9 Bayonet | Ultraviolet",
+            "M9 Bayonet | Damascus Steel",
+            "M9 Bayonet | Rust Coat"
+        ]
     }
 }
