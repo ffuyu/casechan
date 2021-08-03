@@ -41,10 +41,10 @@ class PromoCog(commands.Cog, name='Promo Codes'):
     @commands.is_owner()
     @promo.command()
     async def create(self, ctx, code:Optional[str.upper], funds:Optional[int], max_uses:Optional[int]=1, valid_hours:Optional[float]=None):
-        if code.is_digit():
+        if code.isdigit():
             funds = code
             code = uuid_gen.random(10).upper()
-            
+
         code = code or uuid_gen.random(10).upper()
         funds = funds or 25
         promo = await Promo.get(code=code)
