@@ -47,23 +47,23 @@ class GamblingCog(commands.Cog, name='Gambling'):
         multiplier = random.randint(3, 9)
         if isinstance(item, Case):
             item: Case
-            if not player.cases[item.name] >= amount:
+            if not player.cases.get(item.name, 0) >= amount:
                 raise MissingCase(f'You are missing **{amount}x {item.name}** to place a bet.')
             quest_message = 'Guess and press the correct button, win **{}x {}**!'.format(amount*multiplier, item.name)
             win_message = 'You\'ve won **x{}** **{}**!'.format(amount*multiplier, item.name)
             loss_message = 'You\'ve lost **x{} {}**!'.format(amount, item.name)
 
-            player.mod_case(item.name, amount)
+            player.mod_case(item.name, -amount)
 
         if isinstance(item, Key):
             item: Key
-            if not player.keys[item.name] >= amount:
+            if not player.keys.get(item.name, 0) >= amount:
                 raise MissingCase(f'You are missing **{amount}x {item.name}** to place a bet.')
             quest_message = 'Guess and press the correct button, win **{}x {}**!'.format(amount*multiplier, item.name)
             win_message = 'You\'ve won **x{}** **{}**!'.format(amount*multiplier, item.name)
             loss_message = 'You\'ve lost **x{} {}**!'.format(amount, item.name)
 
-            player.mod_key(item.name, amount)
+            player.mod_key(item.name, -amount)
 
         if not item and amount > 0:
             item = amount
@@ -121,9 +121,9 @@ class GamblingCog(commands.Cog, name='Gambling'):
         else:
             if inter.clicked_button.custom_id == str(reward_place):
                 if isinstance(item, Case):
-                    player.mod_case(item.name, amount * 9)
+                    player.mod_case(item.name, amount * multiplier)
                 elif isinstance(item, Key):
-                    player.mod_key(item.name, amount * 9)
+                    player.mod_key(item.name, amount * multiplier)
                 elif isinstance(item, int):
                     player.balance += item * 2
 

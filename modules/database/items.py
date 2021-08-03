@@ -6,6 +6,8 @@ from odmantic import Model
 from .engine import engine
 from .models import ModelPlus
 
+import random 
+
 __all__ = (
     'Item',
 )
@@ -23,6 +25,18 @@ rarity = {
 
 _item_cache = []
 
+def generate_stats(exterior: str):
+    ranges = {
+        "Battle-Scarred": (0.44, 0.99),
+        "Well-Worn": (0.37, 0.439),
+        "Field-Tested": (0.85, 0.369),
+        "Minimal Wear": (0.07, 0.149),
+        "Factory New": (0.00, 0.069)
+    }
+    range = ranges.get(exterior)
+    float_ = random.SystemRandom().uniform(a=range[0], b=range[1])
+    seed = random.SystemRandom().randint(1, 1000)
+    return float_, seed
 
 class Item(ModelPlus, Model):
     name: str

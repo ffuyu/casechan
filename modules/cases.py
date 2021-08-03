@@ -131,7 +131,6 @@ class Case:
     async def open(self):
         return await open_case(container_name=self.name)
 
-
 class Key:
     def __init__(self, name: str):
         if name not in all_keys:
@@ -144,3 +143,4 @@ class Key:
 
     async def use(self):
         return await open_case(container_name=self.case.name)
+

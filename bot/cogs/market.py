@@ -5,8 +5,8 @@ from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import guild_only, max_concurrency
 
-from modules.cases import Case, Key
-from modules.database.items import Item
+from modules.cases import Case, Key, 
+from modules.database.items import Item, generate_stats
 from modules.database.players import Player
 from modules.errors import ExceededBuyLimit, InsufficientBalance, ItemMissingPrice, ItemMissingStats, ItemNotFound, \
     ItemUnavailable, MissingItem, MissingSpace, NotMarketable, TradeNotAllowed
@@ -15,18 +15,6 @@ from modules.utils.item_converter import ItemConverter
 from modules.utils.key_converter import KeyConverter
 
 
-def generate_stats(exterior: str):
-    ranges = {
-        "Battle-Scarred": (0.44, 0.99),
-        "Well-Worn": (0.37, 0.439),
-        "Field-Tested": (0.85, 0.369),
-        "Minimal Wear": (0.07, 0.149),
-        "Factory New": (0.00, 0.069)
-    }
-    range = ranges.get(exterior)
-    float_ = random.SystemRandom().uniform(a=range[0], b=range[1])
-    seed = random.SystemRandom().randint(1, 1000)
-    return float_, seed
 
 
 class MarketCog(commands.Cog, name='Market'):
