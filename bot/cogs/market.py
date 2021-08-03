@@ -5,7 +5,7 @@ from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import guild_only, max_concurrency
 
-from modules.cases import Case, Key, 
+from modules.cases import Case, Key
 from modules.database.items import Item, generate_stats
 from modules.database.players import Player
 from modules.errors import ExceededBuyLimit, InsufficientBalance, ItemMissingPrice, ItemMissingStats, ItemNotFound, \
