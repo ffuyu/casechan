@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from discord.ext.commands.cooldowns import BucketType
 
-from discord.ext.commands.core import max_concurrency
+from discord.ext.commands.core import guild_only, max_concurrency
 
 from modules.errors import AlreadyClaimed, CodeClaimed, CodeExpired, CodeInvalid, ExistingCode
 from modules.database.promos import Promo
@@ -51,6 +51,7 @@ class PromoCog(commands.Cog, name='Promo Codes'):
         else:
             raise ExistingCode('This promo code already exists!')
 
+    @guild_only()
     @max_concurrency(1, BucketType.default, wait=True)
     @promo.command()
     async def use(self, ctx, code:str.upper):
