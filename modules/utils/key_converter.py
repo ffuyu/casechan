@@ -7,9 +7,10 @@ __all__ = (
     'KeyConverter',
 )
 
+player_preferences = {}
 
 class KeyConverter(Converter):
-    """Converts a case name string into a Case object"""
+    """Converts a key name string into a Key object"""
 
     async def convert(self, ctx, argument):
         for key in all_keys:
@@ -28,6 +29,10 @@ class KeyConverter(Converter):
             if any(statements):
                 return Key(key)
             elif lwar.replace('key', '') in lwky:
+                if ctx.author.id in list(player_preferences.keys()):
+                    if player_preferences.get(ctx.author.id, {}).get(lwar.replace('key', ''), None):
+
+                        return Key(key)
                 row = ActionRow(
                     Button(
                         style=ButtonStyle.green,
@@ -51,6 +56,12 @@ class KeyConverter(Converter):
                     pass
                 else:
                     if inter.clicked_button.custom_id == 'yes':
+                        if player_preferences.get(ctx.author.id, 0):
+                            player_preferences[ctx.author.id][lwar.replace('key', '')] = key
+                        else:
+                            player_preferences[ctx.author.id] = {
+                                lwar.replace('key', ''): key
+                            }
                         return Key(key)
                 finally:
                     await message.delete()
