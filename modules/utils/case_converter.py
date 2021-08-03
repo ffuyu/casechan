@@ -7,9 +7,7 @@ __all__ = (
     'CaseConverter',
 )
 
-player_preferences = {
-    
-}
+player_preferences = {}
 
 class CaseConverter(Converter):
     """Converts a case name string into a Case object"""
@@ -29,10 +27,11 @@ class CaseConverter(Converter):
             if any(statements):
                 return Case(case)
             elif lwar.replace('case', '') in lwcs or lwar.replace('xray', 'x-ray') in lwcs:
-                if ctx.author.id in list(player_preferences.keys()):
-                    if player_preferences.get(ctx.author.id, {}).get(lwar.replace('case', ''), None):
-
+                lwar_ = lwar.replace('case', '')
+                if ctx.author.id in player_preferences:
+                    if player_preferences[ctx.author.id].get(lwar_, None):
                         return Case(case)
+
                 row = ActionRow(
                     Button(
                         style=ButtonStyle.green,
@@ -56,12 +55,8 @@ class CaseConverter(Converter):
                     pass
                 else:
                     if inter.clicked_button.custom_id == 'yes':
-                        if player_preferences.get(ctx.author.id, 0):
-                            player_preferences[ctx.author.id][lwar.replace('case', '')] = case
-                        else:
-                            player_preferences[ctx.author.id] = {
-                                lwar.replace('case', ''): case
-                            }
+                        p = player_preferences.setdefault(ctx.author.id, {})
+                        p[lwar_] = case
                         return Case(case)
                 finally:
                     await message.delete()
