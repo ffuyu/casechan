@@ -18,12 +18,6 @@ with open('etc/cases.json', encoding='utf-8') as f:
     all_cases = json.loads(f.read())
     all_keys = ['{} Key'.format(x) for x in all_cases]
 
-with open('etc/exclusivecases.json', encoding='utf-8') as f:
-    exclusive_cases = json.loads(f.read())
-
-with open('etc/exclusivecases.json', encoding='utf-8') as f:
-    exclusive_assets = json.loads(f.read())
-
 with open("etc/collections.json", "r", encoding='utf-8') as f:
     all_collections = json.loads(f.read())
 
