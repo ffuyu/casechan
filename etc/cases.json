@@ -2470,5 +2470,10 @@
             "M9 Bayonet | Safari Mesh",
             "M9 Bayonet | Boreal Forest"
         ]
+    },
+    "X-Ray P250 Package": {
+        "Restricted": [
+            "P250 | X-Ray"
+        ]
     }
 }
