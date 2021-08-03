@@ -46,10 +46,10 @@ class RewardsCog(commands.Cog, name='Rewards'):
 
             return await ctx.send(f'Claimed **{amount}x** cases from hourly rewards.')
 
-        a = player.hourly
-        b = a + datetime.timedelta(hours=1)
+        a = player.weekly + datetime.timedelta(hours=1) - datetime.datetime.utcnow()
 
-        raise HourlyError(f'You have to wait {naturaldelta(a - b)} to claim your next weekly rewards.')
+
+        raise HourlyError(f'You have to wait {naturaldelta(a)} to claim your next weekly rewards.')
 
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
@@ -76,10 +76,9 @@ class RewardsCog(commands.Cog, name='Rewards'):
 
             return await ctx.send(f'Claimed **{amount}x** cases from daily rewards.')
 
-        a = player.daily
-        b = a + datetime.timedelta(days=1)
+        a = player.weekly + datetime.timedelta(days=1) - datetime.datetime.utcnow()
 
-        raise DailyError(f'You have to wait {naturaldelta(a - b)} to claim your next weekly rewards.')
+        raise DailyError(f'You have to wait {naturaldelta(a)} to claim your next weekly rewards.')
 
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
@@ -107,10 +106,9 @@ class RewardsCog(commands.Cog, name='Rewards'):
 
             return await ctx.send(f'Claimed **{amount}x** cases from weekly rewards.')
 
-        a = player.weekly
-        b = a + datetime.timedelta(weeks=1)
+        a = player.weekly + datetime.timedelta(weeks=1) - datetime.datetime.utcnow()
 
-        raise WeeklyError(f'You have to wait {naturaldelta(a - b)} to claim your next weekly rewards.')
+        raise WeeklyError(f'You have to wait {naturaldelta(a)} to claim your next weekly rewards.')
 
 
 def setup(bot):

@@ -32,9 +32,8 @@ class Player(ModelPlus, Model):
     daily: Optional[datetime] = datetime.utcnow() - timedelta(days=1)
     hourly: Optional[datetime] = datetime.utcnow() - timedelta(hours=1)
     weekly: Optional[datetime] = datetime.utcnow() - timedelta(weeks=1)
-    streak: int = 0
+    streak: int = 0 # streak only applies to daily
     balance: float = 0.0
-    restricted: bool = False
     trade_banned: bool = False
     created_at: datetime = datetime.utcnow()
 
