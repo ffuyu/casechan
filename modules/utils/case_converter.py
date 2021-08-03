@@ -25,7 +25,7 @@ class CaseConverter(Converter):
             ]
             if any(statements):
                 return Case(case)
-            elif lwar.replace('case', '') in lwcs:
+            elif lwar.replace('case', '') in lwcs or lwar.replace('xray', 'x-ray') in lwcs:
                 row = ActionRow(
                     Button(
                         style=ButtonStyle.green,
