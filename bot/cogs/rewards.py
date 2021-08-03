@@ -46,7 +46,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
 
             return await ctx.send(f'Claimed **{amount}x** cases from hourly rewards.')
 
-        a = datetime.datetime.utcnow()
+        a = player.hourly
         b = a + datetime.timedelta(hours=1)
 
         raise HourlyError(f'You have to wait {naturaldelta(a - b)} to claim your next weekly rewards.')
@@ -76,7 +76,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
 
             return await ctx.send(f'Claimed **{amount}x** cases from daily rewards.')
 
-        a = datetime.datetime.utcnow()
+        a = player.daily
         b = a + datetime.timedelta(days=1)
 
         raise DailyError(f'You have to wait {naturaldelta(a - b)} to claim your next weekly rewards.')
@@ -106,7 +106,8 @@ class RewardsCog(commands.Cog, name='Rewards'):
             await player.save()
 
             return await ctx.send(f'Claimed **{amount}x** cases from weekly rewards.')
-        a = datetime.datetime.utcnow()
+
+        a = player.weekly
         b = a + datetime.timedelta(weeks=1)
 
         raise WeeklyError(f'You have to wait {naturaldelta(a - b)} to claim your next weekly rewards.')
