@@ -34,7 +34,7 @@ class PromoCog(commands.Cog, name='Promo Codes'):
         print(f'Cog: {self.qualified_name} unloaded')
 
     
-    @commands.group()
+    @commands.group(hidden=True)
     async def promo(self, ctx):
         pass
     
