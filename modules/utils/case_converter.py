@@ -31,6 +31,7 @@ class CaseConverter(Converter):
             elif lwar.replace('case', '') in lwcs or lwar.replace('xray', 'x-ray') in lwcs:
                 if ctx.author.id in list(player_preferences.keys()):
                     if player_preferences.get(ctx.author.id, {}).get(lwar.replace('case', ''), False):
+                        print(player_preferences)
                         return Case(case)
                 row = ActionRow(
                     Button(
