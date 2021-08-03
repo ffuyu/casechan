@@ -115,6 +115,64 @@
             "Broken Fang Gloves | Unhinged"
         ]
     },
+    "Operation Hydra Case": {
+        "Mil-Spec Grade": [
+            "USP-S | Blueprint",
+            "FAMAS | Macabre",
+            "M4A1-S | Briefing",
+            "MAC-10 | Aloha",
+            "MAG-7 | Hard Water",
+            "Tec-9 | Cut Out",
+            "UMP-45 | Metal Flowers"
+        ],
+        "Restricted": [
+            "AK-47 | Orbit Mk01",
+            "P2000 | Woodsman",
+            "P250 | Red Rock",
+            "P90 | Death Grip",
+            "SSG 08 | Death's Head"
+        ],
+        "Classified": [
+            "Dual Berettas | Cobra Strike",
+            "Galil AR | Sugar Rush",
+            "M4A4 | Hellfire"
+        ],
+        "Covert": [
+            "Five-SeveN | Hyper Beast",
+            "AWP | Oni Taiji"
+        ],
+        "Exceedingly Rare Item": [
+            "Bloodhound Gloves | Snakebite",
+            "Bloodhound Gloves | Bronzed",
+            "Bloodhound Gloves | Charred",
+            "Bloodhound Gloves | Guerilla",
+            
+            "Driver Gloves | Crimson Weave",
+            "Driver Gloves | Lunar Weave",
+            "Driver Gloves | Convoy",
+            "Driver Gloves | Diamondback",
+
+            "Hand Wraps | Slaughter",
+            "Hand Wraps | Leather",
+            "Hand Wraps | Badlands",
+            "Hand Wraps | Spruce DDPAT",
+
+            "Moto Gloves | Spearmint",
+            "Moto Gloves | Boom!",
+            "Moto Gloves | Cool Mint",
+            "Moto Gloves | Eclipse",
+
+            "Specialist Gloves | Crimson Kimono",
+            "Specialist Gloves | Emerald Web",
+            "Specialist Gloves | Foundation",
+            "Specialist Gloves | Forest DDPAT",
+
+            "Sport Gloves | Pandora's Box",
+            "Sport Gloves | Superconductor",
+            "Sport Gloves | Hedge Maze",
+            "Sport Gloves | Arid"
+        ]
+    },
     "Snakebite Case": {
         "Mil-Spec Grade": [
             "SG 553 | Heavy Metal",
@@ -289,7 +347,7 @@
             "Butterfly Knife | Safari Mesh",
             "Butterfly Knife | Urban Masked",  
             "Butterfly Knife | Scorched",
-            "Butterfly Knife | Fade "
+            "Butterfly Knife | Fade"
         ]
     },
     "Prisma 2 Case": {
@@ -532,7 +590,21 @@
             "Karambit | Scorched",
             "Karambit | Urban Masked",
             "Karambit | Safari Mesh",
-            "Karambit | Boreal Forest"
+            "Karambit | Boreal Forest",
+
+            "M9 Bayonet | Fade",
+            "M9 Bayonet",
+            "M9 Bayonet | Slaughter",
+            "M9 Bayonet | Case Hardened",
+            "M9 Bayonet | Crimson Web",
+            "M9 Bayonet | Night",
+            "M9 Bayonet | Blue Steel",
+            "M9 Bayonet | Stained",
+            "M9 Bayonet | Forest DDPAT",
+            "M9 Bayonet | Scorched",
+            "M9 Bayonet | Urban Masked",
+            "M9 Bayonet | Safari Mesh",
+            "M9 Bayonet | Boreal Forest"
         ]
     },
     "Danger Zone Case": {
@@ -574,7 +646,7 @@
             "Navaja Knife | Urban Masked",  
             "Navaja Knife | Scorched",
             "Navaja Knife | Night Stripe",
-            "Navaja Knife | Fade ",
+            "Navaja Knife | Fade",
 
             "Stiletto Knife",
             "Stiletto Knife | Slaughter",
@@ -588,7 +660,7 @@
             "Stiletto Knife | Urban Masked",  
             "Stiletto Knife | Scorched",
             "Stiletto Knife | Night Stripe",
-            "Stiletto Knife | Fade ",
+            "Stiletto Knife | Fade",
 
             "Talon Knife",
             "Talon Knife | Slaughter",
@@ -602,7 +674,7 @@
             "Talon Knife | Urban Masked",  
             "Talon Knife | Scorched",
             "Talon Knife | Night Stripe",
-            "Talon Knife | Fade ",
+            "Talon Knife | Fade",
 
             "Ursus Knife",
             "Ursus Knife | Slaughter",
@@ -616,7 +688,7 @@
             "Ursus Knife | Urban Masked",  
             "Ursus Knife | Scorched",
             "Ursus Knife | Night Stripe",
-            "Ursus Knife | Fade "
+            "Ursus Knife | Fade"
         ]
     },
     "CS20 Case": {
@@ -658,7 +730,7 @@
             "Classic Knife | Urban Masked",  
             "Classic Knife | Scorched",
             "Classic Knife | Night Stripe",
-            "Classic Knife | Fade "
+            "Classic Knife | Fade"
         ]
     },
     "Horizon Case": {
@@ -700,7 +772,7 @@
             "Navaja Knife | Urban Masked",  
             "Navaja Knife | Scorched",
             "Navaja Knife | Night Stripe",
-            "Navaja Knife | Fade ",
+            "Navaja Knife | Fade",
 
             "Stiletto Knife",
             "Stiletto Knife | Slaughter",
@@ -714,7 +786,7 @@
             "Stiletto Knife | Urban Masked",  
             "Stiletto Knife | Scorched",
             "Stiletto Knife | Night Stripe",
-            "Stiletto Knife | Fade ",
+            "Stiletto Knife | Fade",
 
             "Talon Knife",
             "Talon Knife | Slaughter",
@@ -728,7 +800,7 @@
             "Talon Knife | Urban Masked",  
             "Talon Knife | Scorched",
             "Talon Knife | Night Stripe",
-            "Talon Knife | Fade ",
+            "Talon Knife | Fade",
 
             "Ursus Knife",
             "Ursus Knife | Slaughter",
@@ -742,7 +814,7 @@
             "Ursus Knife | Urban Masked",  
             "Ursus Knife | Scorched",
             "Ursus Knife | Night Stripe",
-            "Ursus Knife | Fade "
+            "Ursus Knife | Fade"
         ]
     },
     "Shattered Web Case": {
@@ -784,7 +856,7 @@
             "Nomad Knife | Urban Masked",  
             "Nomad Knife | Scorched",
             "Nomad Knife | Night Stripe",
-            "Nomad Knife | Fade ",
+            "Nomad Knife | Fade",
 
             "Paracord Knife",
             "Paracord Knife | Slaughter",
@@ -798,7 +870,7 @@
             "Paracord Knife | Urban Masked",  
             "Paracord Knife | Scorched",
             "Paracord Knife | Night Stripe",
-            "Paracord Knife | Fade ",
+            "Paracord Knife | Fade",
 
             "Skeleton Knife",
             "Skeleton Knife | Slaughter",
@@ -812,7 +884,7 @@
             "Skeleton Knife | Urban Masked",  
             "Skeleton Knife | Scorched",
             "Skeleton Knife | Night Stripe",
-            "Skeleton Knife | Fade ",
+            "Skeleton Knife | Fade",
 
             "Survival Knife",
             "Survival Knife | Slaughter",
@@ -826,7 +898,7 @@
             "Survival Knife | Urban Masked",  
             "Survival Knife | Scorched",
             "Survival Knife | Night Stripe",
-            "Survival Knife | Fade "
+            "Survival Knife | Fade"
         ]
     },
     "Shadow Case": {
@@ -866,8 +938,8 @@
             "Shadow Daggers | Safari Mesh",
             "Shadow Daggers | Urban Masked",  
             "Shadow Daggers | Scorched",
-            "Shadow Daggers | Night ",
-            "Shadow Daggers | Fade "
+            "Shadow Daggers | Night",
+            "Shadow Daggers | Fade"
         ]
     },
     "CS:GO Weapon Case": {
@@ -900,8 +972,8 @@
             "Bayonet | Safari Mesh",
             "Bayonet | Urban Masked",  
             "Bayonet | Scorched",
-            "Bayonet | Night ",
-            "Bayonet | Fade ",
+            "Bayonet | Night",
+            "Bayonet | Fade",
 
             "Flip Knife",
             "Flip Knife | Slaughter",
@@ -914,8 +986,8 @@
             "Flip Knife | Safari Mesh",
             "Flip Knife | Urban Masked",  
             "Flip Knife | Scorched",
-            "Flip Knife | Night ",
-            "Flip Knife | Fade ",
+            "Flip Knife | Night",
+            "Flip Knife | Fade",
 
             "Gut Knife",
             "Gut Knife | Slaughter",
@@ -928,8 +1000,8 @@
             "Gut Knife | Safari Mesh",
             "Gut Knife | Urban Masked",  
             "Gut Knife | Scorched",
-            "Gut Knife | Night ",
-            "Gut Knife | Fade ",
+            "Gut Knife | Night",
+            "Gut Knife | Fade",
 
             "Karambit",
             "Karambit | Slaughter",
@@ -942,8 +1014,208 @@
             "Karambit | Safari Mesh",
             "Karambit | Urban Masked",  
             "Karambit | Scorched",
-            "Karambit | Night ",
-            "Karambit | Fade "
+            "Karambit | Night",
+            "Karambit | Fade",
+
+            "M9 Bayonet | Fade",
+            "M9 Bayonet",
+            "M9 Bayonet | Slaughter",
+            "M9 Bayonet | Case Hardened",
+            "M9 Bayonet | Crimson Web",
+            "M9 Bayonet | Night",
+            "M9 Bayonet | Blue Steel",
+            "M9 Bayonet | Stained",
+            "M9 Bayonet | Forest DDPAT",
+            "M9 Bayonet | Scorched",
+            "M9 Bayonet | Urban Masked",
+            "M9 Bayonet | Safari Mesh",
+            "M9 Bayonet | Boreal Forest"
+        ]
+    },
+    "CS:GO Weapon Case 2": {
+        "Mil-Spec Grade": [
+            "Tec-9 | Blue Titanium",
+            "M4A1-S | Blood Tiger",
+            "FAMAS | Hexane",
+            "P250 | Hive",
+            "SCAR-20 | Crimson Web"
+        ],
+        "Restricted": [
+            "Five-SeveN | Case Hardened",
+            "MP9 | Hypnotic",
+            "Nova | Graphite",
+            "Dual Berettas | Hemoglobin"
+        ],
+        "Classified": [
+            "P90 | Cold Blooded",
+            "USP-S | Serum"
+        ],
+        "Covert": [
+            "SSG 08 | Blood in the Water"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet",
+            "Bayonet | Slaughter",
+            "Bayonet | Blue Steel",
+            "Bayonet | Crimson Web",
+            "Bayonet | Case Hardened",
+            "Bayonet | Forest DDPAT",
+            "Bayonet | Stained",
+            "Bayonet | Boreal Forest",
+            "Bayonet | Safari Mesh",
+            "Bayonet | Urban Masked",  
+            "Bayonet | Scorched",
+            "Bayonet | Night",
+            "Bayonet | Fade",
+
+            "Flip Knife",
+            "Flip Knife | Slaughter",
+            "Flip Knife | Blue Steel",
+            "Flip Knife | Crimson Web",
+            "Flip Knife | Case Hardened",
+            "Flip Knife | Forest DDPAT",
+            "Flip Knife | Stained",
+            "Flip Knife | Boreal Forest",
+            "Flip Knife | Safari Mesh",
+            "Flip Knife | Urban Masked",  
+            "Flip Knife | Scorched",
+            "Flip Knife | Night",
+            "Flip Knife | Fade",
+
+            "Gut Knife",
+            "Gut Knife | Slaughter",
+            "Gut Knife | Blue Steel",
+            "Gut Knife | Crimson Web",
+            "Gut Knife | Case Hardened",
+            "Gut Knife | Forest DDPAT",
+            "Gut Knife | Stained",
+            "Gut Knife | Boreal Forest",
+            "Gut Knife | Safari Mesh",
+            "Gut Knife | Urban Masked",  
+            "Gut Knife | Scorched",
+            "Gut Knife | Night",
+            "Gut Knife | Fade",
+
+            "Karambit",
+            "Karambit | Slaughter",
+            "Karambit | Blue Steel",
+            "Karambit | Crimson Web",
+            "Karambit | Case Hardened",
+            "Karambit | Forest DDPAT",
+            "Karambit | Stained",
+            "Karambit | Boreal Forest",
+            "Karambit | Safari Mesh",
+            "Karambit | Urban Masked",  
+            "Karambit | Scorched",
+            "Karambit | Night",
+            "Karambit | Fade",
+            
+            "M9 Bayonet | Fade",
+            "M9 Bayonet",
+            "M9 Bayonet | Slaughter",
+            "M9 Bayonet | Case Hardened",
+            "M9 Bayonet | Crimson Web",
+            "M9 Bayonet | Night",
+            "M9 Bayonet | Blue Steel",
+            "M9 Bayonet | Stained",
+            "M9 Bayonet | Forest DDPAT",
+            "M9 Bayonet | Scorched",
+            "M9 Bayonet | Urban Masked",
+            "M9 Bayonet | Safari Mesh",
+            "M9 Bayonet | Boreal Forest"
+        ]
+    },
+    "CS:GO Weapon Case 3": {
+        "Mil-Spec Grade": [
+            "CZ75-Auto | Crimson Web",
+            "P2000 | Red FragCam",
+            "Dual Berettas | Panther",
+            "USP-S | Stainless",
+            "Glock-18 | Blue Fissure"
+        ],
+        "Restricted": [
+            "CZ75-Auto | Tread Plate",
+            "Tec-9 | Titanium Bit",
+            "Desert Eagle | Heirloom",
+            "Five-SeveN | Copper Galaxy"
+        ],
+        "Classified": [
+            "CZ75-Auto | The Fuschia Is Now",
+            "P250 | Undertow"
+        ],
+        "Covert": [
+            "CZ75-Auto | Victoria"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet",
+            "Bayonet | Slaughter",
+            "Bayonet | Blue Steel",
+            "Bayonet | Crimson Web",
+            "Bayonet | Case Hardened",
+            "Bayonet | Forest DDPAT",
+            "Bayonet | Stained",
+            "Bayonet | Boreal Forest",
+            "Bayonet | Safari Mesh",
+            "Bayonet | Urban Masked",  
+            "Bayonet | Scorched",
+            "Bayonet | Night",
+            "Bayonet | Fade",
+
+            "Flip Knife",
+            "Flip Knife | Slaughter",
+            "Flip Knife | Blue Steel",
+            "Flip Knife | Crimson Web",
+            "Flip Knife | Case Hardened",
+            "Flip Knife | Forest DDPAT",
+            "Flip Knife | Stained",
+            "Flip Knife | Boreal Forest",
+            "Flip Knife | Safari Mesh",
+            "Flip Knife | Urban Masked",  
+            "Flip Knife | Scorched",
+            "Flip Knife | Night",
+            "Flip Knife | Fade",
+
+            "Gut Knife",
+            "Gut Knife | Slaughter",
+            "Gut Knife | Blue Steel",
+            "Gut Knife | Crimson Web",
+            "Gut Knife | Case Hardened",
+            "Gut Knife | Forest DDPAT",
+            "Gut Knife | Stained",
+            "Gut Knife | Boreal Forest",
+            "Gut Knife | Safari Mesh",
+            "Gut Knife | Urban Masked",  
+            "Gut Knife | Scorched",
+            "Gut Knife | Night",
+            "Gut Knife | Fade",
+
+            "Karambit",
+            "Karambit | Slaughter",
+            "Karambit | Blue Steel",
+            "Karambit | Crimson Web",
+            "Karambit | Case Hardened",
+            "Karambit | Forest DDPAT",
+            "Karambit | Stained",
+            "Karambit | Boreal Forest",
+            "Karambit | Safari Mesh",
+            "Karambit | Urban Masked",  
+            "Karambit | Scorched",
+            "Karambit | Night",
+            "Karambit | Fade",
+            
+            "M9 Bayonet | Fade",
+            "M9 Bayonet",
+            "M9 Bayonet | Slaughter",
+            "M9 Bayonet | Case Hardened",
+            "M9 Bayonet | Crimson Web",
+            "M9 Bayonet | Night",
+            "M9 Bayonet | Blue Steel",
+            "M9 Bayonet | Stained",
+            "M9 Bayonet | Forest DDPAT",
+            "M9 Bayonet | Scorched",
+            "M9 Bayonet | Urban Masked",
+            "M9 Bayonet | Safari Mesh",
+            "M9 Bayonet | Boreal Forest"
         ]
     },
     "Glove Case": {
@@ -1006,6 +1278,72 @@
     },
     "Chroma Case": {
         "Mil-Spec Grade": [
+            "AK-47 | Elite Build",
+            "MP7 | Armor Core",
+            "Desert Eagle | Bronze Deco",
+            "P250 | Valence",
+            "Negev | Man-o'-war",
+            "Sawed-Off | Origami"
+        ],
+        "Restricted": [
+            "AWP | Worm God",
+            "MAG-7 | Heat",
+            "CZ75-Auto | Pole Position",
+            "UMP-45 | Grand Prix"
+        ],
+        "Classified": [
+            "Five-SeveN | Monkey Business",
+            "Galil AR | Eco",
+            "FAMAS | Djinn"
+        ],
+        "Covert": [
+            "M4A1-S | Hyper Beast",
+            "MAC-10 | Neon Rider"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet | Marble Fade",
+            "Bayonet | Doppler",
+            "Bayonet | Tiger Tooth",
+            "Bayonet | Marble Fade",
+            "Bayonet | Ultraviolet",
+            "Bayonet | Damascus Steel",
+            "Bayonet | Rust Coat",
+
+            "Flip Knife | Marble Fade",
+            "Flip Knife | Doppler",
+            "Flip Knife | Tiger Tooth",
+            "Flip Knife | Marble Fade",
+            "Flip Knife | Ultraviolet",
+            "Flip Knife | Damascus Steel",
+            "Flip Knife | Rust Coat",
+
+            "Gut Knife | Marble Fade",
+            "Gut Knife | Doppler",
+            "Gut Knife | Tiger Tooth",
+            "Gut Knife | Marble Fade",
+            "Gut Knife | Ultraviolet",
+            "Gut Knife | Damascus Steel",
+            "Gut Knife | Rust Coat",
+
+            "Karambit | Marble Fade",
+            "Karambit | Doppler",
+            "Karambit | Tiger Tooth",
+            "Karambit | Marble Fade",
+            "Karambit | Ultraviolet",
+            "Karambit | Damascus Steel",
+            "Karambit | Rust Coat",
+
+            "M9 Bayonet | Marble Fade",
+            "M9 Bayonet | Doppler",
+            "M9 Bayonet | Tiger Tooth",
+            "M9 Bayonet | Marble Fade",
+            "M9 Bayonet | Ultraviolet",
+            "M9 Bayonet | Damascus Steel",
+            "M9 Bayonet | Rust Coat"
+        ]
+    },
+    "Chroma 2 Case": {
+        "Mil-Spec Grade": [
             "Glock-18 | Catacombs",
             "M249 | System Lock",
             "MP9 | Deadly Poison",
@@ -1067,6 +1405,1070 @@
             "M9 Bayonet | Ultraviolet",
             "M9 Bayonet | Damascus Steel",
             "M9 Bayonet | Rust Coat"
+        ]
+    },
+    "Chroma 3 Case": {
+        "Mil-Spec Grade": [
+            "Glock-18 | Catacombs",
+            "M249 | System Lock",
+            "MP9 | Deadly Poison",
+            "SCAR-20 | Grotto",
+            "XM1014 | Quicksilver"
+        ],
+        "Restricted": [
+            "Dual Berettas | Urban Shock",
+            "Desert Eagle | Naga",
+            "MAC-10 | Malachite",
+            "Sawed-Off | Serenity"
+        ],
+        "Classified": [
+            "AK-47 | Cartel",
+            "M4A4 | 龍王 (Dragon King)",
+            "P250 | Muertos"
+        ],
+        "Covert": [
+            "AWP | Man-o'-war",
+            "Galil AR | Chatterbox"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet | Marble Fade",
+            "Bayonet | Doppler",
+            "Bayonet | Tiger Tooth",
+            "Bayonet | Marble Fade",
+            "Bayonet | Ultraviolet",
+            "Bayonet | Damascus Steel",
+            "Bayonet | Rust Coat",
+
+            "Flip Knife | Marble Fade",
+            "Flip Knife | Doppler",
+            "Flip Knife | Tiger Tooth",
+            "Flip Knife | Marble Fade",
+            "Flip Knife | Ultraviolet",
+            "Flip Knife | Damascus Steel",
+            "Flip Knife | Rust Coat",
+
+            "Gut Knife | Marble Fade",
+            "Gut Knife | Doppler",
+            "Gut Knife | Tiger Tooth",
+            "Gut Knife | Marble Fade",
+            "Gut Knife | Ultraviolet",
+            "Gut Knife | Damascus Steel",
+            "Gut Knife | Rust Coat",
+
+            "Karambit | Marble Fade",
+            "Karambit | Doppler",
+            "Karambit | Tiger Tooth",
+            "Karambit | Marble Fade",
+            "Karambit | Ultraviolet",
+            "Karambit | Damascus Steel",
+            "Karambit | Rust Coat",
+
+            "M9 Bayonet | Marble Fade",
+            "M9 Bayonet | Doppler",
+            "M9 Bayonet | Tiger Tooth",
+            "M9 Bayonet | Marble Fade",
+            "M9 Bayonet | Ultraviolet",
+            "M9 Bayonet | Damascus Steel",
+            "M9 Bayonet | Rust Coat"
+        ]
+    },
+    "Gamma Case": {
+        "Mil-Spec Grade": [
+            "Five-SeveN | Violent Daimyo",
+            "MAC-10 | Carnivore",
+            "Nova | Exo",
+            "P250 | Iron Clad",
+            "PP-Bizon | Harvester",
+            "SG 553 | Aerial",
+            "Tec-9 | Ice Cap"
+        ],
+        "Restricted": [
+            "AUG | Aristocrat",
+            "AWP | Phobos",
+            "P90 | Chopper",
+            "R8 Revolver | Reboot",
+            "Sawed-Off | Limelight"
+        ],
+        "Classified": [
+            "M4A4 | Desolate Space",
+            "P2000 | Imperial Dragon",
+            "SCAR-20 | Bloodsport"
+        ],
+        "Covert": [
+            "Glock-18 | Wasteland Rebel",
+            "M4A1-S | Mecha Industries"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet | Lore",
+            "Bayonet | Gamma Doppler",
+            "Bayonet | Autotronic",
+            "Bayonet | Freehand",
+            "Bayonet | Black Laminate",
+            "Bayonet | Bright Water",
+
+            "Flip Knife | Lore",
+            "Flip Knife | Gamma Doppler",
+            "Flip Knife | Autotronic",
+            "Flip Knife | Freehand",
+            "Flip Knife | Black Laminate",
+            "Flip Knife | Bright Water",
+  
+
+            "Gut Knife | Lore",
+            "Gut Knife | Gamma Doppler",
+            "Gut Knife | Autotronic",
+            "Gut Knife | Freehand",
+            "Gut Knife | Black Laminate",
+            "Gut Knife | Bright Water",
+ 
+
+            "Karambit | Lore",
+            "Karambit | Gamma Doppler",
+            "Karambit | Autotronic",
+            "Karambit | Freehand",
+            "Karambit | Black Laminate",
+            "Karambit | Bright Water",
+
+            "M9 Bayonet | Lore",
+            "M9 Bayonet | Gamma Doppler",
+            "M9 Bayonet | Autotronic",
+            "M9 Bayonet | Freehand",
+            "M9 Bayonet | Black Laminate",
+            "M9 Bayonet | Bright Water"
+        ]
+    },
+    "Gamma 2 Case": {
+        "Mil-Spec Grade": [
+            "CZ75-Auto | Imprint",
+            "Five-SeveN | Scumbria",
+            "G3SG1 | Ventilator",
+            "Negev | Dazzle",
+            "P90 | Grim",
+            "UMP-45 | Briefing",
+            "XM1014 | Slipstream"
+        ],
+        "Restricted": [
+            "Desert Eagle | Directive",
+            "Glock-18 | Weasel",
+            "MAG-7 | Petroglyph",
+            "SCAR-20 | Powercore",
+            "SG 553 | Triarch"
+        ],
+        "Classified": [
+            "AUG | Syd Mead",
+            "MP9 | Airlock",
+            "Tec-9 | Fuel Injector"
+        ],
+        "Covert": [
+            "AK-47 | Neon Revolution",
+            "FAMAS | Roll Cage"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet | Lore",
+            "Bayonet | Gamma Doppler",
+            "Bayonet | Autotronic",
+            "Bayonet | Freehand",
+            "Bayonet | Black Laminate",
+            "Bayonet | Bright Water",
+
+            "Flip Knife | Lore",
+            "Flip Knife | Gamma Doppler",
+            "Flip Knife | Autotronic",
+            "Flip Knife | Freehand",
+            "Flip Knife | Black Laminate",
+            "Flip Knife | Bright Water",
+  
+
+            "Gut Knife | Lore",
+            "Gut Knife | Gamma Doppler",
+            "Gut Knife | Autotronic",
+            "Gut Knife | Freehand",
+            "Gut Knife | Black Laminate",
+            "Gut Knife | Bright Water",
+ 
+
+            "Karambit | Lore",
+            "Karambit | Gamma Doppler",
+            "Karambit | Autotronic",
+            "Karambit | Freehand",
+            "Karambit | Black Laminate",
+            "Karambit | Bright Water",
+
+            "M9 Bayonet | Lore",
+            "M9 Bayonet | Gamma Doppler",
+            "M9 Bayonet | Autotronic",
+            "M9 Bayonet | Freehand",
+            "M9 Bayonet | Black Laminate",
+            "M9 Bayonet | Bright Water"
+        ]
+    },
+    "Huntsman Weapon Case": {
+        "Mil-Spec Grade": [
+            "Tec-9 | Isaac",
+            "SSG 08 | Slashed",
+            "Galil AR | Kami",
+            "CZ75-Auto | Twist",
+            "P90 | Module",
+            "P2000 | Pulse"
+        ],
+        "Restricted": [
+            "AUG | Torque",
+            "PP-Bizon | Antique",
+            "XM1014 | Heaven Guard",
+            "MAC-10 | Tatter"
+        ],
+        "Classified": [
+            "M4A1-S | Atomic Alloy",
+            "SCAR-20 | Cyrex",
+            "USP-S | Caiman"
+        ],
+        "Covert": [
+            "AK-47 | Vulcan",
+            "M4A4 | Desert-Strike"
+        ],
+        "Exceedingly Rare Item": [
+            "Huntsman Knife",
+            "Huntsman Knife | Slaughter",
+            "Huntsman Knife | Blue Steel",
+            "Huntsman Knife | Crimson Web",
+            "Huntsman Knife | Case Hardened",
+            "Huntsman Knife | Forest DDPAT",
+            "Huntsman Knife | Stained",
+            "Huntsman Knife | Boreal Forest",
+            "Huntsman Knife | Safari Mesh",
+            "Huntsman Knife | Urban Masked",  
+            "Huntsman Knife | Scorched",
+            "Huntsman Knife | Night",
+            "Huntsman Knife | Fade"
+        ]
+    },
+    "Revolver Case": {
+        "Mil-Spec Grade": [
+            "R8 Revolver | Crimson Web",
+            "AUG | Ricochet",
+            "Desert Eagle | Corinthian",
+            "P2000 | Imperial",
+            "Sawed-Off | Yorick",
+            "SCAR-20 | Outbreak"
+        ],
+        "Restricted": [
+            "PP-Bizon | Fuel Rod",
+            "Five-SeveN | Retrobution",
+            "Negev | Power Loader",
+            "SG 553 | Tiger Moth",
+            "Tec-9 | Avalanche",
+            "XM1014 | Teclu Burner"
+        ],
+        "Classified": [
+            "AK-47 | Point Disarray",
+            "G3SG1 | The Executioner",
+            "P90 | Shapewood"
+        ],
+        "Covert": [
+            "M4A4 | Royal Paladin",
+            "R8 Revolver | Fade"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet",
+            "Bayonet | Slaughter",
+            "Bayonet | Blue Steel",
+            "Bayonet | Crimson Web",
+            "Bayonet | Case Hardened",
+            "Bayonet | Forest DDPAT",
+            "Bayonet | Stained",
+            "Bayonet | Boreal Forest",
+            "Bayonet | Safari Mesh",
+            "Bayonet | Urban Masked",  
+            "Bayonet | Scorched",
+            "Bayonet | Night",
+            "Bayonet | Fade",
+
+            "Flip Knife",
+            "Flip Knife | Slaughter",
+            "Flip Knife | Blue Steel",
+            "Flip Knife | Crimson Web",
+            "Flip Knife | Case Hardened",
+            "Flip Knife | Forest DDPAT",
+            "Flip Knife | Stained",
+            "Flip Knife | Boreal Forest",
+            "Flip Knife | Safari Mesh",
+            "Flip Knife | Urban Masked",  
+            "Flip Knife | Scorched",
+            "Flip Knife | Night",
+            "Flip Knife | Fade",
+
+            "Gut Knife",
+            "Gut Knife | Slaughter",
+            "Gut Knife | Blue Steel",
+            "Gut Knife | Crimson Web",
+            "Gut Knife | Case Hardened",
+            "Gut Knife | Forest DDPAT",
+            "Gut Knife | Stained",
+            "Gut Knife | Boreal Forest",
+            "Gut Knife | Safari Mesh",
+            "Gut Knife | Urban Masked",  
+            "Gut Knife | Scorched",
+            "Gut Knife | Night",
+            "Gut Knife | Fade",
+
+            "Karambit",
+            "Karambit | Slaughter",
+            "Karambit | Blue Steel",
+            "Karambit | Crimson Web",
+            "Karambit | Case Hardened",
+            "Karambit | Forest DDPAT",
+            "Karambit | Stained",
+            "Karambit | Boreal Forest",
+            "Karambit | Safari Mesh",
+            "Karambit | Urban Masked",  
+            "Karambit | Scorched",
+            "Karambit | Night",
+            "Karambit | Fade",
+
+            "M9 Bayonet",
+            "M9 Bayonet | Slaughter",
+            "M9 Bayonet | Blue Steel",
+            "M9 Bayonet | Crimson Web",
+            "M9 Bayonet | Case Hardened",
+            "M9 Bayonet | Forest DDPAT",
+            "M9 Bayonet | Stained",
+            "M9 Bayonet | Boreal Forest",
+            "M9 Bayonet | Safari Mesh",
+            "M9 Bayonet | Urban Masked",  
+            "M9 Bayonet | Scorched",
+            "M9 Bayonet | Night",
+            "M9 Bayonet | Fade"
+        ]
+    },
+    "Spectrum Case": {
+        "Mil-Spec Grade": [
+            "PP-Bizon | Jungle Slipstream",
+            "SCAR-20 | Blueprint",
+            "Desert Eagle | Oxide Blaze",
+            "Five-SeveN | Capillary",
+            "MP7 | Akoben",
+            "P250 | Ripple",
+            "Sawed-Off | Zander"
+        ],
+        "Restricted": [
+            "Galil AR | Crimson Tsunami",
+            "M249 | Emerald Poison Dart",
+            "MAC-10 | Last Dive",
+            "UMP-45 | Scaffold",
+            "XM1014 | Seasons"
+        ],
+        "Classified": [
+            "AWP | Fever Dream",
+            "CZ75-Auto | Xiangliu",
+            "M4A1-S | Decimator"
+        ],
+        "Covert": [
+            "AK-47 | Bloodsport",
+            "USP-S | Neo-Noir"
+        ],
+        "Exceedingly Rare Item": [
+            "Bowie Knife | Doppler",
+            "Bowie Knife | Tiger Tooth",
+            "Bowie Knife | Marble Fade",
+            "Bowie Knife | Ultraviolet",
+            "Bowie Knife | Damascus Steel",
+            "Bowie Knife | Rust Coat",
+            
+            "Butterfly Knife | Doppler",
+            "Butterfly Knife | Tiger Tooth",
+            "Butterfly Knife | Marble Fade",
+            "Butterfly Knife | Ultraviolet",
+            "Butterfly Knife | Damascus Steel",
+            "Butterfly Knife | Rust Coat",
+            
+            "Falchion Knife | Doppler",
+            "Falchion Knife | Tiger Tooth",
+            "Falchion Knife | Marble Fade",
+            "Falchion Knife | Ultraviolet",
+            "Falchion Knife | Damascus Steel",
+            "Falchion Knife | Rust Coat",
+
+            "Huntsman Knife | Doppler",
+            "Huntsman Knife | Tiger Tooth",
+            "Huntsman Knife | Marble Fade",
+            "Huntsman Knife | Ultraviolet",
+            "Huntsman Knife | Damascus Steel",
+            "Huntsman Knife | Rust Coat",
+
+            "Shadow Daggers | Doppler",
+            "Shadow Daggers | Tiger Tooth",
+            "Shadow Daggers | Marble Fade",
+            "Shadow Daggers | Ultraviolet",
+            "Shadow Daggers | Damascus Steel",
+            "Shadow Daggers | Rust Coat"
+        ]
+    },
+    "Spectrum 2 Case": {
+        "Mil-Spec Grade": [
+            "Sawed-Off | Morris",
+            "AUG | Triqua",
+            "G3SG1 | Hunter",
+            "Glock-18 | Off World",
+            "MAC-10 | Oceanic",
+            "Tec-9 | Cracked Opal",
+            "SCAR-20 | Jungle Slipstream"
+        ],
+        "Restricted": [
+            "MP9 | Goo",
+            "SG 553 | Phantom",
+            "CZ75-Auto | Tacticat",
+            "UMP-45 | Exposure",
+            "XM1014 | Ziggy"
+        ],
+        "Classified": [
+            "PP-Bizon | High Roller",
+            "M4A1-S | Leaded Glass",
+            "R8 Revolver | Llama Cannon"
+        ],
+        "Covert": [
+            "AK-47 | The Empress",
+            "P250 | See Ya Later"
+        ],
+        "Exceedingly Rare Item": [
+            "Bowie Knife | Doppler",
+            "Bowie Knife | Tiger Tooth",
+            "Bowie Knife | Marble Fade",
+            "Bowie Knife | Ultraviolet",
+            "Bowie Knife | Damascus Steel",
+            "Bowie Knife | Rust Coat",
+            
+            "Butterfly Knife | Doppler",
+            "Butterfly Knife | Tiger Tooth",
+            "Butterfly Knife | Marble Fade",
+            "Butterfly Knife | Ultraviolet",
+            "Butterfly Knife | Damascus Steel",
+            "Butterfly Knife | Rust Coat",
+            
+            "Falchion Knife | Doppler",
+            "Falchion Knife | Tiger Tooth",
+            "Falchion Knife | Marble Fade",
+            "Falchion Knife | Ultraviolet",
+            "Falchion Knife | Damascus Steel",
+            "Falchion Knife | Rust Coat",
+
+            "Huntsman Knife | Doppler",
+            "Huntsman Knife | Tiger Tooth",
+            "Huntsman Knife | Marble Fade",
+            "Huntsman Knife | Ultraviolet",
+            "Huntsman Knife | Damascus Steel",
+            "Huntsman Knife | Rust Coat",
+
+            "Shadow Daggers | Doppler",
+            "Shadow Daggers | Tiger Tooth",
+            "Shadow Daggers | Marble Fade",
+            "Shadow Daggers | Ultraviolet",
+            "Shadow Daggers | Damascus Steel",
+            "Shadow Daggers | Rust Coat"
+        ]
+    },
+    "Winter Offensive Weapon Case": {
+        "Mil-Spec Grade": [
+            "Galil AR | Sandstorm",
+            "Five-SeveN | Kami",
+            "M249 | Magma",
+            "PP-Bizon | Cobalt Halftone"
+        ],
+        "Restricted": [
+            "FAMAS | Pulse",    
+            "Dual Berettas | Marina",
+            "MP9 | Rose Iron",
+            "Nova | Rising Skull"
+        ],
+        "Classified": [
+            "M4A1-S | Guardian",
+            "P250 | Mehndi",
+            "AWP | Redline"
+        ],
+        "Covert": [
+            "M4A4 | Asiimov",
+            "Sawed-Off | The Kraken"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet",
+            "Bayonet | Slaughter",
+            "Bayonet | Blue Steel",
+            "Bayonet | Crimson Web",
+            "Bayonet | Case Hardened",
+            "Bayonet | Forest DDPAT",
+            "Bayonet | Stained",
+            "Bayonet | Boreal Forest",
+            "Bayonet | Safari Mesh",
+            "Bayonet | Urban Masked",  
+            "Bayonet | Scorched",
+            "Bayonet | Night",
+            "Bayonet | Fade",
+
+            "Flip Knife",
+            "Flip Knife | Slaughter",
+            "Flip Knife | Blue Steel",
+            "Flip Knife | Crimson Web",
+            "Flip Knife | Case Hardened",
+            "Flip Knife | Forest DDPAT",
+            "Flip Knife | Stained",
+            "Flip Knife | Boreal Forest",
+            "Flip Knife | Safari Mesh",
+            "Flip Knife | Urban Masked",  
+            "Flip Knife | Scorched",
+            "Flip Knife | Night",
+            "Flip Knife | Fade",
+
+            "Gut Knife",
+            "Gut Knife | Slaughter",
+            "Gut Knife | Blue Steel",
+            "Gut Knife | Crimson Web",
+            "Gut Knife | Case Hardened",
+            "Gut Knife | Forest DDPAT",
+            "Gut Knife | Stained",
+            "Gut Knife | Boreal Forest",
+            "Gut Knife | Safari Mesh",
+            "Gut Knife | Urban Masked",  
+            "Gut Knife | Scorched",
+            "Gut Knife | Night",
+            "Gut Knife | Fade",
+
+            "Karambit",
+            "Karambit | Slaughter",
+            "Karambit | Blue Steel",
+            "Karambit | Crimson Web",
+            "Karambit | Case Hardened",
+            "Karambit | Forest DDPAT",
+            "Karambit | Stained",
+            "Karambit | Boreal Forest",
+            "Karambit | Safari Mesh",
+            "Karambit | Urban Masked",  
+            "Karambit | Scorched",
+            "Karambit | Night",
+            "Karambit | Fade",
+            
+            "M9 Bayonet | Fade",
+            "M9 Bayonet",
+            "M9 Bayonet | Slaughter",
+            "M9 Bayonet | Case Hardened",
+            "M9 Bayonet | Crimson Web",
+            "M9 Bayonet | Night",
+            "M9 Bayonet | Blue Steel",
+            "M9 Bayonet | Stained",
+            "M9 Bayonet | Forest DDPAT",
+            "M9 Bayonet | Scorched",
+            "M9 Bayonet | Urban Masked",
+            "M9 Bayonet | Safari Mesh",
+            "M9 Bayonet | Boreal Forest"
+        ]
+    },
+    "Operation Phoenix Weapon Case": {
+        "Mil-Spec Grade": [
+            "UMP-45 | Corporal",
+            "Negev | Terrain",
+            "Tec-9 | Sandstorm",
+            "MAG-7 | Heaven Guard"
+        ],
+        "Restricted": [
+            "MAC-10 | Heat",
+            "SG 553 | Pulse",
+            "FAMAS | Sergeant",
+            "USP-S | Guardian"
+        ],
+        "Classified": [
+            "AK-47 | Redline",
+            "P90 | Trigon",
+            "Nova | Antique"
+        ],
+        "Covert": [
+            "AWP | Asiimov",
+            "AUG | Chameleon"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet",
+            "Bayonet | Slaughter",
+            "Bayonet | Blue Steel",
+            "Bayonet | Crimson Web",
+            "Bayonet | Case Hardened",
+            "Bayonet | Forest DDPAT",
+            "Bayonet | Stained",
+            "Bayonet | Boreal Forest",
+            "Bayonet | Safari Mesh",
+            "Bayonet | Urban Masked",  
+            "Bayonet | Scorched",
+            "Bayonet | Night",
+            "Bayonet | Fade",
+
+            "Flip Knife",
+            "Flip Knife | Slaughter",
+            "Flip Knife | Blue Steel",
+            "Flip Knife | Crimson Web",
+            "Flip Knife | Case Hardened",
+            "Flip Knife | Forest DDPAT",
+            "Flip Knife | Stained",
+            "Flip Knife | Boreal Forest",
+            "Flip Knife | Safari Mesh",
+            "Flip Knife | Urban Masked",  
+            "Flip Knife | Scorched",
+            "Flip Knife | Night",
+            "Flip Knife | Fade",
+
+            "Gut Knife",
+            "Gut Knife | Slaughter",
+            "Gut Knife | Blue Steel",
+            "Gut Knife | Crimson Web",
+            "Gut Knife | Case Hardened",
+            "Gut Knife | Forest DDPAT",
+            "Gut Knife | Stained",
+            "Gut Knife | Boreal Forest",
+            "Gut Knife | Safari Mesh",
+            "Gut Knife | Urban Masked",  
+            "Gut Knife | Scorched",
+            "Gut Knife | Night",
+            "Gut Knife | Fade",
+
+            "Karambit",
+            "Karambit | Slaughter",
+            "Karambit | Blue Steel",
+            "Karambit | Crimson Web",
+            "Karambit | Case Hardened",
+            "Karambit | Forest DDPAT",
+            "Karambit | Stained",
+            "Karambit | Boreal Forest",
+            "Karambit | Safari Mesh",
+            "Karambit | Urban Masked",  
+            "Karambit | Scorched",
+            "Karambit | Night",
+            "Karambit | Fade",
+            
+            "M9 Bayonet | Fade",
+            "M9 Bayonet",
+            "M9 Bayonet | Slaughter",
+            "M9 Bayonet | Case Hardened",
+            "M9 Bayonet | Crimson Web",
+            "M9 Bayonet | Night",
+            "M9 Bayonet | Blue Steel",
+            "M9 Bayonet | Stained",
+            "M9 Bayonet | Forest DDPAT",
+            "M9 Bayonet | Scorched",
+            "M9 Bayonet | Urban Masked",
+            "M9 Bayonet | Safari Mesh",
+            "M9 Bayonet | Boreal Forest"
+        ]
+    },
+    "Operation Wildfire Case": {
+        "Mil-Spec Grade": [
+            "PP-Bizon | Photic Zone",
+            "Dual Berettas | Cartel",
+            "MAC-10 | Lapis Gator",
+            "SSG 08 | Necropos",
+            "Tec-9 | Jambiya",
+            "USP-S | Lead Conduit"
+        ],
+        "Restricted": [
+            "FAMAS | Valence",
+            "Five-SeveN | Triumvirate",
+            "Glock-18 | Royal Legion",
+            "MAG-7 | Praetorian",
+            "MP7 | Impire"
+        ],
+        "Classified": [
+            "AWP | Elite Build",
+            "Desert Eagle | Kumicho Dragon",
+            "Nova | Hyper Beast"
+        ],
+        "Covert": [
+            "AK-47 | Fuel Injector",
+            "M4A4 | The Battlestar"
+        ],
+        "Exceedingly Rare Item": [
+            "Bowie Knife",
+            "Bowie Knife | Slaughter",
+            "Bowie Knife | Blue Steel",
+            "Bowie Knife | Crimson Web",
+            "Bowie Knife | Case Hardened",
+            "Bowie Knife | Forest DDPAT",
+            "Bowie Knife | Stained",
+            "Bowie Knife | Boreal Forest",
+            "Bowie Knife | Safari Mesh",
+            "Bowie Knife | Urban Masked",  
+            "Bowie Knife | Scorched",
+            "Bowie Knife | Night",
+            "Bowie Knife | Fade"
+        ]
+    },
+    "Operation Vanguard Weapon Case": {
+        "Mil-Spec Grade": [
+            "G3SG1 | Murky",
+            "MAG-7 | Firestarter",
+            "MP9 | Dart",
+            "Five-SeveN | Urban Hazard",
+            "UMP-45 | Delusion"
+        ],
+        "Restricted": [
+            "Glock-18 | Grinder",
+            "M4A1-S | Basilisk",
+            "M4A4 | Griffin",
+            "Sawed-Off | Highwayman"
+        ],
+        "Classified": [
+            "P250 | Cartel",
+            "SCAR-20 | Cardiac",
+            "XM1014 | Tranquility"
+        ],
+        "Covert": [
+            "AK-47 | Wasteland Rebel",
+            "P2000 | Fire Elemental"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet",
+            "Bayonet | Slaughter",
+            "Bayonet | Blue Steel",
+            "Bayonet | Crimson Web",
+            "Bayonet | Case Hardened",
+            "Bayonet | Forest DDPAT",
+            "Bayonet | Stained",
+            "Bayonet | Boreal Forest",
+            "Bayonet | Safari Mesh",
+            "Bayonet | Urban Masked",  
+            "Bayonet | Scorched",
+            "Bayonet | Night",
+            "Bayonet | Fade",
+
+            "Flip Knife",
+            "Flip Knife | Slaughter",
+            "Flip Knife | Blue Steel",
+            "Flip Knife | Crimson Web",
+            "Flip Knife | Case Hardened",
+            "Flip Knife | Forest DDPAT",
+            "Flip Knife | Stained",
+            "Flip Knife | Boreal Forest",
+            "Flip Knife | Safari Mesh",
+            "Flip Knife | Urban Masked",  
+            "Flip Knife | Scorched",
+            "Flip Knife | Night",
+            "Flip Knife | Fade",
+
+            "Gut Knife",
+            "Gut Knife | Slaughter",
+            "Gut Knife | Blue Steel",
+            "Gut Knife | Crimson Web",
+            "Gut Knife | Case Hardened",
+            "Gut Knife | Forest DDPAT",
+            "Gut Knife | Stained",
+            "Gut Knife | Boreal Forest",
+            "Gut Knife | Safari Mesh",
+            "Gut Knife | Urban Masked",  
+            "Gut Knife | Scorched",
+            "Gut Knife | Night",
+            "Gut Knife | Fade",
+
+            "Karambit",
+            "Karambit | Slaughter",
+            "Karambit | Blue Steel",
+            "Karambit | Crimson Web",
+            "Karambit | Case Hardened",
+            "Karambit | Forest DDPAT",
+            "Karambit | Stained",
+            "Karambit | Boreal Forest",
+            "Karambit | Safari Mesh",
+            "Karambit | Urban Masked",  
+            "Karambit | Scorched",
+            "Karambit | Night",
+            "Karambit | Fade",
+            
+            "M9 Bayonet | Fade",
+            "M9 Bayonet",
+            "M9 Bayonet | Slaughter",
+            "M9 Bayonet | Case Hardened",
+            "M9 Bayonet | Crimson Web",
+            "M9 Bayonet | Night",
+            "M9 Bayonet | Blue Steel",
+            "M9 Bayonet | Stained",
+            "M9 Bayonet | Forest DDPAT",
+            "M9 Bayonet | Scorched",
+            "M9 Bayonet | Urban Masked",
+            "M9 Bayonet | Safari Mesh",
+            "M9 Bayonet | Boreal Forest"
+        ]
+    },
+    "eSports 2013 Case": {
+        "Mil-Spec Grade": [
+            "M4A4 | Faded Zebra",
+            "MAG-7 | Memento",
+            "FAMAS | Doomkitty"
+        ],
+        "Restricted": [
+            "Galil AR | Orange DDPAT",
+            "Sawed-Off | Orange DDPAT",
+            "P250 | Splash"
+        ],
+        "Classified": [
+            "AK-47 | Red Laminate",
+            "AWP | BOOM"
+        ],
+        "Covert": [
+            "P90 | Death by Kitty"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet",
+            "Bayonet | Slaughter",
+            "Bayonet | Blue Steel",
+            "Bayonet | Crimson Web",
+            "Bayonet | Case Hardened",
+            "Bayonet | Forest DDPAT",
+            "Bayonet | Stained",
+            "Bayonet | Boreal Forest",
+            "Bayonet | Safari Mesh",
+            "Bayonet | Urban Masked",  
+            "Bayonet | Scorched",
+            "Bayonet | Night",
+            "Bayonet | Fade",
+
+            "Flip Knife",
+            "Flip Knife | Slaughter",
+            "Flip Knife | Blue Steel",
+            "Flip Knife | Crimson Web",
+            "Flip Knife | Case Hardened",
+            "Flip Knife | Forest DDPAT",
+            "Flip Knife | Stained",
+            "Flip Knife | Boreal Forest",
+            "Flip Knife | Safari Mesh",
+            "Flip Knife | Urban Masked",  
+            "Flip Knife | Scorched",
+            "Flip Knife | Night",
+            "Flip Knife | Fade",
+
+            "Gut Knife",
+            "Gut Knife | Slaughter",
+            "Gut Knife | Blue Steel",
+            "Gut Knife | Crimson Web",
+            "Gut Knife | Case Hardened",
+            "Gut Knife | Forest DDPAT",
+            "Gut Knife | Stained",
+            "Gut Knife | Boreal Forest",
+            "Gut Knife | Safari Mesh",
+            "Gut Knife | Urban Masked",  
+            "Gut Knife | Scorched",
+            "Gut Knife | Night",
+            "Gut Knife | Fade",
+
+            "Karambit",
+            "Karambit | Slaughter",
+            "Karambit | Blue Steel",
+            "Karambit | Crimson Web",
+            "Karambit | Case Hardened",
+            "Karambit | Forest DDPAT",
+            "Karambit | Stained",
+            "Karambit | Boreal Forest",
+            "Karambit | Safari Mesh",
+            "Karambit | Urban Masked",  
+            "Karambit | Scorched",
+            "Karambit | Night",
+            "Karambit | Fade",
+            
+            "M9 Bayonet | Fade",
+            "M9 Bayonet",
+            "M9 Bayonet | Slaughter",
+            "M9 Bayonet | Case Hardened",
+            "M9 Bayonet | Crimson Web",
+            "M9 Bayonet | Night",
+            "M9 Bayonet | Blue Steel",
+            "M9 Bayonet | Stained",
+            "M9 Bayonet | Forest DDPAT",
+            "M9 Bayonet | Scorched",
+            "M9 Bayonet | Urban Masked",
+            "M9 Bayonet | Safari Mesh",
+            "M9 Bayonet | Boreal Forest"
+        ]
+    },
+    "eSports 2013 Winter Case": {
+        "Mil-Spec Grade": [
+            "Galil AR | Blue Titanium",
+            "Five-SeveN | Nightshade",
+            "PP-Bizon | Water Sigil",
+            "Nova | Ghost Camo",
+            "G3SG1 | Azure Zebra",
+            "P250 | Steel Disruption"
+        ],
+        "Restricted": [
+            "AK-47 | Blue Laminate",
+            "P90 | Blind Spot"
+        ],
+        "Classified": [
+            "FAMAS | Afterimage",
+            "AWP | Electric Hive",
+            "Desert Eagle | Cobalt Disruption"
+        ],
+        "Covert": [
+            "M4A4 | X-Ray"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet",
+            "Bayonet | Slaughter",
+            "Bayonet | Blue Steel",
+            "Bayonet | Crimson Web",
+            "Bayonet | Case Hardened",
+            "Bayonet | Forest DDPAT",
+            "Bayonet | Stained",
+            "Bayonet | Boreal Forest",
+            "Bayonet | Safari Mesh",
+            "Bayonet | Urban Masked",  
+            "Bayonet | Scorched",
+            "Bayonet | Night",
+            "Bayonet | Fade",
+
+            "Flip Knife",
+            "Flip Knife | Slaughter",
+            "Flip Knife | Blue Steel",
+            "Flip Knife | Crimson Web",
+            "Flip Knife | Case Hardened",
+            "Flip Knife | Forest DDPAT",
+            "Flip Knife | Stained",
+            "Flip Knife | Boreal Forest",
+            "Flip Knife | Safari Mesh",
+            "Flip Knife | Urban Masked",  
+            "Flip Knife | Scorched",
+            "Flip Knife | Night",
+            "Flip Knife | Fade",
+
+            "Gut Knife",
+            "Gut Knife | Slaughter",
+            "Gut Knife | Blue Steel",
+            "Gut Knife | Crimson Web",
+            "Gut Knife | Case Hardened",
+            "Gut Knife | Forest DDPAT",
+            "Gut Knife | Stained",
+            "Gut Knife | Boreal Forest",
+            "Gut Knife | Safari Mesh",
+            "Gut Knife | Urban Masked",  
+            "Gut Knife | Scorched",
+            "Gut Knife | Night",
+            "Gut Knife | Fade",
+
+            "Karambit",
+            "Karambit | Slaughter",
+            "Karambit | Blue Steel",
+            "Karambit | Crimson Web",
+            "Karambit | Case Hardened",
+            "Karambit | Forest DDPAT",
+            "Karambit | Stained",
+            "Karambit | Boreal Forest",
+            "Karambit | Safari Mesh",
+            "Karambit | Urban Masked",  
+            "Karambit | Scorched",
+            "Karambit | Night",
+            "Karambit | Fade",
+            
+            "M9 Bayonet | Fade",
+            "M9 Bayonet",
+            "M9 Bayonet | Slaughter",
+            "M9 Bayonet | Case Hardened",
+            "M9 Bayonet | Crimson Web",
+            "M9 Bayonet | Night",
+            "M9 Bayonet | Blue Steel",
+            "M9 Bayonet | Stained",
+            "M9 Bayonet | Forest DDPAT",
+            "M9 Bayonet | Scorched",
+            "M9 Bayonet | Urban Masked",
+            "M9 Bayonet | Safari Mesh",
+            "M9 Bayonet | Boreal Forest"
+        ]
+    },
+    "eSports 2014 Summer Case": {
+        "Mil-Spec Grade": [
+            "SSG 08 | Dark Water",
+            "MAC-10 | Ultraviolet",
+            "USP-S | Blood Tiger",
+            "CZ75-Auto | Hexane",
+            "Negev | Bratatat",
+            "XM1014 | Red Python"
+        ],
+        "Restricted": [
+            "PP-Bizon | Blue Streak",
+            "P90 | Virus",
+            "MP7 | Ocean Foam",
+            "Glock-18 | Steel Disruption",
+            "Desert Eagle | Crimson Web"
+        ],
+        "Classified": [
+            "AUG | Bengal Tiger",
+            "Nova | Bloomstick",
+            "AWP | Corticera",
+            "P2000 | Corticera"
+        ],
+        "Covert": [
+            "M4A4 | Bullet Rain",
+            "AK-47 | Jaguar"
+        ],
+        "Exceedingly Rare Item": [
+            "Bayonet",
+            "Bayonet | Slaughter",
+            "Bayonet | Blue Steel",
+            "Bayonet | Crimson Web",
+            "Bayonet | Case Hardened",
+            "Bayonet | Forest DDPAT",
+            "Bayonet | Stained",
+            "Bayonet | Boreal Forest",
+            "Bayonet | Safari Mesh",
+            "Bayonet | Urban Masked",  
+            "Bayonet | Scorched",
+            "Bayonet | Night",
+            "Bayonet | Fade",
+
+            "Flip Knife",
+            "Flip Knife | Slaughter",
+            "Flip Knife | Blue Steel",
+            "Flip Knife | Crimson Web",
+            "Flip Knife | Case Hardened",
+            "Flip Knife | Forest DDPAT",
+            "Flip Knife | Stained",
+            "Flip Knife | Boreal Forest",
+            "Flip Knife | Safari Mesh",
+            "Flip Knife | Urban Masked",  
+            "Flip Knife | Scorched",
+            "Flip Knife | Night",
+            "Flip Knife | Fade",
+
+            "Gut Knife",
+            "Gut Knife | Slaughter",
+            "Gut Knife | Blue Steel",
+            "Gut Knife | Crimson Web",
+            "Gut Knife | Case Hardened",
+            "Gut Knife | Forest DDPAT",
+            "Gut Knife | Stained",
+            "Gut Knife | Boreal Forest",
+            "Gut Knife | Safari Mesh",
+            "Gut Knife | Urban Masked",  
+            "Gut Knife | Scorched",
+            "Gut Knife | Night",
+            "Gut Knife | Fade",
+
+            "Karambit",
+            "Karambit | Slaughter",
+            "Karambit | Blue Steel",
+            "Karambit | Crimson Web",
+            "Karambit | Case Hardened",
+            "Karambit | Forest DDPAT",
+            "Karambit | Stained",
+            "Karambit | Boreal Forest",
+            "Karambit | Safari Mesh",
+            "Karambit | Urban Masked",  
+            "Karambit | Scorched",
+            "Karambit | Night",
+            "Karambit | Fade",
+            
+            "M9 Bayonet | Fade",
+            "M9 Bayonet",
+            "M9 Bayonet | Slaughter",
+            "M9 Bayonet | Case Hardened",
+            "M9 Bayonet | Crimson Web",
+            "M9 Bayonet | Night",
+            "M9 Bayonet | Blue Steel",
+            "M9 Bayonet | Stained",
+            "M9 Bayonet | Forest DDPAT",
+            "M9 Bayonet | Scorched",
+            "M9 Bayonet | Urban Masked",
+            "M9 Bayonet | Safari Mesh",
+            "M9 Bayonet | Boreal Forest"
         ]
     }
 }

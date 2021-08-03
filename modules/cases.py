@@ -14,9 +14,13 @@ __all__ = (
     'Case',
 )
 
+require_no_key = {
+    "X-Ray P250 Package"
+}
+
 with open('etc/cases.json', encoding='utf-8') as f:
     all_cases = json.loads(f.read())
-    all_keys = ['{} Key'.format(x) for x in all_cases]
+    all_keys = ['{} Key'.format(x) for x in all_cases if x not in require_no_key]
 
 with open("etc/collections.json", "r", encoding='utf-8') as f:
     all_collections = json.loads(f.read())
@@ -117,7 +121,7 @@ class Case:
         self.name = name
         self.asset = case_assets[name]
         self.items = all_cases[name]
-        self.key = '{} Key'.format(name)
+        self.key = '{} Key'.format(name) if name not in require_no_key else None
 
     def __str__(self):
         return self.name

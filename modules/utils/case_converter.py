@@ -1,4 +1,5 @@
 from discord.ext.commands import Converter
+from dislash.interactions.message_components import ActionRow, Button, ButtonStyle
 
 from ..cases import Case, all_cases
 
@@ -20,9 +21,36 @@ class CaseConverter(Converter):
                 lwcs == f'operation {lwar}',
                 lwcs == f'operation {lwar} case',
                 lwcs == f'cs:go {lwar}',
-                lwcs == f'cs:go {lwar} case'
+                lwcs == f'cs:go {lwar} case',
             ]
             if any(statements):
                 return Case(case)
+            elif lwar.replace('case', '') in lwcs:
+                row = ActionRow(
+                    Button(
+                        style=ButtonStyle.green,
+                        label='Yes',
+                        custom_id='yes'
+                    ),
+                    Button(
+                        style=ButtonStyle.red,
+                        label='No',
+                        custom_id='no'
+                    )
+                )
+                message = await ctx.send(f'Did you mean **{case}**?', components=[row])
+
+                def check(inter):
+                    return inter.author == ctx.author
+
+                try:
+                    inter = await message.wait_for_button_click(check=check, timeout=15)
+                except:
+                    pass
+                else:
+                    if inter.clicked_button.custom_id == 'yes':
+                        return Case(case)
+                finally:
+                    await message.delete()
         else:
             raise ValueError(f'No case with name "{argument}"')

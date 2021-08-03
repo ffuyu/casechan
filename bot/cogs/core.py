@@ -66,7 +66,7 @@ class CoreCog(commands.Cog, name='Core'):
                 raise MissingSpace('You can\'t open more cases, your inventory is full!')
             if container.name not in player.cases:
                 raise MissingCase(f'You are missing {container}.')
-            if container.key not in player.keys:
+            if container.key and container.key not in player.keys:
                 raise MissingKey(f'You are missing {container.key}.')
 
             # Opening animation
