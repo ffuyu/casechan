@@ -1,8 +1,8 @@
-from discord.ext.commands.cooldowns import BucketType
 from discord import Embed
-from discord.ext.commands.core import max_concurrency
 from discord.ext import commands
 from discord.ext.commands.context import Context
+from discord.ext.commands.cooldowns import BucketType
+from discord.ext.commands.core import max_concurrency
 from dpytools import Color
 
 from modules.utils import update_item_database
@@ -18,12 +18,12 @@ class OwnerCog(commands.Cog, name='owner'):
 
     @commands.is_owner()
     @commands.group(hidden=True)
-    async def owner(self, ctx:Context):
+    async def owner(self, ctx: Context):
         pass
 
     @max_concurrency(1, BucketType.default, wait=False)
     @owner.command(name='update-items', hidden=True)
-    async def _update_items(self, ctx:Context):
+    async def _update_items(self, ctx: Context):
         """Updates the item's database"""
         msg = await ctx.send(embed=Embed(
             description=f"Updating Item's Database...",

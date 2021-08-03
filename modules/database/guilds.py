@@ -2,10 +2,9 @@ import logging
 
 from odmantic import Model
 
-from ..constants import DEFAULT_PREFIX
-
 from . import engine
 from .models import ModelPlus
+from ..constants import DEFAULT_PREFIX
 
 __all__ = (
     'GuildConfig',
