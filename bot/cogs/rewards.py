@@ -40,6 +40,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
             player.hourly = datetime.datetime.utcnow()
             amount = random.randint(4, 7) \
                 if ctx.author.created_at - datetime.datetime.utcnow() < datetime.timedelta(weeks=1) else 1
+
             cases = [Case(random.choice(list(all_cases.keys()))) for _ in range(amount)]
             for case in cases:
                 player.mod_case(case.name, 1)
@@ -70,10 +71,10 @@ class RewardsCog(commands.Cog, name='Rewards'):
             amount = random.randint(player.streak, player.streak + 10) \
                 if ctx.author.created_at - datetime.datetime.utcnow() < datetime.timedelta(days=7) else 2
 
-            for _ in range(amount):
-                case = Case(random.choice([x for x in all_cases]))
-                # player.mod_case(case.name, 1)
-                # player.mod_key(case.key, 1)
+            cases = [Case(random.choice(list(all_cases.keys()))) for _ in range(amount)]
+            for case in cases:
+                player.mod_case(case.name, 1)
+                player.mod_key(case.key, 1)
             await player.save()
 
             return await ctx.send(f'Claimed **{amount}x** cases from daily rewards.')
@@ -100,13 +101,10 @@ class RewardsCog(commands.Cog, name='Rewards'):
                            k=1)[0]
             amount = random.randint(range_[0], range_[1])
 
-            for _ in range(amount):
-                case = Case(random.choice([x for x in all_cases]))
-                # player.mod_case(case.name, 1)
-                # player.mod_key(case.key, 1)
-            await ctx.send(embed=Embed(
-                description = str(player.dict())
-            ))
+            cases = [Case(random.choice(list(all_cases.keys()))) for _ in range(amount)]
+            for case in cases:
+                player.mod_case(case.name, 1)
+                player.mod_key(case.key, 1)
             await player.save()
 
             return await ctx.send(f'Claimed **{amount}x** cases from weekly rewards.')
