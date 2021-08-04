@@ -1,10 +1,13 @@
 import datetime
 import random
 
+from discord import Embed
+
 from discord.ext import commands
 from discord.ext.commands.context import Context
 from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import max_concurrency
+
 from humanize import naturaldelta
 
 from modules.cases import Case, all_cases
@@ -102,7 +105,9 @@ class RewardsCog(commands.Cog, name='Rewards'):
                 case = Case(random.choice([x for x in all_cases]))
                 player.mod_case(case.name, 1)
                 player.mod_key(case.key, 1)
-            await ctx.send(str(player.dict()))
+            await ctx.send(embed=Embed(
+                description = str(player.dict())
+            ))
             await player.save()
 
             return await ctx.send(f'Claimed **{amount}x** cases from weekly rewards.')
