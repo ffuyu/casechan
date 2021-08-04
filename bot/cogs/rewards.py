@@ -42,9 +42,16 @@ class RewardsCog(commands.Cog, name='Rewards'):
                 if ctx.author.created_at - datetime.datetime.utcnow() < datetime.timedelta(weeks=1) else 1
 
             cases = [Case(random.choice(list(all_cases.keys()))) for _ in range(amount)]
+            added = []
+            remaining_cases = amount
             for case in cases:
-                player.mod_case(case.name, 1)
-                player.mod_key(case.key, 1)
+                if case.name in added or not remaining_cases:
+                    continue
+                to_give = random.randint(1, remaining_cases)
+                player.mod_case(case.name, to_give)
+                player.mod_key(case.key, to_give)
+                added.append(case.name)
+                remaining_cases -= to_give
             await player.save()
 
             return await ctx.send(f'Claimed **{amount}x** cases from hourly rewards.')
@@ -72,9 +79,16 @@ class RewardsCog(commands.Cog, name='Rewards'):
                 if ctx.author.created_at - datetime.datetime.utcnow() < datetime.timedelta(days=7) else 2
 
             cases = [Case(random.choice(list(all_cases.keys()))) for _ in range(amount)]
+            added = []
+            remaining_cases = amount
             for case in cases:
-                player.mod_case(case.name, 1)
-                player.mod_key(case.key, 1)
+                if case.name in added or not remaining_cases:
+                    continue
+                to_give = random.randint(1, remaining_cases)
+                player.mod_case(case.name, to_give)
+                player.mod_key(case.key, to_give)
+                added.append(case.name)
+                remaining_cases -= to_give
             await player.save()
 
             return await ctx.send(f'Claimed **{amount}x** cases from daily rewards.')
@@ -102,9 +116,16 @@ class RewardsCog(commands.Cog, name='Rewards'):
             amount = random.randint(range_[0], range_[1])
 
             cases = [Case(random.choice(list(all_cases.keys()))) for _ in range(amount)]
+            added = []
+            remaining_cases = amount
             for case in cases:
-                player.mod_case(case.name, 1)
-                player.mod_key(case.key, 1)
+                if case.name in added or not remaining_cases:
+                    continue
+                to_give = random.randint(1, remaining_cases)
+                player.mod_case(case.name, to_give)
+                player.mod_key(case.key, to_give)
+                added.append(case.name)
+                remaining_cases -= to_give
             await player.save()
 
             return await ctx.send(f'Claimed **{amount}x** cases from weekly rewards.')
