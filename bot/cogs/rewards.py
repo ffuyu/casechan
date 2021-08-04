@@ -43,8 +43,8 @@ class RewardsCog(commands.Cog, name='Rewards'):
 
             for _ in range(amount):
                 case = Case(random.choice([x for x in all_cases]))
-                player.mod_case(case.name, 1)
-                player.mod_key(case.key, 1)
+                # player.mod_case(case.name, 1)
+                # player.mod_key(case.key, 1)
             await player.save()
 
             return await ctx.send(f'Claimed **{amount}x** cases from hourly rewards.')
