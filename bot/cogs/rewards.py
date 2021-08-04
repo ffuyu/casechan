@@ -41,7 +41,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
             amount = random.randint(4, 7) \
                 if ctx.author.created_at - datetime.datetime.utcnow() < datetime.timedelta(weeks=1) else 1
 
-            cases = [Case(random.choice(list(all_cases.keys()))) for _ in range(amount)]
+            cases = [Case(random.choice([*all_cases])) for _ in range(amount)]
             added = []
             remaining_cases = amount
             for case in cases:
@@ -78,7 +78,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
             amount = random.randint(player.streak, player.streak + 10) \
                 if ctx.author.created_at - datetime.datetime.utcnow() < datetime.timedelta(days=7) else 2
 
-            cases = [Case(random.choice(list(all_cases.keys()))) for _ in range(amount)]
+            cases = [Case(random.choice([*all_cases])) for _ in range(amount)]
             added = []
             remaining_cases = amount
             for case in cases:
@@ -115,7 +115,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
                            k=1)[0]
             amount = random.randint(range_[0], range_[1])
 
-            cases = [Case(random.choice(list(all_cases.keys()))) for _ in range(amount)]
+            cases = [Case(random.choice([*all_cases])) for _ in range(amount)]
             added = []
             remaining_cases = amount
             for case in cases:
