@@ -39,7 +39,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
                 if ctx.author.created_at - datetime.datetime.utcnow() < datetime.timedelta(weeks=1) else 1
 
             for _ in range(amount):
-                case = Case(random.choice([x for x in all_cases]))
+                case = Case(random.choice(all_cases))
                 player.mod_case(case.name, 1)
                 player.mod_key(case.key, 1)
             await player.save()
@@ -69,7 +69,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
                 if ctx.author.created_at - datetime.datetime.utcnow() < datetime.timedelta(days=7) else 2
 
             for _ in range(amount):
-                case = Case(random.choice([x for x in all_cases]))
+                case = Case(random.choice(all_cases))
                 player.mod_case(case.name, 1)
                 player.mod_key(case.key, 1)
             await player.save()
@@ -99,14 +99,17 @@ class RewardsCog(commands.Cog, name='Rewards'):
             amount = random.randint(range_[0], range_[1])
 
             for _ in range(amount):
-                case = Case(random.choice([x for x in all_cases]))
+                case = Case(random.choice(all_cases))
                 player.mod_case(case.name, 1)
                 player.mod_key(case.key, 1)
+            print(player.doc())
             await player.save()
 
             return await ctx.send(f'Claimed **{amount}x** cases from weekly rewards.')
 
-        remaining = player.weekly + datetime.timedelta(weeks=1) - datetime.datetime.utcnow()
+        weekly = player.weekly
+
+        remaining = weekly + datetime.timedelta(weeks=1) - datetime.datetime.utcnow()
 
         raise WeeklyError(f'You have to wait {naturaldelta(remaining)} to claim your next weekly rewards.')
 

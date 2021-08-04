@@ -76,7 +76,7 @@ class CoreCog(commands.Cog, name='Core'):
             ).set_image(url=container.asset).set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
 
             message = await ctx.send(embed=opening_embed, reference=ctx.message)
-            await asyncio.sleep(5)
+            await asyncio.sleep(6.0)
 
             # Displaying results
             item, *stats = await container.open()
