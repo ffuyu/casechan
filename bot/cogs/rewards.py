@@ -99,7 +99,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
             amount = random.randint(range_[0], range_[1])
 
             for _ in range(amount):
-                case = Case(random.choice(all_cases))
+                case = Case(random.choice([x for x in all_cases]))
                 player.mod_case(case.name, 1)
                 player.mod_key(case.key, 1)
             print(player.doc())
