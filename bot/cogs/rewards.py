@@ -40,7 +40,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
             player.hourly = datetime.datetime.utcnow()
             amount = random.randint(4, 7) \
                 if ctx.author.created_at - datetime.datetime.utcnow() < datetime.timedelta(weeks=1) else 1
-
+            print(all_cases)
             cases = [Case(random.choice(all_cases)) for _ in range(amount)]
             for case in cases:
                 player.mod_case(case.name, 1)

@@ -113,6 +113,7 @@ class Player(ModelPlus, Model):
         attr[name] += n
         if attr[name] <= 0:
             del attr[name]
+        print(attr)
 
     def mod_case(self, case_name, n: int = 1):
         """
