@@ -89,20 +89,16 @@ class MarketCog(commands.Cog, name='Market'):
             raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
 
         if isinstance(item, Key):
-
-            item_ = await Item.get(name=item.name)
-            price = item_.price
-
             if not player.trade_banned:
-                if player.balance >= (price * amount):
+                if player.balance >= (item.price * amount):
                     player.mod_key(item.name, amount)
-                    player.balance -= (price * amount)
+                    player.balance -= (item.price * amount)
                     await player.save()
 
 
                     return await ctx.send(
                         'You have purchased **{}x {}** for **${}**'.format(
-                            amount, item.name, price))
+                            amount, item.name, item.price))
 
                 raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
             raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
