@@ -71,19 +71,19 @@ class MarketCog(commands.Cog, name='Market'):
         if isinstance(item, Case):
 
             item_ = await Item.get(name=item.name)
-            item.price = item_.price
+            price = item_.price
 
             if not player.trade_banned:
-                if player.balance >= (item.price * amount):
+                if player.balance >= (price * amount):
                     player.mod_case(item.name, amount)
-                    player.balance -= (item.price * amount)
+                    player.balance -= (price * amount)
                     await player.save()
 
                     item.price = await Item.get(name=item.name)
 
                     return await ctx.send(
                         'You have purchased **{}x {}** for **${}**'.format(
-                            amount, item.name, item.price))
+                            amount, item.name, price))
 
                 raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
             raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
@@ -91,18 +91,18 @@ class MarketCog(commands.Cog, name='Market'):
         if isinstance(item, Key):
 
             item_ = await Item.get(name=item.name)
-            item.price = item_.price
+            price = item_.price
 
             if not player.trade_banned:
-                if player.balance >= (item.price * amount):
+                if player.balance >= (price * amount):
                     player.mod_key(item.name, amount)
-                    player.balance -= (item.price * amount)
+                    player.balance -= (price * amount)
                     await player.save()
 
 
                     return await ctx.send(
                         'You have purchased **{}x {}** for **${}**'.format(
-                            amount, item.name, item.price))
+                            amount, item.name, price))
 
                 raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
             raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
