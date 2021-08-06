@@ -18,6 +18,7 @@ from DiscordUtils.Pagination import CustomEmbedPaginator
 from discord import Member, Embed, Colour, Guild
 from discord.ext import commands
 from discord.ext.commands.context import Context
+from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import guild_only, max_concurrency
 from dislash.interactions.message_components import ActionRow, Button, ButtonStyle
 from dislash.interactions.slash_interaction import Interaction
@@ -178,6 +179,7 @@ class CoreCog(commands.Cog, name='Core'):
 
         return await ctx.send(f'**{user}** has no cases to display')  # FIXME (replace with an embed)
 
+    @commands.cooldown(5, 30, BucketType.member)
     @commands.command(aliases=['inv'])
     async def inventory(self, ctx: Context, user: Optional[Member]):
         """View your inventory"""
@@ -196,6 +198,7 @@ class CoreCog(commands.Cog, name='Core'):
         return await ctx.reply('**{}** has no items to display'.format(user))
 
     @guild_only()
+    @commands.cooldown(5, 30, BucketType.member)
     @commands.command(aliases=["bal", "b", "networth", "nw"])
     async def balance(self, ctx, user: Optional[Member]):
         """Displays your wallet, inventory and net worth all at once"""
@@ -212,6 +215,7 @@ class CoreCog(commands.Cog, name='Core'):
         )
 
     @guild_only()
+    @commands.cooldown(5, 30, BucketType.guild)
     @commands.command(aliases=['lb'])
     async def leaderboard(self, ctx: Context, guild: Optional[Guild]):
         """View the inventory worth leaderboard for the server"""
@@ -235,6 +239,7 @@ class CoreCog(commands.Cog, name='Core'):
                 sum([x for x in users_dictionary.values()]))).set_author(name=ctx.guild, icon_url=ctx.guild.icon_url)
         )
 
+    @commands.cooldown(5, 60, BucketType.member)
     @commands.command()
     async def top(self, ctx):
         """Lists the top 10 most rich servers based on inventory worth"""
