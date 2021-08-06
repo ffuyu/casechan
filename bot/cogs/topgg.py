@@ -13,7 +13,7 @@ bot.topgg_webhook.run(5000)
 
 class TopGGCog(commands.Cog):
     @bot.event
-    async def on_autopost_success(self):
+    async def on_autopost_success():
         print(
             f"Posted server count ({bot.topggpy.guild_count}), shard count ({bot.shard_count})"
         )
