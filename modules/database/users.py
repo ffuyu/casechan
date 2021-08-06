@@ -4,7 +4,7 @@ from odmantic import Model
 
 from datetime import datetime, timedelta
 
-from typing import Optional
+from typing import List, Optional
 
 all = {
     'User'
@@ -14,7 +14,7 @@ class User(ModelPlus, Model):
     user_id: int
     last_voted: Optional[datetime] = None
     total_votes: int = 0
-    acknowledgements = []
+    acknowledgements: List[str] = []
     created_at: Optional[datetime] = datetime.utcnow()
 
     class Config: 
