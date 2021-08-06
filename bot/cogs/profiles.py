@@ -32,6 +32,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
         if user_.acknowledgements:
             profile_embed.add_field(name="Acknowledgements:", value='\n'.join(user_.acknowledgements), inline=True)
 
+        await ctx.send(embed=profile_embed)
 
 def setup(bot):
     bot.add_cog(ProfilesCog(bot))
