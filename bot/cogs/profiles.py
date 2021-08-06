@@ -43,7 +43,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
     async def add(self, ctx, user:Optional[User], *, acknowledgement:str):
         user = user or ctx.author
         u = await Users.get(True, user_id=user.id)
-        u.acknowledgements.add(acknowledgement)
+        u.acknowledgements.append(acknowledgement)
         await u.save()
         await ctx.send(f"Added {acknowledgement} to {user}")
 
@@ -51,13 +51,17 @@ class ProfilesCog(commands.Cog, name='Profiles'):
     async def remove(self, ctx, user:Optional[User], *, acknowledgement:str):
         user = user or ctx.author
         u = await Users.get(True, user_id=user.id)
-        try:
-            u.acknowledgements.remove(acknowledgement)
-        except KeyError:
-            await ctx.send(f"{user} does not have {acknowledgement}")
-        else:
-            await u.save()
-            await ctx.send(f"Removed {acknowledgement} from {user}")
+        u.acknowledgements.remove(acknowledgement)
+        await u.save()
+        await ctx.send(f"Removed {acknowledgement} from {user}")
+
+    @acknowledgement.command(aliases=["clr"])
+    async def clear(self, ctx, user:Optional[User]):
+        user = user or ctx.author
+        u = await Users.get(True, user_id=user.id)
+        u.acknowledgements.clear()
+        await u.save()
+        await ctx.send(f"Removed all acknowledgements from {user}")
 
 def setup(bot):
     bot.add_cog(ProfilesCog(bot))
