@@ -1,4 +1,4 @@
-from modules.database.users import User
+from modules.database.users import Users
 import random
 from typing import Optional, Union
 
@@ -118,7 +118,7 @@ class MarketCog(commands.Cog, name='Market'):
         amount = 1
         if isinstance(item, Item):
             player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-            user = await User.get(True, user_id=ctx.author.id)
+            user = await Users.get(True, user_id=ctx.author.id)
             fees = user.fees
             if player.item_count(item.name) >= amount:
                 if not player.trade_banned:
@@ -155,7 +155,7 @@ class MarketCog(commands.Cog, name='Market'):
             item: the name of the item you want to sell, leave empty to sell everything
         """
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-        user = await User.get(True, user_id=ctx.author.id)
+        user = await Users.get(True, user_id=ctx.author.id)
         fees = user.fees
         if isinstance(item, Item):
             amount = player.item_count(item.name)

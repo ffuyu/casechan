@@ -2,12 +2,12 @@ from typing import Optional
 
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
-from discord.ext.commands.core import guild_only
+from discord.ext.commands.core import guild_only, is_owner
 
-from discord import Embed, Colour, Member
+from discord import Embed, Colour, Member, User
 
 from modules.database.players import Player
-from modules.database.users import User
+from modules.database.users import Users
 
 from humanize import naturaldate
 
@@ -25,7 +25,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
         """Displays a user's public profile"""
         user = user or ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
-        user_ = await User.get(True, user_id=user.id)
+        user_ = await Users.get(True, user_id=user.id)
         profile_embed = Embed(description="Registered {} | Voted {} times".format(naturaldate(player.created_at), user_.total_votes), color=Colour.random())
         profile_embed.set_author(name=user)
         profile_embed.set_thumbnail(url=user.avatar_url)
@@ -33,6 +33,31 @@ class ProfilesCog(commands.Cog, name='Profiles'):
             profile_embed.add_field(name="Acknowledgements:", value='\n'.join(user_.acknowledgements), inline=True)
 
         await ctx.send(embed=profile_embed)
+
+    @is_owner()
+    @commands.group(aliases=["ack"], hidden=True)
+    async def acknowledgement(self, ctx):
+        pass
+
+    @acknowledgement.command(aliases=["a"])
+    async def add(self, ctx, user:Optional[User], *, acknowledgement:str):
+        user = user or ctx.author
+        u = await Users.get(True, user_id=user.id)
+        u.acknowledgements.add(acknowledgement)
+        await u.save()
+        await ctx.send(f"Added {acknowledgement} to {user}")
+
+    @acknowledgement.command(aliases=["r"])
+    async def remove(self, ctx, user:Optional[User], *, acknowledgement:str):
+        user = user or ctx.author
+        u = await Users.get(True, user_id=user.id)
+        try:
+            u.acknowledgements.remove(acknowledgement)
+        except KeyError:
+            await ctx.send(f"{user} does not have {acknowledgement}")
+        else:
+            await u.save()
+            await ctx.send(f"Removed {acknowledgement} from {user}")
 
 def setup(bot):
     bot.add_cog(ProfilesCog(bot))
