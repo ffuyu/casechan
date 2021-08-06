@@ -31,7 +31,7 @@ class MarketCog(commands.Cog, name='Market'):
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
     async def buy(self, ctx, amount: Optional[int] = 1, *,
-                  item: Optional[Union[ItemConverter, CaseConverter, KeyConverter]]):
+                  item: Optional[Union[CaseConverter, KeyConverter, ItemConverter]]):
         """
         Buy a skin from the market using your balance
         Args:
@@ -112,7 +112,7 @@ class MarketCog(commands.Cog, name='Market'):
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
-    async def sell(self, ctx, *, item: Optional[Union[KeyConverter, CaseConverter, ItemConverter]]):
+    async def sell(self, ctx, *, item: Optional[Union[CaseConverter, KeyConverter, ItemConverter]]):
         """
         Sell a skin to the market and get balance
         Args:
@@ -149,7 +149,7 @@ class MarketCog(commands.Cog, name='Market'):
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
-    async def sellall(self, ctx, *, item: Optional[Union[ItemConverter, CaseConverter, KeyConverter]]):
+    async def sellall(self, ctx, *, item: Optional[Union[CaseConverter, KeyConverter, ItemConverter]]):
         """
         Bulk sells the specified item or all items if none specified
         Args:
