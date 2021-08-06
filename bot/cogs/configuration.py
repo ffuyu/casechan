@@ -1,5 +1,6 @@
 from discord import Embed
 from discord.ext import commands
+from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import guild_only
 from dpytools import Color
 from dpytools.checks import is_admin
@@ -18,6 +19,8 @@ class ConfigCog(commands.Cog, name='Configuration'):
         print(f'Cog: {self.qualified_name} unloaded')
 
     @is_admin()
+    @guild_only()
+    @commands.cooldown(10, 60, BucketType.user)
     @commands.group(aliases=['set'])
     async def config(self, ctx):
         """Admin restricted, bot configuration commands"""
@@ -37,8 +40,7 @@ class ConfigCog(commands.Cog, name='Configuration'):
             description=f'Done, prefix updated to "`{new_prefix}`"',
             color=Color.LIME
         ))
-
-    @guild_only()
+    
     @commands.command(name='prefix')
     async def prefix_(self, ctx):
         """Displays the current prefix in the server"""

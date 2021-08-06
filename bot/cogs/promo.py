@@ -38,6 +38,7 @@ class PromoCog(commands.Cog, name='Promo Codes'):
     async def promo(self, ctx):
         pass
     
+    @commands.cooldown(10, 60, BucketType.user)
     @commands.is_owner()
     @promo.command()
     async def create(self, ctx, code:Optional[str.upper], funds:Optional[int], max_uses:Optional[int]=1, valid_hours:Optional[float]=None):
