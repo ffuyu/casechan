@@ -61,6 +61,8 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             embed.description = 'You are not allowed to use this command!'
         elif isinstance(error, MaxConcurrencyReached):
             embed.description = f'This command can only be used by {error.number} {str(error.per).split(".")[1]} at same time.'
+        elif isinstance(error, CommandOnCooldown):
+            embed.description = "Slow down! You can run this command in {:.2f}s".format(error.retry_after)
         else:
             embed.description = str(error)
         try:
