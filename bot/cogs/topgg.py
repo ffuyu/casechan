@@ -13,14 +13,14 @@ bot.topgg_webhook.run(5000)
 
 class TopGGCog(commands.Cog):
     @bot.event
-    async def on_autopost_success():
+    async def on_autopost_success(self):
         print(
             f"Posted server count ({bot.topggpy.guild_count}), shard count ({bot.shard_count})"
         )
 
 
     @bot.event
-    async def on_dbl_vote(data):
+    async def on_dbl_vote(self, data):
         """An event that is called whenever someone votes for the bot on Top.gg."""
         if data["type"] == "test":
             return bot.dispatch("dbl_test", data)
@@ -29,7 +29,7 @@ class TopGGCog(commands.Cog):
 
 
     @bot.event
-    async def on_dbl_test(data):
+    async def on_dbl_test(self, data):
         """An event that is called whenever someone tests the webhook system for your bot on Top.gg."""
         print(f"Received a test vote:\n{data}")
 
