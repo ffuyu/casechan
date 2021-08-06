@@ -1,3 +1,4 @@
+from modules.database.users import User
 import random
 from typing import Optional, Union
 
@@ -117,6 +118,8 @@ class MarketCog(commands.Cog, name='Market'):
         amount = 1
         if isinstance(item, Item):
             player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
+            user = await User.get(True, user_id=ctx.author.id)
+            fees = user.fees
             if player.item_count(item.name) >= amount:
                 if not player.trade_banned:
                     if item.price > 0.00:
@@ -124,12 +127,12 @@ class MarketCog(commands.Cog, name='Market'):
                         stats = player.inventory.get(item.name, [])
                         if stats:
                             player.rem_item(item.name, stats[0])
-                            player.balance += ((item.price * amount) * 0.85)
+                            player.balance += ((item.price * amount) * fees)
                             player.stats['transactions']['items_sold'] += 1
                             await player.save()
                             return await ctx.send(
                                 'You have sold **{}x {}** and received **${:.2f}**.'.format(amount, item.name, (
-                                            (item.price * 0.85) * amount)))
+                                            (item.price * fees) * amount)))
 
                         raise ItemMissingStats(
                             'An error occured while selling your item. Perhaps the item is corrupted.')
@@ -152,16 +155,19 @@ class MarketCog(commands.Cog, name='Market'):
             item: the name of the item you want to sell, leave empty to sell everything
         """
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
+        user = await User.get(True, user_id=ctx.author.id)
+        fees = user.fees
         if isinstance(item, Item):
             amount = player.item_count(item.name)
             if amount:
+
                 player.inventory.pop(item.name)
-                player.balance += (item.price * 0.85)
+                player.balance += (item.price * fees)
                 player.stats['transactions']['items_sold'] += amount
                 await player.save()
                 return await ctx.send('You have sold **{}x {}(s)** and received **${:.2f}**.'.format(amount, item.name,
                                                                                                      ((
-                                                                                                                  item.price * 0.85) * amount)))
+                                                                                                                  item.price * fees) * amount)))
             raise MissingItem('You don\'t have any **{}** to sell.'.format(item.name))
 
         if isinstance(item, (Case, Key)):
@@ -179,9 +185,9 @@ class MarketCog(commands.Cog, name='Market'):
                         item_ = await Item.get(False, name=item)
                         if item_:
                             player.inventory.pop(item_.name)
-                            player.balance += ((item_.price * 0.85) * amount)
+                            player.balance += ((item_.price * fees) * amount)
                             player.stats['transactions']['items_sold'] += amount
-                            total_received += ((item_.price * 0.85) * amount)
+                            total_received += ((item_.price * fees) * amount)
 
                 await player.save()
                 return await ctx.send(

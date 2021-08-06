@@ -12,6 +12,7 @@ as follows:
 """
 
 import asyncio
+from modules.database.users import User
 from typing import Optional
 
 from DiscordUtils.Pagination import CustomEmbedPaginator
@@ -132,8 +133,10 @@ class CoreCog(commands.Cog, name='Core'):
                     await inter.reply('Claimed **{}** successfully'.format(item.name), ephemeral=True)
 
                 elif inter.clicked_button.custom_id == 'sell':
-                    player.balance += (item.price * 0.85)
-                    await inter.send('You have sold **{}** and received ${:.2f}'.format(item.name, (item.price * 0.85)),
+                    user = await User.get(True, user_id=ctx.author.id)
+                    fees = user.fees
+                    player.balance += (item.price * fees)
+                    await inter.send('You have sold **{}** and received ${:.2f}'.format(item.name, (item.price * fees)),
                                      ephemeral=True)
             finally:
                 await player.save()

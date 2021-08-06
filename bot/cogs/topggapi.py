@@ -1,8 +1,11 @@
+from datetime import datetime
 from discord.ext import tasks, commands
 
 import topgg, os
 
 from ..bot import bot
+
+from modules.database.users import User
 
 TOPGG_API = os.environ.get("TOPGG_API")
 WEBHOOK = os.environ.get("WEBHOOK")
@@ -28,6 +31,12 @@ class TopGGCog(commands.Cog):
 
         print(f"Received a vote:\n{data}")
 
+        voter = await User.get(True, user_id=int(data.user))
+
+        voter.total_votes += 1
+        voter.last_voted = datetime.utcnow()
+        
+        await voter.save()
 
     @bot.event
     async def on_dbl_test(data):

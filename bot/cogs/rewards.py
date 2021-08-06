@@ -2,11 +2,14 @@ import datetime
 import random
 
 from discord import Embed
+from discord.colour import Colour
 
 from discord.ext import commands
 from discord.ext.commands.context import Context
 from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import max_concurrency
+from dislash.interactions.message_components import ActionRow, Button, ButtonStyle
+from dislash.interactions.slash_interaction import Interaction
 
 from humanize import naturaldelta
 
@@ -133,6 +136,37 @@ class RewardsCog(commands.Cog, name='Rewards'):
         remaining = player.weekly + datetime.timedelta(weeks=1) - datetime.datetime.utcnow()
 
         raise WeeklyError(f'You have to wait {naturaldelta(remaining)} to claim your next weekly rewards.')
+
+    @commands.command(aliases=["upvote"])
+    async def vote(self, ctx):
+        """Vote for casechan and get perks"""
+        embed=Embed(
+            description = "Vote for **casechan** and reduce your selling fees down to 5% for 12 hours!",
+            color = Colour.random()
+        )
+        rows = ActionRow(
+            Button(
+                style=ButtonStyle.link,
+                url="https://top.gg/bot/864925623826120714/vote",
+                label="Vote now",
+                custom_id="vote"
+            )
+        )
+
+        message = await ctx.send(embed=embed, components=[rows])
+
+        def check(inter):
+            return inter.id == message.id
+
+        try:
+            inter = await message.wait_for_button_click(check=check, timeout=60)
+            inter: Interaction
+        except:
+            await ctx.message.delete()
+        else:
+            if inter.clicked_button.custom_id == 'vote':
+                await inter.reply('Your perks will be granted as soon as you vote, thank you for voting! :heart:', ephemeral=True)
+
 
 
 def setup(bot):
