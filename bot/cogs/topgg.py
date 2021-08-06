@@ -8,7 +8,7 @@ TOPGG_API = os.environ.get("TOPGG_API")
 
 bot.topggpy = topgg.DBLClient(bot, TOPGG_API, autopost=True, post_shard_count=True)
 
-bot.topgg_webhook = topgg.WebhookManager(bot).dbl_webhook("159.203.105.187", "password")
+bot.topgg_webhook = topgg.WebhookManager(bot).dbl_webhook("/dblwebhook", "password")
 bot.topgg_webhook.run(5000)
 
 class TopGGCog(commands.Cog):
