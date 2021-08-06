@@ -69,11 +69,17 @@ class MarketCog(commands.Cog, name='Market'):
         # These instances are intentionally separated due to case prices will have some complex stuff going in them separately.
 
         if isinstance(item, Case):
+
+            item_ = await Item.get(name=item.name)
+            item.price = item_.price
+
             if not player.trade_banned:
                 if player.balance >= (item.price * amount):
                     player.mod_case(item.name, amount)
                     player.balance -= (item.price * amount)
                     await player.save()
+
+                    item.price = await Item.get(name=item.name)
 
                     return await ctx.send(
                         'You have purchased **{}x {}** for **${}**'.format(
@@ -83,11 +89,16 @@ class MarketCog(commands.Cog, name='Market'):
             raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
 
         if isinstance(item, Key):
+
+            item_ = await Item.get(name=item.name)
+            item.price = item_.price
+
             if not player.trade_banned:
                 if player.balance >= (item.price * amount):
                     player.mod_key(item.name, amount)
                     player.balance -= (item.price * amount)
                     await player.save()
+
 
                     return await ctx.send(
                         'You have purchased **{}x {}** for **${}**'.format(
