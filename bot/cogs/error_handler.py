@@ -4,7 +4,7 @@ from modules.errors import (
     ItemNotFound, MissingCase, MissingItem, MissingKey, MissingSpace,
      NotMarketable, TradeNotAllowed, WeeklyError
 )
-
+from bson.errors import InvalidDocument
 from discord import Forbidden
 from discord.ext import commands
 from discord.ext.commands import (
@@ -36,7 +36,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             MissingItem, NotMarketable, ItemNotFound, DailyError, HourlyError, WeeklyError,
             MissingSpace, MissingCase, MissingKey, InsufficientBalance, NotOwner, TradeNotAllowed,
             ExceededBuyLimit, CodeExpired, CodeClaimed, CodeInvalid, AlreadyClaimed, ExistingCode,
-            InvalidBet, BetTooLow, Forbidden
+            InvalidBet, BetTooLow, Forbidden, InvalidDocument
             }
         embed = Embed(
             title="Command Error:",
@@ -63,6 +63,8 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             embed.description = f'This command can only be used by {error.number} {str(error.per).split(".")[1]} at same time.'
         elif isinstance(error, CommandOnCooldown):
             embed.description = "Slow down! You can run this command in {:.2f}s".format(error.retry_after)
+        elif isinstance(error, InvalidDocument):
+            embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
         else:
             embed.description = str(error)
         try:
