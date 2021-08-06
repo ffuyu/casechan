@@ -20,7 +20,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
         print(f'Cog: {self.qualified_name} unloaded')
 
     @guild_only()
-    @commands.command()
+    @commands.command(hidden=True)
     async def profile(self, ctx, user:Optional[User]):
         """Displays a user's public profile"""
         user = user or ctx.author
