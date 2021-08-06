@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from concurrent.futures import ProcessPoolExecutor
+
 from datetime import datetime
 from functools import partial
 
@@ -15,9 +15,7 @@ __all__ = (
 
 log = logging.getLogger(__name__)
 
-_relevant_rarities = ['Contraband', 'Covert', 'Classified', 'Restricted',
-                      'Mil-Spec Grade', 'Consumer Grade', 'Industrial Grade',
-                      'Extraordinary']
+_relevant_types = ['Weapon', 'Knife', 'Container']
 
 _relevant_keys = ['name', 'icon_url', 'rarity']
 _price_periods = ['7_days', '24_hours', '30_days']
@@ -61,7 +59,7 @@ async def update_item_database():
         raw_items = list(res['items_list'].values())
         with Timer() as t:
             for raw_item in raw_items:
-                if raw_item.get('rarity') not in _relevant_rarities:
+                if raw_item.get('type') not in _relevant_types:
                     continue
                 # debug
                 item = {k: v for k, v in raw_item.items() if k in _relevant_keys}

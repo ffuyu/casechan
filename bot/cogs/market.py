@@ -70,30 +70,28 @@ class MarketCog(commands.Cog, name='Market'):
 
         if isinstance(item, Case):
             if not player.trade_banned:
-                if player.balance >= (0.00 * amount):
+                if player.balance >= (item.price * amount):
                     player.mod_case(item.name, amount)
-                    player.balance -= (0.00 * amount)
+                    player.balance -= (item.price * amount)
                     await player.save()
 
                     return await ctx.send(
-                        'You have purchased **{}x {}** successfully. You have received this item for **free**'.format(
-                            amount, item.name))
-                    # return await ctx.send('You have purchased **{}x {}** successfully. You have been charged **${:.2f}**.'.format(amount, item.name, 0.0 * amount))
+                        'You have purchased **{}x {}** for **${}**'.format(
+                            amount, item.name, item.price))
 
                 raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
             raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
 
         if isinstance(item, Key):
             if not player.trade_banned:
-                if player.balance >= (0.00 * amount):
+                if player.balance >= (item.price * amount):
                     player.mod_key(item.name, amount)
-                    player.balance -= (0.00 * amount)
+                    player.balance -= (item.price * amount)
                     await player.save()
 
                     return await ctx.send(
-                        'You have purchased **{}x {}** successfully. You have received this item for **free**'.format(
-                            amount, item.name))
-                    # return await ctx.send('You have purchased **{}x {}** successfully. You have been charged **${:.2f}**.'.format(amount, item.name, 0.0 * amount))
+                        'You have purchased **{}x {}** for **${}**'.format(
+                            amount, item.name, item.price))
 
                 raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
             raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')

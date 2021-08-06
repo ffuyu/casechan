@@ -31,5 +31,4 @@ async def load_cogs():
         if filename.endswith('.py') and not filename.startswith('_'):
             bot.load_extension(('bot.cogs.' + filename[:-3]))
 
-
 bot.loop.create_task(load_cogs())
