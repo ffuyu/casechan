@@ -12,7 +12,9 @@ as follows:
 """
 
 import asyncio
-from modules.database.users import Users
+
+from discord.abc import User
+from modules.database.users import UserData
 from typing import Optional
 
 from DiscordUtils.Pagination import CustomEmbedPaginator
@@ -133,7 +135,7 @@ class CoreCog(commands.Cog, name='Core'):
                     await inter.reply('Claimed **{}** successfully'.format(item.name), ephemeral=True)
 
                 elif inter.clicked_button.custom_id == 'sell':
-                    user = await Users.get(True, user_id=ctx.author.id)
+                    user = await UserData.get(True, user_id=ctx.author.id)
                     fees = user.fees
                     player.balance += (item.price * fees)
                     await inter.send('You have sold **{}** and received ${:.2f}'.format(item.name, (item.price * fees)),
@@ -252,7 +254,8 @@ class CoreCog(commands.Cog, name='Core'):
         for guild in all_guilds:
             users = await Player.find(guild_id=guild.guild_id)
             guild_object = self.bot.get_guild(guild.guild_id)
-            guilds_dictionary[guild_object.name] = sum([await x.inv_total() for x in users])
+            if guild_object:
+                guilds_dictionary[guild_object.name] = sum([await x.inv_total() for x in users])
 
         leaderboard = dict(sorted(guilds_dictionary.items(), key=lambda item: item[1], reverse=True))
 

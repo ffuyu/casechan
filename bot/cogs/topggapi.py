@@ -31,7 +31,7 @@ class TopGGCog(commands.Cog):
 
         print(f"Received a vote:\n{data}")
 
-        voter = await Users.get(True, user_id=int(data.user))
+        voter = await Users.get(True, user_id=int(data.get('user', '0')))
 
         voter.total_votes += 1
         voter.last_voted = datetime.utcnow()

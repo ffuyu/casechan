@@ -7,10 +7,10 @@ from datetime import datetime, timedelta
 from typing import Optional, List
 
 all = {
-    'Users'
+    'UserData'
 }
 
-class Users(ModelPlus, Model):
+class UserData(ModelPlus, Model):
     user_id: int
     last_voted: Optional[datetime] = None
     total_votes: int = 0
@@ -40,9 +40,5 @@ class Users(ModelPlus, Model):
         return False
 
     @property
-    def is_valid(self):
-        return datetime.utcnow() <= self.last_voted + timedelta(hours=12) if self.last_voted else False
-
-    @property
     def fees(self):
-        return 0.95 if self.is_valid else 0.85  # todo: change "is_valid" to "is_boosted"
+        return 0.95 if self.is_boosted else 0.85
