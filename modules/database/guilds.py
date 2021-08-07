@@ -26,11 +26,10 @@ class GuildConfig(ModelPlus, Model):
     async def _refresh_cache(cls):
         global _guilds_cache
         _guilds_cache = {g.guild_id: g for g in await engine.find(cls)}
-        log.info(f'Guild configuration cache updated. {len(_guilds_cache)} guilds in the cache.')
+        log.info(f'Guild config refreshed')
 
     @classmethod
     async def _cache(cls) -> dict:
-        global _guilds_cache
         if not _guilds_cache:
             await cls._refresh_cache()
         return _guilds_cache
@@ -46,8 +45,7 @@ class GuildConfig(ModelPlus, Model):
         Args:
             guild_id: the discord's snowflake id for that guild
         """
-        global _guilds_cache
-        if guild_id not in _guilds_cache:
+        if not _guilds_cache:
             await cls._refresh_cache()
         guild_config = _guilds_cache.setdefault(guild_id, cls(guild_id=guild_id))
         return guild_config
@@ -56,7 +54,6 @@ class GuildConfig(ModelPlus, Model):
         """
         Saves this instance both to the cache and to the database
         """
-        cache = await self._cache()
-        cache[self.guild_id] = self
+        _guilds_cache[self.guild_id] = self
         await self.engine.save(self)
         log.info(f'Configuration for guild with id {self.guild_id} persisted to cache and database')
