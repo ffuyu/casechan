@@ -21,9 +21,28 @@ class Users(ModelPlus, Model):
         collection = 'users'
 
     @property
+    def vote_expiration(self) -> Optional[datetime]:
+        """The optional date on when this user's boost will expire
+        Returns:
+            Optional[datetime] -> datetime when voting boost will expire
+                None if no last_voted
+        """
+        if self.last_voted:
+            return self.last_voted + timedelta(hours=12) 
+    
+    @property
+    def is_boosted(self) -> bool:
+        """Boolean that tells if this user is currently boosted
+        A boosted user has voted in top.gg at least 12 hours ago
+        """
+        if self.last_voted:
+            return datetime.utcnow() <= self.vote_expiration
+        return False
+
+    @property
     def is_valid(self):
         return datetime.utcnow() <= self.last_voted + timedelta(hours=12) if self.last_voted else False
 
     @property
     def fees(self):
-        return 0.95 if self.is_valid else 0.85
+        return 0.95 if self.is_valid else 0.85  # todo: change "is_valid" to "is_boosted"

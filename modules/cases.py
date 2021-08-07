@@ -60,7 +60,7 @@ def _generate_item(container_name: str, data: dict):
         float_ = random.uniform(a, b)
         item_name += f' ({exterior})'
 
-    if not any([k in item_name for k in ['Gloves', 'Wraps']]):
+    if all(k not in item_name for k in ['Gloves', 'Wraps']):
         # Generate StatTrak™ if not a glove item
         # 0 = Item is not StatTrak™
         # 1 = Item is StatTrak™
