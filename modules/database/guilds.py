@@ -46,6 +46,7 @@ class GuildConfig(ModelPlus, Model):
         Args:
             guild_id: the discord's snowflake id for that guild
         """
+        global _guilds_cache
         if guild_id not in _guilds_cache:
             await cls._refresh_cache()
         guild_config = _guilds_cache.setdefault(guild_id, cls(guild_id=guild_id))

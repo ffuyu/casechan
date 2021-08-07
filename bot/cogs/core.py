@@ -12,10 +12,6 @@ as follows:
 """
 
 import asyncio
-
-from discord.abc import User
-from discord.client import Client
-from modules.database.users import UserData
 from typing import Optional
 
 from DiscordUtils.Pagination import CustomEmbedPaginator
@@ -31,6 +27,7 @@ from dpytools.embeds import paginate_to_embeds
 
 from modules.cases import Case
 from modules.database import Player, Item, engine, GuildConfig
+from modules.database.users import UserData
 from modules.errors import MissingCase, MissingKey, MissingSpace
 from modules.utils import ItemConverter
 from modules.utils.case_converter import CaseConverter
@@ -160,7 +157,7 @@ class CoreCog(commands.Cog, name='Core'):
             if player.cases:
                 pages = paginate_to_embeds(description='\n'.join(
                     f'**{v}x** {k[:20] + "..." if len(k) > 22 else k}' for k, v in player.cases.items()),
-                                           title='{}\'s Cases'.format(user), max_size=130, color=Colour.random())
+                    title='{}\'s Cases'.format(user), max_size=130, color=Colour.random())
 
                 paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
                 if len(pages) > 1:
@@ -175,7 +172,7 @@ class CoreCog(commands.Cog, name='Core'):
             if player.keys:
                 pages = paginate_to_embeds(description='\n'.join(
                     f'**{v}x** {k[:20] + "..." if len(k) > 22 else k}' for k, v in player.keys.items()),
-                                           title='{}\'s Keys'.format(user), max_size=150, color=Colour.random())
+                    title='{}\'s Keys'.format(user), max_size=150, color=Colour.random())
 
                 paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
                 if len(pages) > 1:
