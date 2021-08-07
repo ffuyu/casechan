@@ -251,6 +251,7 @@ class CoreCog(commands.Cog, name='Core'):
     async def top(self, ctx):
         """Lists the top 10 most rich servers based on inventory worth"""
         guilds_dictionary = {}
+        await GuildConfig.get(True, guild_id=ctx.guild.id)
         all_guilds = await engine.find(GuildConfig)
         for guild in all_guilds:
             users = await Player.find(guild_id=guild.guild_id)
