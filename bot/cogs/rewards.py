@@ -148,8 +148,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
             Button(
                 style=ButtonStyle.link,
                 url="https://top.gg/bot/864925623826120714/vote",
-                label="Vote now",
-                custom_id="vote"
+                label="Vote now"
             )
         )
 
