@@ -119,7 +119,7 @@ class Player(ModelPlus, Model):
         Modifies the amount of keys in the player's inventory.
         Same as self.mod_case but, for keys
         Args:
-            key_name: The name of the key
+            case_name: The name of the case
             n: amount to modify the inventory with
         Returns:
             None
