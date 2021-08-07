@@ -14,6 +14,7 @@ as follows:
 import asyncio
 
 from discord.abc import User
+from discord.client import Client
 from modules.database.users import UserData
 from typing import Optional
 
@@ -253,8 +254,8 @@ class CoreCog(commands.Cog, name='Core'):
         all_guilds = await engine.find(GuildConfig)
         for guild in all_guilds:
             users = await Player.find(guild_id=guild.guild_id)
-            guild_object = self.bot.get_guild(guild.guild_id)
-            if guild_object:
+            if guild.guild_id in [x.id for x in self.bot.guilds]:
+                guild_object = self.bot.get_guild(guild.guild_id)
                 guilds_dictionary[guild_object.name] = sum([await x.inv_total() for x in users])
 
         leaderboard = dict(sorted(guilds_dictionary.items(), key=lambda item: item[1], reverse=True))
