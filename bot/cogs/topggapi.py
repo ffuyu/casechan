@@ -5,7 +5,7 @@ import topgg, os
 
 from ..bot import bot
 
-from modules.database.users import Users
+from modules.database.users import UserData
 
 TOPGG_API = os.environ.get("TOPGG_API")
 WEBHOOK = os.environ.get("WEBHOOK")
@@ -31,7 +31,7 @@ class TopGGCog(commands.Cog):
 
         print(f"Received a vote:\n{data}")
 
-        voter = await Users.get(True, user_id=int(data.get('user', '0')))
+        voter = await UserData.get(True, user_id=int(data.get('user', '0')))
 
         voter.total_votes += 1
         voter.last_voted = datetime.utcnow()
