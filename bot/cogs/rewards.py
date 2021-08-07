@@ -53,9 +53,10 @@ class RewardsCog(commands.Cog, name='Rewards'):
                 to_give = random.randint(1, remaining_cases)
                 player.mod_case(case.name, to_give)
                 player.mod_key(case.key, to_give)
+                await player.save()
                 added.append(case.name)
                 remaining_cases -= to_give
-            await player.save()
+            
 
             return await ctx.send(f'Claimed **{amount}x** cases from hourly rewards.')
 
@@ -90,9 +91,10 @@ class RewardsCog(commands.Cog, name='Rewards'):
                 to_give = random.randint(1, remaining_cases)
                 player.mod_case(case.name, to_give)
                 player.mod_key(case.key, to_give)
+                await player.save()
                 added.append(case.name)
                 remaining_cases -= to_give
-            await player.save()
+            
 
             return await ctx.send(f'Claimed **{amount}x** cases from daily rewards.')
 
@@ -127,9 +129,10 @@ class RewardsCog(commands.Cog, name='Rewards'):
                 to_give = random.randint(1, remaining_cases)
                 player.mod_case(case.name, to_give)
                 player.mod_key(case.key, to_give)
+                await player.save()
                 added.append(case.name)
                 remaining_cases -= to_give
-            await player.save()
+            
 
             return await ctx.send(f'Claimed **{amount}x** cases from weekly rewards.')
 
