@@ -5,6 +5,7 @@ from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import guild_only, is_owner
 
 from discord import Embed, Colour, Member, User
+from humanize.time import naturaltime
 
 from modules.database.players import Player
 from modules.database.users import UserData
@@ -26,7 +27,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
         user = user or ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
         userdata = await UserData.get(True, user_id=user.id)
-        profile_embed = Embed(description="Registered {} | Voted {} times\nSelling fees: {}".format(naturaldate(player.created_at), userdata.total_votes, '5%' if userdata.is_boosted else '15% | [Vote now](https://top.gg/bot/864925623826120714/vote) for 5%'), color=Colour.random())
+        profile_embed = Embed(description="Registered {} | Voted {} times\nSelling fees: {}".format(naturaldate(player.created_at), userdata.total_votes, f'**5%** | Valid until {naturaltime(userdata.vote_expiration)}' if userdata.is_boosted else '15% | [Vote now](https://top.gg/bot/864925623826120714/vote) for 5%'), color=Colour.random())
         profile_embed.set_author(name=user)
         profile_embed.set_thumbnail(url=user.avatar_url)
         if userdata.acknowledgements:
