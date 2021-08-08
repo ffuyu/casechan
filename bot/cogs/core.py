@@ -248,13 +248,9 @@ class CoreCog(commands.Cog, name='Core'):
     async def top(self, ctx):
         """Lists the top 10 most rich servers based on inventory worth"""
         guilds_dictionary = {}
-        await GuildConfig.get(True, guild_id=ctx.guild.id)
-        all_guilds = await engine.find(GuildConfig)
-        for guild in all_guilds:
-            users = await Player.find(guild_id=guild.guild_id)
-            if guild.guild_id in [x.id for x in self.bot.guilds]:
-                guild_object = self.bot.get_guild(guild.guild_id)
-                guilds_dictionary[guild_object.name] = sum([await x.inv_total() for x in users])
+        for guild in self.bot.guilds:
+            users = await Player.find(guild_id=guild.id)
+            guilds_dictionary[guild.name] = sum([await x.inv_total() for x in users])
 
         leaderboard = dict(sorted(guilds_dictionary.items(), key=lambda item: item[1], reverse=True))
 
