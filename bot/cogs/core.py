@@ -239,7 +239,7 @@ class CoreCog(commands.Cog, name='Core'):
                     "**{}**: ${:.2f}".format(list(leaderboard.keys())[x], leaderboard[list(leaderboard.keys())[x]]) for
                     x in range(10 if len(list(leaderboard.keys())) >= 10 else len(list(leaderboard.keys())))),
                 color=Colour.random()
-            ).set_footer(text="Based on inventory worth | Total server inventory worth: ${:.2f}\nUse the command 'top' to view the world leaderboard!".format(
+            ).set_footer(text="Based on inventory worth | Total server inventory worth: ${:.2f}\nUse the command 'top' to view the world leaderboard.".format(
                 sum([x for x in users_dictionary.values()]))).set_author(name=ctx.guild, icon_url=ctx.guild.icon_url)
         )
 
