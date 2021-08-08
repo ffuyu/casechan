@@ -181,7 +181,7 @@ class CoreCog(commands.Cog, name='Core'):
 
                 return await paginator.run(pages)
 
-        return await ctx.send(f'**{user}** has no cases to display')  # FIXME (replace with an embed)
+        return await ctx.send(f'**{user}** has no {"cases" if ctx.invoked_with == "cases" else "keys"} to display')  # FIXME (replace with an embed)
 
     @commands.cooldown(10, 30, BucketType.member)
     @commands.command(aliases=['inv'])
