@@ -4,7 +4,9 @@ from discord.ext.commands.context import Context
 from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import max_concurrency
 from dpytools import Color
+from dpytools.checks import only_these_users
 
+from modules.constants import owners_ids
 from modules.utils import update_item_database
 
 
@@ -17,6 +19,7 @@ class OwnerCog(commands.Cog, name='owner'):
         print(f'Cog: {self.qualified_name} unloaded')
 
     @commands.is_owner()
+    @only_these_users(*owners_ids)
     @commands.group(hidden=True)
     async def owner(self, ctx: Context):
         pass
