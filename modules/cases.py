@@ -20,7 +20,7 @@ _require_no_key = {
 
 with open('etc/cases.json', encoding='utf-8') as f:
     all_cases = json.loads(f.read())
-    all_keys = ['{} Key'.format(x) for x in all_cases if x not in _require_no_key]
+    all_keys = [f'{case} Key' for case in all_cases if case not in _require_no_key]
 
 with open("etc/collections.json", "r", encoding='utf-8') as f:
     all_collections = json.loads(f.read())
@@ -35,6 +35,7 @@ _rarities = {  # grade weight, st weight 1 & 2
     "Covert": (0.63939, 99.93606, 0.06394),
     "Exceedingly Rare Item": (0.25575, 99.97442, 0.02558),
 }
+
 
 def _generate_item(container_name: str, data: dict):
     rarities = _rarities
@@ -113,6 +114,22 @@ async def open_case(container_name, type_='case'):
     return item, float_, seed
 
 
+def get_case_vars(name: str) -> tuple:
+    """Returns the base attributes of a case (new json)
+    This is just to show how cases will now be constructed"""
+
+    with open('etc/new_cases.json', encoding='utf-8') as f:
+        # todo: remove cases.json and rename new_cases to cases.json
+        new_cases = json.loads(f.read())
+        new_keys = [f'{case} Key' for case in new_cases if case not in _require_no_key]
+    case = new_cases[name]
+    name = case['name']
+    asset = case_assets['name']
+    items = case['items']
+    key = f'{name} Key' if name not in _require_no_key else None
+    return name, asset, items, key
+
+
 class Case:
     def __init__(self, name: str):
         if name not in all_cases:
@@ -120,7 +137,7 @@ class Case:
         self.name = name
         self.asset = case_assets[name]
         self.items = all_cases[name]
-        self.key = '{} Key'.format(name) if name not in _require_no_key else None
+        self.key = f'{name} Key' if name not in _require_no_key else None
 
         self.price = 0.00
 
@@ -132,6 +149,7 @@ class Case:
 
     async def open(self):
         return await open_case(container_name=self.name)
+
 
 class Key:
     def __init__(self, name: str):
@@ -145,6 +163,8 @@ class Key:
     def __str__(self):
         return self.name
 
+    def __repr__(self):
+        return f'Key(name={self.name})'
+
     async def use(self):
         return await open_case(container_name=self.case.name)
-

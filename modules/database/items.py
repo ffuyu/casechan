@@ -1,3 +1,4 @@
+import random
 from typing import Optional, List
 
 from dpytools import Embed
@@ -5,8 +6,6 @@ from odmantic import Model
 
 from .engine import engine
 from .models import ModelPlus
-
-import random 
 
 __all__ = (
     'Item',
@@ -26,6 +25,7 @@ rarity = {
 
 _item_cache = []
 
+
 def generate_stats(exterior: str):
     ranges = {
         "Battle-Scarred": (0.44, 0.99),
@@ -34,10 +34,11 @@ def generate_stats(exterior: str):
         "Minimal Wear": (0.07, 0.149),
         "Factory New": (0.00, 0.069)
     }
-    range = ranges.get(exterior)
-    float_ = random.SystemRandom().uniform(a=range[0], b=range[1])
+    range_ = ranges.get(exterior)
+    float_ = random.SystemRandom().uniform(a=range_[0], b=range_[1])
     seed = random.SystemRandom().randint(1, 1000)
     return float_, seed
+
 
 class Item(ModelPlus, Model):
     name: str
@@ -67,7 +68,7 @@ class Item(ModelPlus, Model):
             r = 'Exceedingly Rare Item'
         else:
             r = self.rarity
-        
+
         return rarity[r][1]
 
     @property
@@ -81,13 +82,13 @@ class Item(ModelPlus, Model):
 
     def to_embed(self, float_=None, seed=None, minimal=False):
         e = Embed(
-            description = f"**{self.name}**",
+            description=f"**{self.name}**",
             color=self.color
         ).add_field(name='Price', value=f'${self.price:.2f}', inline=False)
 
         if self.asset_url:
             e.set_image(url=self.asset_url) if not minimal else e.set_thumbnail(url=self.asset_url)
-        
+
         if float_:
             e.add_field(name='Float', value=float_, inline=False)
         if seed:
@@ -113,6 +114,7 @@ class Item(ModelPlus, Model):
     def __radd__(self, other: int):
         return self.price + other
 
-def sort_items(items:List[Item], highest_first:bool=True) -> list:
+
+def sort_items(items: List[Item], highest_first: bool = True) -> list:
     sorted_list = sorted(items, key=lambda item: item.price, reverse=highest_first)
     return sorted_list

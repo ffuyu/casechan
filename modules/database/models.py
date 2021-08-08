@@ -35,6 +35,7 @@ class ModelPlus(Model):
         """
         q = cls.query(**kwargs)
         doc = await engine.find_one(cls, q)
+
         return doc or (cls(**kwargs) if create else None)
 
     @classmethod
