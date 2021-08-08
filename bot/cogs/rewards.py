@@ -23,9 +23,8 @@ async def _reward_cases(player, to_give):
         n = random.randint(0, to_give - given)
         given += n
         player.mod_case(case.name, n)
-        if not case.key:
-            continue
-        player.mod_case(case.name, n)
+        if case.key:
+            player.mod_case(case.name, n)
         
     await player.save()
 
