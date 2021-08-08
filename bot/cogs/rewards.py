@@ -137,7 +137,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
         except:
             await ctx.message.delete()
         else:
-            if inter.clicked_button.custom_id == 'vote':
+            if inter.clicked_button:
                 await inter.reply('Your perks will be granted as soon as you vote, thank you for voting! :heart:',
                                   ephemeral=True)
 
