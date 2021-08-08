@@ -6,7 +6,7 @@ from dpytools import Embed
 from humanize import naturaldelta
 
 
-class Cog(commands.Cog, name='misc'):
+class Cog(commands.Cog, name='Misc'):
     def __init__(self, bot):
         self.bot = bot
         print(f'Cog: {self.qualified_name} loaded')

@@ -24,6 +24,7 @@ async def _reward_cases(player, to_give):
         player.mod_case(case.name, n)
         player.mod_key(case.key, n)
         given += n
+    print(Player.cases, Player.keys)
     await player.save()
 
 
