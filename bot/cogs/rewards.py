@@ -126,20 +126,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
             )
         )
 
-        message = await ctx.send(embed=embed, components=[rows])
-
-        def check(inter):
-            return inter.id == message.id
-
-        try:
-            inter = await message.wait_for_button_click(check=check, timeout=60)
-            inter: Interaction
-        except:
-            await ctx.message.delete()
-        else:
-            if inter.clicked_button:
-                await inter.reply('Your perks will be granted as soon as you vote, thank you for voting! :heart:',
-                                  ephemeral=True)
+        await ctx.send(embed=embed, components=[rows])
 
 
 def setup(bot):
