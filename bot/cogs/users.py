@@ -1,3 +1,4 @@
+from dpytools.checks import only_these_users
 from modules.errors import CaseNotFound
 from modules.utils.case_converter import CaseConverter
 from typing import Optional
@@ -7,6 +8,7 @@ from discord.ext.commands.context import Context
 from modules.cases import Case
 from discord.ext.commands.core import max_concurrency
 from discord import Guild, User
+from modules.constants import owners_ids
 
 async def _alter_case(ctx: Context,
                       amount: int,
@@ -33,6 +35,7 @@ class UsersCog(commands.Cog, name='Users'):
         print(f'Cog: {self.qualified_name} unloaded')
 
     @commands.is_owner()
+    @only_these_users(*owners_ids)
     @commands.group(hidden=True)
     async def user(self, ctx:Context):
         pass
