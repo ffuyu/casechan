@@ -42,7 +42,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
 
     @acknowledgement.command(aliases=["a"])
     async def add(self, ctx, user:Optional[User], *, acknowledgement:str):
-        user = user or ctx.author
+        user = user if user and not user.bot else ctx.author
         u = await UserData.get(True, user_id=user.id)
         u.acknowledgements.append(acknowledgement)
         await u.save()
@@ -50,7 +50,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
 
     @acknowledgement.command(aliases=["r"])
     async def remove(self, ctx, user:Optional[User], *, acknowledgement:str):
-        user = user or ctx.author
+        user = user if user and not user.bot else ctx.author
         u = await UserData.get(True, user_id=user.id)
         u.acknowledgements.remove(acknowledgement)
         await u.save()
@@ -58,7 +58,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
 
     @acknowledgement.command(aliases=["clr"])
     async def clear(self, ctx, user:Optional[User]):
-        user = user or ctx.author
+        user = user if user and not user.bot else ctx.author
         u = await UserData.get(True, user_id=user.id)
         u.acknowledgements.clear()
         await u.save()

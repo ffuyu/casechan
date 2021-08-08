@@ -150,7 +150,7 @@ class CoreCog(commands.Cog, name='Core'):
     @commands.command(aliases=['keys'])
     async def cases(self, ctx: Context, user: Optional[Member]):
         """List the cases you currently have."""
-        user = user or ctx.author
+        user = user if user and not user.bot else ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
 
         if ctx.invoked_with == 'cases':
@@ -187,7 +187,7 @@ class CoreCog(commands.Cog, name='Core'):
     @commands.command(aliases=['inv'])
     async def inventory(self, ctx: Context, user: Optional[Member]):
         """View your inventory"""
-        user = user or ctx.author
+        user = user if user and not user.bot else ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
         if player.inventory:
             pages = paginate_to_embeds(description='\n'.join(['**{}x** {}'.format(len(player.inventory.get(item)), item)
@@ -206,7 +206,7 @@ class CoreCog(commands.Cog, name='Core'):
     @commands.command(aliases=["bal", "b", "networth", "nw"])
     async def balance(self, ctx, user: Optional[Member]):
         """Displays your wallet, inventory and net worth all at once"""
-        user = user or ctx.author
+        user = user if user and not user.bot else ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
         inv_total = await player.inv_total()
         await ctx.send(
