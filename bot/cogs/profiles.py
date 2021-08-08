@@ -24,7 +24,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
     @commands.command(hidden=True)
     async def profile(self, ctx, user:Optional[User]):
         """Displays a user's public profile"""
-        user = user and not user.bot or ctx.author
+        user = user if user and not user.bot else ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
         userdata = await UserData.get(True, user_id=user.id)
         profile_embed = Embed(description="Registered {} | Voted {} times\nSelling fees: {}".format(naturaldate(player.created_at), userdata.total_votes, f'**5%** | Valid for {naturaltime(userdata.vote_expiration)}' if userdata.is_boosted else '15% | [Vote now](https://top.gg/bot/864925623826120714/vote) for 5%'), color=Colour.random())
