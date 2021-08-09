@@ -146,7 +146,7 @@ class CoreCog(commands.Cog, name='Core'):
                 return inter.author == ctx.author
 
             try:
-                inter = await message.wait_for_button_click(check=check, timeout=15)
+                inter = await message.wait_for_button_click(check=check, timeout=30)
                 inter: Interaction
             except:
                 if amount != 1:
