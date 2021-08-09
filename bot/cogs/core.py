@@ -71,9 +71,9 @@ class CoreCog(commands.Cog, name='Core'):
             if inv_size >= 1000 - amount:
                 raise MissingSpace('You can\'t open more cases, your inventory is full!')
             if amount > player.cases.get(container.name, 0):
-                raise MissingCase(f'You are missing {amount} {container}.')
+                raise MissingCase(f'You are missing {amount-player.cases.get(container.name, 0)} {container}.')
             if container.key and amount > player.keys.get(container.key, 0):
-                raise MissingKey(f'You are missing {amount} {container.key}.')
+                raise MissingKey(f'You are missing {amount-player.keys.get(container.key, 0)} {container.key}.')
  
             # Opening animation
             opening_embed = Embed(
