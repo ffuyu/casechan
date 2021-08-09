@@ -158,7 +158,7 @@ class CoreCog(commands.Cog, name='Core'):
             else:
                 if inter.clicked_button.custom_id == 'claim':
                     if amount != 1:
-                        for item in item_objects:
+                        for item in items:
                             i, *s = item
                             player.add_item(i.name, s)
                         await inter.reply('Claimed **{}** items successfully'.format(len(item_objects)), ephemeral=True)
