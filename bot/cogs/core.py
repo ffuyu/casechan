@@ -72,7 +72,7 @@ class CoreCog(commands.Cog, name='Core'):
                 raise MissingSpace('You can\'t open more cases, your inventory is full!')
             if amount > player.cases.get(container.name, 0):
                 raise MissingCase(f'You are missing {amount} {container}.')
-            if amount > player.keys.get(container.key, 0):
+            if container.key and amount > player.keys.get(container.key, 0):
                 raise MissingKey(f'You are missing {amount} {container.key}.')
  
             # Opening animation
@@ -193,7 +193,7 @@ class CoreCog(commands.Cog, name='Core'):
         user = user if user and not user.bot else ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
 
-        if ctx.invoked_with == 'cases':
+        if ctx.invoked_with == 'cases': 
             if player.cases:
                 pages = paginate_to_embeds(description='\n'.join(
                     f'**{v}x** {k[:20] + "..." if len(k) > 22 else k}' for k, v in player.cases.items()),
