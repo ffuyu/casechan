@@ -78,7 +78,7 @@ class MarketCog(commands.Cog, name='Market'):
                     item.price = await Item.get(name=item.name)
 
                     return await ctx.send(
-                        'You have purchased **{}x {}** for **${}**'.format(
+                        'You have purchased **{}x {}** for **${:.2f}**'.format(
                             amount, item.name, price * amount))
 
                 raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
@@ -93,7 +93,7 @@ class MarketCog(commands.Cog, name='Market'):
 
 
                     return await ctx.send(
-                        'You have purchased **{}x {}** for **${}**'.format(
+                        'You have purchased **{}x {}** for **${:.2f}**'.format(
                             amount, item.name, item.price * amount))
 
                 raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
