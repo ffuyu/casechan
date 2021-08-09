@@ -79,7 +79,7 @@ class MarketCog(commands.Cog, name='Market'):
 
                     return await ctx.send(
                         'You have purchased **{}x {}** for **${}**'.format(
-                            amount, item.name, price))
+                            amount, item.name, price * amount))
 
                 raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
             raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
@@ -94,7 +94,7 @@ class MarketCog(commands.Cog, name='Market'):
 
                     return await ctx.send(
                         'You have purchased **{}x {}** for **${}**'.format(
-                            amount, item.name, item.price))
+                            amount, item.name, item.price * amount))
 
                 raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
             raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
