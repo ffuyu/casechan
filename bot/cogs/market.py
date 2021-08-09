@@ -1,5 +1,5 @@
+from discord.ext.commands.errors import MissingRequiredArgument
 from modules.database.users import UserData
-import random
 from typing import Optional, Union
 
 from discord.ext import commands
@@ -14,9 +14,7 @@ from modules.errors import ExceededBuyLimit, InsufficientBalance, ItemMissingPri
 from modules.utils.case_converter import CaseConverter
 from modules.utils.item_converter import ItemConverter
 from modules.utils.key_converter import KeyConverter
-
-
-
+from modules.utils.operator_converter import OperatorConverter
 
 class MarketCog(commands.Cog, name='Market'):
     """Contains market commands that lets players buy/sell items"""
@@ -54,7 +52,6 @@ class MarketCog(commands.Cog, name='Market'):
                             for _ in range(amount):
                                 stats = generate_stats(item.name[item.name.find('(') + 1:item.name.find(')')])
                                 player.add_item(item.name, stats)
-                                print(stats)
                             player.balance -= (item.price * amount)
 
                             await player.save()
@@ -66,8 +63,6 @@ class MarketCog(commands.Cog, name='Market'):
                     raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
                 raise MissingSpace('You cannot buy this item now. Reason: Inventory limit reached.')
             raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
-
-        # These instances are intentionally separated due to case prices will have some complex stuff going in them separately.
 
         if isinstance(item, Case):
 
@@ -148,11 +143,21 @@ class MarketCog(commands.Cog, name='Market'):
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
-    async def sellall(self, ctx, *, item: Optional[Union[CaseConverter, KeyConverter, ItemConverter]]):
+    async def sellall(self, ctx, operator:Optional[OperatorConverter], price:Optional[float], *, item: Optional[Union[CaseConverter, KeyConverter, ItemConverter]]):
         """
         Bulk sells the specified item or all items if none specified
+
         Args:
+            operator: logical operator to define greater, less or equal price rules
+            price: price to use with the specified logical operator
             item: the name of the item you want to sell, leave empty to sell everything
+        \n\n
+        Examples:
+            c.sellall: Sell everything
+            c.sellall ak jaguar fn: Sell all with name AK-47 | Jaguar (Factory Name)
+            c.sellall > 5: Sell all items with price greater than $5.0
+            c.sellall < 5: Sell all items with price less than $5.0
+            c.sellall = 5: Sell all items that are worth $5.0-5.99
         """
         player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
         user = await UserData.get(True, user_id=ctx.author.id)
@@ -173,7 +178,7 @@ class MarketCog(commands.Cog, name='Market'):
         if isinstance(item, (Case, Key)):
             raise NotMarketable('This item cannot be sold.')
 
-        if not item:
+        if not item and not operator and not price:
             items = list(player.inventory.keys())
             if items:
                 total_received = 0.0
@@ -193,6 +198,64 @@ class MarketCog(commands.Cog, name='Market'):
                 return await ctx.send(
                     'You have sold **{} items** and received **${:.2f}**.'.format(total_items, total_received))
             raise ItemNotFound('You have no items to sell.')
+
+        elif operator and not price:
+            raise MissingRequiredArgument(price)
+        elif operator and price:
+            items = list(player.inventory.keys())
+            if not items:
+                raise ItemNotFound('You have no items to sell.')
+            total_received = 0.0
+            total_items = 0
+            if operator == ">":
+            
+                for item in items:
+                    item_ = await Item.get(False, name=item)
+                    if not item_.price > price:
+                        continue
+                    amount = player.item_count(item)
+                    total_items += amount
+                    if amount:
+                        if item_:
+                            player.inventory.pop(item_.name)
+                            player.balance += ((item_.price * fees) * amount)
+                            player.stats['transactions']['items_sold'] += amount
+                            total_received += ((item_.price * fees) * amount)
+
+            elif operator == "<":
+
+                for item in items:
+                    item_ = await Item.get(False, name=item)
+                    if not item_.price < price:
+                        continue
+                    amount = player.item_count(item)
+                    total_items += amount
+                    if amount:
+                        if item_:
+                            player.inventory.pop(item_.name)
+                            player.balance += ((item_.price * fees) * amount)
+                            player.stats['transactions']['items_sold'] += amount
+                            total_received += ((item_.price * fees) * amount)
+
+            elif operator == "=":
+                
+                for item in items:
+                    item_ = await Item.get(False, name=item)
+                    if not int(item_.price) == int(price):
+                        continue
+                    amount = player.item_count(item)
+                    total_items += amount
+                    if amount:
+                        if item_:
+                            player.inventory.pop(item_.name)
+                            player.balance += ((item_.price * fees) * amount)
+                            player.stats['transactions']['items_sold'] += amount
+                            total_received += ((item_.price * fees) * amount)
+
+
+            await player.save()
+            return await ctx.send(
+                'You have sold **{} items** and received **${:.2f}**.'.format(total_items, total_received))
 
 
 def setup(bot):
