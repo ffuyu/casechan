@@ -158,13 +158,13 @@ class CoreCog(commands.Cog, name='Core'):
             else:
                 if inter.clicked_button.custom_id == 'claim':
                     if amount != 1:
-                        for item in items:
+                        for item in item_objects:
                             i, *s = item
                             player.add_item(i.name, s)
+                        await inter.reply('Claimed **{}** items successfully'.format(len(item_objects)), ephemeral=True)
                     else:
                         player.add_item(item.name, stats)
-
-                    await inter.reply('Claimed **{}** successfully'.format(item.name), ephemeral=True)
+                        await inter.reply('Claimed **{}** successfully'.format(item.name), ephemeral=True)
 
                 elif inter.clicked_button.custom_id == 'sell':
                     fees = user.fees
