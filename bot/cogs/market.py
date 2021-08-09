@@ -151,7 +151,7 @@ class MarketCog(commands.Cog, name='Market'):
             operator: logical operator to define greater, less or equal price rules
             price: price to use with the specified logical operator
             item: the name of the item you want to sell, leave empty to sell everything
-        \n\n
+        \n
         Examples:
             c.sellall: Sell everything
             c.sellall ak jaguar fn: Sell all with name AK-47 | Jaguar (Factory Name)
