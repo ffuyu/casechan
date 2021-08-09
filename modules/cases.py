@@ -103,9 +103,8 @@ async def open_case(container_name, type_='case'):
     valid_item_names = [item.name for item in items]
 
     loop = asyncio.get_running_loop()
-    with concurrent.futures.ThreadPoolExecutor() as pool:
-        result = await loop.run_in_executor(pool, partial(
-            _get_valid_item, valid_item_names, container_name, data))
+
+    result = await loop.run_in_executor(None, partial(_get_valid_item, valid_item_names, container_name, data))
 
     item_name, float_, seed = result
 
