@@ -68,7 +68,7 @@ class CoreCog(commands.Cog, name='Core'):
 
 
             # checks
-            if inv_size >= 1000 - amount:
+            if inv_size > 1000 - amount:
                 raise MissingSpace('You can\'t open more cases, your inventory is full!')
             if amount > player.cases.get(container.name, 0):
                 raise MissingCase(f'You are missing {amount-player.cases.get(container.name, 0)} {container}.')
