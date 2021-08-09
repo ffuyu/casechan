@@ -26,7 +26,7 @@ rarity = {
 _item_cache = []
 
 
-def generate_stats(exterior: str):
+def generate_stats(exterior: str='Factory New'):
     ranges = {
         "Battle-Scarred": (0.44, 0.99),
         "Well-Worn": (0.37, 0.439),
