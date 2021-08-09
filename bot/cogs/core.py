@@ -148,7 +148,7 @@ class CoreCog(commands.Cog, name='Core'):
 
     @commands.cooldown(10, 60, BucketType.member)
     @commands.command(aliases=['keys'])
-    async def cases(self, ctx: Context, user: Optional[Member]):
+    async def cases(self, ctx: Context, *, user: Optional[Member]):
         """List the cases you currently have."""
         user = user if user and not user.bot else ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
@@ -185,7 +185,7 @@ class CoreCog(commands.Cog, name='Core'):
 
     @commands.cooldown(10, 30, BucketType.member)
     @commands.command(aliases=['inv'])
-    async def inventory(self, ctx: Context, user: Optional[Member]):
+    async def inventory(self, ctx: Context, *, user: Optional[Member]):
         """View your inventory"""
         user = user if user and not user.bot else ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
@@ -204,7 +204,7 @@ class CoreCog(commands.Cog, name='Core'):
     @guild_only()
     @commands.cooldown(10, 30, BucketType.member)
     @commands.command(aliases=["bal", "b", "networth", "nw"])
-    async def balance(self, ctx, user: Optional[Member]):
+    async def balance(self, ctx, *,user: Optional[Member]):
         """Displays your wallet, inventory and net worth all at once"""
         user = user if user and not user.bot else ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
@@ -221,7 +221,7 @@ class CoreCog(commands.Cog, name='Core'):
     @guild_only()
     @commands.cooldown(10, 30, BucketType.guild)
     @commands.command(aliases=['lb'])
-    async def leaderboard(self, ctx: Context, guild: Optional[Guild]):
+    async def leaderboard(self, ctx: Context, *, guild: Optional[Guild]):
         """View the inventory worth leaderboard for the server"""
         guild = guild or ctx.guild
         users = await Player.find(guild_id=guild.id)
