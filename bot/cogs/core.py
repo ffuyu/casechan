@@ -124,7 +124,7 @@ class CoreCog(commands.Cog, name='Core'):
                 results.set_author(name=container.name, icon_url=container.asset)
 
                 if len(items) > 5:
-                    results.description = "You have opened **{}x {}**. Total items worth: **${:.2f}**".format(amount, container.name, len(item_objects), sum([x.price for x in item_objects]))
+                    results.description = "You have opened **{}x {}**. Total items worth: **${:.2f}**".format(amount, container.name, sum([x.price for x in item_objects]))
                 else:
                     results.description = "You have opened **{}x {}** and received the following items: \n\n {}".format(amount, container.name, '\n'.join([f'{item.name} ${item.price}' for item in item_objects]))
                 await message.edit(embed=results, components=[row])
