@@ -8,7 +8,7 @@ from discord.ext.commands.core import guild_only, max_concurrency
 
 from modules.cases import Case, Key
 from modules.database.items import Item, generate_stats
-from modules.database.players import Player
+from modules.database.players import Player, SafePlayer
 from modules.errors import ExceededBuyLimit, InsufficientBalance, ItemMissingPrice, ItemMissingStats, ItemNotFound, \
     ItemUnavailable, MissingItem, MissingSpace, NotMarketable, TradeNotAllowed
 from modules.utils.case_converter import CaseConverter
@@ -41,8 +41,7 @@ class MarketCog(commands.Cog, name='Market'):
         if amount > 1000:
             raise ExceededBuyLimit('You can\'t buy more than 1000 items at once.')
 
-        player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-        async with player:
+        async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             if isinstance(item, Item):
                 if player.balance >= (item.price * amount):
                     if (1000 - len(player.inventory)) >= amount:
@@ -112,8 +111,7 @@ class MarketCog(commands.Cog, name='Market'):
         """
         amount = 1
         if isinstance(item, Item):
-            player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-            async with player:
+            async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
                 user = await UserData.get(True, user_id=ctx.author.id)
                 fees = user.fees
                 if player.item_count(item.name) >= amount:
@@ -160,10 +158,9 @@ class MarketCog(commands.Cog, name='Market'):
             c.sellall < 5: Sell all items with price less than $5.0
             c.sellall = 5: Sell all items that are worth $5.0-5.99
         """
-        player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
         user = await UserData.get(True, user_id=ctx.author.id)
         fees = user.fees
-        async with player:
+        async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             if isinstance(item, Item):
                 amount = player.item_count(item.name)
                 if amount:

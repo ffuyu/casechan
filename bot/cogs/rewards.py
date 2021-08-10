@@ -12,7 +12,7 @@ from dislash.interactions.slash_interaction import Interaction
 from humanize import naturaldelta
 
 from modules.cases import Case, all_cases
-from modules.database.players import Player
+from modules.database.players import Player, SafePlayer
 from modules.errors import DailyError, WeeklyError, HourlyError
 
 
@@ -47,8 +47,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
         """
         Claim your hourly rewards
         """
-        player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-        async with player:
+        async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             if (datetime.datetime.utcnow() - player.hourly) > datetime.timedelta(hours=1):
                 player.hourly = datetime.datetime.utcnow()
                 amount = random.randint(4, 7) \
@@ -68,8 +67,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
         """
         Claim your daily rewards
         """
-        player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-        async with player:
+        async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             if (datetime.datetime.utcnow() - player.daily) > datetime.timedelta(days=1):
                 if (datetime.datetime.utcnow() - player.daily) > datetime.timedelta(days=2):
                     player.streak = 0
@@ -93,8 +91,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
         """
         Claim your weekly rewards
         """
-        player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-        async with player:
+        async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             if datetime.datetime.utcnow() - ctx.author.created_at < datetime.timedelta(weeks=1):
                 raise WeeklyError('Your account is ineligible to claim weekly rewards.')
 

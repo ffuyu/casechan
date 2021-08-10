@@ -12,6 +12,7 @@ as follows:
 """
 
 import asyncio
+from modules.database.players import SafePlayer
 from typing import Optional
 
 from DiscordUtils.Pagination import CustomEmbedPaginator
@@ -61,11 +62,10 @@ class CoreCog(commands.Cog, name='Core'):
         """
         container: Case
         if container:
-            player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
             user = await UserData.get(True, user_id=ctx.author.id)
             amount = amount if amount > 0  else 1
 
-            async with player:
+            async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
                 inv_size = player.inv_items_count()
 
 

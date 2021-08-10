@@ -141,10 +141,16 @@ class Player(ModelPlus, Model):
         """
         self._mod_case_or_key('keys', key_name, n)
 
-    async def __aenter__(self):
-        sem = sems.setdefault(self.member_id, Semaphore())
-        await sem.aquire()
+class SafePlayer:
+  def __init__(self, mid, gid):
+    self.mid, self.gid = mid, gid
 
-    async def __aexit__(self, *args):
-        sem = sems[self.member_id]
-        sem.release()   
+  async def __aenter__(self):
+    sem = sems.setdefault(self.mid, Semaphore())
+    await sem.aquire()
+    player = await Player.get(True, member_id=self.mid, guild_id=self.gid)
+    return player
+
+  async def __aexit__(self, *args):
+    sem = sems[self.mid]
+    sem.release()
