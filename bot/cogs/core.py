@@ -64,124 +64,126 @@ class CoreCog(commands.Cog, name='Core'):
             player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
             user = await UserData.get(True, user_id=ctx.author.id)
             amount = amount if amount > 0  else 1
-            inv_size = player.inv_items_count()
+
+            async with player:
+                inv_size = player.inv_items_count()
 
 
-            # checks
-            if inv_size > 1000 - amount:
-                raise MissingSpace('You can\'t open more cases, your inventory is full!')
-            if amount > player.cases.get(container.name, 0):
-                raise MissingCase(f'You are missing {amount-player.cases.get(container.name, 0)} {container}.')
-            if container.key and amount > player.keys.get(container.key, 0):
-                raise MissingKey(f'You are missing {amount-player.keys.get(container.key, 0)} {container.key}.')
- 
-            # Opening animation
-            opening_embed = Embed(
-                description='**{}**'.format(container),
-                color=Colour.random()
-            ).set_image(url=container.asset).set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
+                # checks
+                if inv_size > 1000 - amount:
+                    raise MissingSpace('You can\'t open more cases, your inventory is full!')
+                if amount > player.cases.get(container.name, 0):
+                    raise MissingCase(f'You are missing {amount-player.cases.get(container.name, 0)} {container}.')
+                if container.key and amount > player.keys.get(container.key, 0):
+                    raise MissingKey(f'You are missing {amount-player.keys.get(container.key, 0)} {container.key}.')
+    
+                # Opening animation
+                opening_embed = Embed(
+                    description='**{}**'.format(container),
+                    color=Colour.random()
+                ).set_image(url=container.asset).set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
 
-            message = await ctx.send(embed=opening_embed, reference=ctx.message)
-            await asyncio.sleep(6.0)
+                message = await ctx.send(embed=opening_embed, reference=ctx.message)
+                await asyncio.sleep(6.0)
 
-            
-            # Updating Player 
-            player.mod_case(container.name, -amount)
-            player.mod_key(container.key, -amount)
-            player.stats['cases']['opened'] += amount
+                
+                # Updating Player 
+                player.mod_case(container.name, -amount)
+                player.mod_key(container.key, -amount)
+                player.stats['cases']['opened'] += amount
 
-            # Opening cases
-            items = [await container.open() for _ in range(amount)]
-            item_objects = [k for k, _, _ in items]
+                # Opening cases
+                items = [await container.open() for _ in range(amount)]
+                item_objects = [k for k, _, _ in items]
 
-            # Buttons
-            row = ActionRow(
-                Button(
-                    style=ButtonStyle.grey,
-                    label="Claim" if amount == 1 else "Claim all",
-                    custom_id="claim",
-                    emoji='📥',
-                ),
-                Button(
-                    style=ButtonStyle.green,
-                    label="Sell" if amount == 1 else "Sell all",
-                    custom_id="sell",
-                    emoji='💸'
-                ),
-                Button(
-                    style=ButtonStyle.grey,
-                    label=f"{inv_size+amount}/1000",
-                    custom_id="invsize",
-                    disabled=True
+                # Buttons
+                row = ActionRow(
+                    Button(
+                        style=ButtonStyle.grey,
+                        label="Claim" if amount == 1 else "Claim all",
+                        custom_id="claim",
+                        emoji='📥',
+                    ),
+                    Button(
+                        style=ButtonStyle.green,
+                        label="Sell" if amount == 1 else "Sell all",
+                        custom_id="sell",
+                        emoji='💸'
+                    ),
+                    Button(
+                        style=ButtonStyle.grey,
+                        label=f"{inv_size+amount}/1000",
+                        custom_id="invsize",
+                        disabled=True
+                    )
                 )
-            )
 
-            # Displaying results (Bulk)
-            if amount != 1:
-                results = Embed(
-                    color = Colour.random()
-                )
-                results.set_author(name=container.name, icon_url=container.asset)
-
-                if len(items) > 5:
-                    results.description = "You have opened **{}x {}**. Total items worth: **${:.2f}**".format(amount, container.name, sum([x.price for x in item_objects]))
-                else:
-                    results.description = "You have opened **{}x {}** and received the following items: \n\n {}".format(amount, container.name, '\n'.join([f'{item.name} ${item.price}' for item in item_objects]))
-                await message.edit(embed=results, components=[row])
-
-            # Displaying results (Single)
-            else:
-                item, *stats = items[0]
-                results = Embed(
-                    description='**{}**'.format(item.name),
-                    color=item.color
-                )
-                results.set_image(url='https://community.akamai.steamstatic.com/economy/image/{}'.format(item.icon_url)) \
-                    .set_footer(text='Float %f | Paint Seed: %d | Price: $%.2f' % (stats[0], stats[1], item.price)) \
-                    .set_author(name=container, icon_url=container.asset)
-
-                await message.edit(embed=results, components=[row])
-
-            def check(inter):
-                return inter.author == ctx.author
-
-            try:
-                inter = await message.wait_for_button_click(check=check, timeout=30)
-                inter: Interaction
-            except:
+                # Displaying results (Bulk)
                 if amount != 1:
-                    for item in items:
-                        i, *s = item
-                        player.add_item(i.name, s)
+                    results = Embed(
+                        color = Colour.random()
+                    )
+                    results.set_author(name=container.name, icon_url=container.asset)
+
+                    if len(items) > 5:
+                        results.description = "You have opened **{}x {}**. Total items worth: **${:.2f}**".format(amount, container.name, sum([x.price for x in item_objects]))
+                    else:
+                        results.description = "You have opened **{}x {}** and received the following items: \n\n {}".format(amount, container.name, '\n'.join([f'{item.name} ${item.price}' for item in item_objects]))
+                    await message.edit(embed=results, components=[row])
+
+                # Displaying results (Single)
                 else:
-                    player.add_item(item.name, stats)
-            else:
-                if inter.clicked_button.custom_id == 'claim':
+                    item, *stats = items[0]
+                    results = Embed(
+                        description='**{}**'.format(item.name),
+                        color=item.color
+                    )
+                    results.set_image(url='https://community.akamai.steamstatic.com/economy/image/{}'.format(item.icon_url)) \
+                        .set_footer(text='Float %f | Paint Seed: %d | Price: $%.2f' % (stats[0], stats[1], item.price)) \
+                        .set_author(name=container, icon_url=container.asset)
+
+                    await message.edit(embed=results, components=[row])
+
+                def check(inter):
+                    return inter.author == ctx.author
+
+                try:
+                    inter = await message.wait_for_button_click(check=check, timeout=30)
+                    inter: Interaction
+                except:
                     if amount != 1:
                         for item in items:
                             i, *s = item
                             player.add_item(i.name, s)
-                        await inter.reply('Claimed **{}** items successfully'.format(len(item_objects)), ephemeral=True)
                     else:
                         player.add_item(item.name, stats)
-                        await inter.reply('Claimed **{}** successfully'.format(item.name), ephemeral=True)
+                else:
+                    if inter.clicked_button.custom_id == 'claim':
+                        if amount != 1:
+                            for item in items:
+                                i, *s = item
+                                player.add_item(i.name, s)
+                            await inter.reply('Claimed **{}** items successfully'.format(len(item_objects)), ephemeral=True)
+                        else:
+                            player.add_item(item.name, stats)
+                            await inter.reply('Claimed **{}** successfully'.format(item.name), ephemeral=True)
 
-                elif inter.clicked_button.custom_id == 'sell':
-                    fees = user.fees
-                    total_received = 0.0
-                    if amount != 1:
-                        for item in item_objects:
+                    elif inter.clicked_button.custom_id == 'sell':
+                        fees = user.fees
+                        total_received = 0.0
+                        if amount != 1:
+                            for item in item_objects:
+                                total_received += (item.price * fees)
+                        else:
                             total_received += (item.price * fees)
-                    else:
-                        total_received += (item.price * fees)
-                    await inter.send('You have sold **{}** and received ${:.2f}'.format(item.name if amount == 1 else f'{len(items)} items', total_received),
-                                     ephemeral=True)
+                        await inter.send('You have sold **{}** and received ${:.2f}'.format(item.name if amount == 1 else f'{len(items)} items', total_received),
+                                        ephemeral=True)
 
-                    player.balance += total_received
-            finally:
-                await player.save()
-                return await message.edit(components=[
-                    disable_row(row)])  # NOTE custom function used because row.disable_buttons() does not work.
+                        player.balance += total_received
+                finally:
+                    await player.save()
+                    return await message.edit(components=[
+                        disable_row(row)])  # NOTE custom function used because row.disable_buttons() does not work.
 
         else:
             return await ctx.send('Not a valid case name!')
