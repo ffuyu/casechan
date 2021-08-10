@@ -3,7 +3,7 @@ import json
 
 from odmantic import field
 
-from modules.cases import all_cases
+from modules.cases import all_cases, case_assets
 from modules.database import Item
 from modules.database import engine
 
@@ -26,6 +26,12 @@ async def main():
             'items': case
         }
         j[item.name] = new_case
+
+    print('Adding assets to cases')
+
+    for case in j:
+        asset = case_assets.get(case)
+        j[case]['asset'] = asset
 
     print('Saving data')
     with open('etc/new_cases.json', 'w') as f:

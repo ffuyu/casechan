@@ -123,7 +123,7 @@ def get_case_vars(name: str) -> tuple:
         new_keys = [f'{case} Key' for case in new_cases if case not in _require_no_key]
     case = new_cases[name]
     name = case['name']
-    asset = case_assets['name']
+    asset = case['asset']
     items = case['items']
     key = f'{name} Key' if name not in _require_no_key else None
     return name, asset, items, key
