@@ -76,7 +76,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
 
             player.daily = datetime.datetime.utcnow()
             player.streak += 1
-            amount = random.randint(player.streak, player.streak + 10) \
+            amount = random.randint(player.streak + 10, player.streak + 20) \
                 if ctx.author.created_at - datetime.datetime.utcnow() < datetime.timedelta(days=7) else 2
 
             await _reward_cases(player, amount)
