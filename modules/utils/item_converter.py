@@ -86,15 +86,14 @@ class ItemConverter(Converter):
         item_cache = await Item.item_cache()
         if not _names_cache:
             log.info('Refreshing names cache...')
-            with ProcessPoolExecutor() as pool:
-                _names_cache = await ctx.bot.loop.run_in_executor(pool, partial(self._item_names, item_cache))
+
+            _names_cache = await ctx.bot.loop.run_in_executor(None, partial(self._item_names, item_cache))
 
         names = _names_cache
         if argument in names:
             target = names[argument]
         else:
-            with ProcessPoolExecutor() as pool:
-                t = await ctx.bot.loop.run_in_executor(pool, partial(self._replace_abbr, argument))
+            t = await ctx.bot.loop.run_in_executor(None, partial(self._replace_abbr, argument))
 
             log.info(f'Converted query "{argument}" into "{t}" with replacements')
 

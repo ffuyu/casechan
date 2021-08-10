@@ -9,6 +9,7 @@ __all__ = (
 
 player_preferences = {}
 
+
 class CaseConverter(Converter):
     """Converts a case name string into a Case object"""
 
