@@ -1,4 +1,7 @@
+from discord.embeds import Embed
+from discord.ext.commands.context import Context
 from discord.ext.commands.errors import MissingRequiredArgument
+from dpytools import Color
 from modules.database.users import UserData
 from typing import Optional, Union
 
@@ -256,6 +259,19 @@ class MarketCog(commands.Cog, name='Market'):
             await player.save()
             return await ctx.send(
                 'You have sold **{} items** and received **${:.2f}**.'.format(total_items, total_received))
+
+    @commands.command(aliases=['inspect'])
+    async def price(self, ctx: Context, *, query: Optional[ItemConverter]):
+        """
+        Shows item price & asset with specified query
+        Args:
+            query: the name of the item to search
+        """
+        if query:
+            query: Item
+            await ctx.send(embed=query.to_embed(minimal=True if ctx.invoked_with == 'price' else False))
+        else:
+            await ctx.send(embed=Embed(description='Item not found', color=Color.RED))
 
 
 def setup(bot):
