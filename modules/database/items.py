@@ -34,7 +34,7 @@ def generate_stats(exterior: str='Factory New'):
         "Minimal Wear": (0.07, 0.149),
         "Factory New": (0.00, 0.069)
     }
-    range_ = ranges.get(exterior)
+    range_ = ranges.get(exterior, (0.00, 0.069))
     float_ = random.SystemRandom().uniform(a=range_[0], b=range_[1])
     seed = random.SystemRandom().randint(1, 1000)
     return float_, seed

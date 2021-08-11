@@ -63,7 +63,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             embed.description = f'This command can only be used by {error.number} {str(error.per).split(".")[1]} at same time.'
         elif isinstance(error, CommandOnCooldown):
             embed.description = "Slow down! You can run this command in {:.2f}s".format(error.retry_after)
-        elif isinstance(error, (InvalidDocument, AttributeError)):
+        elif isinstance(error, (InvalidDocument, AttributeError, TypeError)):
             embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
         else:
             embed.description = str(error)
