@@ -1,3 +1,4 @@
+from asyncio import Lock
 from copy import copy
 from datetime import datetime, timedelta
 from typing import Optional, Dict, List, Tuple
@@ -9,6 +10,7 @@ from .models import ModelPlus
 
 __all__ = (
     'Player',
+    'SafePlayer'
 )
 
 stats_dict = {
@@ -32,7 +34,7 @@ class Player(ModelPlus, Model):
     daily: Optional[datetime] = datetime.utcnow() - timedelta(days=1)
     hourly: Optional[datetime] = datetime.utcnow() - timedelta(hours=1)
     weekly: Optional[datetime] = datetime.utcnow() - timedelta(weeks=1)
-    streak: int = 0 # streak only applies to daily
+    streak: int = 0  # streak only applies to daily
     balance: float = 0.0
     trade_banned: bool = False
     created_at: datetime = datetime.utcnow()
@@ -137,3 +139,29 @@ class Player(ModelPlus, Model):
             None
         """
         self._mod_case_or_key('keys', key_name, n)
+
+
+player_locks = {}
+
+
+class SafePlayer:
+    """
+    Context manager that implements asyncio.lock to control access to player documents
+    Use:
+        async with SafePlayer(member_id, guild_id) as player:
+            # work with player
+            await player.save()
+    """
+    def __init__(self, member_id: int, guild_id: int):
+        self.mid = member_id
+        self.gid = guild_id
+
+    async def __aenter__(self):
+        lock = player_locks.setdefault((self.mid, self.gid), Lock())
+        self.lock = lock
+        await lock.acquire()
+        player = await Player.get(True, guild_id=self.gid, member_id=self.mid)
+        return player
+
+    async def __aexit__(self, *exc):
+        self.lock.release()

@@ -8,7 +8,7 @@ from discord.ext.commands.core import guild_only, max_concurrency
 
 from modules.cases import Case, Key
 from modules.database.items import Item, generate_stats
-from modules.database.players import Player
+from modules.database.players import Player, SafePlayer
 from modules.errors import ExceededBuyLimit, InsufficientBalance, ItemMissingPrice, ItemMissingStats, ItemNotFound, \
     ItemUnavailable, MissingItem, MissingSpace, NotMarketable, TradeNotAllowed
 from modules.utils.case_converter import CaseConverter
@@ -112,28 +112,27 @@ class MarketCog(commands.Cog, name='Market'):
         """
         amount = 1
         if isinstance(item, Item):
-            player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-            user = await UserData.get(True, user_id=ctx.author.id)
-            fees = user.fees
-            if player.item_count(item.name) >= amount:
-                if not player.trade_banned:
-                    if item.price > 0.00:
+            async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
+                user = await UserData.get(True, user_id=ctx.author.id)
+                fees = user.fees
+                if player.item_count(item.name) >= amount:
+                    if not player.trade_banned:
+                        if item.price > 0.00:
+                            stats = player.inventory.get(item.name, [])
+                            if stats:
+                                player.rem_item(item.name, stats[0])
+                                player.balance += ((item.price * amount) * fees)
+                                player.stats['transactions']['items_sold'] += 1
+                                await player.save()
+                                return await ctx.send(
+                                    'You have sold **{}x {}** and received **${:.2f}**.'.format(amount, item.name, (
+                                                (item.price * fees) * amount)))
 
-                        stats = player.inventory.get(item.name, [])
-                        if stats:
-                            player.rem_item(item.name, stats[0])
-                            player.balance += ((item.price * amount) * fees)
-                            player.stats['transactions']['items_sold'] += 1
-                            await player.save()
-                            return await ctx.send(
-                                'You have sold **{}x {}** and received **${:.2f}**.'.format(amount, item.name, (
-                                            (item.price * fees) * amount)))
-
-                        raise ItemMissingStats(
-                            'An error occured while selling your item. Perhaps the item is corrupted.')
-                    raise ItemMissingPrice('You cannot sell this item now. Reason: Item has no price data.')
-                raise TradeNotAllowed('You cannot sell items. Reason: Account trade banned.')
-            raise MissingItem('You cannot sell this item now. Reason: Item not found on inventory.')
+                            raise ItemMissingStats('An error occured while selling your item. '
+                                                   'Perhaps the item is corrupted.')
+                        raise ItemMissingPrice('You cannot sell this item now. Reason: Item has no price data.')
+                    raise TradeNotAllowed('You cannot sell items. Reason: Account trade banned.')
+                raise MissingItem('You cannot sell this item now. Reason: Item not found on inventory.')
 
         if isinstance(item, (Case, Key)):
             raise NotMarketable('This item cannot be sold.')
