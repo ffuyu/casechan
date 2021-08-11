@@ -44,65 +44,65 @@ class MarketCog(commands.Cog, name='Market'):
         if amount > 1000:
             raise ExceededBuyLimit('You can\'t buy more than 1000 items at once.')
 
-        player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
+        async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
 
-        if isinstance(item, Item):
-            if player.balance >= (item.price * amount):
-                if (1000 - len(player.inventory)) >= amount:
-                    if not player.trade_banned:
-                        if item.price > 0.00:
-
-                            for _ in range(amount):
-                                stats = generate_stats(item.name[item.name.find('(') + 1:item.name.find(')')])
-                                player.add_item(item.name, stats)
-                            player.balance -= (item.price * amount)
-
-                            await player.save()
-                            return await ctx.send(
-                                'You have purchased **{}x {}** successfully. You have been charged **${:.2f}**.'.format(
-                                    amount, item.name, item.price * amount))
-
-                        raise ItemUnavailable('You cannot buy this item now. Reason: Item has no price data.')
-                    raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
-                raise MissingSpace('You cannot buy this item now. Reason: Inventory limit reached.')
-            raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
-
-        if isinstance(item, Case):
-
-            item_ = await Item.get(name=item.name)
-            price = item_.price
-
-            if not player.trade_banned:
-                if player.balance >= (price * amount):
-                    player.mod_case(item.name, amount)
-                    player.balance -= (price * amount)
-                    await player.save()
-
-                    item.price = await Item.get(name=item.name)
-
-                    return await ctx.send(
-                        'You have purchased **{}x {}** for **${:.2f}**'.format(
-                            amount, item.name, price * amount))
-
-                raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
-            raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
-
-        if isinstance(item, Key):
-            if not player.trade_banned:
+            if isinstance(item, Item):
                 if player.balance >= (item.price * amount):
-                    player.mod_key(item.name, amount)
-                    player.balance -= (item.price * amount)
-                    await player.save()
+                    if (1000 - len(player.inventory)) >= amount:
+                        if not player.trade_banned:
+                            if item.price > 0.00:
 
+                                for _ in range(amount):
+                                    stats = generate_stats(item.name[item.name.find('(') + 1:item.name.find(')')])
+                                    player.add_item(item.name, stats)
+                                player.balance -= (item.price * amount)
 
-                    return await ctx.send(
-                        'You have purchased **{}x {}** for **${:.2f}**'.format(
-                            amount, item.name, item.price * amount))
+                                await player.save()
+                                return await ctx.send(
+                                    'You have purchased **{}x {}** successfully. You have been charged **${:.2f}**.'.format(
+                                        amount, item.name, item.price * amount))
 
+                            raise ItemUnavailable('You cannot buy this item now. Reason: Item has no price data.')
+                        raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
+                    raise MissingSpace('You cannot buy this item now. Reason: Inventory limit reached.')
                 raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
-            raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
 
-        raise ItemNotFound('Item not found')
+            if isinstance(item, Case):
+
+                item_ = await Item.get(name=item.name)
+                price = item_.price
+
+                if not player.trade_banned:
+                    if player.balance >= (price * amount):
+                        player.mod_case(item.name, amount)
+                        player.balance -= (price * amount)
+                        await player.save()
+
+                        item.price = await Item.get(name=item.name)
+
+                        return await ctx.send(
+                            'You have purchased **{}x {}** for **${:.2f}**'.format(
+                                amount, item.name, price * amount))
+
+                    raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
+                raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
+
+            if isinstance(item, Key):
+                if not player.trade_banned:
+                    if player.balance >= (item.price * amount):
+                        player.mod_key(item.name, amount)
+                        player.balance -= (item.price * amount)
+                        await player.save()
+
+
+                        return await ctx.send(
+                            'You have purchased **{}x {}** for **${:.2f}**'.format(
+                                amount, item.name, item.price * amount))
+
+                    raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
+                raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
+
+            raise ItemNotFound('Item not found')
 
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
@@ -161,103 +161,105 @@ class MarketCog(commands.Cog, name='Market'):
             c.sellall < 5: Sell all items with price less than $5.0
             c.sellall = 5: Sell all items that are worth $5.0-5.99
         """
-        player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
+        
         user = await UserData.get(True, user_id=ctx.author.id)
         fees = user.fees
-        if isinstance(item, Item):
-            amount = player.item_count(item.name)
-            if amount:
 
-                player.inventory.pop(item.name)
-                player.balance += (item.price * fees)
-                player.stats['transactions']['items_sold'] += amount
-                await player.save()
-                return await ctx.send('You have sold **{}x {}(s)** and received **${:.2f}**.'.format(amount, item.name,
-                                                                                                     ((
-                                                                                                                  item.price * fees) * amount)))
-            raise MissingItem('You don\'t have any **{}** to sell.'.format(item.name))
+        async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
+            if isinstance(item, Item):
+                amount = player.item_count(item.name)
+                if amount:
 
-        if isinstance(item, (Case, Key)):
-            raise NotMarketable('This item cannot be sold.')
+                    player.inventory.pop(item.name)
+                    player.balance += (item.price * fees)
+                    player.stats['transactions']['items_sold'] += amount
+                    await player.save()
+                    return await ctx.send('You have sold **{}x {}(s)** and received **${:.2f}**.'.format(amount, item.name,
+                                                                                                        ((
+                                                                                                                    item.price * fees) * amount)))
+                raise MissingItem('You don\'t have any **{}** to sell.'.format(item.name))
 
-        if not item and not operator and not price:
-            items = list(player.inventory.keys())
-            if items:
+            if isinstance(item, (Case, Key)):
+                raise NotMarketable('This item cannot be sold.')
+
+            if not item and not operator and not price:
+                items = list(player.inventory.keys())
+                if items:
+                    total_received = 0.0
+                    total_items = 0
+                    for item in items:
+                        amount = player.item_count(item)
+                        total_items += amount
+                        if amount:
+                            item_ = await Item.get(False, name=item)
+                            if item_:
+                                player.inventory.pop(item_.name)
+                                player.balance += ((item_.price * fees) * amount)
+                                player.stats['transactions']['items_sold'] += amount
+                                total_received += ((item_.price * fees) * amount)
+
+                    await player.save()
+                    return await ctx.send(
+                        'You have sold **{} items** and received **${:.2f}**.'.format(total_items, total_received))
+                raise ItemNotFound('You have no items to sell.')
+
+            elif operator and not price:
+                raise MissingRequiredArgument(price)
+            elif operator and price:
+                items = list(player.inventory.keys())
+                if not items:
+                    raise ItemNotFound('You have no items to sell.')
                 total_received = 0.0
                 total_items = 0
-                for item in items:
-                    amount = player.item_count(item)
-                    total_items += amount
-                    if amount:
+                if operator == ">":
+                
+                    for item in items:
                         item_ = await Item.get(False, name=item)
-                        if item_:
-                            player.inventory.pop(item_.name)
-                            player.balance += ((item_.price * fees) * amount)
-                            player.stats['transactions']['items_sold'] += amount
-                            total_received += ((item_.price * fees) * amount)
+                        if not item_.price > price:
+                            continue
+                        amount = player.item_count(item)
+                        total_items += amount
+                        if amount:
+                            if item_:
+                                player.inventory.pop(item_.name)
+                                player.balance += ((item_.price * fees) * amount)
+                                player.stats['transactions']['items_sold'] += amount
+                                total_received += ((item_.price * fees) * amount)
+
+                elif operator == "<":
+
+                    for item in items:
+                        item_ = await Item.get(False, name=item)
+                        if not item_.price < price:
+                            continue
+                        amount = player.item_count(item)
+                        total_items += amount
+                        if amount:
+                            if item_:
+                                player.inventory.pop(item_.name)
+                                player.balance += ((item_.price * fees) * amount)
+                                player.stats['transactions']['items_sold'] += amount
+                                total_received += ((item_.price * fees) * amount)
+
+                elif operator == "=":
+                    
+                    for item in items:
+                        item_ = await Item.get(False, name=item)
+                        if not int(item_.price) == int(price):
+                            continue
+                        amount = player.item_count(item)
+                        total_items += amount
+                        if amount:
+                            if item_:
+                                player.inventory.pop(item_.name)
+                                player.balance += ((item_.price * fees) * amount)
+                                player.stats['transactions']['items_sold'] += amount
+                                total_received += ((item_.price * fees) * amount)
+
 
                 await player.save()
                 return await ctx.send(
                     'You have sold **{} items** and received **${:.2f}**.'.format(total_items, total_received))
-            raise ItemNotFound('You have no items to sell.')
-
-        elif operator and not price:
-            raise MissingRequiredArgument(price)
-        elif operator and price:
-            items = list(player.inventory.keys())
-            if not items:
-                raise ItemNotFound('You have no items to sell.')
-            total_received = 0.0
-            total_items = 0
-            if operator == ">":
-            
-                for item in items:
-                    item_ = await Item.get(False, name=item)
-                    if not item_.price > price:
-                        continue
-                    amount = player.item_count(item)
-                    total_items += amount
-                    if amount:
-                        if item_:
-                            player.inventory.pop(item_.name)
-                            player.balance += ((item_.price * fees) * amount)
-                            player.stats['transactions']['items_sold'] += amount
-                            total_received += ((item_.price * fees) * amount)
-
-            elif operator == "<":
-
-                for item in items:
-                    item_ = await Item.get(False, name=item)
-                    if not item_.price < price:
-                        continue
-                    amount = player.item_count(item)
-                    total_items += amount
-                    if amount:
-                        if item_:
-                            player.inventory.pop(item_.name)
-                            player.balance += ((item_.price * fees) * amount)
-                            player.stats['transactions']['items_sold'] += amount
-                            total_received += ((item_.price * fees) * amount)
-
-            elif operator == "=":
-                
-                for item in items:
-                    item_ = await Item.get(False, name=item)
-                    if not int(item_.price) == int(price):
-                        continue
-                    amount = player.item_count(item)
-                    total_items += amount
-                    if amount:
-                        if item_:
-                            player.inventory.pop(item_.name)
-                            player.balance += ((item_.price * fees) * amount)
-                            player.stats['transactions']['items_sold'] += amount
-                            total_received += ((item_.price * fees) * amount)
-
-
-            await player.save()
-            return await ctx.send(
-                'You have sold **{} items** and received **${:.2f}**.'.format(total_items, total_received))
 
     @commands.command(aliases=['inspect'])
     async def price(self, ctx: Context, *, query: Optional[ItemConverter]):

@@ -36,7 +36,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             MissingItem, NotMarketable, ItemNotFound, DailyError, HourlyError, WeeklyError,
             MissingSpace, MissingCase, MissingKey, InsufficientBalance, NotOwner, TradeNotAllowed,
             ExceededBuyLimit, CodeExpired, CodeClaimed, CodeInvalid, AlreadyClaimed, ExistingCode,
-            InvalidBet, BetTooLow, Forbidden, InvalidDocument, AttributeError
+            InvalidBet, BetTooLow, Forbidden
             }
         embed = Embed(
             title="Command Error:",

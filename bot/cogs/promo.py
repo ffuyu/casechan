@@ -5,7 +5,7 @@ from discord.ext.commands.core import guild_only, max_concurrency
 
 from modules.errors import AlreadyClaimed, CodeClaimed, CodeExpired, CodeInvalid, ExistingCode
 from modules.database.promos import Promo
-from modules.database.players import Player
+from modules.database.players import Player, SafePlayer
 
 from typing import Optional
 
@@ -65,14 +65,16 @@ class PromoCog(commands.Cog, name='Promo Codes'):
             if not promo.is_expired:
                 if not promo.uses >= promo.max_uses:
                     if not ctx.author.id in promo.users:
-
-                        player = await Player.get(True, member_id=ctx.author.id, guild_id=ctx.guild.id)
-                        player.balance += promo.funds
+                        
                         promo.uses += 1
                         promo.users.append(ctx.author.id)
                         await promo.save()
-                        await player.save()
-                        return await ctx.send(f'Success! You\'ve received **${promo.funds}**')
+
+                        async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
+                            player.balance += promo.funds
+                            
+                            await player.save()
+                            return await ctx.send(f'Success! You\'ve received **${promo.funds}**')
 
                     raise AlreadyClaimed('You have already used this promo code.')
                 raise CodeClaimed('This promo code has reached max uses.')
