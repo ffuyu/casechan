@@ -80,7 +80,7 @@ class CoreCog(commands.Cog, name='Core'):
 
             # Opening embed
             opening_embed = Embed(
-                description=f'**{container}**',
+                description=f'**<a:casechanloading:874960632187879465> {container}**',
                 color=Colour.random(),
                 image=container.asset
             ).set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
