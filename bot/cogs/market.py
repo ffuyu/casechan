@@ -158,7 +158,7 @@ class MarketCog(commands.Cog, name='Market'):
                             if stats:
 
                                 if item.price >= 1000:
-                                    if not sell_prompt(ctx):
+                                    if not await sell_prompt(ctx):
                                         raise SaleNotConfirmed("User cancelled the sale or failed to respond in time.")
                                 
                                 player.rem_item(item.name, stats[0])
