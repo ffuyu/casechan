@@ -86,7 +86,7 @@ class CoreCog(commands.Cog, name='Core'):
             ).set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
 
             message = await ctx.send(embed=opening_embed, reference=ctx.message)
-            # await asyncio.sleep(6.0)
+            await asyncio.sleep(6.0)
 
             # Updating Player
             player.mod_case(container.name, -amount)
