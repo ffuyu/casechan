@@ -30,6 +30,7 @@ from modules.database.users import UserData
 from modules.errors import MissingCase, MissingKey, MissingSpace
 from modules.utils.case_converter import CaseConverter
 
+from etc.emojis import emojis
 
 def disable_row(row: ActionRow) -> ActionRow:
     for button in row.buttons:
@@ -123,7 +124,7 @@ class CoreCog(commands.Cog, name='Core'):
                 else:
                     desc = f"You have opened **{amount}x {container.name}** " \
                            f"and received the following items: \n\n"
-                    desc += '\n'.join([f'{item.name} ${item.price}' for item in item_objects])
+                    desc += '\n'.join([f'{emojis.get(item.rarity)} {item.name} ${item.price}' for item in item_objects])
                     results.description = desc
 
                 await message.edit(embed=results, components=[row])
@@ -132,7 +133,7 @@ class CoreCog(commands.Cog, name='Core'):
             else:
                 item, *stats = items[0]
                 results = Embed(
-                    description=f'**{item.name}**',
+                    description=f'{emojis.get(item.rarity)} **{item.name}**',
                     color=item.color,
                     image=f'https://community.akamai.steamstatic.com/economy/image/{item.icon_url}'
                 ).set_footer(text='Float %f | Paint Seed: %d | Price: $%.2f' % (stats[0], stats[1], item.price)) \
