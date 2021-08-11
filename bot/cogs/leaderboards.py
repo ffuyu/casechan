@@ -34,10 +34,10 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
             if member:
                 users_dictionary[member.name] = await user.inv_total()
 
-        leaderboard = dict(sorted(users_dictionary.items(), key=lambda item: item[1], reverse=True))
+        leaderboard = sorted(users_dictionary.items(), key=lambda item: item[1], reverse=True)
         await ctx.send(
             embed=Embed(
-                description='\n'.join(f"**{k}**: ${v:.2f}" for k, v in leaderboard.items()),
+                description='\n'.join(f"**{k}**: ${v:.2f}" for k, v in leaderboard[:10]),
                 color=Colour.random()
             ).set_footer(text="Based on inventory worth | Total server inventory worth: ${:.2f}\nUse the command 'top' to view the world leaderboard.".format(
                 sum([x for x in users_dictionary.values()]))).set_author(name=guild, icon_url=guild.icon_url)
