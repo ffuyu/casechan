@@ -107,6 +107,10 @@ class ExceededBuyLimit(MarketError):
     pass
 
 
+class SaleNotConfirmed(MarketError):
+    pass
+
+
 class DailyError(CommandError):
     pass
 

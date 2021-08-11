@@ -2,7 +2,7 @@ from modules.errors import (
     AlreadyClaimed, BetTooLow, CodeClaimed, CodeExpired, CodeInvalid, DailyError, 
     ExceededBuyLimit, ExistingCode, HourlyError, InsufficientBalance, InvalidBet, 
     ItemNotFound, MissingCase, MissingItem, MissingKey, MissingSpace,
-     NotMarketable, TradeNotAllowed, WeeklyError
+     NotMarketable, SaleNotConfirmed, TradeNotAllowed, WeeklyError
 )
 from bson.errors import InvalidDocument
 from discord import Forbidden
@@ -36,7 +36,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             MissingItem, NotMarketable, ItemNotFound, DailyError, HourlyError, WeeklyError,
             MissingSpace, MissingCase, MissingKey, InsufficientBalance, NotOwner, TradeNotAllowed,
             ExceededBuyLimit, CodeExpired, CodeClaimed, CodeInvalid, AlreadyClaimed, ExistingCode,
-            InvalidBet, BetTooLow, Forbidden
+            InvalidBet, BetTooLow, Forbidden, SaleNotConfirmed
             }
         embed = Embed(
             title="Command Error:",
