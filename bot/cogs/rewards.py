@@ -7,12 +7,13 @@ from discord.ext import commands
 from discord.ext.commands.context import Context
 from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import max_concurrency
+
 from dislash.interactions.message_components import ActionRow, Button, ButtonStyle
-from dislash.interactions.slash_interaction import Interaction
+
 from humanize import naturaldelta
 
 from modules.cases import Case, all_cases
-from modules.database.players import Player, SafePlayer
+from modules.database.players import SafePlayer
 from modules.errors import DailyError, WeeklyError, HourlyError
 
 

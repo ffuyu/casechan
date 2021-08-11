@@ -1,16 +1,15 @@
 from typing import Optional
 
 from discord.ext import commands
-from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import guild_only, is_owner
 
-from discord import Embed, Colour, Member, User
-from humanize.time import naturaltime
+from discord import Embed, Colour, User
 
 from modules.database.players import Player
 from modules.database.users import UserData
 
 from humanize import naturaldate
+from humanize.time import naturaltime
 
 class ProfilesCog(commands.Cog, name='Profiles'):
     def __init__(self, bot):

@@ -11,7 +11,7 @@ from discord.ext.commands.core import guild_only, max_concurrency
 
 from modules.cases import Case, Key
 from modules.database.items import Item, generate_stats
-from modules.database.players import Player, SafePlayer
+from modules.database.players import SafePlayer
 from modules.errors import ExceededBuyLimit, InsufficientBalance, ItemMissingPrice, ItemMissingStats, ItemNotFound, \
     ItemUnavailable, MissingItem, MissingSpace, NotMarketable, TradeNotAllowed
 from modules.utils.case_converter import CaseConverter

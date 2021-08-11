@@ -7,6 +7,7 @@ from humanize import naturaldelta
 
 
 class Cog(commands.Cog, name='Misc'):
+    """Miscellaneous commands"""
     def __init__(self, bot):
         self.bot = bot
         print(f'Cog: {self.qualified_name} loaded')

@@ -1,8 +1,12 @@
-from modules.database.players import SafePlayer
+import random
+
+from typing import Optional, Union
+
 from modules.utils.key_converter import KeyConverter
 from modules.utils.case_converter import CaseConverter
-import random
-from typing import Optional, Union
+from modules.database.players import SafePlayer
+from modules.cases import Case, Key
+from modules.errors import BetTooLow, InsufficientBalance, InvalidBet, MissingCase, MissingKey
 
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
@@ -13,9 +17,7 @@ from dislash.interactions.message_components import Button, ActionRow
 from dislash.interactions.slash_interaction import Interaction
 
 from bot.cogs.core import disable_row
-from modules.cases import Case, Key
-from modules.database import Player
-from modules.errors import BetTooLow, InsufficientBalance, InvalidBet, MissingCase, MissingKey
+
 
 class GamblingCog(commands.Cog, name='Gambling'):
     """
@@ -59,7 +61,7 @@ class GamblingCog(commands.Cog, name='Gambling'):
             if isinstance(item, Key):
                 item: Key
                 if not player.keys.get(item.name, 0) >= amount:
-                    raise MissingCase(f'You are missing **{amount}x {item.name}** to place a bet.')
+                    raise MissingKey(f'You are missing **{amount}x {item.name}** to place a bet.')
                 quest_message = 'Guess and press the correct button, win **{}x {}**!'.format(amount*multiplier, item.name)
                 win_message = 'You\'ve won **x{}** **{}**!'.format(amount*multiplier, item.name)
                 loss_message = 'You\'ve lost **x{} {}**!'.format(amount, item.name)

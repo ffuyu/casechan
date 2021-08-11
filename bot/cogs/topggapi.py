@@ -1,3 +1,8 @@
+"""
+TopGGCog automatically POST's the server count to top.gg
+and listens for upvotes coming from top.gg to reward the voters
+"""
+
 from datetime import datetime
 from discord.ext import tasks, commands
 

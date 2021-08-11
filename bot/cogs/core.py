@@ -11,26 +11,23 @@ as follows:
 # Viewing leaderboards
 """
 import asyncio
-from modules.database.items import Item
 from modules.database.players import Player
 from typing import Optional
 
 from DiscordUtils.Pagination import CustomEmbedPaginator
-from discord import Member, Colour, Guild, PartialEmoji
+from discord import Member, Colour, PartialEmoji
 from discord.ext import commands
 from discord.ext.commands.context import Context
 from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import guild_only, max_concurrency
 from dislash.interactions.message_components import ActionRow, Button, ButtonStyle
-from dpytools import Color
 from dpytools.embeds import Embed
 from dpytools.embeds import paginate_to_embeds
 
 from modules.cases import Case
-from modules.database import Player, Item, SafePlayer
+from modules.database import Player, SafePlayer
 from modules.database.users import UserData
 from modules.errors import MissingCase, MissingKey, MissingSpace
-from modules.utils import ItemConverter
 from modules.utils.case_converter import CaseConverter
 
 
