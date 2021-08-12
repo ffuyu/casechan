@@ -11,6 +11,7 @@ as follows:
 # Viewing leaderboards
 """
 import asyncio
+from modules.database.items import sort_items
 from modules.database.players import Player
 from typing import Optional
 
@@ -229,8 +230,10 @@ class CoreCog(commands.Cog, name='Core'):
         user = user if user and not user.bot else ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
         if player.inventory:
-            pages = paginate_to_embeds(description='\n'.join(['**{}x** {}'.format(len(player.inventory.get(item)), item)
-                                                              for item in player.inventory]),
+            sorted_inventory = sort_items(await player.inv_items())
+
+            pages = paginate_to_embeds(description='\n'.join(['**{}x** {}'.format(player.item_count(item.name), item.name)
+                                                              for item in sorted_inventory]),
                                        title='{}\'s Inventory'.format(user), max_size=400, color=Colour.random())
             paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
             if len(pages) > 1:

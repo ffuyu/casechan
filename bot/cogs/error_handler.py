@@ -1,5 +1,5 @@
 from modules.errors import (
-    AlreadyClaimed, BetTooLow, CodeClaimed, CodeExpired, CodeInvalid, DailyError, 
+    AlreadyClaimed, BetTooLow, CaseNotFound, CodeClaimed, CodeExpired, CodeInvalid, DailyError, 
     ExceededBuyLimit, ExistingCode, HourlyError, InsufficientBalance, InvalidBet, 
     ItemNotFound, MissingCase, MissingItem, MissingKey, MissingSpace,
      NotMarketable, SaleNotConfirmed, TradeNotAllowed, WeeklyError
@@ -36,7 +36,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             MissingItem, NotMarketable, ItemNotFound, DailyError, HourlyError, WeeklyError,
             MissingSpace, MissingCase, MissingKey, InsufficientBalance, NotOwner, TradeNotAllowed,
             ExceededBuyLimit, CodeExpired, CodeClaimed, CodeInvalid, AlreadyClaimed, ExistingCode,
-            InvalidBet, BetTooLow, Forbidden, SaleNotConfirmed
+            InvalidBet, BetTooLow, Forbidden, SaleNotConfirmed, CaseNotFound
             }
         embed = Embed(
             title="Command Error:",
