@@ -248,6 +248,7 @@ class MarketCog(commands.Cog, name='Market'):
             elif operator and not price:
                 raise MissingRequiredArgument(price)
             elif operator and price:
+                return await ctx.send("This function is temporarily disabled")
                 items = list(player.inventory.keys())
                 if not items:
                     raise ItemNotFound('You have no items to sell.')
