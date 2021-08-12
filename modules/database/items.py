@@ -116,5 +116,5 @@ class Item(ModelPlus, Model):
 
 
 def sort_items(items: List[Item], highest_first: bool = True) -> list:
-    sorted_list = sorted(items, key=lambda item: item.price, reverse=highest_first)
+    sorted_list = sorted(items, key=lambda item: item.rarity_level, reverse=highest_first)
     return sorted_list
