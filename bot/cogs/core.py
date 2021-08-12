@@ -239,7 +239,7 @@ class CoreCog(commands.Cog, name='Core'):
             if len(pages) > 1:
                 paginator.add_reaction('⬅️', "back")
                 paginator.add_reaction('➡️', "next")
-
+    
             return await paginator.run(pages)
         return await ctx.reply('**{}** has no items to display'.format(user))
 
