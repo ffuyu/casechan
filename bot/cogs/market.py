@@ -197,13 +197,11 @@ class MarketCog(commands.Cog, name='Market'):
             c.sellall ak jaguar fn: Sell all with name AK-47 | Jaguar (Factory Name)
             c.sellall > 5: Sell all items with price greater than $5.0
             c.sellall < 5: Sell all items with price less than $5.0
-            c.sellall = 5: Sell all items that are worth $5.0-5.99
         """
         
         user = await UserData.get(True, user_id=ctx.author.id)
         fees = user.fees
         to_sell = {}
-
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             if isinstance(item, Item):
                 amount = player.item_count(item.name)
@@ -248,76 +246,54 @@ class MarketCog(commands.Cog, name='Market'):
             elif operator and not price:
                 raise MissingRequiredArgument(price)
             elif operator and price:
-                return await ctx.send("This function is temporarily disabled")
-                items = list(player.inventory.keys())
+                price = price if price > 0 else 1
+                items = player.inventory
+                items_count = sum([len(stats) for _, stats in player.inventory.items()])
+                to_sell_count = 0
                 if not items:
                     raise ItemNotFound('You have no items to sell.')
+
                 if operator == ">":
-                
-                    items_count = sum([len(stats) for _, stats in player.inventory.items()])
-                    if items_count:
 
-                        for item in player.inventory:
-                            item_ = await Item.get(False, name=item)
-                            if item_.price > 0.00 and item_.price > price:
-                                to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
+                    for item in player.inventory:
+                        item_ = await Item.get(False, name=item)
+                        if item_.price > price:
+                            to_sell_count += 1 * player.item_count(item)
+                            to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
+                    
+                    if sum(list(to_sell.values())) >= 1000:
+                        if not await sell_prompt(ctx):
+                            raise SaleNotConfirmed("User cancelled the sale or failed to respond in time.")
+
+                    for name, price in to_sell.items():
+                        player.inventory.pop(name)
+                        player.balance += price
                         
-                        if sum(list(to_sell.values())) >= 1000:
-                            if not await sell_prompt(ctx):
-                                raise SaleNotConfirmed("User cancelled the sale or failed to respond in time.")
 
-                        for name, price in to_sell.items():
-                            player.inventory.pop(name)
-                            player.balance += price
-
-                        player.stats['transactions']['items_sold'] += items_count
+                    player.stats['transactions']['items_sold'] += items_count
 
                 elif operator == "<":
                     
-                    items_count = sum([len(stats) for _, stats in player.inventory.items()])
-                    if items_count:
-
-                        for item in player.inventory:
-                            item_ = await Item.get(False, name=item)
-                            if item_.price > 0.00 and item._price < price:
-                                to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
-                        
-                        if sum(list(to_sell.values())) >= 1000:
-                            if not await sell_prompt(ctx):
-                                raise SaleNotConfirmed("User cancelled the sale or failed to respond in time.")
-
-                        for name, price in to_sell.items():
-                            player.inventory.pop(name)
-                            player.balance += price
-
-                        player.stats['transactions']['items_sold'] += items_count
-
-                elif operator == "=":
+                    for item in player.inventory:
+                        item_ = await Item.get(False, name=item)
+                        if item_.price < price:
+                            to_sell_count += 1 * player.item_count(item)
+                            to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
                     
-                    items_count = sum([len(stats) for _, stats in player.inventory.items()])
-                    if items_count:
+                    if sum(list(to_sell.values())) >= 1000:
+                        if not await sell_prompt(ctx):
+                            raise SaleNotConfirmed("User cancelled the sale or failed to respond in time.")
 
-                        for item in player.inventory:
-                            item_ = await Item.get(False, name=item)
-                            if item_.price > 0.00 and item_.price == price:
-                                to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
-                        
-                        if sum(list(to_sell.values())) >= 1000:
-                            if not await sell_prompt(ctx):
-                                raise SaleNotConfirmed("User cancelled the sale or failed to respond in time.")
+                    for name, price in to_sell.items():
+                        player.inventory.pop(name)
+                        player.balance += price
 
-                        for name, price in to_sell.items():
-                            player.inventory.pop(name)
-                            player.balance += price
-
-                        player.stats['transactions']['items_sold'] += items_count
-
-
+                    player.stats['transactions']['items_sold'] += items_count
                 
                 if to_sell:
                     await player.save()
                     return await ctx.send(
-                        'You have sold **{} items** and received **${:.2f}**.'.format(len(to_sell),  sum(list(to_sell.values()))))
+                        'You have sold **{} items** and received **${:.2f}**.'.format(to_sell_count, sum(list(to_sell.values()))))
 
                 raise MissingItem("You don't have any items to sell within the specified price range.")
 

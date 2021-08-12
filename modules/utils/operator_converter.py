@@ -6,15 +6,14 @@ __all__ = (
 
 operators = {
     "gt": ">",
-    "lt": "<",
-    "eq": "="
+    "lt": "<"
 }
 
 class OperatorConverter(Converter):
     """Does not convert, checks if string operator is valid and raises ValueError otherise."""
 
     async def convert(self, ctx, argument):
-        if argument in [">", "<", "="]:
+        if argument in [">", "<"]:
             return argument
         elif argument in [*operators]:
             return operators.get(argument)
