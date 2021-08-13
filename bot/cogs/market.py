@@ -207,6 +207,8 @@ class MarketCog(commands.Cog, name='Market'):
         fees = user.fees
         to_sell = {}
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
+            if player.trade_banned:
+                raise TradeNotAllowed('You cannot sell items. Reason: Account trade banned.')
             if isinstance(item, Item):
                 amount = player.item_count(item.name)
                 if amount:
