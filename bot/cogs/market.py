@@ -13,7 +13,7 @@ from discord.ext.commands.core import guild_only, max_concurrency
 
 from modules.cases import Case, Key
 from modules.database.items import Item, generate_stats
-from modules.database.players import SafePlayer
+from modules.database.players import Player, SafePlayer
 from modules.errors import ExceededBuyLimit, InsufficientBalance, ItemMissingPrice, ItemMissingStats, ItemNotFound, \
     ItemUnavailable, MissingItem, MissingSpace, NotMarketable, SaleNotConfirmed, TradeNotAllowed
 from modules.utils.case_converter import CaseConverter
@@ -103,22 +103,25 @@ class MarketCog(commands.Cog, name='Market'):
             if isinstance(item, Case):
 
                 item_ = await Item.get(name=item.name)
-                price = item_.price
+                print(item_)
+                if item_:
+                    price = item_.price
 
-                if not player.trade_banned:
-                    if player.balance >= (price * amount):
-                        player.mod_case(item.name, amount)
-                        player.balance -= (price * amount)
-                        await player.save()
+                    if not player.trade_banned:
+                        if player.balance >= (price * amount):
+                            player.mod_case(item.name, amount)
+                            player.balance -= (price * amount)
+                            await player.save()
 
-                        item.price = await Item.get(name=item.name)
+                            item.price = await Item.get(name=item.name)
 
-                        return await ctx.send(
-                            'You have purchased **{}x {}** for **${:.2f}**'.format(
-                                amount, item.name, price * amount))
+                            return await ctx.send(
+                                'You have purchased **{}x {}** for **${:.2f}**'.format(
+                                    amount, item.name, price * amount))
 
-                    raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
-                raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
+                        raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
+                    raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
+                raise ItemMissingPrice("This case cannot be bought right now. Please try again later.")
 
             if isinstance(item, Key):
                 if not player.trade_banned:
@@ -310,6 +313,19 @@ class MarketCog(commands.Cog, name='Market'):
         else:
             await ctx.send(embed=Embed(description='Item not found', color=Color.RED))
 
+    @commands.is_owner()
+    @commands.command()
+    async def replacebreakout(self, ctx):
+        case_holders = await Player.find("Operation Breakout Case" in Player.cases)
+        key_holders = await Player.find("Operation Breakout Case Key" in Player.keys)
+
+        for case_holder in case_holders:
+            case_holder.cases["Operation Breakout Weapon Case"] = case_holder.cases.pop("Operation Breakout Case")
+        
+        for key_holder in key_holders:
+            key_holder.keys["Operation Breakout Weapon Case Key"] = key_holder.keys.pop("Operation Breakout Case Key")
+        
+        await ctx.send("Completed")
 
 def setup(bot):
     bot.add_cog(MarketCog(bot))
