@@ -314,25 +314,5 @@ class MarketCog(commands.Cog, name='Market'):
         else:
             await ctx.send(embed=Embed(description='Item not found', color=Color.RED))
 
-    @commands.is_owner()
-    @commands.command()
-    async def replacebreakout(self, ctx):
-        case_holders = await engine.find(Player)
-        key_holders = await engine.find(Player)
-
-        for case_holder in case_holders:
-            if "Operation Breakout Case" in [*case_holder.cases]:
-                case_holder.cases["Operation Breakout Weapon Case"] = case_holder.cases.pop("Operation Breakout Case")
-
-            await case_holder.save()
-
-        for key_holder in key_holders:
-            if "Operation Breakout Case Key" in [*case_holder.keys]:
-                key_holder.keys["Operation Breakout Weapon Case Key"] = key_holder.keys.pop("Operation Breakout Case Key")
-        
-            await key_holder.save()
-        
-        await ctx.send("Completed")
-
 def setup(bot):
     bot.add_cog(MarketCog(bot))
