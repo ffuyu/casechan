@@ -316,8 +316,8 @@ class MarketCog(commands.Cog, name='Market'):
     @commands.is_owner()
     @commands.command()
     async def replacebreakout(self, ctx):
-        case_holders = await Player.find("Operation Breakout Case" in Player.cases)
-        key_holders = await Player.find("Operation Breakout Case Key" in Player.keys)
+        case_holders = await Player.find()
+        key_holders = await Player.find()
 
         for case_holder in case_holders:
             case_holder.cases["Operation Breakout Weapon Case"] = case_holder.cases.pop("Operation Breakout Case")
