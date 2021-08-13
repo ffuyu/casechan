@@ -323,10 +323,14 @@ class MarketCog(commands.Cog, name='Market'):
         for case_holder in case_holders:
             if "Operation Breakout Case" in case_holder.cases:
                 case_holder.cases["Operation Breakout Weapon Case"] = case_holder.cases.pop("Operation Breakout Case")
-        
+
+            case_holder.save()
+
         for key_holder in key_holders:
             if "Operation Breakout Case Key" in case_holder.keys:
                 key_holder.keys["Operation Breakout Weapon Case Key"] = key_holder.keys.pop("Operation Breakout Case Key")
+        
+            key_holder.save()
         
         await ctx.send("Completed")
 
