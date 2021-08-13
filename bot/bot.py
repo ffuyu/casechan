@@ -27,7 +27,7 @@ bot = commands.Bot(command_prefix=get_command_prefix,
                    owner_ids=owners_ids)
 
 SlashClient(bot)
-inter_client = InteractionClient(bot, test_guilds=[875387935128694874])
+inter_client = InteractionClient(bot)
 
 @bot.event
 async def on_ready():
