@@ -27,11 +27,11 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
     async def leaderboard(self, ctx: Context, *, guild: Optional[Guild]):
         """View the inventory worth leaderboard for the server"""
         guild = guild or ctx.guild
-        users = await engine.find(Player, Player.guild_id==guild.id, Player.trade_banned==False)
+        users = await engine.find(Player, Player.guild_id==guild.id)
         users_dictionary = {}
         for user in users:
             member = guild.get_member(user.member_id)
-            if member:
+            if member and not user.trade_banned:
                 users_dictionary[member.name] = await user.inv_total()
 
         leaderboard = sorted(users_dictionary.items(), key=lambda item: item[1], reverse=True)
