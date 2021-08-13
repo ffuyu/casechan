@@ -11,7 +11,8 @@ as follows:
 # Viewing leaderboards
 """
 import asyncio
-from modules.database.items import sort_items
+from os import name
+from modules.database.items import Item, sort_items
 from modules.database.players import Player
 from typing import Optional
 
@@ -25,7 +26,7 @@ from dislash.interactions.message_components import ActionRow, Button, ButtonSty
 from dpytools.embeds import Embed
 from dpytools.embeds import paginate_to_embeds
 
-from modules.cases import Case
+from modules.cases import Case, all_cases
 from modules.database import Player, SafePlayer
 from modules.database.users import UserData
 from modules.errors import MissingCase, MissingKey, MissingSpace
@@ -260,8 +261,6 @@ class CoreCog(commands.Cog, name='Core'):
                 .add_field(name="Inventory", value='${:.2f}'.format(inv_total), inline=True)
                 .add_field(name="Net worth", value='${:.2f}'.format(player.balance + inv_total), inline=True)
         )
-
-    
 
 
 def setup(bot):

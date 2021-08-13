@@ -1,9 +1,12 @@
 import asyncio
+from DiscordUtils.Pagination import CustomEmbedPaginator
+from discord.colour import Colour
 from discord.embeds import Embed
 from discord.ext.commands.context import Context
 from discord.ext.commands.errors import MissingRequiredArgument
 from dislash.interactions.message_components import ActionRow, Button, ButtonStyle
 from dpytools import Color
+from dpytools.embeds import paginate_to_embeds
 from modules.database import engine
 from modules.database.users import UserData
 from typing import Optional, Union
@@ -12,7 +15,7 @@ from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import guild_only, max_concurrency
 
-from modules.cases import Case, Key
+from modules.cases import Case, Key, all_cases
 from modules.database.items import Item, generate_stats
 from modules.database.players import Player, SafePlayer
 from modules.errors import ExceededBuyLimit, InsufficientBalance, ItemMissingPrice, ItemMissingStats, ItemNotFound, \
@@ -21,6 +24,8 @@ from modules.utils.case_converter import CaseConverter
 from modules.utils.item_converter import ItemConverter
 from modules.utils.key_converter import KeyConverter
 from modules.utils.operator_converter import OperatorConverter
+
+case_prices = {}
 
 async def sell_prompt(ctx):
     row = ActionRow(
@@ -315,6 +320,26 @@ class MarketCog(commands.Cog, name='Market'):
             await ctx.send(embed=query.to_embed(minimal=True if ctx.invoked_with == 'price' else False))
         else:
             await ctx.send(embed=Embed(description='Item not found', color=Color.RED))
+
+    @commands.cooldown(10, 60, BucketType.member)
+    @commands.command()
+    async def caseprices(self, ctx: Context):
+        """List the cases you currently have."""
+        if not case_prices:
+            for case in all_cases:
+                c = await Item.get(name=case)
+                if c:
+                    case_prices[case] = c.price
+        pages = paginate_to_embeds(description='\n'.join(
+            f'{k[:20] + "..." if len(k) > 22 else k}: **${v}**' for k, v in case_prices.items()),
+            title='Case Prices', max_size=200, color=Colour.random())
+
+        paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
+        if len(pages) > 1:
+            paginator.add_reaction('⬅️', "back")
+            paginator.add_reaction('➡️', "next")
+
+        return await paginator.run(pages)
 
 def setup(bot):
     bot.add_cog(MarketCog(bot))

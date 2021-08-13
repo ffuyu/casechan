@@ -15,5 +15,7 @@ emojis = {
     "Restricted": RESTRICTED,
     "Classified": CLASSIFIED,
     "Covert": COVERT,
+    "Extraordinary": COVERT,
+    "Exceedingly Rare Item": COVERT,
     "Contraband": CONTRABAND,
 }
