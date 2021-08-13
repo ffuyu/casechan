@@ -4,6 +4,7 @@ from discord.ext.commands.context import Context
 from discord.ext.commands.errors import MissingRequiredArgument
 from dislash.interactions.message_components import ActionRow, Button, ButtonStyle
 from dpytools import Color
+from modules.database import engine
 from modules.database.users import UserData
 from typing import Optional, Union
 
@@ -316,8 +317,8 @@ class MarketCog(commands.Cog, name='Market'):
     @commands.is_owner()
     @commands.command()
     async def replacebreakout(self, ctx):
-        case_holders = await Player.find()
-        key_holders = await Player.find()
+        case_holders = await engine.find(Player, "Operation Breakout Case" in Player.cases)
+        key_holders = await engine.find(Player, "Operation Breakout Case Key" in Player.keys)
 
         for case_holder in case_holders:
             case_holder.cases["Operation Breakout Weapon Case"] = case_holder.cases.pop("Operation Breakout Case")
