@@ -6,7 +6,7 @@ DiscordUtils
 discord-pretty-help
 python-dotenv
 requests
+dislash.py
 humanize
 shortuuid
 topggpy
-dislash.py==latest

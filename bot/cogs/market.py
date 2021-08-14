@@ -236,7 +236,8 @@ class MarketCog(commands.Cog, name='Market'):
 
                     for item in player.inventory:
                         item_ = await Item.get(False, name=item)
-                        to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
+                        if item_:
+                            to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
                     
                     if sum(list(to_sell.values())) >= 1000:
                         if not await sell_prompt(ctx):
@@ -268,9 +269,10 @@ class MarketCog(commands.Cog, name='Market'):
 
                     for item in player.inventory:
                         item_ = await Item.get(False, name=item)
-                        if item_.price > price:
-                            to_sell_count += 1 * player.item_count(item)
-                            to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
+                        if item_:
+                            if item_.price > price:
+                                to_sell_count += 1 * player.item_count(item)
+                                to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
                     
                     if sum(list(to_sell.values())) >= 1000:
                         if not await sell_prompt(ctx):
@@ -287,9 +289,10 @@ class MarketCog(commands.Cog, name='Market'):
                     
                     for item in player.inventory:
                         item_ = await Item.get(False, name=item)
-                        if item_.price < price:
-                            to_sell_count += 1 * player.item_count(item)
-                            to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
+                        if item_:
+                            if item_.price < price:
+                                to_sell_count += 1 * player.item_count(item)
+                                to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
                     
                     if sum(list(to_sell.values())) >= 1000:
                         if not await sell_prompt(ctx):
