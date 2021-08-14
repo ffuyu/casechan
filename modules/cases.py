@@ -157,7 +157,7 @@ class Key:
         self.name = name
         self.case = Case(self.name.replace(' Key', ''))
 
-        self.price = 2.50
+        self.price = 1.25
 
     def __str__(self):
         return self.name

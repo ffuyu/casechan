@@ -38,6 +38,5 @@ class OwnerCog(commands.Cog, name='owner'):
             color=Color.LIME,
         ), delete_after=60.0)
 
-
 def setup(bot):
     bot.add_cog(OwnerCog(bot))
