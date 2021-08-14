@@ -79,6 +79,16 @@ class UsersCog(commands.Cog, name='Users'):
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
+    async def ban(self, ctx:Context, guild_id:Optional[int], user_id:Optional[int]):
+        """Applies a permanent trade-ban to user in specified guild"""
+        player = await Player.get(True, member_id=user_id or ctx.author.id, guild_id=guild_id or ctx.guild.id)
+        player.trade_banned = False
+        await player.save()
+        await ctx.send(f"Removed trade restrictions from **{guild_id or ctx.guild.id}/{user_id or ctx.author}**.")
+
+
+    @max_concurrency(1, commands.BucketType.default, wait=True)
+    @user.command()
     async def delete(self, ctx: Context, guild_id: Optional[int], user_id:Optional[int]):
         """
         Deletes a user from the database
