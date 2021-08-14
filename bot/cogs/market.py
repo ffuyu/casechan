@@ -71,7 +71,7 @@ class MarketCog(commands.Cog, name='Market'):
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
-    async def buy(self, ctx, amount: Optional[int] = 1, *,
+    async def buy(self, ctx:Context, amount: Optional[int] = 1, *,
                   item: Optional[Union[CaseConverter, KeyConverter, ItemConverter]]):
         """
         Buy a skin from the market using your balance
@@ -109,7 +109,6 @@ class MarketCog(commands.Cog, name='Market'):
             if isinstance(item, Case):
 
                 item_ = await Item.get(name=item.name)
-                print(item_)
                 if item_:
                     price = item_.price
 
@@ -121,9 +120,44 @@ class MarketCog(commands.Cog, name='Market'):
 
                             item.price = await Item.get(name=item.name)
 
-                            return await ctx.send(
+                            receipt = await ctx.send(
                                 'You have purchased **{}x {}** for **${:.2f}**'.format(
                                     amount, item.name, price * amount))
+
+                            def check(inter_):
+                                return inter_.author == ctx.author
+
+                            row = ActionRow(
+                                Button(
+                                    style=ButtonStyle.blurple,
+                                    label="Yes",
+                                    custom_id="yes",
+                                ),
+                                Button(
+                                    style=ButtonStyle.gray,
+                                    label="No",
+                                    custom_id="no",
+                                )
+                            )
+                            message = await ctx.send(f"Would you like to buy **{amount}x {item.key}**?", components=[row])
+
+                            try:
+                                inter = await message.wait_for_button_click(check=check, timeout=30)
+                            except asyncio.TimeoutError:
+                                pass
+                            else:
+                                if inter.clicked_button.custom_id == "yes":
+                                    if player.balance >= (amount * 2.5):
+                                        player.mod_key(item.key, amount)
+                                        player.balance -= (amount * 2.5)
+                                        await player.save()
+                                        await receipt.edit(content='You have purchased **{}x {}** and keys for **${:.2f}**'.format(
+                                    amount, item.name, (price * amount) + (amount * 2.5)))
+                                    else:
+                                        raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
+                            finally:
+                                await message.delete()
+                                return 
 
                         raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
                     raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
