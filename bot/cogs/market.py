@@ -1,4 +1,5 @@
 import asyncio
+from modules.constants import ButtonCancel, ButtonConfirm
 from DiscordUtils.Pagination import CustomEmbedPaginator
 from discord.colour import Colour
 from discord.embeds import Embed
@@ -30,11 +31,11 @@ case_prices = {}
 async def sell_prompt(ctx):
     row = ActionRow(
         Button(
-            style=ButtonStyle.green,
+            style=ButtonConfirm,
             label="Confirm",
             custom_id="confirm"),
         Button(
-            style=ButtonStyle.red,
+            style=ButtonCancel,
             label="Cancel",
             custom_id="cancel")
     )
@@ -129,12 +130,12 @@ class MarketCog(commands.Cog, name='Market'):
 
                             row = ActionRow(
                                 Button(
-                                    style=ButtonStyle.blurple,
+                                    style=ButtonConfirm,
                                     label="Yes",
                                     custom_id="yes",
                                 ),
                                 Button(
-                                    style=ButtonStyle.gray,
+                                    style=ButtonCancel,
                                     label="No",
                                     custom_id="no",
                                 )
