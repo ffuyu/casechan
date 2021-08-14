@@ -149,11 +149,12 @@ class MarketCog(commands.Cog, name='Market'):
                             else:
                                 if inter.clicked_button.custom_id == "yes":
                                     if player.balance >= (amount * 2.5):
+                                        key = Key(item.key)
                                         player.mod_key(item.key, amount)
-                                        player.balance -= (amount * 2.5)
+                                        player.balance -= (amount * key.price)
                                         await player.save()
                                         await receipt.edit(content='You have purchased **{}x {}** and keys for **${:.2f}**'.format(
-                                    amount, item.name, (price * amount) + (amount * 2.5)))
+                                    amount, item.name, (price * amount) + (amount * key.price)))
                                     else:
                                         raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
                             finally:
