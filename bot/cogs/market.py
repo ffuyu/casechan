@@ -154,7 +154,7 @@ class MarketCog(commands.Cog, name='Market'):
                                         player.balance -= (amount * key.price)
                                         await player.save()
                                         await receipt.edit(content='You have purchased **{}x {}** and keys for **${:.2f}**'.format(
-                                    amount, item.name, (price * amount) + (amount * key.price)))
+                                    amount, item.name, (price * amount) + (amount * key.priceoh)))
                                     else:
                                         raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
                             finally:
@@ -363,7 +363,7 @@ class MarketCog(commands.Cog, name='Market'):
     @commands.cooldown(10, 60, BucketType.member)
     @commands.command()
     async def caseprices(self, ctx: Context):
-        """List the cases you currently have."""
+        """Lists all the cases with their prices next to them"""
         if not case_prices:
             for case in all_cases:
                 c = await Item.get(name=case)
