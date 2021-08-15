@@ -12,6 +12,8 @@ as follows:
 """
 import asyncio
 from os import name
+
+from discord.abc import User
 from modules.database.items import Item, sort_items
 from modules.database.players import Player
 from typing import Optional
@@ -23,6 +25,7 @@ from discord.ext.commands.context import Context
 from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import guild_only, max_concurrency
 from dislash.interactions.message_components import ActionRow, Button, ButtonStyle
+from dislash import *
 from dpytools.embeds import Embed
 from dpytools.embeds import paginate_to_embeds
 
@@ -53,18 +56,32 @@ class CoreCog(commands.Cog, name='Core'):
     def cog_unload(self):
         print(f'Cog: {self.qualified_name} unloaded')
 
-    @guild_only()
+    @slash_commands.guild_only()
     @max_concurrency(number=1, per=commands.BucketType.member, wait=True)
-    @commands.command(name='open')
-    async def _open(self, ctx: Context, amount: Optional[int] = 1, *, container: Optional[CaseConverter]):
+    @slash_commands.slash_command(name="open", guild_ids = [876199559729147914], description="Opens the specified case", options=[
+        Option(
+            name="container",
+            description="Case to open",
+            type=Type.STRING,
+            required=True
+        ),
+        Option(
+            name="amount",
+            description="Amount of cases to open",
+            type=Type.INTEGER,
+            required=False
+        )
+    ])
+    async def _open(self, inter, amount: Optional[int] = 1, *, container: str):
         """
         Opens a case from your cases
         """
+        container = await CaseConverter().convert(inter, container)
         container: Case
         if not container:
-            return await ctx.send('Not a valid case name!')
+            return await inter.reply('Not a valid case name!', ephemeral=True)
 
-        async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
+        async with SafePlayer(inter.author.id, inter.guild.id) as player:
             amount = amount if amount > 0 else 1
             inv_size = player.inv_items_count()
 
@@ -83,9 +100,9 @@ class CoreCog(commands.Cog, name='Core'):
                 description=f'**<a:casechanloading:874960632187879465> {container}**',
                 color=Colour.random(),
                 image=container.asset
-            ).set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
+            ).set_author(name=inter.author, icon_url=inter.author.avatar_url)
 
-            message = await ctx.send(embed=opening_embed, reference=ctx.message)
+            message = await inter.reply(embed=opening_embed)
             await asyncio.sleep(6.0)
 
             # Updating Player
@@ -145,7 +162,7 @@ class CoreCog(commands.Cog, name='Core'):
                 await message.edit(embed=results, components=[row])
 
             def check(inter_):
-                return inter_.author == ctx.author
+                return inter_.author == inter.author
 
             try:
                 inter = await message.wait_for_button_click(check=check, timeout=30)
@@ -169,7 +186,7 @@ class CoreCog(commands.Cog, name='Core'):
                         await inter.reply(f'Claimed **{item.name}** successfully', ephemeral=True)
 
                 elif inter.clicked_button.custom_id == 'sell':
-                    user = await UserData.get(True, user_id=ctx.author.id)
+                    user = await UserData.get(True, user_id=inter.author.id)
                     fees = user.fees
                     total_received = 0.0
                     if amount != 1:
@@ -186,74 +203,113 @@ class CoreCog(commands.Cog, name='Core'):
                 # NOTE custom function used because row.disable_buttons() does not work.
                 return await message.edit(components=[disable_row(row)])
 
+    @guild_only()
+    @slash_commands.cooldown(10, 60, BucketType.member)
+    @slash_commands.slash_command(name="cases", description="Lists the cases you currently have", guild_ids=[876199559729147914], options=[
+        Option(
+            name="user",
+            description="User to retrieve the cases from",
+            type=Type.USER,
+            required=False
+        ),
 
-    @commands.cooldown(10, 60, BucketType.member)
-    @commands.command(aliases=['keys'])
-    async def cases(self, ctx: Context, *, user: Optional[Member]):
+    ])
+    async def cases(self, inter, user:Optional[User]=None):
         """List the cases you currently have."""
-        user = user if user and not user.bot else ctx.author
-        player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
+        user = user if user and not user.bot else inter.author
+        player = await Player.get(True, member_id=user.id, guild_id=inter.guild.id)
 
-        if ctx.invoked_with == 'cases':
-            if player.cases:
-                pages = paginate_to_embeds(description='\n'.join(
-                    f'**{v}x** {k[:20] + "..." if len(k) > 22 else k}' for k, v in player.cases.items()),
-                    title='{}\'s Cases'.format(user), max_size=130, color=Colour.random())
+        if player.cases:
+            pages = paginate_to_embeds(description='\n'.join(
+                f'**{v}x** {k[:20] + "..." if len(k) > 22 else k}' for k, v in player.cases.items()),
+                title='{}\'s Cases'.format(user), max_size=130, color=Colour.random())
 
-                paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
-                if len(pages) > 1:
-                    paginator.add_reaction('⬅️', "back")
-                    paginator.add_reaction('➡️', "next")
+            paginator = CustomEmbedPaginator(inter, remove_reactions=True)
+            if len(pages) > 1:
+                paginator.add_reaction('⬅️', "back")
+                paginator.add_reaction('➡️', "next")
 
-                return await paginator.run(pages)
+            await paginator.run(pages)
 
-            return await ctx.send(f'**{user}** has no cases to display')  # FIXME (replace with an embed)
+        await inter.reply(f'**{user}** has no cases to display', ephemeral=True)
 
-        elif ctx.invoked_with == 'keys':
-            if player.keys:
-                pages = paginate_to_embeds(description='\n'.join(
-                    f'**{v}x** {k[:20] + "..." if len(k) > 22 else k}' for k, v in player.keys.items()),
-                    title='{}\'s Keys'.format(user), max_size=150, color=Colour.random())
+    @guild_only()
+    @slash_commands.cooldown(10, 60, BucketType.member)
+    @slash_commands.slash_command(name="keys", description="Lists the keys you currently have", guild_ids=[876199559729147914], options=[
+        Option(
+            name="user",
+            description="User to retrieve the keys from",
+            type=Type.USER,
+            required=False
+        ),
 
-                paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
-                if len(pages) > 1:
-                    paginator.add_reaction('⬅️', "back")
-                    paginator.add_reaction('➡️', "next")
+    ])
+    async def keys(self, inter, user:Optional[User]=None):
+        """List the keys you currently have."""
+        user = user if user and not user.bot else inter.author
+        player = await Player.get(True, member_id=user.id, guild_id=inter.guild.id)
 
-                return await paginator.run(pages)
+        if player.keys:
+            pages = paginate_to_embeds(description='\n'.join(
+                f'**{v}x** {k[:20] + "..." if len(k) > 22 else k}' for k, v in player.keys.items()),
+                title='{}\'s Keys'.format(user), max_size=130, color=Colour.random())
 
-        return await ctx.send(
-            f'**{user}** has no {"cases" if ctx.invoked_with == "cases" else "keys"} to display')  # FIXME (replace with an embed)
+            paginator = CustomEmbedPaginator(inter, remove_reactions=True)
+            if len(pages) > 1:
+                paginator.add_reaction('⬅️', "back")
+                paginator.add_reaction('➡️', "next")
 
-    @commands.cooldown(10, 30, BucketType.member)
-    @commands.command(aliases=['inv'])
-    async def inventory(self, ctx: Context, *, user: Optional[Member]):
+            await paginator.run(pages)
+
+        await inter.reply(f'**{user}** has no keys to display', ephemeral=True)
+
+
+    @guild_only()
+    @slash_commands.cooldown(10, 30, BucketType.member)
+    @slash_commands.slash_command(name="inventory", description="Displays your inventory", guild_ids=[876199559729147914], options=[
+        Option(
+            name="user",
+            description="User to retrieve the inventory from",
+            type=Type.USER,
+            required=False
+        ),
+
+    ])
+    async def inventory(self, inter, *, user: Optional[User]=None):
         """View your inventory"""
-        user = user if user and not user.bot else ctx.author
-        player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
+        user = user if user and not user.bot else inter.author
+        player = await Player.get(True, member_id=user.id, guild_id=inter.guild.id)
         if player.inventory:
             sorted_inventory = sort_items(await player.inv_items())
 
             pages = paginate_to_embeds(description='\n'.join(['**{}x** {}'.format(player.item_count(item.name), item.name)
                                                               for item in sorted_inventory]),
                                        title='{}\'s Inventory'.format(user), max_size=400, color=Colour.random())
-            paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
+            paginator = CustomEmbedPaginator(inter, remove_reactions=True)
             if len(pages) > 1:
                 paginator.add_reaction('⬅️', "back")
                 paginator.add_reaction('➡️', "next")
     
-            return await paginator.run(pages)
-        return await ctx.reply('**{}** has no items to display'.format(user))
+            await paginator.run(pages)
+        await inter.reply('**{}** has no items to display'.format(user), ephemeral=True)
 
     @guild_only()
-    @commands.cooldown(10, 30, BucketType.member)
-    @commands.command(aliases=["bal", "b", "networth", "nw"])
-    async def balance(self, ctx, *, user: Optional[Member]):
+    @slash_commands.cooldown(10, 30, BucketType.member)
+    @slash_commands.slash_command(name="balance", description="Displays your wallet, inventory worth and net worth", guild_ids=[876199559729147914], options=[
+        Option(
+            name="user",
+            description="User to retrieve the balance from",
+            type=Type.USER,
+            required=False
+        ),
+
+    ])
+    async def balance(self, inter, *, user: Optional[User]=None):
         """Displays your wallet, inventory and net worth all at once"""
-        user = user if user and not user.bot else ctx.author
-        player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
+        user = user if user and not user.bot else inter.author
+        player = await Player.get(True, member_id=user.id, guild_id=inter.guild.id)
         inv_total = await player.inv_total()
-        await ctx.send(
+        await inter.send(
             embed=Embed(
                 color=Colour.random()
             ).set_author(name=user, icon_url=user.avatar_url) \
