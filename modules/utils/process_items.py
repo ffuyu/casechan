@@ -19,7 +19,7 @@ _relevant_types = ['Weapon', 'Knife', 'Container']
 
 _relevant_keys = ['name', 'icon_url', 'rarity']
 _price_periods = ['7_days', '24_hours', '30_days']
-_all_time_stats = ['median', 'average', 'highest_price']
+_all_time_stats = ['highest_price', 'average', 'median']
 
 
 def _select_items_to_persist(items_, db_items_) -> list:
