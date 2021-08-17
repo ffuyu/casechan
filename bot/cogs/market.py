@@ -110,6 +110,7 @@ class MarketCog(commands.Cog, name='Market'):
         """
         Sell an item to the market and get balance
         Args:
+            amount: amount to sell, applies to the specified item
             item: the name of the item you want to sell
         """
         
