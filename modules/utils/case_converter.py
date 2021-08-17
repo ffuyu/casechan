@@ -22,9 +22,9 @@ class CaseConverter(Converter):
                 lwcs == f'{lwar} case',
                 lwcs == f'operation {lwar}',
                 lwcs == f'operation {lwar} case',
-                lwcs == f'operation {lwar} weapon case',
                 lwcs == f'cs:go {lwar}',
                 lwcs == f'cs:go {lwar} case',
+                lwcs == f'operation {lwar} weapon case',
             ]
             if any(statements):
                 return Case(case)

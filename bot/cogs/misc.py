@@ -26,9 +26,6 @@ class Cog(commands.Cog, name='Misc'):
                         f'Age: {naturaldelta(dt.utcnow() - self.bot.user.created_at)}'
         )
         await ctx.send(embed=embed)
-        owners = [guild.owner_id for guild in guilds]
-        owners_ = {guild.owner_id: owners.count(guild.owner_id) for guild in guilds}
-        print(owners_)
 
     @commands.command()
     async def invite(self, ctx: commands.Context):

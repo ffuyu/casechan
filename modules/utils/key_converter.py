@@ -24,8 +24,8 @@ class KeyConverter(Converter):
                 lwky.replace('case', '') == f'{lwar}',
                 lwky.replace('case', '') == f'{lwar} key',
                 lwky.replace('case', '') == f'operation {lwar} key',
-                lwky.replace('case', '') == f'operation {lwar} weapon case key',
                 lwky.replace('case', '') == f'cs:go {lwar} key',
+                lwky.replace('case', '') == f'operation {lwar} weapon case key',
             ]
             if any(statements):
                 return Key(key)
