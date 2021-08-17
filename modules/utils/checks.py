@@ -71,7 +71,7 @@ def able_to_opencase(player:Player, case:Case, amount:int=1):
     
     if case_amount < amount:
         raise UnableToOpen(
-            message=f'You are missing {amount - case_amount} x {case}')
+            message=f'You are missing {amount - case_amount}x {case}')
     elif key_amount < amount:
         raise UnableToOpen(
             message=f'You are missing {amount - key_amount}x {case.key}')
