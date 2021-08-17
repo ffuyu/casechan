@@ -80,12 +80,18 @@ class MarketCog(commands.Cog, name='Market'):
             item: item you want to buy, it can be a case, key or an item
         """
         amount = amount if amount > 0 else 1
+        
+        # TODO: add case prices to Case to avoid this mess
+        if isinstance(item, Case):
+            item_ = await Item.get(name=item.name)
+            item.price = item_.price
 
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             if able_to_buy(player, item, amount):
 
                 if isinstance(item, (Case, Key)):
                     player.mod_case(item.name, amount) if isinstance(item, Case) else player.mod_key(item.name, amount)
+
 
                 elif isinstance(item, Item):
                     item: Item
@@ -106,7 +112,7 @@ class MarketCog(commands.Cog, name='Market'):
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
     async def sell(self, ctx, amount:Optional[int] = 1, *,
-                   item: Optional[Union[CaseConverter, ItemConverter]]):
+                   item: Optional[ItemConverter]):
         """
         Sell an item to the market and get balance
         Args:
@@ -121,10 +127,7 @@ class MarketCog(commands.Cog, name='Market'):
 
                 fees = await player.fees
 
-                if isinstance(item, (Case)):
-                    player.mod_case(item.name, -amount)
-
-                elif isinstance(item, Item):
+                if isinstance(item, Item):
                     item: Item
                     items = player.inventory.get(item.name, [])
                     if amount == len(items):
@@ -133,9 +136,10 @@ class MarketCog(commands.Cog, name='Market'):
                         player.inventory[item.name] = random.sample(items, k=len(items)-amount)
                     
 
-                player.balance += (item.price * fees) * amount
-                await player.save()
                 earning = (item.price * fees) * amount
+                player.balance += earning
+
+                await player.save()
                 await ctx.reply(
                     content=f'Sold {amount}x {item.name} for ${earning:.2f}.' if earning > 0.0 else 'Sold no items.',
                     mention_author=False

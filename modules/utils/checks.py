@@ -17,9 +17,13 @@ def able_to_buy(player:Player, item:Union[Item, Case, Key], amount:int=1):
         raise UnableToBuy(
             message='You can\'t buy more than 1000 items at once.'
         )
-    elif not remaining_inv >= amount or isinstance(item, (Case, Key)):
+    elif not remaining_inv >= amount and not isinstance(item, (Case, Key)):
         raise UnableToBuy(
             message='You can\'t complete this purchase, your inventory is full!'
+        )
+    elif not item.price and isinstance(item, (Item, Key)):
+        raise UnableToBuy(
+            message='You can\'t purchase this item as it has no price data.'
         )
     elif not player.balance >= total_price:
         raise UnableToBuy(
@@ -39,14 +43,24 @@ def able_to_sell(player:Player, item:Union[Item, Case, Key], amount:int=1):
         raise UnableToSell(
             message='This item cannot be sold as it has no price.'
         )
-    elif not player.item_count(item.name) >= amount:
-        raise UnableToSell(
-            message=f'You are missing {missing_items}x {item.name}.'
-        )
     elif not isinstance(item, (Case, Item)):
         raise UnableToSell(
             message=f'The item you are trying to sell cannot be sold in the market.'
         )
+
+    else:
+
+        if isinstance(item, Item):
+            if not player.item_count(item.name) >= amount:
+                raise UnableToSell(
+                    message=f'You are missing {missing_items}x {item.name}.'
+                )
+
+        elif isinstance(item, Case):
+            if not player.cases.get(item.name, 0) >= amount:
+                raise UnableToSell(
+                    message=f'You are missing {missing_items}x {item.name}.'
+                )
 
     return True
 
