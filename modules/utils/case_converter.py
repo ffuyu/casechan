@@ -1,3 +1,4 @@
+from modules.constants import ButtonCancel, ButtonConfirm
 from discord.ext.commands import Converter
 from dislash.interactions.message_components import ActionRow, Button, ButtonStyle
 
@@ -36,12 +37,12 @@ class CaseConverter(Converter):
 
                 row = ActionRow(
                     Button(
-                        style=ButtonStyle.green,
+                        style=ButtonConfirm,
                         label='Yes',
                         custom_id='yes'
                     ),
                     Button(
-                        style=ButtonStyle.red,
+                        style=ButtonCancel,
                         label='No',
                         custom_id='no'
                     )

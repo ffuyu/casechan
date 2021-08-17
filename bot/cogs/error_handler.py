@@ -1,9 +1,14 @@
 from modules.errors import (
-    AlreadyClaimed, BetTooLow, CaseNotFound, CodeClaimed, CodeExpired, CodeInvalid, DailyError, 
-    ExceededBuyLimit, ExistingCode, HourlyError, InsufficientBalance, InvalidBet, 
-    ItemNotFound, MissingCase, MissingItem, MissingKey, MissingSpace,
-     NotMarketable, SaleNotConfirmed, TradeNotAllowed, WeeklyError
+    AlreadyClaimed, BetTooLow, 
+    CodeClaimed, CodeExpired, CodeInvalid, 
+    ExistingCode, InsufficientBalance, 
+    InvalidBet, ItemNotFound, MissingItem, 
+    MissingSpace, RewardsError, TradeNotAllowed, UnableToBuy, 
+    UnableToOpen, UnableToSell, ItemNotFound, 
+    MissingItem, MissingSpace, TradeNotAllowed,
+    MissingCase, MissingKey
 )
+
 from bson.errors import InvalidDocument
 from discord import Forbidden
 from discord.ext import commands
@@ -14,9 +19,6 @@ from discord.ext.commands import (
 
 from discord.ext.commands.errors import BadUnionArgument, BotMissingPermissions, CommandError, NotOwner
 from dpytools import Embed, Color
-
-from modules.errors import DailyError, ExceededBuyLimit, HourlyError, InsufficientBalance, ItemNotFound, MissingCase, \
-    MissingItem, MissingKey, MissingSpace, NotMarketable, TradeNotAllowed, WeeklyError
 
 
 class ErrorHandlerCog(commands.Cog, name='Error Handler'):
@@ -32,12 +34,12 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
         expected = {
             CheckFailure, CommandNotFound, NoPrivateMessage, MemberNotFound,
             BadArgument, MissingRequiredArgument, MaxConcurrencyReached, CommandOnCooldown,
-            Forbidden, RoleNotFound, BadUnionArgument, BotMissingPermissions, CommandError,
-            MissingItem, NotMarketable, ItemNotFound, DailyError, HourlyError, WeeklyError,
-            MissingSpace, MissingCase, MissingKey, InsufficientBalance, NotOwner, TradeNotAllowed,
-            ExceededBuyLimit, CodeExpired, CodeClaimed, CodeInvalid, AlreadyClaimed, ExistingCode,
-            InvalidBet, BetTooLow, Forbidden, SaleNotConfirmed, CaseNotFound
+            Forbidden, RoleNotFound, BadUnionArgument, BotMissingPermissions, CommandError, MissingItem, 
+            ItemNotFound, RewardsError, MissingSpace, InsufficientBalance,
+            NotOwner, TradeNotAllowed, CodeExpired, CodeClaimed, CodeInvalid, AlreadyClaimed, ExistingCode,
+            InvalidBet, BetTooLow, Forbidden, UnableToBuy, UnableToOpen, UnableToSell, MissingKey, MissingCase
             }
+            
         embed = Embed(
             title="Command Error:",
             color=Color.FIRE_ORANGE,
@@ -45,28 +47,38 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
 
         if isinstance(error, (CommandNotFound)):
             return
+
         elif isinstance(error, NoPrivateMessage):
             embed.description = "This command only works inside a server"
+
         elif isinstance(error, (CheckFailure, BadArgument)):
             embed.description = f"{error.__cause__ or error}"
             print(error.__cause__ or error)
+
         elif isinstance(error, Forbidden):
             me = ctx.guild.me
             if ctx.channel.permissions_for(me).send_messages:
                 embed.description = ("I cannot perform the action you requested because I'm missing permissions "
                                      "or because my role is too low.")
+
         elif isinstance(error, BotMissingPermissions):
             embed.description = str(error)
+
         elif isinstance(error, NotOwner):
             embed.description = 'You are not allowed to use this command!'
+
         elif isinstance(error, MaxConcurrencyReached):
             embed.description = f'This command can only be used by {error.number} {str(error.per).split(".")[1]} at same time.'
+
         elif isinstance(error, CommandOnCooldown):
             embed.description = "Slow down! You can run this command in {:.2f}s".format(error.retry_after)
+
         elif isinstance(error, (InvalidDocument, AttributeError, TypeError)):
             embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
+
         else:
             embed.description = str(error)
+
         try:
             await ctx.send(embed=embed)
         except:

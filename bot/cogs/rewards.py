@@ -14,7 +14,7 @@ from humanize import naturaldelta
 
 from modules.cases import Case, all_cases
 from modules.database.players import SafePlayer
-from modules.errors import DailyError, WeeklyError, HourlyError
+from modules.errors import RewardsError
 
 
 async def _reward_cases(player, to_give):
@@ -60,7 +60,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
 
             remaining = player.hourly + datetime.timedelta(hours=1) - datetime.datetime.utcnow()
 
-            raise HourlyError(f'You have to wait {naturaldelta(remaining)} to claim your next hourly rewards.')
+            raise RewardsError(f'You have to wait {naturaldelta(remaining)} to claim your next hourly rewards.')
 
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
@@ -84,7 +84,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
 
             remaining = player.daily + datetime.timedelta(days=1) - datetime.datetime.utcnow()
 
-            raise DailyError(f'You have to wait {naturaldelta(remaining)} to claim your next daily rewards.')
+            raise RewardsError(f'You have to wait {naturaldelta(remaining)} to claim your next daily rewards.')
 
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
@@ -94,7 +94,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
         """
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             if datetime.datetime.utcnow() - ctx.author.created_at < datetime.timedelta(weeks=1):
-                raise WeeklyError('Your account is ineligible to claim weekly rewards.')
+                raise RewardsError('Your account is ineligible to claim weekly rewards.')
 
             if (datetime.datetime.utcnow() - player.weekly) > datetime.timedelta(weeks=1):
                 player.weekly = datetime.datetime.utcnow()
@@ -110,7 +110,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
 
             remaining = player.weekly + datetime.timedelta(weeks=1) - datetime.datetime.utcnow()
 
-            raise WeeklyError(f'You have to wait {naturaldelta(remaining)} to claim your next weekly rewards.')
+            raise RewardsError(f'You have to wait {naturaldelta(remaining)} to claim your next weekly rewards.')
 
     @commands.command(aliases=["upvote"])
     async def vote(self, ctx):

@@ -26,7 +26,7 @@ rarity = {
 _item_cache = []
 
 
-def generate_stats(exterior: str='Factory New'):
+def generate_stats(exterior: str):
     ranges = {
         "Battle-Scarred": (0.44, 0.99),
         "Well-Worn": (0.37, 0.439),
@@ -34,7 +34,7 @@ def generate_stats(exterior: str='Factory New'):
         "Minimal Wear": (0.07, 0.149),
         "Factory New": (0.00, 0.069)
     }
-    range_ = ranges.get(exterior, (0.00, 0.069))
+    range_ = ranges.get(exterior, (0, 0))
     float_ = random.SystemRandom().uniform(a=range_[0], b=range_[1])
     seed = random.SystemRandom().randint(1, 1000)
     return float_, seed
@@ -79,6 +79,14 @@ class Item(ModelPlus, Model):
     @property
     def rarity_level(self):
         return rarity[self.rarity][0]
+
+    @property
+    def is_marketable(self):
+        return True if self.price else False
+
+    @property
+    def exterior(self):
+        return self.name[self.name.find('(') + 1:self.name.find(')')]
 
     def to_embed(self, float_=None, seed=None, minimal=False):
         e = Embed(

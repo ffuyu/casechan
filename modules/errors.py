@@ -1,23 +1,5 @@
 from discord.ext.commands.errors import CommandError
 
-__all__ = (
-    'TradeError',
-    'TradeNotAllowed',
-    'TradeExpired',
-
-    'ItemNotFound',
-    'ItemUnavailable',
-
-    'MissingCase',
-    'MissingKey',
-
-    'MissingSpace',
-
-    'MarketError',
-    'InsufficientBalance',
-    'NotMarketable'
-)
-
 
 class TradeError(CommandError):
     pass
@@ -25,108 +7,58 @@ class TradeError(CommandError):
 
 class TradeNotAllowed(TradeError):
     pass
-
-
 class TradeExpired(TradeError):
     pass
-
-
 class TradeUnavailable(TradeError):
     pass
-
-
 class NotTradeable(TradeError):
     pass
 
 
 class ItemError(CommandError):
     pass
-
-
 class ItemNotFound(ItemError):
     pass
-
-
 class ItemUnavailable(ItemError):
     pass
-
-
 class ItemMissingStats(ItemError):
     pass
-
-
 class ItemMissingPrice(ItemError):
     pass
 
 
 class CaseError(CommandError):
     pass
-
-
-class MissingCase(CaseError):
+class UnableToOpen(CaseError):
     pass
-
-
-class MissingKey(CaseError):
+class MissingCase(CommandError):
     pass
-
-
-class CaseNotFound(CaseError):
+class MissingKey(CommandError):
     pass
 
 
 class InventoryError(CommandError):
     pass
-
-
 class MissingSpace(InventoryError):
     pass
-
-
 class MissingItem(InventoryError):
     pass
 
 
 class MarketError(CommandError):
     pass
-
-
-class InsufficientBalance(MarketError):
+class UnableToBuy(MarketError):
+    pass
+class UnableToSell(MarketError):
     pass
 
 
-class NotMarketable(MarketError):
-    pass
-
-
-class StateNotEqual(MarketError):
-    pass
-
-
-class ExceededBuyLimit(MarketError):
-    pass
-
-
-class SaleNotConfirmed(MarketError):
-    pass
-
-
-class DailyError(CommandError):
-    pass
-
-
-class HourlyError(DailyError):
-    pass
-
-
-class WeeklyError(DailyError):
+class RewardsError(CommandError):
     pass
 
 
 class PromoError(CommandError):
     pass
-
-
 class CodeExpired(PromoError):
     pass
 class CodeInvalid(PromoError):
@@ -143,10 +75,11 @@ class ExistingCode(PromoError):
     pass
 
 
-
 class BetError(CommandError):
     pass
 class InvalidBet(BetError):
     pass
 class BetTooLow(BetError):
+    pass
+class InsufficientBalance(BetError):
     pass

@@ -1,21 +1,23 @@
 from discord.ext.commands import Converter
+import operator
 
 __all__ = (
     'OperatorConverter',
 )
 
 operators = {
-    "gt": ">",
-    "lt": "<"
+    ">": operator.gt,
+    "<": operator.lt,
+    "gt": operator.gt,
+    "lt": operator.lt,
 }
 
 class OperatorConverter(Converter):
-    """Does not convert, checks if string operator is valid and raises ValueError otherise."""
-
-    async def convert(self, ctx, argument):
-        if argument in [">", "<"]:
-            return argument
-        elif argument in [*operators]:
-            return operators.get(argument)
+    """Converts a string logical operator to an actual operator object"""
+    async def convert(self, ctx, argument) -> operator:
+        if argument in [*operators]:
+            return operators[argument]
+        if any(x.isdigit() for x in argument):
+            return operator.eq
         else:
             raise ValueError(f'No operator with name "{argument}"')

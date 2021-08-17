@@ -44,14 +44,15 @@ class GamblingCog(commands.Cog, name='Gambling'):
         """
         amount = amount if amount > 1 else 1
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
-            reward_place = random.randint(1, 9)
+            reward_place = random.randint(1, 4)
             rows = []
             color = random.randint(1, 4)
-            multiplier = random.randint(3, 9)
+            multiplier = random.randint(2, 4)
             if isinstance(item, Case):
                 item: Case
                 if not player.cases.get(item.name, 0) >= amount:
                     raise MissingCase(f'You are missing **{amount}x {item.name}** to place a bet.')
+
                 quest_message = 'Guess and press the correct button, win **{}x {}**!'.format(amount*multiplier, item.name)
                 win_message = 'You\'ve won **x{}** **{}**!'.format(amount*multiplier, item.name)
                 loss_message = 'You\'ve lost **x{} {}**!'.format(amount, item.name)
@@ -62,6 +63,7 @@ class GamblingCog(commands.Cog, name='Gambling'):
                 item: Key
                 if not player.keys.get(item.name, 0) >= amount:
                     raise MissingKey(f'You are missing **{amount}x {item.name}** to place a bet.')
+
                 quest_message = 'Guess and press the correct button, win **{}x {}**!'.format(amount*multiplier, item.name)
                 win_message = 'You\'ve won **x{}** **{}**!'.format(amount*multiplier, item.name)
                 loss_message = 'You\'ve lost **x{} {}**!'.format(amount, item.name)
@@ -72,8 +74,10 @@ class GamblingCog(commands.Cog, name='Gambling'):
                 item = amount
                 if amount < 10:
                     raise BetTooLow('You can\'t place a bet under **$10**')
+
                 if not player.balance >= item:
                     raise InsufficientBalance('You have insufficient balance to place this bet.')
+
                 quest_message = 'Guess and press the correct button, win **${}**!'.format(item * 2)
                 win_message = 'You\'ve won **${}**!'.format(2 * item)
                 loss_message = 'You\'ve lost **${}**!'.format(item)
@@ -84,7 +88,7 @@ class GamblingCog(commands.Cog, name='Gambling'):
             elif (not item and amount) or (isinstance(item, int) and isinstance(amount, (int, float))):
                 raise InvalidBet('You need to place a bet with cases, keys or balance.')
 
-            for y in range(3):
+            for y in range(2):
                 rows.append(ActionRow(
                     Button(
                         style=color,

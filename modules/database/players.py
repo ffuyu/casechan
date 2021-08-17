@@ -1,6 +1,7 @@
 from asyncio import Lock
 from copy import copy
 from datetime import datetime, timedelta
+from modules.database.users import UserData
 from typing import Optional, Dict, List, Tuple
 
 from odmantic import Model, query
@@ -30,6 +31,7 @@ class Player(ModelPlus, Model):
     cases: Dict[str, int] = {}  # {case.name: number}
     keys: Dict[str, int] = {}  # {key.name: number}
     inventory: Dict[str, List[Tuple[float, int]]] = {}  # {item.name: [tuple of stats (float, seed)]}
+    inventory_limit: Optional[int] = 1000
     stats: dict = copy(stats_dict)
     daily: Optional[datetime] = datetime.utcnow() - timedelta(days=1)
     hourly: Optional[datetime] = datetime.utcnow() - timedelta(hours=1)
@@ -67,8 +69,15 @@ class Player(ModelPlus, Model):
     async def inv_items(self) -> List[Item]:
         return await self.engine.find(Item, query.in_(Item.name, [*self.inventory]))
 
+    @property
     def inv_items_count(self):
         return sum([self.item_count(x) for x in self.inventory])
+
+    @property
+    async def fees(self):
+        user = await UserData.get(True, user_id=self.member_id)
+        return user.fees
+
 
     async def inv_total(self) -> float:
         items = [(i, self.inventory[i.name]) for i in await self.inv_items()]
@@ -139,7 +148,6 @@ class Player(ModelPlus, Model):
             None
         """
         self._mod_case_or_key('keys', key_name, n)
-
 
 player_locks = {}
 

@@ -1,26 +1,27 @@
-import asyncio
-from modules.constants import ButtonCancel, ButtonConfirm
+import asyncio, random
+
 from DiscordUtils.Pagination import CustomEmbedPaginator
+
 from discord.colour import Colour
 from discord.embeds import Embed
-from discord.ext.commands.context import Context
-from discord.ext.commands.errors import MissingRequiredArgument
-from dislash.interactions.message_components import ActionRow, Button, ButtonStyle
-from dpytools import Color
-from dpytools.embeds import paginate_to_embeds
-from modules.database import engine
-from modules.database.users import UserData
-from typing import Optional, Union
 
+from discord.ext.commands.context import Context
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import guild_only, max_concurrency
 
+from dislash.interactions.message_components import ActionRow, Button
+
+from dpytools import Color
+from dpytools.embeds import paginate_to_embeds
+
+from typing import Optional, Union
+
+from modules.utils.checks import able_to_buy, able_to_sell
+from modules.constants import ButtonCancel, ButtonConfirm
 from modules.cases import Case, Key, all_cases
 from modules.database.items import Item, generate_stats
-from modules.database.players import Player, SafePlayer
-from modules.errors import ExceededBuyLimit, InsufficientBalance, ItemMissingPrice, ItemMissingStats, ItemNotFound, \
-    ItemUnavailable, MissingItem, MissingSpace, NotMarketable, SaleNotConfirmed, TradeNotAllowed
+from modules.database.players import SafePlayer
 from modules.utils.case_converter import CaseConverter
 from modules.utils.item_converter import ItemConverter
 from modules.utils.key_converter import KeyConverter
@@ -39,7 +40,7 @@ async def sell_prompt(ctx):
             label="Cancel",
             custom_id="cancel")
     )
-    prompt = await ctx.send(content="Do you confirm this sale?", components=[row])
+    prompt = await ctx.send(content="Are you sure you want to sell all your items?", components=[row])
 
     def check(inter_):
         return inter_.author == ctx.author
@@ -56,8 +57,6 @@ async def sell_prompt(ctx):
 
         if inter.clicked_button.custom_id == "confirm":
             return True
-        else:
-            return False
 
 class MarketCog(commands.Cog, name='Market'):
     """Contains market commands that lets players buy/sell items"""
@@ -80,160 +79,76 @@ class MarketCog(commands.Cog, name='Market'):
             amount: quantity of the item you want to buy
             item: item you want to buy, it can be a case, key or an item
         """
-        amount = amount if amount > 1 else 1
-        if amount > 1000:
-            raise ExceededBuyLimit('You can\'t buy more than 1000 items at once.')
+        amount = amount if amount > 0 else 1
 
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
+            if able_to_buy(player, item, amount):
 
-            if isinstance(item, Item):
-                if player.balance >= (item.price * amount):
-                    if (1000 - len(player.inventory)) >= amount:
-                        if not player.trade_banned:
-                            if item.price > 0.00:
+                if isinstance(item, (Case, Key)):
+                    player.mod_case(item.name, amount) if isinstance(item, Case) else player.mod_key(item.name, amount)
 
-                                for _ in range(amount):
-                                    stats = generate_stats(item.name[item.name.find('(') + 1:item.name.find(')')])
-                                    player.add_item(item.name, stats)
-                                player.balance -= (item.price * amount)
+                elif isinstance(item, Item):
+                    item: Item
+                    generated_stats = [generate_stats(item.exterior) for _ in range(amount)]
+                    for stats in generated_stats:
+                        player.add_item(item.name, stats) 
 
-                                await player.save()
-                                return await ctx.send(
-                                    'You have purchased **{}x {}** successfully. You have been charged **${:.2f}**.'.format(
-                                        amount, item.name, item.price * amount))
+                player.balance -= item.price * amount
+                await player.save()
+                return await ctx.reply(
+                    content=f'Purchased {item.name} for ${item.price:.2f}.' if amount == 1 else f'Purchased {amount}x {item.name} for ${item.price * amount:.2f}.',
+                    mention_author=False
+                )
 
-                            raise ItemUnavailable('You cannot buy this item now. Reason: Item has no price data.')
-                        raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
-                    raise MissingSpace('You cannot buy this item now. Reason: Inventory limit reached.')
-                raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
-
-            if isinstance(item, Case):
-
-                item_ = await Item.get(name=item.name)
-                if item_:
-                    price = item_.price
-
-                    if not player.trade_banned:
-                        if player.balance >= (price * amount):
-                            player.mod_case(item.name, amount)
-                            player.balance -= (price * amount)
-                            await player.save()
-
-                            item.price = await Item.get(name=item.name)
-
-                            receipt = await ctx.send(
-                                'You have purchased **{}x {}** for **${:.2f}**'.format(
-                                    amount, item.name, price * amount))
-
-                            def check(inter_):
-                                return inter_.author == ctx.author
-
-                            row = ActionRow(
-                                Button(
-                                    style=ButtonConfirm,
-                                    label="Yes",
-                                    custom_id="yes",
-                                ),
-                                Button(
-                                    style=ButtonCancel,
-                                    label="No",
-                                    custom_id="no",
-                                )
-                            )
-                            message = await ctx.send(f"Would you like to buy **{amount}x {item.key}**?", components=[row])
-
-                            try:
-                                inter = await message.wait_for_button_click(check=check, timeout=30)
-                            except asyncio.TimeoutError:
-                                pass
-                            else:
-                                if inter.clicked_button.custom_id == "yes":
-                                    if player.balance >= (amount * 2.5):
-                                        key = Key(item.key)
-                                        player.mod_key(item.key, amount)
-                                        player.balance -= (amount * key.price)
-                                        await player.save()
-                                        await receipt.edit(content='You have purchased **{}x {}** and keys for **${:.2f}**'.format(
-                                    amount, item.name, (price * amount) + (amount * key.priceoh)))
-                                    else:
-                                        raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
-                            finally:
-                                await message.delete()
-                                return 
-
-                        raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
-                    raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
-                raise ItemMissingPrice("This case cannot be bought right now. Please try again later.")
-
-            if isinstance(item, Key):
-                if not player.trade_banned:
-                    if player.balance >= (item.price * amount):
-                        player.mod_key(item.name, amount)
-                        player.balance -= (item.price * amount)
-                        await player.save()
-
-
-                        return await ctx.send(
-                            'You have purchased **{}x {}** for **${:.2f}**'.format(
-                                amount, item.name, item.price * amount))
-
-                    raise InsufficientBalance('You cannot buy this item now. Reason: Insufficient balance.')
-                raise TradeNotAllowed('You cannot buy this item now. Reason: Account trade banned.')
-
-            raise ItemNotFound('Item not found')
+        
 
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
-    async def sell(self, ctx, *, item: Optional[Union[CaseConverter, KeyConverter, ItemConverter]]):
+    async def sell(self, ctx, amount:Optional[int] = 1, *,
+                   item: Optional[Union[CaseConverter, ItemConverter]]):
         """
-        Sell a skin to the market and get balance
+        Sell an item to the market and get balance
         Args:
             item: the name of the item you want to sell
         """
-        amount = 1
-        if isinstance(item, Item):
-            async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
-                user = await UserData.get(True, user_id=ctx.author.id)
-                fees = user.fees
-                if player.item_count(item.name) >= amount:
-                    if not player.trade_banned:
-                        if item.price > 0.00:
-                            stats = player.inventory.get(item.name, [])
-                            if stats:
+        
+        amount = amount if amount > 0 else 1
 
-                                if item.price >= 1000:
-                                    if not await sell_prompt(ctx):
-                                        raise SaleNotConfirmed("User cancelled the sale or failed to respond in time.")
-                                
-                                player.rem_item(item.name, stats[0])
-                                player.balance += ((item.price * amount) * fees)
-                                player.stats['transactions']['items_sold'] += 1
-                                await player.save()
-                                return await ctx.send(
-                                    'You have sold **{}x {}** and received **${:.2f}**.'.format(amount, item.name, (
-                                                (item.price * fees) * amount)))
+        async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
+            if able_to_sell(player, item, amount):
 
-                            raise ItemMissingStats('An error occured while selling your item. '
-                                                   'Perhaps the item is corrupted.')
-                        raise ItemMissingPrice('You cannot sell this item now. Reason: Item has no price data.')
-                    raise TradeNotAllowed('You cannot sell items. Reason: Account trade banned.')
-                raise MissingItem('You cannot sell this item now. Reason: Item not found on inventory.')
+                fees = await player.fees
 
-        if isinstance(item, (Case, Key)):
-            raise NotMarketable('This item cannot be sold.')
+                if isinstance(item, (Case)):
+                    player.mod_case(item.name, -amount)
 
-        raise ItemNotFound('Please specify an item to sell')
+                elif isinstance(item, Item):
+                    item: Item
+                    items = player.inventory.get(item.name, [])
+                    if amount == len(items):
+                        player.inventory.pop(item.name)
+                    else:
+                        player.inventory[item.name] = random.sample(items, k=len(items)-amount)
+                    
+
+                player.balance += (item.price * fees) * amount
+                await player.save()
+                earning = (item.price * fees) * amount
+                await ctx.reply(
+                    content=f'Sold {amount}x {item.name} for ${earning:.2f}.' if earning > 0.0 else 'Sold no items.',
+                    mention_author=False
+                )
 
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
-    async def sellall(self, ctx, operator:Optional[OperatorConverter], price:Optional[float], *, item: Optional[Union[CaseConverter, KeyConverter, ItemConverter]]):
+    async def sellall(self, ctx:Context, operator:Optional[OperatorConverter], *, item_or_price: Optional[Union[float, CaseConverter, ItemConverter]]):
         """
         Bulk sells the specified item or all items if none specified
 
         Args:
-            operator: logical operator to define greater, less or equal price rules
+            operator: logical operator to define greater or less price rules
             price: price to use with the specified logical operator
             item: the name of the item you want to sell, leave empty to sell everything
         \n
@@ -244,108 +159,64 @@ class MarketCog(commands.Cog, name='Market'):
             c.sellall < 5: Sell all items with price less than $5.0
         """
         
-        user = await UserData.get(True, user_id=ctx.author.id)
-        fees = user.fees
-        to_sell = {}
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
-            if player.trade_banned:
-                raise TradeNotAllowed('You cannot sell items. Reason: Account trade banned.')
-            if isinstance(item, Item):
-                amount = player.item_count(item.name)
-                if amount:
+            if not player.trade_banned:
 
-                    player.inventory.pop(item.name)
-                    player.balance += (item.price * fees)
-                    player.stats['transactions']['items_sold'] += amount
-                    await player.save()
-                    return await ctx.send('You have sold **{}x {}(s)** and received **${:.2f}**.'.format(amount, item.name,
-                                                                                                        ((
-                                                                                                                    item.price * fees) * amount)))
-                raise MissingItem('You don\'t have any **{}** to sell.'.format(item.name))
+                fees = await player.fees
+                earning = 0.0
 
-            if isinstance(item, (Case, Key)):
-                raise NotMarketable('This item cannot be sold.')
+                # operator specified, price specified, no item specified
+                if isinstance(item_or_price, float) and operator:
+                    for item in await player.inv_items():
+                        item: Item
+                        if item.price:
+                            if operator(item.price, item_or_price):
+                                earning += (item.price * fees) * player.item_count(item.name)
+                                player.inventory.pop(item.name)
 
-            if not item and not operator and not price:
-                items_count = sum([len(stats) for _, stats in player.inventory.items()])
-                if items_count:
+                # no operator specified, item specified
+                if isinstance(item_or_price, Item):
+                    if item_or_price in [*player.inventory]:
+                        item: Item
+                        if item_or_price.price:
+                            earning += (item.price * fees) * player.item_count(item.name)
+                            player.inventory.pop(item.name)
 
-                    for item in player.inventory:
-                        item_ = await Item.get(False, name=item)
-                        if item_:
-                            to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
-                    
-                    if sum(list(to_sell.values())) >= 1000:
-                        if not await sell_prompt(ctx):
-                            raise SaleNotConfirmed("User cancelled the sale or failed to respond in time.")
+                # none or invalid arguments passed in, 
+                # either an operator, float, Item or Case
+                # (sells all items)
+                if not operator and not item_or_price:
+                    if await sell_prompt(ctx):
+                        for item in await player.inv_items():
+                            item: Item
+                            if item.price:
+                                earning += (item.price * fees) * player.item_count(item.name)
+                                player.inventory.pop(item.name)
+                    else:
+                        return
 
-                    for name, price in to_sell.items():
-                        player.inventory.pop(name)
-                        player.balance += price
+                # operator specified, no item/price specified
+                # operator specified, item specified
+                # operator not specified, price specified
+                if any(
+                    {
+                        operator and not item_or_price,
+                        operator and isinstance(item_or_price, (Item, Case)),
+                        not operator and isinstance(item_or_price, float)
+                    }
+                ):
+                    return await ctx.reply(
+                        content='There was an error parsing your request',
+                        mention_author=False
+                    )
 
-                    player.stats['transactions']['items_sold'] += items_count
-
-                    await player.save()
-                    return await ctx.send(
-                        'You have sold **{} items** and received **${:.2f}**.'.format(len(to_sell), sum(list(to_sell.values()))))
-
-                raise ItemNotFound('You have no items to sell.')
-
-            elif operator and not price:
-                raise MissingRequiredArgument(price)
-            elif operator and price:
-                price = price if price > 0 else 1
-                items = player.inventory
-                items_count = sum([len(stats) for _, stats in player.inventory.items()])
-                to_sell_count = 0
-                if not items:
-                    raise ItemNotFound('You have no items to sell.')
-
-                if operator == ">":
-
-                    for item in player.inventory:
-                        item_ = await Item.get(False, name=item)
-                        if item_:
-                            if item_.price > price:
-                                to_sell_count += 1 * player.item_count(item)
-                                to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
-                    
-                    if sum(list(to_sell.values())) >= 1000:
-                        if not await sell_prompt(ctx):
-                            raise SaleNotConfirmed("User cancelled the sale or failed to respond in time.")
-
-                    for name, price in to_sell.items():
-                        player.inventory.pop(name)
-                        player.balance += price
-                        
-
-                    player.stats['transactions']['items_sold'] += items_count
-
-                elif operator == "<":
-                    
-                    for item in player.inventory:
-                        item_ = await Item.get(False, name=item)
-                        if item_:
-                            if item_.price < price:
-                                to_sell_count += 1 * player.item_count(item)
-                                to_sell.setdefault(item_.name, player.item_count(item) * (fees * item_.price))
-                    
-                    if sum(list(to_sell.values())) >= 1000:
-                        if not await sell_prompt(ctx):
-                            raise SaleNotConfirmed("User cancelled the sale or failed to respond in time.")
-
-                    for name, price in to_sell.items():
-                        player.inventory.pop(name)
-                        player.balance += price
-
-                    player.stats['transactions']['items_sold'] += items_count
-                
-                if to_sell:
-                    await player.save()
-                    return await ctx.send(
-                        'You have sold **{} items** and received **${:.2f}**.'.format(to_sell_count, sum(list(to_sell.values()))))
-
-                raise MissingItem("You don't have any items to sell within the specified price range.")
+                player.balance += earning
+                await player.save()
+                await ctx.reply(
+                    content=f'Sold items for ${(earning):.2f}.' if earning > 0.0 else 'Sold no items.',
+                    mention_author=False
+                )
+        
 
     @commands.command(aliases=['inspect'])
     async def price(self, ctx: Context, *, query: Optional[ItemConverter]):
@@ -358,7 +229,7 @@ class MarketCog(commands.Cog, name='Market'):
             query: Item
             await ctx.send(embed=query.to_embed(minimal=True if ctx.invoked_with == 'price' else False))
         else:
-            await ctx.send(embed=Embed(description='Item not found', color=Color.RED))
+            await ctx.send(embed=Embed(description='Item not found', color=Color.FIRE_ORANGE))
 
     @commands.cooldown(10, 60, BucketType.member)
     @commands.command()

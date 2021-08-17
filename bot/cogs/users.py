@@ -1,5 +1,4 @@
 from dpytools.checks import only_these_users
-from modules.errors import CaseNotFound
 from modules.utils.case_converter import CaseConverter
 from typing import Optional
 from modules.database.players import Player
@@ -52,7 +51,7 @@ class UsersCog(commands.Cog, name='Users'):
             amount = amount if amount > 1 else 1
             msg = f"Gave **x{amount} {container}** to **{guild.id or ctx.guild.id}/{user.id or ctx.author}**"
             return await _alter_case(ctx, amount, container, msg, guild.id, user.id)
-        raise CaseNotFound('Specified case could not be found')
+        await ctx.send('Specified case could not be found')
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
@@ -66,7 +65,7 @@ class UsersCog(commands.Cog, name='Users'):
             amount = amount if amount > 1 else 1
             msg = f"Took **x{abs(amount)} {container}** from **{guild.id or ctx.guild.id}/{user.id or ctx.author}**"
             return await _alter_case(ctx, -amount, container, msg, guild.id, user.id)
-        raise CaseNotFound('Specified case could not be found')
+        await ctx.send('Specified case could not be found')
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
@@ -94,8 +93,7 @@ class UsersCog(commands.Cog, name='Users'):
         Deletes a user from the database
         """
         player = await Player.get(True, member_id=user_id or ctx.author.id, guild_id=guild_id or ctx.guild.id)
-        
-        await player.save()
+        await player.delete()
         await ctx.send(f"**{guild_id or ctx.guild.id}/{user_id or ctx.author.id}** has been deleted from database.")
 
 
