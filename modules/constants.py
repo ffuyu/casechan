@@ -4,3 +4,4 @@ CASE_EMOJI = '<:case:871191650737745930>'
 ButtonConfirm = 1
 ButtonCancel = 2
 ButtonDanger = 4
+KEY_PRICE = 2.5
