@@ -7,6 +7,9 @@ from modules.cases import all_cases, case_assets
 from modules.database import Item
 from modules.database import engine
 
+_require_no_key = {
+    "X-Ray P250 Package"
+}
 
 async def main():
     print('Started')
@@ -23,7 +26,8 @@ async def main():
         new_case = {
             'name': item.name,
             'price': item.price,
-            'items': case
+            'items': case,
+            'key': f'{item.name} Key' if item.name not in _require_no_key else None
         }
         j[item.name] = new_case
 
@@ -39,7 +43,7 @@ async def main():
     print('Finished')
 
     print("The following cases are missing in new_cases:")
-    print(*(f'\t{c}' for c in all_cases if c not in j))
+    print(*(f'\t{c}\n' for c in all_cases if c not in j))
 
 
 loop = aio.get_event_loop()

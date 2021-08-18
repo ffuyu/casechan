@@ -50,13 +50,21 @@ class Item(ModelPlus, Model):
         collection = 'items'
 
     @classmethod
+    async def from_cache(cls, name: str) -> Optional['Item']:
+        """
+        Returns an item from the cache instead of querying the database
+        If cache hasn't been initiated it is refreshed.
+        """
+        cache = await cls.item_cache()
+        return next((item for item in cache if item.name == name), None)
+
+    @classmethod
     async def _refresh_item_cache(cls):
         global _item_cache
         _item_cache = await engine.find(cls)
 
     @classmethod
     async def item_cache(cls, *, force_refresh=False):
-        global _item_cache
         if not _item_cache or force_refresh:
             await cls._refresh_item_cache()
         return _item_cache

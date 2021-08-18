@@ -1,11 +1,11 @@
 from asyncio import Lock
 from copy import copy
 from datetime import datetime, timedelta
-from modules.database.users import UserData
 from typing import Optional, Dict, List, Tuple
 
 from odmantic import Model, query
 
+from modules.database.users import UserData
 from .items import Item
 from .models import ModelPlus
 
@@ -78,7 +78,6 @@ class Player(ModelPlus, Model):
         user = await UserData.get(True, user_id=self.member_id)
         return user.fees
 
-
     async def inv_total(self) -> float:
         items = [(i, self.inventory[i.name]) for i in await self.inv_items()]
         return sum([k.price * len(v) for k, v in items])
@@ -149,6 +148,7 @@ class Player(ModelPlus, Model):
         """
         self._mod_case_or_key('keys', key_name, n)
 
+
 player_locks = {}
 
 
@@ -160,6 +160,7 @@ class SafePlayer:
             # work with player
             await player.save()
     """
+
     def __init__(self, member_id: int, guild_id: int):
         self.mid = member_id
         self.gid = guild_id
