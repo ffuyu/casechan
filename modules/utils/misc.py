@@ -24,3 +24,8 @@ def first(seq: Sequence, **conditions) -> Optional[Any]:
                 for k, v in conditions.items())),
         None
     )
+
+
+class DotDict(dict):
+    def __getattr__(self, item):
+        return self[item]
