@@ -59,9 +59,9 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
             description='\n'.join(
                 "**{}**: ${:.2f}".format(list(leaderboard.keys())[x], leaderboard[list(leaderboard.keys())[x]]) for x in
                 range(10 if len(list(leaderboard.keys())) >= 10 else len(list(leaderboard.keys())))),
-            color=Colour.from_rgb(252, 194, 3)
+            color=Colour.from_rgb(13, 139, 73)
         ).set_footer(text='Based on inventory worth, not wallets.').set_thumbnail(
-            url="https://img.icons8.com/color-glass/48/000000/star.png")
+            url="https://cdn.discordapp.com/emojis/877878954424406016.png?v=1")
 
         await ctx.send(embed=embed)
         
