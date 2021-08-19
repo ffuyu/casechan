@@ -30,9 +30,16 @@ class CaseConverter(Converter):
                 return Case(case)
             else:
                 statements_secondary = [
-                    argument in lwcs,
-                    argument.replace('case', '') in lwcs,
-                    argument.replace('xray', 'x-ray') in lwcs
+                    any([x.isdigit() for x in argument]) and any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('case', '') in lwcs),
+                    # argument has digits
+                    # case name has digits
+                    # argument is in case name
+                    not any([x.isdigit() for x in argument]) and not any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('case', '') in lwcs),
+                    # argument has no digits
+                    # case name has no digits
+                    # argument is in case name
+                    
+                    ('xray' in argument or 'x-ray' in argument) and argument.replace('xray', 'x-ray') in lwcs # specifically for x-ray p250 package
                 ]
                 if any(statements_secondary):
                     return Case(case)
