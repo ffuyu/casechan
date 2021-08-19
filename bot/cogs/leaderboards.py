@@ -47,7 +47,7 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
     @commands.command()
     async def top(self, ctx):
         """Lists the top 10 most rich servers based on inventory worth"""
-        guilds_dictionary = {}
+        guilds_dictionary = {} 
         for guild in self.bot.guilds:
             users = await Player.find(guild_id=guild.id)
             guilds_dictionary[guild.name] = sum([await x.inv_total() for x in users if not x.trade_banned])
