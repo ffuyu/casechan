@@ -65,7 +65,7 @@ def _get_valid_item(item_name, rarity, valid_items):
 
 
 class Case:
-    def __init__(self, name):
+    def __init__(self, name:str):
         data = all_cases.get(name, {})
         if not data:
             raise ValueError(f'No case with name "{name}"')
