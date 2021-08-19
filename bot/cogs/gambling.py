@@ -2,7 +2,6 @@ import random
 
 from typing import Optional, Union
 
-from modules.utils.key_converter import KeyConverter
 from modules.utils.case_converter import CaseConverter
 from modules.database.players import SafePlayer
 from modules.cases import Case, Key
@@ -35,7 +34,7 @@ class GamblingCog(commands.Cog, name='Gambling'):
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command(aliases=['casehunt', 'keyhunt', 'gamble', 'bet'])
     async def hunt(self, ctx, amount: Optional[Union[int, float]] = 1, *,
-                   item: Optional[Union[CaseConverter, KeyConverter, int]]):
+                   item: Optional[Union[CaseConverter, int]]):
         """
         Gamble your cases, keys or your balance!
         Args:

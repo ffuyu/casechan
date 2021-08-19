@@ -24,7 +24,6 @@ from modules.database.items import Item, generate_stats
 from modules.database.players import SafePlayer
 from modules.utils.case_converter import CaseConverter
 from modules.utils.item_converter import ItemConverter
-from modules.utils.key_converter import KeyConverter
 from modules.utils.operator_converter import OperatorConverter
 
 case_prices = {}
@@ -72,7 +71,7 @@ class MarketCog(commands.Cog, name='Market'):
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
     async def buy(self, ctx:Context, amount: Optional[int] = 1, *,
-                  item: Optional[Union[CaseConverter, KeyConverter, ItemConverter]]):
+                  item: Optional[Union[CaseConverter, ItemConverter]]):
         """
         Buy a skin from the market using your balance
         Args:

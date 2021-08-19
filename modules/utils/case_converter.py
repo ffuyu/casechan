@@ -1,8 +1,9 @@
+from modules.utils.misc import first
 from modules.constants import ButtonTypes
 from discord.ext.commands import Converter
 from dislash.interactions.message_components import ActionRow, Button
 
-from ..cases import Case, all_cases
+from ..cases import Case, Key, all_cases
 
 __all__ = (
     'CaseConverter',
@@ -12,9 +13,14 @@ player_preferences = {}
 
 
 class CaseConverter(Converter):
-    """Converts a case name string into a Case object"""
+    """
+    Converts a case name string into a Case object
+    Returns the key if argument contains the word 'key'
+    """
 
     async def convert(self, ctx, argument:str.lower):
+        first_argument = argument
+        argument = argument.replace(' key', '')
         for case in [*all_cases]:
             lwcs = case.lower()
             statements_primary = [
@@ -27,7 +33,7 @@ class CaseConverter(Converter):
                 lwcs == f'operation {argument} weapon case',
             ]
             if any(statements_primary):
-                return Case(case)
+                return Case(case) if not 'key' in first_argument else Case(case).key
             else:
                 statements_secondary = [
                     any([x.isdigit() for x in argument]) and any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('case', '') in lwcs),
@@ -42,6 +48,6 @@ class CaseConverter(Converter):
                     ('xray' in argument or 'x-ray' in argument) and argument.replace('xray', 'x-ray') in lwcs # specifically for x-ray p250 package
                 ]
                 if any(statements_secondary):
-                    return Case(case)
+                    return Case(case) if not 'key' in first_argument else Case(case).key
         else:
             raise ValueError(f'No case with name "{argument}"')
