@@ -2,6 +2,7 @@ import asyncio
 import json
 import logging
 import random
+import re
 from functools import partial
 
 from .constants import KEY_PRICE
@@ -32,8 +33,9 @@ _exterior_dist = {  # weight, uniform a, uniform b.
 
 def _generate_item(item_name, rarity, valid_exteriors):
     float_ = 0.0
-    exts, weights = zip(*((k,v[0]) for k, v in _exterior_dist.items() if k in valid_exteriors))
-    if '|' in item_name:
+
+    if valid_exteriors:
+        exts, weights = zip(*((k, v[0]) for k, v in _exterior_dist.items() if k in valid_exteriors))
         exterior = random.choices(exts, weights=weights, k=1)[0]
         _, a, b = _exterior_dist[exterior]
         float_ = random.uniform(a, b)
@@ -64,7 +66,13 @@ def _get_valid_item(item_name, rarity, valid_items, valid_exteriors):
         item = next((i for i in valid_items if i.name == item_n), None)
         if not item:
             i+=1
-            log.warning(f'Failed to generate item (try {i}): "{item_name}" converted to {item_n}')
+            log.warning(f'Failed to generate item (try {i}): "{item_name}" converted to "{item_n}" "{valid_exteriors}"')
+            if i == 5:
+                print([i.name for i in valid_items])
+                print(valid_exteriors)
+                print(item_n)
+                print(item_name)
+                exit()
     return item, float_, seed
 
 
@@ -114,7 +122,11 @@ class Case:
         valid_items = await self.get_items()
 
         item_name = random.choice(self.items[rarity])
-        valid_exteriors = [ext for ext in _exterior_dist if ext in [item.rarity for item in valid_items]]
+
+        valid_exteriors = [ext for ext in _exterior_dist
+                           if ext in {re.match(f'.*\((.*)\)$', item.name).group(1)
+                                      for item in valid_items
+                                      if item.name.startswith(item_name.split()[0])}]
 
         loop = asyncio.get_running_loop()
 

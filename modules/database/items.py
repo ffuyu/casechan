@@ -89,6 +89,11 @@ class Item(ModelPlus, Model):
         return rarity[self.rarity][0]
 
     @property
+    def exterior(self):
+        return self.name
+
+
+    @property
     def is_marketable(self):
         return True if self.price else False
 
