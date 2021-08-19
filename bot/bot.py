@@ -4,7 +4,6 @@ from dpytools.embeds import paginate_to_embeds
 from modules.database.players import Player, SafePlayer
 from modules.constants import owners_ids
 from modules.utils import get_command_prefix
-from modules.errors import AlreadyClaimed, CodeClaimed, CodeExpired, CodeInvalid
 
 import os
 

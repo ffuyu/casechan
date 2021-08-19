@@ -15,7 +15,7 @@ class CaseConverter(Converter):
     """Converts a case name string into a Case object"""
 
     async def convert(self, ctx, argument):
-        for case in all_cases:
+        for case in [*all_cases]:
             lwcs = case.lower()
             lwar = argument.lower()
             statements = [
