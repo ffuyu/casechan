@@ -1,7 +1,7 @@
 import asyncio as aio
 
 from modules.database import Player
-from modules.cases import Case
+from modules.new_cases import Case
 
 
 async def main():

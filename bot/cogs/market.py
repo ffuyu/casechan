@@ -1,8 +1,9 @@
 import asyncio, random
+
 from DiscordUtils.Pagination import CustomEmbedPaginator
 
+from discord.colour import Colour
 from discord.embeds import Embed
-from discord import Colour
 
 from discord.ext.commands.context import Context
 from discord.ext import commands
@@ -12,13 +13,12 @@ from discord.ext.commands.core import guild_only, max_concurrency
 from dislash.interactions.message_components import ActionRow, Button
 
 from dpytools import Color
+from dpytools.embeds import paginate_to_embeds
 
 from typing import Optional, Union
 
-from dpytools.embeds import paginate_to_embeds
-
 from modules.utils.checks import able_to_buy, able_to_sell
-from modules.constants import ButtonTypes
+from modules.constants import ButtonCancel, ButtonConfirm
 from modules.cases import Case, Key, all_cases
 from modules.database.items import Item, generate_stats
 from modules.database.players import SafePlayer
@@ -32,11 +32,11 @@ case_prices = {}
 async def sell_prompt(ctx):
     row = ActionRow(
         Button(
-            style=ButtonTypes.CONFIRM,
+            style=ButtonConfirm,
             label="Confirm",
             custom_id="confirm"),
         Button(
-            style=ButtonTypes.CANCEL,
+            style=ButtonCancel,
             label="Cancel",
             custom_id="cancel")
     )
@@ -79,13 +79,13 @@ class MarketCog(commands.Cog, name='Market'):
             amount: quantity of the item you want to buy
             item: item you want to buy, it can be a case, key or an item
         """
-        if not item:
-            return await ctx.reply(
-                content='Item not found or not marketable.',
-                mention_author=False
-            )
-
         amount = amount if amount > 0 else 1
+        
+        # TODO: add case prices to Case to avoid this mess
+        if isinstance(item, Case):
+            item_ = await Item.get(name=item.name)
+            item.price = item_.price
+
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             if able_to_buy(player, item, amount):
 
@@ -106,11 +106,13 @@ class MarketCog(commands.Cog, name='Market'):
                     mention_author=False
                 )
 
+        
+
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
     async def sell(self, ctx, amount:Optional[int] = 1, *,
-                   item: Optional[Union[CaseConverter, ItemConverter]]):
+                   item: Optional[ItemConverter]):
         """
         Sell an item to the market and get balance
         Args:
@@ -118,12 +120,6 @@ class MarketCog(commands.Cog, name='Market'):
             item: the name of the item you want to sell
         """
         
-        if not item:
-            return await ctx.reply(
-                content='Item not found or not marketable.',
-                mention_author=False
-            )
-
         amount = amount if amount > 0 else 1
 
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
@@ -138,10 +134,7 @@ class MarketCog(commands.Cog, name='Market'):
                         player.inventory.pop(item.name)
                     else:
                         player.inventory[item.name] = random.sample(items, k=len(items)-amount)
-
-                elif isinstance(item, Case):
-                    item: Case
-                    player.mod_case(item.name, -amount)
+                    
 
                 earning = (item.price * fees) * amount
                 player.balance += earning
@@ -162,13 +155,13 @@ class MarketCog(commands.Cog, name='Market'):
         Args:
             operator: logical operator to define greater or less price rules
             price: price to use with the specified logical operator
-            item: the name of the item you want to sell, leave empty to sell everything (excluding cases)
+            item: the name of the item you want to sell, leave empty to sell everything
         \n
         Examples:
             c.sellall: Sell everything
             c.sellall ak jaguar fn: Sell all with name AK-47 | Jaguar (Factory Name)
-            c.sellall > 5: Sell all items with price greater than $5.0 (excluding cases)
-            c.sellall < 5: Sell all items with price less than $5.0 (excluding cases)
+            c.sellall > 5: Sell all items with price greater than $5.0
+            c.sellall < 5: Sell all items with price less than $5.0
         """
         
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
@@ -218,7 +211,7 @@ class MarketCog(commands.Cog, name='Market'):
                     }
                 ):
                     return await ctx.reply(
-                        content='There was an error parsing your request.',
+                        content='There was an error parsing your request',
                         mention_author=False
                     )
 
@@ -247,12 +240,13 @@ class MarketCog(commands.Cog, name='Market'):
     @commands.command()
     async def caseprices(self, ctx: Context):
         """Lists all the cases with their prices next to them"""
-        for case in [*all_cases]:
-            c = Case(case)
-            if c:
-                case_prices[case] = c.price
+        if not case_prices:
+            for case in all_cases:
+                c = await Item.get(name=case)
+                if c:
+                    case_prices[case] = c.price
         pages = paginate_to_embeds(description='\n'.join(
-            f'{k[:20] + "..." if len(k) > 22 else k}: **${v:.2f}**' for k, v in case_prices.items()),
+            f'{k[:20] + "..." if len(k) > 22 else k}: **${v}**' for k, v in case_prices.items()),
             title='Case Prices', max_size=200, color=Colour.random())
 
         paginator = CustomEmbedPaginator(ctx, remove_reactions=True)

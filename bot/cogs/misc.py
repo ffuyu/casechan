@@ -1,13 +1,10 @@
 from datetime import datetime as dt
 
 from discord import Color
-from discord.colour import Colour
 from discord.ext import commands
-from dislash.interactions.message_components import Button, ButtonStyle
 from dpytools import Embed
 from humanize import naturaldelta
 
-from dislash import ActionRow
 
 class Cog(commands.Cog, name='Misc'):
     """Miscellaneous commands"""
@@ -58,22 +55,6 @@ class Cog(commands.Cog, name='Misc'):
                         embed=Embed(description=f'Latency: `{latency_ms}ms`\nHeartbeat: `{heartbeat_ms}ms`',
                                     color=Color.purple()))
 
-    @commands.command(aliases=["server"])
-    async def support(self, ctx):
-        """Join our server and get help by creating support tickets"""
-        embed = Embed(
-            description="Join our server to get support and engage with other players!",
-            color=Colour.random()
-        )
-        rows = ActionRow(
-            Button(
-                style=ButtonStyle.link,
-                url="https://discord.gg/hjH9AQVmyW",
-                label="Join now"
-            )
-        )
-
-        await ctx.send(embed=embed, components=[rows])
 
 def setup(bot):
     bot.add_cog(Cog(bot))

@@ -66,16 +66,13 @@ def able_to_sell(player:Player, item:Union[Item, Case, Key], amount:int=1):
 
 def able_to_opencase(player:Player, case:Case, amount:int=1):
     case_amount = player.cases.get(case.name, 0)
-    if case.key:
-        key_amount = player.keys.get(case.key.name, 0)
-    else:
-        key_amount = None
+    key_amount = player.keys.get(case.key, 0)
     inv_lim_amount = player.inventory_limit - player.inv_items_count
     
     if case_amount < amount:
         raise UnableToOpen(
             message=f'You are missing {amount - case_amount}x {case}')
-    elif key_amount is not None and key_amount < amount:
+    elif key_amount < amount:
         raise UnableToOpen(
             message=f'You are missing {amount - key_amount}x {case.key}')
     elif inv_lim_amount < amount:

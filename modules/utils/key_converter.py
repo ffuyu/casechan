@@ -1,6 +1,6 @@
-from modules.constants import ButtonTypes
+from modules.constants import ButtonCancel, ButtonConfirm
 from discord.ext.commands import Converter
-from dislash import ActionRow, Button
+from dislash import ActionRow, Button, ButtonStyle
 
 from ..cases import Key, all_keys
 
@@ -38,12 +38,12 @@ class KeyConverter(Converter):
                         return Key(key)
                 row = ActionRow(
                     Button(
-                        style=ButtonTypes.CONFIRM,
+                        style=ButtonConfirm,
                         label='Yes',
                         custom_id='yes'
                     ),
                     Button(
-                        style=ButtonTypes.CANCEL,
+                        style=ButtonCancel,
                         label='No',
                         custom_id='no'
                     )
