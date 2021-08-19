@@ -11,7 +11,7 @@ def able_to_buy(player:Player, item:Union[Item, Case, Key], amount:int=1):
     
     if player.trade_banned:
         raise UnableToBuy(
-            content='Your buying functions are disabled.'
+            message='Your buying functions are disabled.'
         )
     elif not amount <= 1000:
         raise UnableToBuy(
