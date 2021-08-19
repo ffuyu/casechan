@@ -18,9 +18,9 @@ class CaseConverter(Converter):
     Returns the key if argument contains the word 'key'
     """
 
-    async def convert(self, ctx, argument:str.lower):
-        first_argument = argument
-        argument = argument.replace(' key', '')
+    async def convert(self, ctx, argument:str):
+        first_argument = argument.lower()
+        argument = argument.lower().replace(' key', '')
         for case in [*all_cases]:
             lwcs = case.lower()
             statements_primary = [
