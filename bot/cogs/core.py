@@ -79,9 +79,10 @@ class CoreCog(commands.Cog, name='Core'):
         """
         Opens a case from your cases
         """
-        container: Case
-        if not container:
+        if not container or not isinstance(container, Case):
             return await ctx.send('Not a valid case name!')
+        
+        container: Case
 
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             amount = amount if amount > 0 else 1
