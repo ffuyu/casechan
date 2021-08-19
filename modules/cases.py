@@ -1,10 +1,13 @@
 import asyncio
 import json
+import logging
 import random
 from functools import partial
 
 from .constants import KEY_PRICE
 from .database import Item
+
+log = logging.getLogger(__name__)
 
 with open('etc/cases.json') as f:
     all_cases = json.loads(f.read())
@@ -58,14 +61,17 @@ def _generate_item(item_name, rarity):
 
 def _get_valid_item(item_name, rarity, valid_items):
     item, float_, seed = None, 0.0, 0
+    i = 0
     while item not in valid_items:
         item_n, float_, seed = _generate_item(item_name, rarity)
         item = next((i for i in valid_items if i.name == item_n), None)
+        if not item:
+            log.warning(f'Failed to generate item (try {i}): "{item_name}" converted to {item_n}')
     return item, float_, seed
 
 
 class Case:
-    def __init__(self, name:str):
+    def __init__(self, name: str):
         data = all_cases.get(name, {})
         if not data:
             raise ValueError(f'No case with name "{name}"')
