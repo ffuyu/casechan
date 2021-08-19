@@ -66,6 +66,7 @@ def _get_valid_item(item_name, rarity, valid_items):
         item_n, float_, seed = _generate_item(item_name, rarity)
         item = next((i for i in valid_items if i.name == item_n), None)
         if not item:
+            i+=1
             log.warning(f'Failed to generate item (try {i}): "{item_name}" converted to {item_n}')
     return item, float_, seed
 
