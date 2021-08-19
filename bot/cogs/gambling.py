@@ -78,9 +78,9 @@ class GamblingCog(commands.Cog, name='Gambling'):
                 if not player.balance >= item:
                     raise InsufficientBalance('You have insufficient balance to place this bet.')
 
-                quest_message = 'Guess and press the correct button, win **${}**!'.format(item * 2)
-                win_message = 'You\'ve won **${}**!'.format(2 * item)
-                loss_message = 'You\'ve lost **${}**!'.format(item)
+                quest_message = 'Guess and press the correct button, win **${:.2f}**!'.format(item * 5)
+                win_message = 'You\'ve won **${:.2f}**!'.format(5 * item)
+                loss_message = 'You\'ve lost **${:.2f}**!'.format(item)
 
                 player.balance -= item
 
@@ -88,7 +88,7 @@ class GamblingCog(commands.Cog, name='Gambling'):
             elif (not item and amount) or (isinstance(item, int) and isinstance(amount, (int, float))):
                 raise InvalidBet('You need to place a bet with cases, keys or balance.')
 
-            for y in range(2):
+            for y in range(3):
                 rows.append(ActionRow(
                     Button(
                         style=color,

@@ -14,7 +14,7 @@ __all__ = (
     'SafePlayer'
 )
 
-from ..new_cases import Case
+from ..cases import Case
 
 stats_dict = {
     "cases": {
@@ -156,6 +156,7 @@ class Player(ModelPlus, Model):
             -Opens the selected case
             -Adds the generated item to the inventory
             -Removes the case and key (if applicable) from the inventory
+            -Increases total opened case count (stats)
 
         Note:
             The player instance is not saved to the database
@@ -163,32 +164,21 @@ class Player(ModelPlus, Model):
 
         Returns:
             Item, (float, seed)
-
-        Raises
-            KeyError:
-                -the case is not in the inventory
-                -the case requires a key that is
-                 not present in the inventory
-
         """
-        if case_name not in self.cases:
-            raise KeyError(f'{self} does not have case "{case_name}" '
-                           f'in its inventory')
+
         case = Case(case_name)
-        if case.key and case.key.name not in self.keys:
-            raise KeyError(f'{self} does not have the key to "{case_name}" '
-                           f'in its inventory')
 
         item, *stats = await case.open()
 
         self.mod_case(case_name, -1)
+        self.stats['cases']['opened'] += 1
 
         if case.key:
             self.mod_key(case.key.name, -1)
 
         self.add_item(item.name, stats)
 
-        return item, stats
+        return item, *stats
 
     def __str__(self):
         return f'Player(member_id={self.member_id}, guild_id={self.guild_id}'

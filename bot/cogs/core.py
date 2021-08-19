@@ -11,9 +11,10 @@ as follows:
 # Viewing balance
 """
 import asyncio
+
+from modules.utils.paginate import dict_paginator
 from modules.utils.checks import able_to_opencase
-from os import name
-from modules.database.items import Item, sort_items
+from modules.database.items import sort_items
 from modules.database.players import Player
 from typing import Optional
 
@@ -40,6 +41,24 @@ def disable_row(row: ActionRow) -> ActionRow:
 
     return row
 
+def results_row(player:Player, amount:int):
+    row = ActionRow(
+        Button(style=ButtonStyle.grey,
+            label="Claim" if amount == 1 else "Claim all",
+            custom_id="claim",
+            emoji=PartialEmoji(name='📥')),
+        Button(style=ButtonStyle.green,
+            label="Sell" if amount == 1 else "Sell all",
+            custom_id="sell",
+            emoji=PartialEmoji(name='💸'),
+            disabled=player.trade_banned),
+        Button(style=ButtonStyle.grey,
+            label=f"{player.inv_items_count}/{player.inventory_limit}",
+            custom_id="invsize",
+            disabled=True)
+    )
+    
+    return row
 
 class CoreCog(commands.Cog, name='Core'):
     """
@@ -76,56 +95,26 @@ class CoreCog(commands.Cog, name='Core'):
 
                 opening_embed.set_author(name=ctx.author, icon_url=ctx.author.avatar_url)
 
-                message = await ctx.send(embed=opening_embed, reference=ctx.message)
+                message = await ctx.reply(
+                    content=None,
+                    embed=opening_embed,
+                    mention_author=False
+                )
                 await asyncio.sleep(6.0)
 
-                # Updating Player
-                player.mod_case(container.name, -amount)
-                player.mod_key(container.key, -amount)
-                player.stats['cases']['opened'] += amount
-
                 # Opening cases
-                items = [await container.open() for _ in range(amount)]
+                items = [await player.open_case(container.name) for _ in range(amount)]
                 item_objects = [k for k, _, _ in items]
 
-                # Buttons
-                row = ActionRow(
-                    Button(style=ButtonStyle.grey,
-                        label="Claim" if amount == 1 else "Claim all",
-                        custom_id="claim",
-                        emoji=PartialEmoji(name='📥')),
-                    Button(style=ButtonStyle.green,
-                        label="Sell" if amount == 1 else "Sell all",
-                        custom_id="sell",
-                        emoji=PartialEmoji(name='💸'),
-                        disabled=player.trade_banned),
-                    Button(style=ButtonStyle.grey,
-                        label=f"{player.inv_items_count}/{player.inventory_limit}",
-                        custom_id="invsize",
-                        disabled=True)
-                )
-
-                # Displaying results (Bulk)
+                # Displaying results based on amount
                 if amount != 1:
                     results = Embed(
                         color=Colour.random()
                     )
+                    results.description = f'You have opened {amount}x {container.name} and received **${sum([x.price for x in item_objects]):.2f}** worth of items'
                     
-                    results.set_author(name=container.name, icon_url=container.asset)
+                    results.add_field(name='Items:', value='\n'.join([f'{emojis.get(x.rarity)} **{x.name}** ${x.price}' for i, x in enumerate(item_objects) if i < 5]) + (f'\n\n*({amount-5} more items)*' if len(item_objects) > 5 else ''))
 
-                    if len(items) > 5:
-                        worth = sum([x.price for x in item_objects])
-                        results.description = (f"You have opened **{amount}x {container.name}**. "
-                                            f"Total items worth: **${worth:.2f}**")
-                    else:
-                        desc = f"You have opened **{amount}x {container.name}** " \
-                            f"and received the following items: \n\n"
-                        desc += '\n'.join([f'{emojis.get(item.rarity)} {item.name} ${item.price}' for item in item_objects])
-                        results.description = desc
-
-                    await message.edit(embed=results, components=[row])
-
-                # Displaying results (Single)
                 else:
                     item, *stats = items[0]
                     results = Embed(
@@ -135,15 +124,22 @@ class CoreCog(commands.Cog, name='Core'):
                     ).set_footer(text='Float %f | Paint Seed: %d | Price: $%.2f' % (stats[0], stats[1], item.price)) \
                         .set_author(name=container, icon_url=container.asset)
 
-                    await message.edit(embed=results, components=[row])
-
+                results.set_author(name=container.name, icon_url=container.asset)
+                row = results_row(player, amount)
+                await message.edit(
+                    content=None,
+                    embed=results,
+                    mention_author=False,
+                    components=[row]
+                )
+  
                 def check(inter_):
                     return inter_.author == ctx.author
 
                 try:
                     inter = await message.wait_for_button_click(check=check, timeout=30)
-                    # inter: Interaction
                 except asyncio.TimeoutError:
+                    await message.edit(components=[disable_row(row)])
                     if amount != 1:
                         for item in items:
                             i, *s = item
@@ -151,15 +147,16 @@ class CoreCog(commands.Cog, name='Core'):
                     else:
                         player.add_item(item.name, stats)
                 else:
+                    await message.edit(components=[disable_row(row)])
                     if inter.clicked_button.custom_id == 'claim':
                         if amount != 1:
                             for item in items:
                                 i, *s = item
                                 player.add_item(i.name, s)
-                            await inter.reply(f'Claimed **{len(item_objects)}** items successfully', ephemeral=True)
+                            await inter.reply(f'Claimed **{len(item_objects)}** items', ephemeral=True)
                         else:
                             player.add_item(item.name, stats)
-                            await inter.reply(f'Claimed **{item.name}** successfully', ephemeral=True)
+                            await inter.reply(f'Claimed **{item.name}**', ephemeral=True)
 
                     elif inter.clicked_button.custom_id == 'sell':
                         user = await UserData.get(True, user_id=ctx.author.id)
@@ -170,36 +167,29 @@ class CoreCog(commands.Cog, name='Core'):
                                 total_received += (item.price * fees)
                         else:
                             total_received += (item.price * fees)
-                        await inter.send('You have sold **{}** and received ${:.2f}'.format(
-                            item.name if amount == 1 else f'{len(items)} items', total_received),
-                            ephemeral=True)
+
+
+                        await inter.send(
+                            content=f'You\'ve received **${total_received:.2f}**',
+                            ephemeral=True
+                        )
+
                         player.balance += total_received
                 finally:
                     await player.save()
-                    # NOTE custom function used because row.disable_buttons() does not work.
-                    return await message.edit(components=[disable_row(row)])
-
-
+                
     @commands.cooldown(10, 60, BucketType.member)
     @commands.command()
     async def cases(self, ctx: Context, *, user: Optional[Member]):
         """List the cases you currently have."""
         user = user if user and not user.bot else ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
+
         if player.cases:
-            pages = paginate_to_embeds(description='\n'.join(
-                f'**{v}x** {k[:20] + "..." if len(k) > 22 else k}' for k, v in player.cases.items()),
-                title='{}\'s Cases'.format(user), max_size=130, color=Colour.random())
-
-            paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
-            if len(pages) > 1:
-                paginator.add_reaction('⬅️', "back")
-                paginator.add_reaction('➡️', "next")
-
-            return await paginator.run(pages)
+            return await dict_paginator(f'{user}\'s Keys', ctx, player.cases)
 
         await ctx.send(
-           content=f'**{user}** has no cases to display'
+            content=f'**{user}** has no cases to display'
         )
     
     @commands.cooldown(10, 60, BucketType.member)
@@ -209,24 +199,13 @@ class CoreCog(commands.Cog, name='Core'):
         user = user if user and not user.bot else ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
 
-
         if player.keys:
-            pages = paginate_to_embeds(description='\n'.join(
-                f'**{v}x** {k[:20] + "..." if len(k) > 22 else k}' for k, v in player.keys.items()),
-                title='{}\'s Keys'.format(user), max_size=150, color=Colour.random())
-
-            paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
-            if len(pages) > 1:
-                paginator.add_reaction('⬅️', "back")
-                paginator.add_reaction('➡️', "next")
-
-            return await paginator.run(pages)
+            return await dict_paginator(f'{user}\'s Keys', ctx, player.keys)
 
         await ctx.send(
             content=f'**{user}** has no keys to display'
         )
         
-
     @commands.cooldown(10, 30, BucketType.member)
     @commands.command(aliases=['inv'])
     async def inventory(self, ctx: Context, *, user: Optional[Member]):
