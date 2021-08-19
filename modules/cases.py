@@ -30,14 +30,11 @@ _exterior_dist = {  # weight, uniform a, uniform b.
 }
 
 
-def _generate_item(item_name, rarity):
+def _generate_item(item_name, rarity, valid_exteriors):
     float_ = 0.0
-
+    exts, weights = zip(*((k,v[0]) for k, v in _exterior_dist.items() if k in valid_exteriors))
     if '|' in item_name:
-        exterior = random.choices([*_exterior_dist],
-                                  weights=[w[0] for w
-                                           in _exterior_dist.values()],
-                                  k=1)[0]
+        exterior = random.choices(exts, weights=weights, k=1)[0]
         _, a, b = _exterior_dist[exterior]
         float_ = random.uniform(a, b)
         item_name += f' ({exterior})'
@@ -59,11 +56,11 @@ def _generate_item(item_name, rarity):
     return item_name, float_, seed
 
 
-def _get_valid_item(item_name, rarity, valid_items):
+def _get_valid_item(item_name, rarity, valid_items, valid_exteriors):
     item, float_, seed = None, 0.0, 0
     i = 0
     while item not in valid_items:
-        item_n, float_, seed = _generate_item(item_name, rarity)
+        item_n, float_, seed = _generate_item(item_name, rarity, valid_exteriors)
         item = next((i for i in valid_items if i.name == item_n), None)
         if not item:
             i+=1
@@ -115,13 +112,15 @@ class Case:
                                 weights=[v for v, *_ in possible_rarities.values()],
                                 k=1)[0]
         valid_items = await self.get_items()
+
         item_name = random.choice(self.items[rarity])
+        valid_exteriors = [ext for ext in _exterior_dist if ext in [item.rarity for item in valid_items]]
 
         loop = asyncio.get_running_loop()
 
         result = await loop.run_in_executor(
             None,
-            partial(_get_valid_item, item_name, rarity, valid_items)
+            partial(_get_valid_item, item_name, rarity, valid_items, valid_exteriors)
         )
 
         return result
