@@ -45,7 +45,7 @@ def _generate_item(item_name, rarity, valid_exteriors):
         # 0 = Item is not StatTrak™
         # 1 = Item is StatTrak™
         _, z, o = _rarities[rarity]
-        st = random.choices([1, 0], weights=(z, o), k=1)[0]
+        st = random.choices([0, 1], weights=(z, o), k=1)[0]
         if st:
             item_name = f'StatTrak™ {item_name}'
 
@@ -62,7 +62,8 @@ def _get_valid_item(item_name, rarity, valid_items, valid_exteriors):
     i = 0
     while item not in valid_items:
         item_n, float_, seed = _generate_item(item_name, rarity, valid_exteriors)
-        item = next((i for i in valid_items if item_n in i.name), None)
+        item = next((i for i in valid_items if item_n == i.name), None)
+
         if not item:
             i += 1
             log.warning(f'Failed to generate item (try {i}): "{item_name}" converted to "{item_n}"')
