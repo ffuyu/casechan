@@ -2,7 +2,6 @@ import asyncio
 import json
 import logging
 import random
-import re
 from functools import partial
 
 from .constants import KEY_PRICE
@@ -63,20 +62,16 @@ def _get_valid_item(item_name, rarity, valid_items, valid_exteriors):
     i = 0
     while item not in valid_items:
         item_n, float_, seed = _generate_item(item_name, rarity, valid_exteriors)
-        item = next((i for i in valid_items if i.name == item_n), None)
+        item = next((i for i in valid_items if item_n in i.name), None)
         if not item:
-            i+=1
-            log.warning(f'Failed to generate item (try {i}): "{item_name}" converted to "{item_n}" "{valid_exteriors}"')
-            if i == 5:
-                print([i.name for i in valid_items])
-                print(valid_exteriors)
-                print(item_n)
-                print(item_name)
-                exit()
+            i += 1
+            log.warning(f'Failed to generate item (try {i}): "{item_name}" converted to "{item_n}"')
     return item, float_, seed
 
 
 class Case:
+    _items_cache = {}
+
     def __init__(self, name: str):
         data = all_cases.get(name, {})
         if not data:
@@ -104,35 +99,31 @@ class Case:
         return f'Case(name={self.name})'
 
     async def get_items(self):
-        cache = await Item.item_cache()
-        items = [
-            item
-            for item in cache
-            if item.name.startswith(tuple(self.item_names))
-        ]
-        return items
+        if not self._items_cache.get(self.name):
+            items_cache = set(await Item.item_cache())
+            case_cache = set()
+            for item_name in self.item_names:
+                case_cache.update([item for item in items_cache
+                                   if item_name in item.name])
+            cache = self._items_cache.setdefault(self.name, set())
+            cache.update(case_cache)
+        return self._items_cache[self.name]
 
     async def open(self):
         """Opens this case and returns an item and its stats"""
-        possible_rarities = {k: v for k, v in _rarities.items()
-                             if k in self.item_rarities}
-        rarity = random.choices(population=[*possible_rarities],
-                                weights=[v for v, *_ in possible_rarities.values()],
-                                k=1)[0]
-        valid_items = await self.get_items()
+        rarities, weights = zip(*((k, v[0]) for k, v in _rarities.items() if k in self.item_rarities))
+        rarity = random.choices(population=rarities, weights=weights, k=1)[0]
 
         item_name = random.choice(self.items[rarity])
+        valid_items = {item for item in await self.get_items()
+                       if item_name in item.name}
 
-        valid_exteriors = [ext for ext in _exterior_dist
-                           if ext in {re.match(f'.*\((.*)\)$', item.name).group(1)
-                                      for item in valid_items
-                                      if item.name.startswith(item_name.split()[0])}]
+        exteriors = {it.exterior for it in valid_items if it.exterior}
 
         loop = asyncio.get_running_loop()
-
         result = await loop.run_in_executor(
             None,
-            partial(_get_valid_item, item_name, rarity, valid_items, valid_exteriors)
+            partial(_get_valid_item, item_name, rarity, valid_items, exteriors)
         )
 
         return result
