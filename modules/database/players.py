@@ -154,7 +154,7 @@ class Player(ModelPlus, Model):
         """
         Actions:
             -Opens the selected case
-            -Adds the generated item to the inventory
+            -Adds the generated item to the inventory (if add_item == True)
             -Removes the case and key (if applicable) from the inventory
             -Increases total opened case count (stats)
 
