@@ -45,7 +45,7 @@ def _generate_item(item_name, rarity, valid_exteriors):
         # 0 = Item is not StatTrak™
         # 1 = Item is StatTrak™
         _, z, o = _rarities[rarity]
-        st = random.choices([0, 1], weights=(z, o), k=1)[0]
+        st = random.choices([1, 0], weights=(z, o), k=1)[0]
         if st:
             item_name = f'StatTrak™ {item_name}'
 

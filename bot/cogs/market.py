@@ -164,10 +164,10 @@ class MarketCog(commands.Cog, name='Market'):
             item: the name of the item you want to sell, leave empty to sell everything (excluding cases)
         \n
         Examples:
-            c.sellall: Sell everything
-            c.sellall ak jaguar fn: Sell all with name AK-47 | Jaguar (Factory Name)
-            c.sellall > 5: Sell all items with price greater than $5.0 (excluding cases)
-            c.sellall < 5: Sell all items with price less than $5.0 (excluding cases)
+            sellall: Sell everything
+            sellall ak jaguar fn: Sell all with name AK-47 | Jaguar (Factory Name)
+            sellall > 5: Sell all items with price greater than $5.0 (excluding cases)
+            sellall < 5: Sell all items with price less than $5.0 (excluding cases)
         """
         
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
