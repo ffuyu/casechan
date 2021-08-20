@@ -34,7 +34,7 @@ from modules.database.users import UserData
 from modules.utils.case_converter import CaseConverter
 
 from etc.emojis import emojis
-
+from modules.utils import Timer
 def disable_row(row: ActionRow) -> ActionRow:
     for button in row.buttons:
         button.disabled = True
@@ -101,11 +101,13 @@ class CoreCog(commands.Cog, name='Core'):
                     embed=opening_embed,
                     mention_author=False
                 )
-                await asyncio.sleep(6.0)
 
                 # Opening cases
-                items = [await player.open_case(container.name) for _ in range(amount)]
-                item_objects = [k for k, _, _ in items]
+                with Timer() as t:
+                    items = [await player.open_case(container.name) for _ in range(amount)]
+                    item_objects = [k for k, _, _ in items]
+                
+                await asyncio.sleep(max(6.0 - t.t, 0))
 
                 # Displaying results based on amount
                 if amount != 1:
