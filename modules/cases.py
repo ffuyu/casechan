@@ -33,7 +33,7 @@ _exterior_dist = {  # weight, uniform a, uniform b.
 def _generate_item(item_name, rarity, valid_exteriors):
     float_ = 0.0
 
-    if valid_exteriors:
+    if valid_exteriors and '|' in item_name:
         exts, weights = zip(*((k, v[0]) for k, v in _exterior_dist.items() if k in valid_exteriors))
         exterior = random.choices(exts, weights=weights, k=1)[0]
         _, a, b = _exterior_dist[exterior]
