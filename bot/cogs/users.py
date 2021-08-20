@@ -44,7 +44,6 @@ class UsersCog(commands.Cog, name='Users'):
     async def givecase(self, ctx:Context, guild:Optional[Guild], user:Optional[User], amount:Optional[int]=1, *, container:Optional[CaseConverter]):
         """Gives the specified user in specified guild a case and the case key."""
         container: Case()
-        print(container)
         if container:
             guild = guild or ctx.guild
             user = user or ctx.author
@@ -58,7 +57,6 @@ class UsersCog(commands.Cog, name='Users'):
     async def takecase(self, ctx:Context, guild:Optional[Guild], user:Optional[User], amount:Optional[int]=1, *, container:Optional[CaseConverter]):
         """Gives the specified user in specified guild a case and the case key."""
         container: Case()
-        print(container)
         if container:
             guild = guild or ctx.guild
             user = user or ctx.author
