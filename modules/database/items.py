@@ -1,8 +1,11 @@
+import html
 import random
+import re
 from typing import Optional, List
 
 from dpytools import Embed
 from odmantic import Model
+from pydantic import root_validator
 
 from .engine import engine
 from .models import ModelPlus
@@ -23,7 +26,7 @@ rarity = {
     "Base Grade": (1, 0xb0c3d9)
 }
 
-_item_cache = []
+_item_cache = set()
 
 
 def generate_stats(exterior: str):
@@ -49,6 +52,11 @@ class Item(ModelPlus, Model):
     class Config:
         collection = 'items'
 
+    @root_validator
+    def name_validator(cls, values):
+        values['name'] = html.unescape(values['name'])
+        return values
+
     @classmethod
     async def from_cache(cls, name: str) -> Optional['Item']:
         """
@@ -61,7 +69,7 @@ class Item(ModelPlus, Model):
     @classmethod
     async def _refresh_item_cache(cls):
         global _item_cache
-        _item_cache = await engine.find(cls)
+        _item_cache = set(await engine.find(cls))
 
     @classmethod
     async def item_cache(cls, *, force_refresh=False):
@@ -93,8 +101,11 @@ class Item(ModelPlus, Model):
         return True if self.price else False
 
     @property
-    def exterior(self):
-        return self.name[self.name.find('(') + 1:self.name.find(')')]
+    def exterior(self) -> Optional[str]:
+        """Returns the exterior of the item if any"""
+        m = re.match(f'.*\((.*)\)$', self.name)
+        if m:
+            return m.group(1)
 
     def to_embed(self, float_=None, seed=None, minimal=False):
         e = Embed(
@@ -111,6 +122,9 @@ class Item(ModelPlus, Model):
             e.add_field(name='Seed', value=seed, inline=False)
 
         return e
+
+    def __hash__(self):
+        return hash(self.name)
 
     def __lt__(self, other: 'Item'):
         return self.rarity_level < other.rarity_level
