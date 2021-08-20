@@ -150,7 +150,7 @@ class Player(ModelPlus, Model):
         """
         self._mod_case_or_key('keys', key_name, n)
 
-    async def open_case(self, case_name):
+    async def open_case(self, case_name, *, add_item=False):
         """
         Actions:
             -Opens the selected case
@@ -175,8 +175,8 @@ class Player(ModelPlus, Model):
 
         if case.key:
             self.mod_key(case.key.name, -1)
-
-        self.add_item(item.name, stats)
+        if add_item:
+            self.add_item(item.name, stats)
 
         return item, *stats
 
