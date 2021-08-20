@@ -31,11 +31,11 @@ case_prices = {}
 async def sell_prompt(ctx):
     row = ActionRow(
         Button(
-            style=ButtonTypes.CONFIRM,
+            style=ButtonTypes.CONFIRM.value,
             label="Confirm",
             custom_id="confirm"),
         Button(
-            style=ButtonTypes.CANCEL,
+            style=ButtonTypes.CANCEL.value,
             label="Cancel",
             custom_id="cancel")
     )

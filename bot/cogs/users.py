@@ -21,7 +21,7 @@ async def _alter_case(ctx: Context,
     user_id = user_id or ctx.author.id
     player = await Player.get(True, member_id=user_id or ctx.author.id, guild_id=guild_id or ctx.guild.id)
     player.mod_case(container.name, amount)
-    player.mod_key(container.key, amount)
+    player.mod_key(container.key.name, amount)
     await player.save()
     await ctx.send(msg)
 
