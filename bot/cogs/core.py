@@ -229,7 +229,7 @@ class CoreCog(commands.Cog, name='Core'):
             if random.randint(0, 5) == 0:
                 await ctx.send(content="You can follow the link below to view your inventory on our website!", components=[ActionRow(
                     Button(
-                        ButtonStyle.link,
+                        style=ButtonStyle.link,
                         label='View'
                     )
                 )])
