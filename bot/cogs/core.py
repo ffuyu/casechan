@@ -226,14 +226,14 @@ class CoreCog(commands.Cog, name='Core'):
             if len(pages) > 1:
                 paginator.add_reaction('⬅️', "back")
                 paginator.add_reaction('➡️', "next")
-            if random.randint(0, 5) == 0:
-                await ctx.send(content="You can follow the link below to view your inventory on our website!", components=[ActionRow(
-                    Button(
-                        style=ButtonStyle.link,
-                        label='View',
-                        url=f'https://casechan.com/player/{ctx.author.id}/{ctx.guild.id}'
-                    )
-                )])
+                
+            await ctx.send(content="You can follow the link below to view your inventory on our website!", components=[ActionRow(
+                Button(
+                    style=ButtonStyle.link,
+                    label='View',
+                    url=f'https://casechan.com/profiles/{ctx.author.id}/{ctx.guild.id}'
+                )
+            )])
             return await paginator.run(pages)
         await ctx.reply('**{}** has no items to display'.format(user))
 
