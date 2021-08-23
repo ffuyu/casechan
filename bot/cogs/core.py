@@ -227,10 +227,10 @@ class CoreCog(commands.Cog, name='Core'):
                 paginator.add_reaction('⬅️', "back")
                 paginator.add_reaction('➡️', "next")
                 
-            await ctx.send(content="You can follow the link below to view your inventory on our website!", components=[ActionRow(
+            await ctx.send(components=[ActionRow(
                 Button(
                     style=ButtonStyle.link,
-                    label='View',
+                    label='View on casechan.com',
                     url=f'https://casechan.com/profiles/{ctx.author.id}/{ctx.guild.id}'
                 )
             )])
