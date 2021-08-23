@@ -231,7 +231,7 @@ class CoreCog(commands.Cog, name='Core'):
                 Button(
                     style=ButtonStyle.link,
                     label='View on casechan.com',
-                    url=f'https://casechan.com/profiles/{ctx.author.id}/{ctx.guild.id}'
+                    url=f'https://casechan.com/profiles/{ctx.author.id}/{ctx.guild.id}#inventory'
                 )
             )])
             return await paginator.run(pages)
