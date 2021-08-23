@@ -230,7 +230,8 @@ class CoreCog(commands.Cog, name='Core'):
                 await ctx.send(content="You can follow the link below to view your inventory on our website!", components=[ActionRow(
                     Button(
                         style=ButtonStyle.link,
-                        label='View'
+                        label='View',
+                        url=f'https://casechan.com/player/{ctx.author.id}/{ctx.guild.id}'
                     )
                 )])
             return await paginator.run(pages)
