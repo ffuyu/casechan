@@ -227,14 +227,16 @@ class CoreCog(commands.Cog, name='Core'):
                 paginator.add_reaction('⬅️', "back")
                 paginator.add_reaction('➡️', "next")
                 
-            await paginator.run(pages)
-            return await ctx.send(components=[ActionRow(
+            message = await paginator.run(pages)
+            return await message.edit(
+                components=[ActionRow(
                 Button(
                     style=ButtonStyle.link,
                     label='View on casechan.com',
                     url=f'https://casechan.com/profiles/{ctx.author.id}/{ctx.guild.id}#inventory'
+                    )
+                )]
                 )
-            )])
         await ctx.reply('**{}** has no items to display'.format(user))
 
     @guild_only()
