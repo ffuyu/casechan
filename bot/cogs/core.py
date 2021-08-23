@@ -11,6 +11,7 @@ as follows:
 # Viewing balance
 """
 import asyncio
+import random
 
 from modules.utils.paginate import dict_paginator
 from modules.utils.checks import able_to_opencase
@@ -225,7 +226,13 @@ class CoreCog(commands.Cog, name='Core'):
             if len(pages) > 1:
                 paginator.add_reaction('⬅️', "back")
                 paginator.add_reaction('➡️', "next")
-    
+            if random.randint(0, 5) == 0:
+                await ctx.send(content="You can follow the link below to view your inventory on our website!", components=[ActionRow(
+                    Button(
+                        ButtonStyle.link,
+                        label='View'
+                    )
+                )])
             return await paginator.run(pages)
         await ctx.reply('**{}** has no items to display'.format(user))
 
