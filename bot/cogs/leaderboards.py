@@ -47,18 +47,34 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
     @commands.command()
     async def top(self, ctx):
         """Lists the top 10 most rich servers based on inventory worth"""
-        guilds_dictionary = {} 
+
+        all_players = await engine.find(Player)
+
+        async def players_worth(gid, players):
+            return sum([
+                await player.inv_total() 
+                for player in players 
+                if not players.trade_banned
+            ])
+
+
+        d = {}
         for guild in self.bot.guilds:
-            users = await Player.find(guild_id=guild.id)
-            guilds_dictionary[guild.name] = sum([await x.inv_total() for x in users if not x.trade_banned])
+            players = [
+                p for p in all_players
+                if p.guild_id == guild.id and 
+                p.id in [mid for mid in guild._members]
+            ]
+            d[guild] = await players_worth(guild.id, players)
 
-        leaderboard = dict(sorted(guilds_dictionary.items(), key=lambda item: item[1], reverse=True))
-
+        leaderboard = sorted(d.items(), key=lambda item: item[1], reverse=True)[:10]
+        
         embed = Embed(
             title="TOP 10 SERVERS",
             description='\n'.join(
-                "**{}**: ${:.2f}".format(list(leaderboard.keys())[x], leaderboard[list(leaderboard.keys())[x]]) for x in
-                range(10 if len(list(leaderboard.keys())) >= 10 else len(list(leaderboard.keys())))),
+                f"**{leaderboard[x][0].name}**: ${leaderboard[x][1]}" 
+                for x in range(len([*leaderboard]))
+                ),
             color=Colour.from_rgb(13, 139, 73)
         ).set_footer(text='Based on inventory worth, not wallets.').set_thumbnail(
             url="https://cdn.discordapp.com/emojis/877878954424406016.png?v=1")

@@ -119,11 +119,17 @@ class RewardsCog(commands.Cog, name='Rewards'):
             description="Vote for **casechan** and reduce your selling fees down to 5% for 12 hours!",
             color=Colour.random()
         )
+        embed.set_footer(text='Login once on our site to appear on our vote leaderboards at casechan.com/bot/votes')
         rows = ActionRow(
             Button(
                 style=ButtonStyle.link,
                 url="https://top.gg/bot/864925623826120714/vote",
                 label="Vote now"
+            ),
+            Button(
+                style=ButtonStyle.link,
+                url="https://casechan.com/bot/votes",
+                label="View the vote leaderboard"
             )
         )
 

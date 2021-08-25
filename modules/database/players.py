@@ -68,8 +68,10 @@ class Player(ModelPlus, Model):
         item = await Item.get(name=item_name)
         return item.to_embed(*stats, minimal)
 
-    async def inv_items(self) -> List[Item]:
-        return await self.engine.find(Item, query.in_(Item.name, [*self.inventory]))
+    async def inv_items(self):
+        cache = await Item.item_cache()
+        items = [item for item in cache if item.name in self.inventory]
+        return items
 
     @property
     def inv_items_count(self):
