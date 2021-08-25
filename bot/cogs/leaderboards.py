@@ -68,7 +68,7 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
             d[guild] = await players_worth(guild.id, players)
 
         leaderboard = sorted(d.items(), key=lambda item: item[1], reverse=True)[:10]
-        
+        print(leaderboard)
         embed = Embed(
             title="TOP 10 SERVERS",
             description='\n'.join(
