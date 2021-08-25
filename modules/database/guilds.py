@@ -3,7 +3,7 @@ import logging
 from odmantic import Model
 
 from . import engine
-from .models import ModelExtMixin
+from .models import ModelPlus
 from ..constants import DEFAULT_PREFIX
 
 __all__ = (
@@ -15,7 +15,7 @@ log = logging.getLogger(__name__)
 _guilds_cache = {}
 
 
-class GuildConfig(ModelExtMixin, Model):
+class GuildConfig(ModelPlus, Model):
     guild_id: int
     prefix: str = DEFAULT_PREFIX
 

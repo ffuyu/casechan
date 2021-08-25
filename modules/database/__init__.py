@@ -4,4 +4,3 @@ from .players import *
 from .models import *
 from .guilds import *
 from .trades import *
-from .errors import *

@@ -7,7 +7,7 @@ from odmantic import Model, query
 
 from modules.database.users import UserData
 from .items import Item
-from .models import ModelExtMixin
+from .models import ModelPlus
 
 __all__ = (
     'Player',
@@ -27,7 +27,7 @@ stats_dict = {
 }
 
 
-class Player(ModelExtMixin, Model):
+class Player(ModelPlus, Model):
     member_id: int
     guild_id: int
     cases: Dict[str, int] = {}  # {case.name: number}
@@ -181,7 +181,7 @@ class Player(ModelExtMixin, Model):
         return item, *stats
 
     def __str__(self):
-        return f'Player(member_id={self.member_id}, guild_id={self.guild_id})'
+        return f'Player(member_id={self.member_id}, guild_id={self.guild_id}'
 
 
 player_locks = {}
