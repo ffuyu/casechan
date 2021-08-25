@@ -1,17 +1,30 @@
 from odmantic import query, Model
 
-from modules.database.engine import engine
+from .engine import engine
+from .errors import ModelInheritanceError
 
 __all__ = (
-    'ModelPlus',
+    'ModelExtMixin',
 )
 
 
-class ModelPlus(Model):
+class ModelExtMixin:
+    """
+    This mixin adds the following methods to odmantic models:
+        - query (classmethod): builds a query with passed kwargs using the "$and" notation
+        - get (classmethod): fetches the first document that has passed kwargs or (optionally)
+            returns a new instance with passed kwargs.
+        - find (classmethod): shorthand for engine find operation using the model and query with kwargs
+        - save: saves the instance to the database
+        - delete: deletes the instance from the database. It does not delete the instance itself.
+    """
+    engine = engine
 
-    @property
-    def engine(self):
-        return engine
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if Model not in self.__class__.__bases__:
+            raise ModelInheritanceError(f'Class "{self.__class__.__name__}" '
+                                        f'does not inherit from "odmantic.Model"')
 
     @classmethod
     def query(cls, **kwargs):

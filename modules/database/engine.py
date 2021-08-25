@@ -1,7 +1,8 @@
+import os
+
 from dotenv.main import load_dotenv
 from motor.motor_asyncio import AsyncIOMotorClient
 from odmantic import AIOEngine
-import os
 
 load_dotenv()
 
@@ -13,5 +14,5 @@ __all__ = (
 
 client = AsyncIOMotorClient(DATABASE_URL)
 
-engine = AIOEngine(motor_client=client, database='casechan')
-# engine = AIOEngine(database='casechan')  # local db
+# engine = AIOEngine(motor_client=client, database='casechan')
+engine = AIOEngine(database='casechan')  # local db
