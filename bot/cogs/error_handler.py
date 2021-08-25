@@ -20,7 +20,7 @@ from discord.ext.commands import (
 
 from discord.ext.commands.errors import BadUnionArgument, BotMissingPermissions, CommandError, NotOwner
 from dpytools import Embed, Color
-
+from aiohttp.http_exceptions import BadStatusLine
 
 class ErrorHandlerCog(commands.Cog, name='Error Handler'):
     def __init__(self, bot):
@@ -39,7 +39,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             ItemNotFound, RewardsError, MissingSpace, InsufficientBalance,
             NotOwner, TradeNotAllowed, CodeExpired, CodeClaimed, CodeInvalid, AlreadyClaimed, ExistingCode,
             InvalidBet, BetTooLow, Forbidden, UnableToBuy, UnableToOpen, UnableToSell, MissingKey, MissingCase, 
-            NotFound
+            NotFound, BadStatusLine
             }
             
         embed = Embed(
