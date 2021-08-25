@@ -1,5 +1,5 @@
 
-from .models import ModelPlus
+from .models import ModelExtMixin
 from odmantic import Model
 
 from datetime import datetime
@@ -10,7 +10,7 @@ all = {
     'Promo'
 }
 
-class Promo(ModelPlus, Model):
+class Promo(ModelExtMixin, Model):
     code: str
     expires_at: Optional[datetime] = None
     uses: int = 0

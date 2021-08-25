@@ -1,5 +1,5 @@
 
-from .models import ModelPlus
+from .models import ModelExtMixin
 from odmantic import Model
 
 from datetime import datetime, timedelta
@@ -10,7 +10,7 @@ all = {
     'UserData'
 }
 
-class UserData(ModelPlus, Model):
+class UserData(ModelExtMixin, Model):
     user_id: int
     last_voted: Optional[datetime] = None
     total_votes: int = 0

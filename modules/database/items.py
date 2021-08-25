@@ -8,7 +8,7 @@ from odmantic import Model
 from pydantic import root_validator
 
 from .engine import engine
-from .models import ModelPlus
+from .models import ModelExtMixin
 
 __all__ = (
     'Item',
@@ -43,7 +43,7 @@ def generate_stats(exterior: str):
     return float_, seed
 
 
-class Item(ModelPlus, Model):
+class Item(ModelExtMixin, Model):
     name: str
     icon_url: Optional[str]
     rarity: Optional[str]

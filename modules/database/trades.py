@@ -7,7 +7,7 @@ from odmantic import Model, Field, Reference
 from pydantic import root_validator
 
 from . import Player
-from .models import ModelPlus
+from .models import ModelExtMixin
 
 __all__ = (
     'Trade',
@@ -47,7 +47,7 @@ def _random_code():
     return ''.join(random.choices(chars, k=6))
 
 
-class Trade(ModelPlus, Model):
+class Trade(ModelExtMixin, Model):
     sender: Player = Reference()
     receiver: Player = Reference()
     guild_id: Optional[int] = None
