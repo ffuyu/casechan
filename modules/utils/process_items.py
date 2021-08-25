@@ -3,7 +3,6 @@ import logging
 
 from datetime import datetime
 from functools import partial
-from html import unescape
 
 from aiohttp import ClientSession
 
@@ -65,7 +64,6 @@ async def update_item_database():
                 # debug
                 item = {k: v for k, v in raw_item.items() if k in _relevant_keys}
                 # get price
-                item['name'] = unescape(item.get('name', ''))  # escape html encoded characters
                 rprice = raw_item.get('price')
 
                 if rprice:
