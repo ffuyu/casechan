@@ -6,6 +6,7 @@ from functools import partial
 
 from .constants import KEY_PRICE
 from .database import Item
+from .errors import FailedItemGen
 
 log = logging.getLogger(__name__)
 
@@ -63,10 +64,13 @@ def _get_valid_item(item_name, rarity, valid_items, valid_exteriors):
     while item not in valid_items:
         item_n, float_, seed = _generate_item(item_name, rarity, valid_exteriors)
         item = next((i for i in valid_items if item_n == i.name), None)
-
         if not item:
             i += 1
             log.warning(f'Failed to generate item (try {i}): "{item_name}" converted to "{item_n}"')
+            if i == 10:
+                raise FailedItemGen(f'Failed to generate item after 10 trials: '
+                                    f'"{item_name}" | {rarity} | {valid_items} | '
+                                    f'{valid_exteriors} converted to "{item_n}"')
     return item, float_, seed
 
 
