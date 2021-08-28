@@ -1,3 +1,4 @@
+from collections import defaultdict
 import datetime
 import random
 
@@ -19,11 +20,13 @@ from modules.errors import RewardsError
 
 async def _reward_cases(player, to_give):
     given = 0
+    cases = defaultdict(int)
     while given < to_give:
         case = Case(random.choice([*all_cases]))
         n = random.randint(0, to_give - given)
         given += n
         player.mod_case(case.name, n)
+        cases[case.name] += n
         if case.key:
             player.mod_key(case.key.name, n)
         
