@@ -106,7 +106,7 @@ class CoreCog(commands.Cog, name='Core'):
                 # Opening cases
                 with Timer() as t:
                     items = [await player.open_case(container.name) for _ in range(amount)]
-                    item_objects = [k for k, _, _ in items]
+                    item_objects = sort_items([k for k, *_ in items])
                 
                 await asyncio.sleep(max(6.0 - t.t, 0))
 
