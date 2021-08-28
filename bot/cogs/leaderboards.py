@@ -16,7 +16,7 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
     """Contains the leaderboard commands"""
     def __init__(self, bot):
         self.bot = bot
-        self.null_cached_lb.start()
+        self.update_cached_lb.start()
         print(f'Cog: {self.qualified_name} loaded')
 
     def cog_unload(self):
@@ -72,9 +72,15 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
         await ctx.send(embed=embed)
         
     @tasks.loop(minutes=10)
-    async def null_cached_lb(self):
+    async def update_cached_lb(self):
         global cached_lb
-        cached_lb = None
+        guilds_dictionary = {} 
+        
+        for guild in self.bot.guilds:
+            users = await engine.find(Player, Player.guild_id==guild.id)
+            guilds_dictionary[guild.name] = sum([await x.inv_total() for x in users if not x.trade_banned])
+
+        cached_lb = dict(sorted(guilds_dictionary.items(), key=lambda item: item[1], reverse=True))
 
 def setup(bot):
     bot.add_cog(LeaderboardsCog(bot))
