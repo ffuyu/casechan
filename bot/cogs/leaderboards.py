@@ -16,6 +16,7 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
     """Contains the leaderboard commands"""
     def __init__(self, bot):
         self.bot = bot
+        self.null_cached_lb.start()
         print(f'Cog: {self.qualified_name} loaded')
 
     def cog_unload(self):
