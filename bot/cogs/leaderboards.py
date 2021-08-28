@@ -62,7 +62,7 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
         embed = Embed(
             title="World Leaderboard",
             description='\n'.join(
-                f"**{[*cached_lb][x]}**: ${lb[[*cached_lb][x]]:.2f}"
+                f"**{[*cached_lb][x]}**: ${cached_lb[[*cached_lb][x]]:.2f}"
                 for x in range(10 if len([*cached_lb]) >= 10 else len([*cached_lb]))),
             color=Colour.from_rgb(13, 139, 73)
         )
