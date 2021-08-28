@@ -36,6 +36,7 @@ from modules.utils.case_converter import CaseConverter
 
 from etc.emojis import emojis
 from modules.utils import Timer
+
 def disable_row(row: ActionRow) -> ActionRow:
     for button in row.buttons:
         button.disabled = True

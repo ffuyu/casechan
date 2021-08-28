@@ -131,7 +131,7 @@ class GamblingCog(commands.Cog, name='Gambling'):
                     elif isinstance(item, Key):
                         player.mod_key(item.name, amount * multiplier)
                     elif isinstance(item, int):
-                        player.balance += item * 2
+                        player.balance += item * 5
 
                     await inter.reply(win_message)
                 else:
