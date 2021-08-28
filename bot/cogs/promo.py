@@ -77,7 +77,7 @@ class PromoCog(commands.Cog, name='Promo Codes'):
                             return await ctx.send(f'Success! You\'ve received **${promo.funds}**')
 
                     raise AlreadyClaimed('You have already used this promo code.')
-                raise CodeClaimed('This promo code has reached max uses.')
+                raise CodeClaimed(f'This promo code has reached max uses. ({promo.uses}/{promo.max_uses})')
             raise CodeExpired('This promo code has expired.')
         raise CodeInvalid('Promo code not found.')
         

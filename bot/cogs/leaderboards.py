@@ -4,12 +4,13 @@ from typing import Optional
 from discord.ext.commands.core import guild_only
 from modules.database.players import Player
 
-from discord.ext import commands
+from discord.ext import commands, tasks
 from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.context import Context
 
 from discord import Embed, Colour, Guild
 
+cached_lb = None
 
 class LeaderboardsCog(commands.Cog, name='Leaderboards'):
     """Contains the leaderboard commands"""
@@ -47,24 +48,33 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
     @commands.command()
     async def top(self, ctx):
         """Lists the top 10 most rich servers based on inventory worth"""
-        guilds_dictionary = {} 
-        for guild in self.bot.guilds:
-            users = await Player.find(guild_id=guild.id)
-            guilds_dictionary[guild.name] = sum([await x.inv_total() for x in users if not x.trade_banned])
 
-        leaderboard = dict(sorted(guilds_dictionary.items(), key=lambda item: item[1], reverse=True))
+        if not cached_lb:
+            global cached_lb
+
+            guilds_dictionary = {} 
+            for guild in self.bot.guilds:
+                users = await engine.find(Player, Player.guild_id==guild.id)
+                guilds_dictionary[guild.name] = sum([await x.inv_total() for x in users if not x.trade_banned])
+
+            cached_lb = dict(sorted(guilds_dictionary.items(), key=lambda item: item[1], reverse=True))
 
         embed = Embed(
-            title="TOP 10 SERVERS",
+            title="World Leaderboard",
             description='\n'.join(
-                "**{}**: ${:.2f}".format(list(leaderboard.keys())[x], leaderboard[list(leaderboard.keys())[x]]) for x in
-                range(10 if len(list(leaderboard.keys())) >= 10 else len(list(leaderboard.keys())))),
+                f"**{[*cached_lb][x]}**: ${lb[[*cached_lb][x]]:.2f}"
+                for x in range(10 if len([*cached_lb]) >= 10 else len([*cached_lb]))),
             color=Colour.from_rgb(13, 139, 73)
-        ).set_footer(text='Based on inventory worth, not wallets.').set_thumbnail(
-            url="https://cdn.discordapp.com/emojis/877878954424406016.png?v=1")
-
+        )
+        
+        embed.set_footer(text='Based on inventory worth, not wallets.')
+        embed.set_thumbnail(url="https://cdn.discordapp.com/emojis/877878954424406016.png?v=1")
         await ctx.send(embed=embed)
         
+    @tasks.loop(minutes=10)
+    async def null_cached_lb(self):
+        global cached_lb
+        cached_lb = None
 
 def setup(bot):
     bot.add_cog(LeaderboardsCog(bot))
