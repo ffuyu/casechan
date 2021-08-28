@@ -227,7 +227,10 @@ class MarketCog(commands.Cog, name='Market'):
                     content=f'Sold items for ${(earning):.2f}.' if earning > 0.0 else 'Sold no items.',
                     mention_author=False
                 )
-        
+
+            else:
+                # trade banned
+                return await ctx.send('Your selling functions are disabled.')
 
     @commands.command(aliases=['inspect'])
     async def price(self, ctx: Context, *, query: Optional[ItemConverter]):
