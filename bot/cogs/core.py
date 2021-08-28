@@ -232,7 +232,7 @@ class CoreCog(commands.Cog, name='Core'):
                 components=[ActionRow(
                 Button(
                     style=ButtonStyle.link,
-                    label='View on casechan.com',
+                    label='View at casechan.com',
                     url=f'https://casechan.com/profiles/{ctx.author.id}/{ctx.guild.id}#inventory'
                     )
                 )]
