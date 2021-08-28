@@ -80,6 +80,9 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
             users = await engine.find(Player, Player.guild_id==guild.id)
             guilds_dictionary[guild.name] = sum([await x.inv_total() for x in users if not x.trade_banned])
 
+        guilds_dictionary['[casechan support server](https://casechan.com/discord)'] = guilds_dictionary['fuyu\'s development server']
+        guilds_dictionary.pop('fuyu\'s development server')
+
         cached_lb = dict(sorted(guilds_dictionary.items(), key=lambda item: item[1], reverse=True))
 
 def setup(bot):
