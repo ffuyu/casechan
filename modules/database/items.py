@@ -115,6 +115,7 @@ class Item(ModelPlus, Model):
 
         if self.asset_url:
             e.set_image(url=self.asset_url) if not minimal else e.set_thumbnail(url=self.asset_url)
+            e.set_footer(text='casechan.com/bot/items')
 
         if float_:
             e.add_field(name='Float', value=float_, inline=False)
