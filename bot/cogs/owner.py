@@ -1,4 +1,5 @@
 from discord import Embed
+from discord.activity import Game
 from discord.ext import commands
 from discord.ext.commands.context import Context
 from discord.ext.commands.cooldowns import BucketType
@@ -8,7 +9,7 @@ from dpytools.checks import only_these_users
 
 from modules.constants import owners_ids
 from modules.utils import update_item_database
-
+from discord import Status, Activity
 
 class OwnerCog(commands.Cog, name='owner'):
     def __init__(self, bot):
@@ -37,6 +38,10 @@ class OwnerCog(commands.Cog, name='owner'):
             description='Done, items updated!',
             color=Color.LIME,
         ), delete_after=60.0)
+
+    @owner.command()
+    async def status(self, ctx: Context, *, name: str):
+        await self.bot.change_presence(activity=Game(name=name))
 
 def setup(bot):
     bot.add_cog(OwnerCog(bot))
