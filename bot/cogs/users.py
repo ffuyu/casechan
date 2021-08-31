@@ -1,3 +1,5 @@
+from discord.colour import Colour
+from discord.embeds import Embed
 from dpytools.checks import only_these_users
 from modules.utils.case_converter import CaseConverter
 from typing import Optional
@@ -94,6 +96,17 @@ class UsersCog(commands.Cog, name='Users'):
         await player.delete()
         await ctx.send(f"**{guild_id or ctx.guild.id}/{user_id or ctx.author.id}** has been deleted from database.")
 
+    @commands.is_owner()
+    @user.command()
+    async def info(self, ctx, user:User):
+        if user:
+            await ctx.send(embed=Embed(
+                color = Colour.random()
+            ).set_author(name=str(user))\
+            .add_field(name='Created at', value=user.created_at)\
+            .set_thumbnail(url=user.avatar_url))
+        else:
+            await ctx.send('User unreachable')
 
 def setup(bot):
     bot.add_cog(UsersCog(bot))
