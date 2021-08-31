@@ -98,7 +98,8 @@ class UsersCog(commands.Cog, name='Users'):
 
     @commands.is_owner()
     @user.command()
-    async def info(self, ctx, user:User):
+    async def info(self, ctx, user:Optional[User]):
+        user = user or ctx.author
         if user:
             await ctx.send(embed=Embed(
                 color = Colour.random()
