@@ -19,7 +19,7 @@ from DiscordUtils.Pagination import CustomEmbedPaginator
 intents = Intents.all()
 intents.presences = False
 
-bot = commands.Bot(command_prefix=get_command_prefix,
+bot = commands.AutoShardedBot(command_prefix=get_command_prefix,
                    case_insensitive=True,
                    intents=intents,
                    help_command=PrettyHelp(color=Colour.random(), no_category="General"),
