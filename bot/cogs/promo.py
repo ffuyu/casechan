@@ -82,6 +82,7 @@ class PromoCog(commands.Cog, name='Promo Codes'):
             raise CodeExpired('This promo code has expired.')
         raise CodeInvalid('Promo code not found.')
         
+
     @promo.command()
     async def info(self, ctx, code:str, show_users:Optional[bool]):
         promo = await Promo.get(code=code)
@@ -94,12 +95,20 @@ class PromoCog(commands.Cog, name='Promo Codes'):
             embed.add_field(name='Uses', value=f'{promo.uses}/{promo.max_uses}')
 
             if show_users and promo.uses:
-                embed.add_field(name='Users', value='\n'.join(promo.users), inline=False)
+                embed.add_field(name='Users', value='\n'.join([str(uid) for uid in promo.users]), inline=False)
 
             await ctx.send(embed=embed)
         else:
             raise CodeInvalid('Promo code not found.')
 
+    @promo.command()
+    async def delete(self, ctx, code:str):
+        promo = await Promo.get(code=code)
+        if promo:
+            await promo.delete()
+            await ctx.send(f'Deleted `{code}`')
+        else:
+            raise CodeInvalid('Promo code not found.')
 
 
 
