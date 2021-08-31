@@ -1,17 +1,18 @@
 from datetime import datetime, timedelta
-from discord.ext.commands.cooldowns import BucketType
+from typing import Optional
+from shortuuid import ShortUUID
 
+from discord.ext.commands.cooldowns import BucketType
 from discord.ext.commands.core import guild_only, max_concurrency
+from discord.ext import commands
+
+from discord import Embed, Colour
 
 from modules.errors import AlreadyClaimed, CodeClaimed, CodeExpired, CodeInvalid, ExistingCode
 from modules.database.promos import Promo
 from modules.database.players import Player, SafePlayer
 
-from typing import Optional
 
-from discord.ext import commands
-
-from shortuuid import ShortUUID
 
 allowed_characters = [
     'A', 'B', 'C', 'D', 'E',
@@ -81,6 +82,25 @@ class PromoCog(commands.Cog, name='Promo Codes'):
             raise CodeExpired('This promo code has expired.')
         raise CodeInvalid('Promo code not found.')
         
+    @promo.command()
+    async def info(self, ctx, code:str, show_users:Optional[bool]):
+        promo = await Promo.get(code=code)
+        if promo:
+            embed = Embed(
+                color=Colour.random()
+            )
+            embed.timestamp = promo.expires_at
+            embed.add_field(name='Funds', value=promo.funds)
+            embed.add_field(name='Uses', value=f'{promo.uses}/{promo.max_uses}')
+
+            if show_users and promo.uses:
+                embed.add_field(name='Users', value='\n'.join(promo.users), inline=False)
+
+            await ctx.send(embed=embed)
+        else:
+            raise CodeInvalid('Promo code not found.')
+
+
 
 
 def setup(bot):
