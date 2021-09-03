@@ -90,7 +90,8 @@ class PromoCog(commands.Cog, name='Promo Codes'):
             embed = Embed(
                 color=Colour.random()
             )
-            embed.timestamp = promo.expires_at
+            if promo.expires_at:
+                embed.timestamp = promo.expires_at
             embed.add_field(name='Funds', value=promo.funds)
             embed.add_field(name='Uses', value=f'{promo.uses}/{promo.max_uses}')
 
