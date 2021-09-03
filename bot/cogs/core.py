@@ -191,7 +191,7 @@ class CoreCog(commands.Cog, name='Core'):
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
 
         if player.cases:
-            return await dict_paginator(f'{user}\'s Keys', ctx, player.cases)
+            return await dict_paginator(f'{user}\'s Cases', ctx, player.cases)
 
         await ctx.send(
             content=f'**{user}** has no cases to display'
