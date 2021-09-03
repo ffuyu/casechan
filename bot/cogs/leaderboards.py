@@ -34,7 +34,7 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
         for user in users:
             member = guild.get_member(user.member_id)
             if member and not user.trade_banned:
-                users_dictionary[member.name] = await user.inv_total()
+                users_dictionary[f'[{member.name}](https://casechan.com/profile/{user.member_id}/{user.guild_id})'] = await user.inv_total()
 
         leaderboard = sorted(users_dictionary.items(), key=lambda item: item[1], reverse=True)
         await ctx.send(

@@ -255,6 +255,7 @@ class CoreCog(commands.Cog, name='Core'):
                 .add_field(name="Wallet", value='${:.2f}'.format(player.balance), inline=True)
                 .add_field(name="Inventory", value='${:.2f}'.format(inv_total), inline=True)
                 .add_field(name="Net worth", value='${:.2f}'.format(player.balance + inv_total), inline=True)
+                .set_footer(text="casechan.com/profile")
         )
 
 
