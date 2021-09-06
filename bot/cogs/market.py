@@ -245,9 +245,9 @@ class MarketCog(commands.Cog, name='Market'):
         else:
             await ctx.send(embed=Embed(description='Item not found', color=Color.FIRE_ORANGE))
 
-        if random.randint(1, 100) == 100 and ctx.invoked_with == 'price':
+        if random.randint(1, 50) == 50 and ctx.invoked_with == 'price':
             await ctx.send(embed=Embed(
-                description = "Check out (BOT Chicken)[https://top.gg/bot/286697179949694977/invite/], An easy to use CS:GO item/inventory price checker bot.",
+                description = "Check out [BOT Chicken](https://top.gg/bot/286697179949694977/invite/), An easy to use CS:GO item/inventory price checker bot.",
                 color = Colour.from_rgb(252, 176, 12)
             ).set_author(name='Need accurate item prices?', icon_url="https://cdn.discordapp.com/attachments/883851874355282000/884498302475837560/logo.png"))
 
