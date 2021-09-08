@@ -1,5 +1,6 @@
 import asyncio, random
 from DiscordUtils.Pagination import CustomEmbedPaginator
+import discord
 
 from discord.embeds import Embed
 from discord import Colour
