@@ -1,6 +1,4 @@
-import random
 from datetime import datetime, timedelta
-from string import ascii_lowercase as abc
 from typing import Optional, List, Dict, Tuple
 
 from odmantic import Model, Field, Reference
@@ -13,45 +11,9 @@ __all__ = (
     'Trade',
 )
 
-"""
-{
-    "_id": {
-        "$oid": "60e5b2e2c4fabdf9080a5694"
-    },
-    "id": "Px8khH",
-    "sender": {
-        "$numberLong": "717747572076314745"
-    },
-    "receiver": {
-        "$numberLong": "797161877569798144"
-    },
-    "created_at": {
-        "$date": "2021-07-07T13:57:31.415Z"
-    },
-    "expires_at": {
-        "$date": "2021-07-14T13:57:31.415Z"
-    },
-    "accepted": false,
-    "active": true,
-    "sender_items": ["P250 | Sand Dune (Factory New)"],
-    "receiver_items": [],
-    "confirmed": [{
-        "$numberLong": "717747572076314745"
-    }]
-}
-"""
-
-
-def _random_code():
-    chars = abc + '01234567890'
-    return ''.join(random.choices(chars, k=6))
-
-
 class Trade(ModelPlus, Model):
     sender: Player = Reference()
     receiver: Player = Reference()
-    guild_id: Optional[int] = None
-    code: str = Field(default_factory=_random_code)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     expires_at: Optional[datetime] = None  # default will be set to +7 days from creation time
     accepted: Optional[bool] = None
@@ -66,10 +28,7 @@ class Trade(ModelPlus, Model):
 
     @root_validator
     def general_validator(cls, values):
-        """Sets guild_id if necessary"""
-        if not values.get('guild_id'):
-            p = values.get('sender')
-            values['guild_id'] = p.guild_id
+        """Validator"""
 
         created_at = values.get('created_at')
         if not values.get('expires_at'):
