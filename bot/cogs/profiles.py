@@ -26,9 +26,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
         """Displays a user's public profile"""
         user = user if user and not user.bot else ctx.author
         player = await Player.get(True, member_id=user.id, guild_id=ctx.guild.id)
-        userdata = await engine.find_one(UserData, UserData.user_id == user.id)
-        if not userdata:
-            userdata = await UserData.get(True, user_id=user.id)
+        userdata = await UserData.get(True, user_id=user.id)
         profile_embed = Embed(color=Colour.random())
         profile_embed.add_field(name=f'Selling fees:', value=f'{"5" if userdata.is_boosted else "15"}%', inline=True)
         profile_embed.add_field(name=f'Total votes:', value=f'{userdata.total_votes}', inline=True)
