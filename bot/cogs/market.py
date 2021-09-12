@@ -245,7 +245,7 @@ class MarketCog(commands.Cog, name='Market'):
         else:
             await ctx.send(embed=Embed(description='Item not found', color=Color.FIRE_ORANGE))
 
-        if random.randint(1, 50) == 50 and ctx.invoked_with == 'price':
+        if random.randint(1, 25) == 25 and ctx.invoked_with == 'price':
             await ctx.send(embed=Embed(
                 description = "Check out [BOT Chicken](https://top.gg/bot/286697179949694977/invite/), An easy to use CS:GO item/inventory price checker bot.",
                 color = Colour.from_rgb(252, 176, 12)
@@ -263,10 +263,8 @@ class MarketCog(commands.Cog, name='Market'):
             f'{k[:20] + "..." if len(k) > 22 else k}: **${v:.2f}**' for k, v in case_prices.items()),
             title='Case Prices', max_size=200, color=Colour.random())
 
-        paginator = CustomEmbedPaginator(ctx, remove_reactions=True)
-        if len(pages) > 1:
-            paginator.add_reaction('⬅️', "back")
-            paginator.add_reaction('➡️', "next")
+        paginator = CustomEmbedPaginator(ctx, remove_reactions=True, timeout=20)
+        if len(pages) > 1: paginator.add_reaction('⬅️', "back"), paginator.add_reaction('➡️', "next")
 
         return await paginator.run(pages)
 

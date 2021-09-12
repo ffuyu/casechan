@@ -1,4 +1,5 @@
 from datetime import datetime as dt
+from modules.database.guilds import Guild
 
 from discord import Color
 from discord.colour import Colour
@@ -74,6 +75,19 @@ class Cog(commands.Cog, name='Misc'):
         )
 
         await ctx.send(embed=embed, components=[rows])
+
+    @commands.command(aliases=["info", "guildinfo"])
+    async def serverinfo(self, ctx):
+        guild = await Guild.get(True, guild_id=ctx.guild.id)
+        embed = Embed(color=Colour.random())
+        embed.add_fields(False, **{
+            'Global Leaderboards': 'Ineligible' if guild.excluded_from_leaderboards else 'Eligible',
+            'Website Visibility': 'Invisible' if guild.excluded_from_web else 'Visible',
+            'Cheats': 'Enabled' if guild.server_cheats_enabled else 'Disabled',
+            'Status:': 'Modded' if guild.is_excluded else 'Official',
+            'Total Worth': f'${await guild.total_worth:.2f}'
+        })
+        await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Cog(bot))

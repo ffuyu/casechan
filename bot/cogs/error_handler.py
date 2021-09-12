@@ -47,15 +47,13 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             color=Color.FIRE_ORANGE,
         )
 
-        if isinstance(error, (CommandNotFound)):
-            return
+        if isinstance(error, (CommandNotFound)): return
 
         elif isinstance(error, NoPrivateMessage):
             embed.description = "This command only works inside a server"
 
-        elif isinstance(error, (CheckFailure, BadArgument)):
+        elif isinstance(error, (CheckFailure, BadArgument, MissingRequiredArgument)):
             embed.description = f"{error.__cause__ or error}"
-            print(error.__cause__ or error)
 
         elif isinstance(error, Forbidden):
             me = ctx.guild.me
@@ -79,8 +77,8 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
 
         else:
-            embed.description = str(error)
-
+            print(str(error))
+            embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
         try:
             await ctx.send(embed=embed)
         except:

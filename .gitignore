@@ -6,6 +6,11 @@ __pycache__/
 # C extensions
 *.so
 
+# fuyus junk
+todo.md
+test.py
+sex.py
+
 #pycharm
 .idea/
 

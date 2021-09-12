@@ -3,6 +3,8 @@ from modules.cases import Case, Key
 
 from modules.database import Player, Item
 
+import re
+
 from typing import Union
 
 def able_to_buy(player:Player, item:Union[Item, Case, Key], amount:int=1):
@@ -83,3 +85,11 @@ def able_to_opencase(player:Player, case:Case, amount:int=1):
             message=f'You can\'t open more cases, your inventory is full!')
 
     return True
+
+def emojify(ctx, text:str) -> str:
+    """
+    Clears custom emojis from the text if guild does not allow external emotes for the bot
+    """
+    if not ctx.guild.me.guild_permissions.external_emojis: return re.sub(r'<.+?>', '', text)
+
+    return text

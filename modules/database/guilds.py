@@ -1,23 +1,52 @@
 import logging
+from typing import Optional
 
 from odmantic import Model
 
-from . import engine
+from . import engine, Player
 from .models import ModelPlus
-from ..constants import DEFAULT_PREFIX
+
+from modules.config import config
 
 __all__ = (
-    'GuildConfig',
+    'Guild',
 )
 
 log = logging.getLogger(__name__)
 
 _guilds_cache = {}
 
+DEFAULT_PREFIX = config.get('default_prefix')
 
-class GuildConfig(ModelPlus, Model):
+class Guild(ModelPlus, Model):
+    # Stores guild information and configuration
+    # Hence the name Guild, this model must be imported
+    # as Guild_ in files that also import discord.Guild 
+    # to prevent conflicts.
+
     guild_id: int
     prefix: str = DEFAULT_PREFIX
+    
+    # whether to exclude the server from global leaderboards
+    # this variable alone does not determine the exclusion
+    # and exclusion must be checked through @is_excluded
+    excluded_from_leaderboards: bool = False
+
+    # whether if guild is allowed to appear on casechan.com/profile and if 
+    # user profiles in this guild are allowed to be fetched through profile URLs
+    excluded_from_web: bool = False
+
+    # allow server administrators to distribute cases, keys and create promotion codes for the server
+    server_cheats_enabled: bool = False
+
+    @property
+    def is_excluded(self) -> bool:
+        # Auto exclude if server has cheats enabled
+        return self.excluded_from_leaderboards or self.server_cheats_enabled
+
+    @property
+    async def total_worth(self) -> float:
+        if players:=await engine.find(Player, Player.guild_id == self.guild_id):return sum([await player.inv_total() for player in players]) if players else 0.00
 
     class Config:
         collection = 'guilds'

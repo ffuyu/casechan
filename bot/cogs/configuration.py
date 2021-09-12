@@ -5,7 +5,7 @@ from discord.ext.commands.core import guild_only
 from dpytools import Color
 from dpytools.checks import is_admin
 
-from modules.database import GuildConfig
+from modules.database import Guild
 
 
 class ConfigCog(commands.Cog, name='Configuration'):
@@ -33,7 +33,7 @@ class ConfigCog(commands.Cog, name='Configuration'):
         Args:
             new_prefix: a sequence of characters to use as the new prefix
         """
-        guild_config = await GuildConfig.draw(guild_id=ctx.guild.id)
+        guild_config = await Guild.draw(guild_id=ctx.guild.id)
         guild_config.prefix = new_prefix
         await guild_config.save()
         await ctx.send(embed=Embed(
@@ -44,7 +44,7 @@ class ConfigCog(commands.Cog, name='Configuration'):
     @commands.command(name='prefix')
     async def prefix_(self, ctx):
         """Displays the current prefix in the server"""
-        guild = await GuildConfig.get(True, guild_id=ctx.guild.id)
+        guild = await Guild.get(True, guild_id=ctx.guild.id)
         await ctx.send(f'My prefix in this guild is: "`{guild.prefix}`"')
 
 

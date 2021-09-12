@@ -7,9 +7,9 @@ from discord.ext.commands.core import max_concurrency
 from dpytools import Color
 from dpytools.checks import only_these_users
 
-from modules.constants import owners_ids
+from modules.config import OWNERS_IDS
 from modules.utils import update_item_database
-from discord import Status, Activity
+
 
 class OwnerCog(commands.Cog, name='owner'):
     def __init__(self, bot):
@@ -20,7 +20,7 @@ class OwnerCog(commands.Cog, name='owner'):
         print(f'Cog: {self.qualified_name} unloaded')
 
     @commands.is_owner()
-    @only_these_users(*owners_ids)
+    @only_these_users(*OWNERS_IDS)
     @commands.group(hidden=True)
     async def owner(self, ctx: Context):
         pass
