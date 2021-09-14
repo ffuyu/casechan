@@ -10,3 +10,4 @@ dislash.py
 humanize
 shortuuid
 topggpy
+pyyaml
