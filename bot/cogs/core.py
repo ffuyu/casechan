@@ -325,11 +325,12 @@ class CoreCog(commands.Cog, name='Core'):
     async def log_stats(self):
         global last_opening_durations
         global cases_opened
-        if last_opening_durations or cases_opened: 
-            print(f'{cases_opened} cases opened in the last 10 minutes,')
-            print(f'Average case opening duration in the last 10 minutes: {sum(last_opening_durations)/len(last_opening_durations):.6f}')
-            last_opening_durations = {}
-            cases_opened = 0
+        if last_opening_durations: print(f'Average case opening duration in the last 10 minutes: {sum(last_opening_durations)/len(last_opening_durations):.6f}')
+            
+        if cases_opened: print(f'{cases_opened} cases opened in the last 10 minutes,')
+            
+        last_opening_durations = {}
+        cases_opened = 0
             
 
     @log_stats.before_loop
