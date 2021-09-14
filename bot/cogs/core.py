@@ -11,9 +11,7 @@ as follows:
 # Viewing balance
 """
 import asyncio
-import os
-import aiohttp
-import io
+import time
 import logging
 
 from sqlitedict import SqliteDict
@@ -123,14 +121,16 @@ class CoreCog(commands.Cog, name='Core'):
 
                 # Opening cases
 
-                with Timer() as t:
-                    items = [await player.open_case(container) for _ in range(amount)]
+                start = time.perf_counter()
+                items = [await player.open_case(container) for _ in range(amount)]
+                stop = time.perf_counter()
+            
                     
-                last_opening_durations.append(t.t)
+                last_opening_durations.append(stop-start)
                 item_objects = sort_items([k for k, *_ in items])
 
                 
-                await asyncio.sleep(max(sleep_duration - t.t, 0))
+                await asyncio.sleep(max(sleep_duration - stop-start, 0))
 
                 # Displaying results based on amount
                 if amount > 1:
@@ -328,7 +328,8 @@ class CoreCog(commands.Cog, name='Core'):
         global cases_opened
         if last_opening_durations or cases_opened: 
             print(f'{cases_opened} cases opened in the last 10 minutes,')
-            print(f'Average case opening duration in the last 10 minutes: {sum([last_opening_durations])/len(last_opening_durations):.6f}')
+            a = sum([last_opening_durations])
+            print(f'Average case opening duration in the last 10 minutes: {a/len(last_opening_durations):.6f}')
 
             last_opening_duration = {}
             cases_opened = 0

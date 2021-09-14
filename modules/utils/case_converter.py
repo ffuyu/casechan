@@ -22,6 +22,9 @@ class ContainerConverter(Converter):
         first_argument = argument.lower()
         argument = argument.lower().replace(' key', '')
 
+        if len(argument) < 4:
+            raise ValueError(f'No container or key with name "{argument}"')
+
         # cases
         for case in [*all_cases]:
             lwcs = case.lower()
@@ -98,21 +101,17 @@ class ContainerConverter(Converter):
                 lwcs == f'ems one 2014 {argument} souvenir package',
 
                 lwcs == f'dreamhack 2013 {argument} package',
-                lwcs == f'dreamhack 2013 {argument} souvenir package',
-
-                lwcs == f'{argument.replace("xray", "x-ray")} p250 package',
-                lwcs == f'x-ray p250 package',
-
+                lwcs == f'dreamhack 2013 {argument} souvenir package'
             ]
-            secondary = [
-                any([x.isdigit() for x in argument]) and any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('package', '') in lwcs),
-                not any([x.isdigit() for x in argument]) and not any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('package', '') in lwcs),
-            ]
+            # secondary = [
+            #     any([x.isdigit() for x in argument]) and any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('package', '') in lwcs),
+            #     not any([x.isdigit() for x in argument]) and not any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('package', '') in lwcs),
+            # ]
 
             if any(primary): 
                 return Package(package)
-            elif any(secondary):
-                return Package(package)
+            # elif any(secondary):
+            #     return Package(package)
 
 
         raise ValueError(f'No container or key with name "{argument}"')

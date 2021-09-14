@@ -21,12 +21,6 @@ stats_dict = {
     "cases": {
         "opened": 0
     },
-    "packages": {
-        "opened": 0
-    },
-    "capsules": {
-        "opened": 0
-    },
     "transactions": {
         "trades_made": 0,
         "items_sold": 0
@@ -212,10 +206,8 @@ class Player(ModelPlus, Model):
             self.stats['cases']['opened'] += 1
         if isinstance(container, Package): 
             self.mod_package(container.name, -1)
-            self.stats['packages']['opened'] += 1
         if isinstance(container, Capsule): 
             self.mod_capsule(container.name, -1)
-            self.stats['capsules']['opened'] += 1
 
         
 
