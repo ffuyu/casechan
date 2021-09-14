@@ -37,6 +37,7 @@ class UserData(ModelPlus, Model):
         """
         if self.last_voted:
             return datetime.utcnow() <= self.vote_expiration
+            
         return False
 
     @property

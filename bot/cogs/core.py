@@ -129,8 +129,7 @@ class CoreCog(commands.Cog, name='Core'):
                 last_opening_durations.append(stop-start)
                 item_objects = sort_items([k for k, *_ in items])
 
-                
-                await asyncio.sleep(max(sleep_duration - stop-start, 0))
+                await asyncio.sleep(max(sleep_duration - (stop-start), 0))
 
                 # Displaying results based on amount
                 if amount > 1:
