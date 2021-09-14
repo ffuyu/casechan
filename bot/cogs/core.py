@@ -329,8 +329,8 @@ class CoreCog(commands.Cog, name='Core'):
         if last_opening_durations or cases_opened: 
             print(f'{cases_opened} cases opened in the last 10 minutes,')
             a = sum([last_opening_durations])
-            print(f'Average case opening duration in the last 10 minutes: {a/len(last_opening_durations):.6f}')
-
+            try: print(f'Average case opening duration in the last 10 minutes: {a/len(last_opening_durations):.6f}')
+            except: pass
             last_opening_duration = {}
             cases_opened = 0
             
