@@ -12,7 +12,7 @@ from modules.database.promos import Promo
 from modules.database.items import sort_items
 from modules.database.players import Player, SafePlayer
 
-class Cog(commands.Cog, name='Cog Cookie Cutter'):
+class Cog(commands.Cog, name='Context Menu Commands'):
     """Cog containing all context menu commands."""
     def __init__(self, bot):
         self.bot = bot
