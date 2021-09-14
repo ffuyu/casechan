@@ -35,7 +35,6 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
         """View the inventory worth leaderboard for the server"""
         guild = guild or ctx.guild
         users = await engine.find(Player, Player.guild_id==guild.id)
-        users = [users[0] for _ in range(15)]
         users_dictionary = {}
         for user in users:
             member = guild.get_member(user.member_id)
@@ -66,11 +65,11 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
             
             leaderboard_embed.set_footer(text='Based on inventory worth, not wallets.')
 
-            running_guild = await Guild_.get(True, guild_id=ctx.guild.id)
+            # running_guild = await Guild_.get(True, guild_id=ctx.guild.id)
 
-            if len(cached_lb) >= 10:
-                if not running_guild.is_excluded and not ctx.guild.id in cached_lb[10:]: 
-                    leaderboard_embed.footer(text=leaderboard_embed.footer.text+f'\nYour server is {ordinal(list(cached_lb.values()).index(ctx.guild.id))}')
+            # if len(cached_lb) >= 10:
+            #     if not running_guild.is_excluded and not ctx.guild.id in cached_lb[10:]: 
+            #         leaderboard_embed.footer(text=leaderboard_embed.footer.text+f'\nYour server is {ordinal(list(cached_lb.values()).index(ctx.guild.id))}')
 
 
         else: leaderboard_embed.description = 'Loading...'
@@ -91,7 +90,8 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
             return text
 
         for player in players:
-            if player.guild_id in [g.id for g in self.bot.guilds]: guilds[filter(self.bot.get_guild(player.guild_id).name)]+=await player.inv_total()
+            if player.guild_id in [g.id for g in self.bot.guilds]:
+                guilds[filter(self.bot.get_guild(player.guild_id).name)]+=await player.inv_total()
                 
         if guilds.get('fuyu\'s development server', None): guilds['**[casechan support server](https://casechan.com/discord)**'] = guilds.pop('fuyu\'s development server')
         
