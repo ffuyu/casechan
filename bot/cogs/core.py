@@ -323,14 +323,14 @@ class CoreCog(commands.Cog, name='Core'):
 
     @tasks.loop(minutes=10)
     async def log_stats(self):
-        global last_opening_duration
+        global last_opening_durations
         global cases_opened
         if last_opening_durations or cases_opened: 
             print(f'{cases_opened} cases opened in the last 10 minutes,')
             a = sum([last_opening_durations])
             try: print(f'Average case opening duration in the last 10 minutes: {a/len(last_opening_durations):.6f}')
-            except: pass
-            last_opening_duration = {}
+            except TypeError: pass
+            last_opening_durations = {}
             cases_opened = 0
             
 
