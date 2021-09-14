@@ -19,10 +19,10 @@ from dpytools.embeds import paginate_to_embeds
 
 from modules.utils.checks import able_to_buy, able_to_sell
 from modules.constants import ButtonTypes
-from modules.cases import Case, Key, all_cases
+from modules.cases import Capsule, Case, Container, Key, Package, all_cases
 from modules.database.items import Item, generate_stats
 from modules.database.players import SafePlayer
-from modules.utils.case_converter import CaseConverter
+from modules.utils.case_converter import ContainerConverter
 from modules.utils.item_converter import ItemConverter
 from modules.utils.operator_converter import OperatorConverter
 
@@ -71,7 +71,7 @@ class MarketCog(commands.Cog, name='Market'):
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
     async def buy(self, ctx:Context, amount: Optional[int] = 1, *,
-                  item: Optional[Union[CaseConverter, ItemConverter]]):
+                  item: Optional[Union[ContainerConverter, ItemConverter]]):
         """
         Buy a skin from the market using your balance
         Args:
@@ -83,13 +83,21 @@ class MarketCog(commands.Cog, name='Market'):
                 content='Item not found or not marketable.',
                 mention_author=False
             )
-
+        else:
+            print(item)
         amount = amount if amount > 0 else 1
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             if able_to_buy(player, item, amount):
 
-                if isinstance(item, (Case, Key)):
-                    player.mod_case(item.name, amount) if isinstance(item, Case) else player.mod_key(item.name, amount)
+                if isinstance(item, (Container, Key)):
+                    if isinstance(item, Case):
+                        player.mod_case(item.name, amount)
+                    elif isinstance(item, Package):
+                        player.mod_package(item.name, amount)
+                    elif isinstance(item, Capsule):
+                        player.mod_capsule(item.name, amount)
+                    elif isinstance(item, Key):
+                        player.mod_key(item.name, amount)
 
 
                 elif isinstance(item, Item):
@@ -109,7 +117,7 @@ class MarketCog(commands.Cog, name='Market'):
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
     async def sell(self, ctx, amount:Optional[int] = 1, *,
-                   item: Optional[Union[CaseConverter, ItemConverter]]):
+                   item: Optional[Union[ContainerConverter, ItemConverter]]):
         """
         Sell an item to the market and get balance
         Args:
@@ -138,9 +146,15 @@ class MarketCog(commands.Cog, name='Market'):
                     else:
                         player.inventory[item.name] = random.sample(items, k=len(items)-amount)
 
-                elif isinstance(item, Case):
-                    item: Case
-                    player.mod_case(item.name, -amount)
+                elif isinstance(item, Container):
+                    if isinstance(item, Case):
+                        player.mod_case(item.name, amount)
+                    elif isinstance(item, Package):
+                        player.mod_package(item.name, amount)
+                    elif isinstance(item, Capsule):
+                        player.mod_capsule(item.name, amount)
+                    elif isinstance(item, Key):
+                        return await ctx.send('You can\'t sell keys')
 
                 earning = (item.price * fees) * amount
                 player.balance += earning
@@ -154,7 +168,7 @@ class MarketCog(commands.Cog, name='Market'):
     @guild_only()
     @max_concurrency(1, BucketType.member, wait=False)
     @commands.command()
-    async def sellall(self, ctx:Context, operator:Optional[OperatorConverter], *, item_or_price: Optional[Union[float, CaseConverter, ItemConverter]]):
+    async def sellall(self, ctx:Context, operator:Optional[OperatorConverter], *, item_or_price: Optional[Union[float, ContainerConverter, ItemConverter]]):
         """
         Bulk sells the specified item or all items if none specified
 

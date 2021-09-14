@@ -1,3 +1,4 @@
+from modules.errors import AlreadyClaimed, CodeExpired, CodeInvalid, ReachedMaxUses
 
 from modules.database.players import Player
 from .models import ModelPlus
@@ -5,11 +6,11 @@ from odmantic import Model
 
 from datetime import datetime
 
-from typing import List, Optional, Set
+from typing import List, Optional
 
-all = {
+__all__ = (
     'Promo'
-}
+)
 
 class Promo(ModelPlus, Model):
     # the actual code player has to specify to receive funds
@@ -40,13 +41,11 @@ class Promo(ModelPlus, Model):
     def is_expired(self):
         return datetime.utcnow() >= self.expires_at if self.expires_at else False
     
-    def eligible_for(self, player:Player):
-        statements = {
-            self.uses < self.max_uses,
-            not self.is_expired,
-            player.guild_id in self.available_in or not self.available_in,
-            player.member_id in self.available_to or not self.available_to,
-            player.member_id not in self.users
-        }
+    def eligible_for(self, player:Player) -> Optional[bool]:
+        if self.uses >= self.max_uses:raise ReachedMaxUses('This promo code has reached max uses.')
+        if self.is_expired:raise CodeExpired('This promo code has expired.')
+        if self.available_in and player.guild_id not in self.available_in: raise CodeInvalid('This promo code is not valid in this server.')
+        if self.available_to and player.member_id not in self.available_to: raise CodeInvalid('You are not allowed to redeem this promo code.')
+        if player.member_id in self.users: raise AlreadyClaimed('You have already redeemed this promo code.')
 
-        return all(statements)
+        return True

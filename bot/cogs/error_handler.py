@@ -1,6 +1,6 @@
 from discord.errors import NotFound
 from modules.errors import (
-    AlreadyClaimed, BetTooLow, 
+    AlreadyClaimed, BetTooLow, CheatsDisabled, 
     CodeClaimed, CodeExpired, CodeInvalid, 
     ExistingCode, InsufficientBalance, 
     InvalidBet, ItemNotFound, MissingItem, 
@@ -18,7 +18,7 @@ from discord.ext.commands import (
     MissingRequiredArgument, MaxConcurrencyReached, RoleNotFound, CommandOnCooldown
 )
 
-from discord.ext.commands.errors import BadUnionArgument, BotMissingPermissions, CommandError, NotOwner
+from discord.ext.commands.errors import BadUnionArgument, BotMissingPermissions, CommandError, MissingPermissions, NotOwner
 from dpytools import Embed, Color
 from aiohttp.http_exceptions import BadStatusLine
 
@@ -39,7 +39,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             ItemNotFound, RewardsError, MissingSpace, InsufficientBalance,
             NotOwner, TradeNotAllowed, CodeExpired, CodeClaimed, CodeInvalid, AlreadyClaimed, ExistingCode,
             InvalidBet, BetTooLow, Forbidden, UnableToBuy, UnableToOpen, UnableToSell, MissingKey, MissingCase, 
-            NotFound, BadStatusLine
+            NotFound, BadStatusLine, MissingPermissions, CheatsDisabled
             }
             
         embed = Embed(
@@ -47,12 +47,16 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             color=Color.FIRE_ORANGE,
         )
 
-        if isinstance(error, (CommandNotFound)): return
+        if isinstance(error, (CommandNotFound)):
+            return
 
         elif isinstance(error, NoPrivateMessage):
             embed.description = "This command only works inside a server"
 
-        elif isinstance(error, (CheckFailure, BadArgument, MissingRequiredArgument)):
+        elif isinstance(error, (NotOwner)):
+            embed.description = 'You are not allowed to use this command!'
+
+        elif isinstance(error, (CheckFailure, BadArgument)):
             embed.description = f"{error.__cause__ or error}"
 
         elif isinstance(error, Forbidden):
@@ -64,9 +68,6 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
         elif isinstance(error, BotMissingPermissions):
             embed.description = str(error)
 
-        elif isinstance(error, NotOwner):
-            embed.description = 'You are not allowed to use this command!'
-
         elif isinstance(error, MaxConcurrencyReached):
             embed.description = f'This command can only be used by {error.number} {str(error.per).split(".")[1]} at same time.'
 
@@ -77,8 +78,8 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
 
         else:
-            print(str(error))
-            embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
+            embed.description = str(error)
+
         try:
             await ctx.send(embed=embed)
         except:

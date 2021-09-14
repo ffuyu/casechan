@@ -95,14 +95,14 @@ class ItemConverter(Converter):
         else:
             t = await ctx.bot.loop.run_in_executor(None, partial(self._replace_abbr, argument))
 
-            log.info(f'Converted query "{argument}" into "{t}" with replacements')
+            # log.info(f'Converted query "{argument}" into "{t}" with replacements')
 
             if t in names:
                 target = names[t]
 
         if not target:
             e = ValueError(f'Item not found with query: {argument}')
-            log.info(e)
+            # log.info(e)
             raise e
 
         return target

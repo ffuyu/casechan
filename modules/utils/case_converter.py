@@ -3,27 +3,30 @@ from modules.constants import ButtonTypes
 from discord.ext.commands import Converter
 from dislash.interactions.message_components import ActionRow, Button
 
-from ..cases import Case, Key, all_cases
+from ..cases import Case, Package, all_cases, all_packages, all_capsules
 
 __all__ = (
-    'CaseConverter',
+    'ContainerConverter',
 )
 
 player_preferences = {}
 
 
-class CaseConverter(Converter):
+class ContainerConverter(Converter):
     """
-    Converts a case name string into a Case object
-    Returns the key if argument contains the word 'key'
+    Converts a case name into a Case, Package or a Sticker Capsule
+    Also converts key names to case key names
     """
 
     async def convert(self, ctx, argument:str):
         first_argument = argument.lower()
         argument = argument.lower().replace(' key', '')
+
+        # cases
         for case in [*all_cases]:
             lwcs = case.lower()
-            statements_primary = [
+
+            primary = [
                 lwcs == argument,
                 lwcs == f'{argument} case',
                 lwcs == f'operation {argument}',
@@ -32,22 +35,84 @@ class CaseConverter(Converter):
                 lwcs == f'cs:go {argument} case',
                 lwcs == f'operation {argument} weapon case',
             ]
-            if any(statements_primary):
+
+            if any(primary):
                 return Case(case) if not 'key' in first_argument else Case(case).key
-            else:
-                statements_secondary = [
-                    any([x.isdigit() for x in argument]) and any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('case', '') in lwcs),
-                    # argument has digits
-                    # case name has digits
-                    # argument is in case name
-                    not any([x.isdigit() for x in argument]) and not any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('case', '') in lwcs),
-                    # argument has no digits
-                    # case name has no digits
-                    # argument is in case name
-                    
-                    ('xray' in argument or 'x-ray' in argument) and argument.replace('xray', 'x-ray') in lwcs # specifically for x-ray p250 package
-                ]
-                if any(statements_secondary):
-                    return Case(case) if not 'key' in first_argument else Case(case).key
-        else:
-            raise ValueError(f'No case with name "{argument}"')
+        
+            if any([
+                any([x.isdigit() for x in argument]) and any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('case', '') in lwcs),
+                not any([x.isdigit() for x in argument]) and not any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('case', '') in lwcs),
+            ]):
+                return Case(case) if not 'key' in first_argument else Case(case).key
+
+                
+        # packages
+        for package in [*all_packages]:
+            lwcs = package.lower()
+            primary = [
+                lwcs == argument,
+
+                lwcs == f'{argument} package',
+                lwcs == f'{argument} souvenir package',
+
+                lwcs == f'katowice 2019 {argument} package',
+                lwcs == f'katowice 2019{argument} souvenir package',
+
+                lwcs == f'berlin 2019 {argument} package',
+                lwcs == f'berlin 2019{argument} souvenir package',
+                
+                lwcs == f'london 2018 {argument} package',
+                lwcs == f'london 2018 {argument} souvenir package',
+
+                lwcs == f'boston 2018 {argument} package',
+                lwcs == f'boston 2018{argument} souvenir package',
+
+                lwcs == f'krakow 2017 {argument} package',
+                lwcs == f'krakow 2017 {argument} souvenir package',
+
+                lwcs == f'atlanta 2017 {argument} package',
+                lwcs == f'atlanta 2017 {argument} souvenir package',
+
+                lwcs == f'cologne 2016 {argument} package',
+                lwcs == f'cologne 2016 {argument} souvenir package',
+
+                lwcs == f'mlg columbus 2016 {argument} package',
+                lwcs == f'mlg columbus 2016 {argument} souvenir package',
+
+                lwcs == f'dreamhack cluj-napoca 2015 {argument} package',
+                lwcs == f'dreamhack cluj-napoca 2015  {argument} souvenir package',
+
+                lwcs == f'esl one cologne 2015 {argument} package',
+                lwcs == f'esl one cologne 2015 {argument} souvenir package',
+
+                lwcs == f'esl one katowice 2015 {argument} package',
+                lwcs == f'esl one katowice 2015 {argument} souvenir package',
+
+                lwcs == f'dreamhack 2014 {argument} package',
+                lwcs == f'dreamhack 2014 {argument} souvenir package',
+
+                lwcs == f'esl one cologne 2014 {argument} package',
+                lwcs == f'esl one cologne 2014 {argument} souvenir package',
+
+                lwcs == f'ems one 2014 {argument} package',
+                lwcs == f'ems one 2014 {argument} souvenir package',
+
+                lwcs == f'dreamhack 2013 {argument} package',
+                lwcs == f'dreamhack 2013 {argument} souvenir package',
+
+                lwcs == f'{argument.replace("xray", "x-ray")} p250 package',
+                lwcs == f'x-ray p250 package',
+
+            ]
+            secondary = [
+                any([x.isdigit() for x in argument]) and any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('package', '') in lwcs),
+                not any([x.isdigit() for x in argument]) and not any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('package', '') in lwcs),
+            ]
+
+            if any(primary): 
+                return Package(package)
+            elif any(secondary):
+                return Package(package)
+
+
+        raise ValueError(f'No container or key with name "{argument}"')

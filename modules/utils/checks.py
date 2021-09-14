@@ -1,5 +1,5 @@
 from modules.errors import UnableToBuy, UnableToOpen, UnableToSell
-from modules.cases import Case, Key
+from modules.cases import Capsule, Case, Container, Key, Package
 
 from modules.database import Player, Item
 
@@ -66,23 +66,25 @@ def able_to_sell(player:Player, item:Union[Item, Case, Key], amount:int=1):
 
     return True
 
-def able_to_opencase(player:Player, case:Case, amount:int=1):
-    case_amount = player.cases.get(case.name, 0)
-    if case.key:
-        key_amount = player.keys.get(case.key.name, 0)
-    else:
-        key_amount = None
+def able_to_opencontainer(player:Player, container:Union[Case, Package, Capsule], amount:int=1):
+    if isinstance(container, Case):
+        container_amount = player.cases.get(container.name, 0)
+    elif isinstance(container, Package):
+        container_amount = player.packages.get(container.name, 0)
+    elif isinstance(container, Capsule):
+        container_amount = player.capsules.get(container.name, 0)
+    
+    # if container requires a key
+    if container.key: key_amount = player.keys.get(container.key.name, 0) 
+    else: key_amount = None
+
     inv_lim_amount = player.inventory_limit - player.inv_items_count
     
-    if case_amount < amount:
-        raise UnableToOpen(
-            message=f'You are missing {amount - case_amount}x {case}')
-    elif key_amount is not None and key_amount < amount:
-        raise UnableToOpen(
-            message=f'You are missing {amount - key_amount}x {case.key}')
-    elif inv_lim_amount < amount:
-        raise UnableToOpen(
-            message=f'You can\'t open more cases, your inventory is full!')
+    if container_amount < amount: raise UnableToOpen(message=f'You are missing {amount - container_amount}x {container.name}')
+
+    elif key_amount is not None and key_amount < amount: raise UnableToOpen(message=f'You are missing {amount - key_amount}x {container.key.name}')
+
+    elif inv_lim_amount < amount:raise UnableToOpen(message=f'You can\'t open more cases, your inventory is full!')
 
     return True
 

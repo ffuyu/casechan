@@ -3,9 +3,10 @@ from copy import copy
 from datetime import datetime, timedelta
 from typing import Optional, Dict, List, Tuple
 
-from odmantic import Model, query
+from odmantic import Model
 
 from modules.database.users import UserData
+
 from .items import Item
 from .models import ModelPlus
 
@@ -14,10 +15,16 @@ __all__ = (
     'SafePlayer'
 )
 
-from ..cases import Case
+from ..cases import Capsule, Case, Container, Package
 
 stats_dict = {
     "cases": {
+        "opened": 0
+    },
+    "packages": {
+        "opened": 0
+    },
+    "capsules": {
         "opened": 0
     },
     "transactions": {
@@ -30,7 +37,11 @@ stats_dict = {
 class Player(ModelPlus, Model):
     member_id: int
     guild_id: int
+
     cases: Dict[str, int] = {}  # {case.name: number}
+    packages: Dict[str, int] = {}  # {package.name: number}
+    capsules: Dict[str, int] = {}  # {capsule.name: number}
+
     keys: Dict[str, int] = {}  # {key.name: number}
     inventory: Dict[str, List[Tuple[float, int]]] = {}  # {item.name: [tuple of stats (float, seed)]}
     inventory_limit: Optional[int] = 1000
@@ -114,7 +125,7 @@ class Player(ModelPlus, Model):
         inv = self.inventory.get(item_name, [])
         return len(inv)
 
-    def _mod_case_or_key(self, attr_name, name, n: int):
+    def _mod_case_or_key_or_package_or_capsule(self, attr_name, name, n: int):
         """
         Private method for modifying cases or keys
         Args:
@@ -138,7 +149,31 @@ class Player(ModelPlus, Model):
         Returns:
             None
         """
-        self._mod_case_or_key('cases', case_name, n)
+        self._mod_case_or_key_or_package_or_capsule('cases', case_name, n)
+
+    def mod_package(self, package_name, n: int = 1):
+        """
+        Modifies the amount of packages in the player's inventory.
+        Same as self.mod_case but, for packages
+        Args:
+            package_name: The name of the case
+            n: amount to modify the inventory with
+        Returns:
+            None
+        """
+        self._mod_case_or_key_or_package_or_capsule('packages', package_name, n)
+
+    def mod_capsule(self, capsule_name, n: int = 1):
+        """
+        Modifies the amount of capsules in the player's inventory.
+        Same as self.mod_case but, for capsules
+        Args:
+            capsule_name: The name of the case
+            n: amount to modify the inventory with
+        Returns:
+            None
+        """
+        self._mod_case_or_key_or_package_or_capsule('capsules', capsule_name, n)
 
     def mod_key(self, key_name, n: int = 1):
         """
@@ -150,9 +185,9 @@ class Player(ModelPlus, Model):
         Returns:
             None
         """
-        self._mod_case_or_key('keys', key_name, n)
+        self._mod_case_or_key_or_package_or_capsule('keys', key_name, n)
 
-    async def open_case(self, case_name, *, add_item=False):
+    async def open_case(self, container, *, add_item=False):
         """
         Actions:
             -Opens the selected case
@@ -168,15 +203,24 @@ class Player(ModelPlus, Model):
             Item, (float, seed)
         """
 
-        case = Case(case_name)
+        
 
-        item, *stats = await case.open()
+        item, *stats = await container.open()
 
-        self.mod_case(case_name, -1)
-        self.stats['cases']['opened'] += 1
+        if isinstance(container, Case): 
+            self.mod_case(container.name, -1)
+            self.stats['cases']['opened'] += 1
+        if isinstance(container, Package): 
+            self.mod_package(container.name, -1)
+            self.stats['packages']['opened'] += 1
+        if isinstance(container, Capsule): 
+            self.mod_capsule(container.name, -1)
+            self.stats['capsules']['opened'] += 1
 
-        if case.key:
-            self.mod_key(case.key.name, -1)
+        
+
+        if container.key:
+            self.mod_key(container.key.name, -1)
         if add_item:
             self.add_item(item.name, stats)
 

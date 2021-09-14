@@ -10,9 +10,12 @@ from .errors import FailedItemGen
 
 log = logging.getLogger(__name__)
 
-with open('etc/cases.json') as f:
-    all_cases = json.loads(f.read())
-    all_keys = [key for c in all_cases if (key := all_cases[c]['key'])]
+with open('etc/containers.json') as f:
+    json         = json.loads(f.read())
+    
+    all_cases    = json.get('cases',    [])
+    all_packages = json.get('packages', [])
+    all_capsules = json.get('capsules', [])
 
 _rarities = {  # grade weight, st weight 1 & 2
     "Mil-Spec Grade": (79.92327, 92.00767, 7.99233),
@@ -74,34 +77,48 @@ def _get_valid_item(item_name, rarity, valid_items, valid_exteriors):
     return item, float_, seed
 
 
-class Case:
+class Container:
     _items_cache = {}
-
     def __init__(self, name: str):
-        data = all_cases.get(name, {})
+        data = all_cases.get(name, {}) or all_packages.get(name, {}) or all_capsules.get(name, {})
         if not data:
-            raise ValueError(f'No case with name "{name}"')
+            raise ValueError(f'No container with name "{name}"')
 
-        self.name = data['name']
-        self.price = data['price']
-        self.asset = data['asset']
+        for k in ['name', 'price', 'asset', 'items']:
+            setattr(self, k, data[k])
 
-        self.items = data['items']
-        self.item_names = {item for rarity in self.items.values()
-                           for item in rarity}
+        self.item_names = {item for rarity in self.items.values() for item in rarity}
         self.item_rarities = {*self.items}
-
-        self._key = data['key']
+        self._key = None
 
     @property
     def key(self):
-        return Key(self._key) if self._key else None
+        return self._key
+
+    async def open(self):
+        """Opens this container and returns an item and its stats"""
+        rarities, weights = zip(*((k, v[0]) for k, v in _rarities.items() if k in self.item_rarities))
+        rarity = random.choices(population=rarities, weights=weights, k=1)[0]
+
+        item_name = random.choice(self.items[rarity])
+        valid_items = {item for item 
+                       in await self.get_items()
+                       if item_name in item.name}
+
+        exteriors = {it.exterior for it in valid_items if it.exterior}
+
+        result = await asyncio.get_running_loop().run_in_executor(
+            None,
+            partial(_get_valid_item, item_name, rarity, valid_items, exteriors)
+        )
+
+        return result
 
     def __str__(self):
         return self.name
-
+    
     def __repr__(self):
-        return f'Case(name={self.name})'
+        return f"{self.__class__.__name__}(name={self.name})"
 
     async def get_items(self):
         if not self._items_cache.get(self.name):
@@ -113,26 +130,17 @@ class Case:
             cache = self._items_cache.setdefault(self.name, set())
             cache.update(case_cache)
         return self._items_cache[self.name]
+        
 
-    async def open(self):
-        """Opens this case and returns an item and its stats"""
-        rarities, weights = zip(*((k, v[0]) for k, v in _rarities.items() if k in self.item_rarities))
-        rarity = random.choices(population=rarities, weights=weights, k=1)[0]
+class Case(Container):
+    @property
+    def key(self):
+        return Key(f'{self.name} Key')
 
-        item_name = random.choice(self.items[rarity])
-        valid_items = {item for item in await self.get_items()
-                       if item_name in item.name}
+class Package(Container): pass
+        
 
-        exteriors = {it.exterior for it in valid_items if it.exterior}
-
-        loop = asyncio.get_running_loop()
-        result = await loop.run_in_executor(
-            None,
-            partial(_get_valid_item, item_name, rarity, valid_items, exteriors)
-        )
-
-        return result
-
+class Capsule(Container): pass
 
 class Key:
     def __init__(self, name):
@@ -148,3 +156,4 @@ class Key:
 
     async def use(self):
         return await self.case.open()
+

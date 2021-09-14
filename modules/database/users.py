@@ -42,3 +42,7 @@ class UserData(ModelPlus, Model):
     @property
     def fees(self):
         return 0.95 if self.is_boosted else 0.85
+
+    @property
+    def multiplier(self) -> int:
+        return int(self.is_boosted)+1

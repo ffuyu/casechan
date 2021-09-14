@@ -5,28 +5,29 @@ from discord.ext.commands.context import Context
 from discord.ext.commands.core import max_concurrency
 from discord import Guild, User
 from discord.ext.commands.errors import MissingPermissions, NotOwner
-from discord.permissions import Permissions
 
-from dpytools.checks import only_these_users
+from dpytools.embeds import *
+
 from typing import Optional
 
 from modules.config import OWNERS_IDS
 
-from modules.utils.case_converter import CaseConverter
+from modules.utils.case_converter import ContainerConverter
 from modules.cases import Case
 from modules.database.players import SafePlayer
 from modules.database import Guild as Guild_
 
-async def has_admin_in_cheats_enabled_server_or_ownership(guild, ctx):
-    # if guild is specified and the specified guild is not the current guild | giving to another guild | requires bot ownership
-    if guild and guild != ctx.guild and not ctx.author.id in OWNERS_IDS: raise NotOwner
+async def has_admin_in_cheats_enabled_server_or_owner(guild, ctx):
     # if guild is not specified or the specified guild is the current guild | giving to the current guild | requires administrator permission
-    if not guild or guild == ctx.guild and not ctx.author.guild_permissions.administrator: raise MissingPermissions(Permissions.administrator)
+    if not guild or guild == ctx.guild and not ctx.author.guild_permissions.administrator: raise MissingPermissions(['administrator'])
+    # if guild is specified and the specified guild is not the current guild | giving to another guild | requires bot ownership
+    if guild and guild != ctx.guild and not ctx.author.id in OWNERS_IDS: raise NotOwner('You are not allowed to perform this action.')
     
-    if guild: guild_ = await Guild_.get(True, guild_id=guild.id)
-    else: guild_ = await Guild_.get(True, guild_id=ctx.guild.id)
     
-    if not guild_.server_cheats_enabled and not ctx.author.id in OWNERS_IDS: raise NotOwner
+    guild_ = await Guild_.get(True, guild_id=ctx.guild.id if not guild else guild.id)
+    if not guild_.server_cheats_enabled and not ctx.author.id in OWNERS_IDS: raise NotOwner('Can\'t perform this action on servers with cheats disabled.')
+
+    return True
 
 async def _alter_case(ctx: Context,
                       amount: int,
@@ -52,16 +53,16 @@ class UsersCog(commands.Cog, name='Users'):
     def cog_unload(self):
         print(f'Cog: {self.qualified_name} unloaded')
 
-    @only_these_users(*OWNERS_IDS)
     @commands.group(hidden=True)
     async def user(self, ctx:Context):
         pass
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
-    async def givecase(self, ctx:Context, guild:Optional[Guild], user:Optional[User], amount:Optional[int]=1, *, container:Optional[CaseConverter]):
+    async def givecase(self, ctx:Context, guild:Optional[Guild], user:Optional[User], amount:Optional[int]=1, *, container:Optional[ContainerConverter]):
         """Gives the specified user in specified guild a case and the case key."""
         
+        if not await has_admin_in_cheats_enabled_server_or_owner(guild or ctx.guild, ctx): return
 
         container: Case()
         if container:
@@ -74,26 +75,10 @@ class UsersCog(commands.Cog, name='Users'):
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
-    async def takecase(self, ctx:Context, guild:Optional[Guild], user:Optional[User], amount:Optional[int]=1, *, container:Optional[CaseConverter]):
-        """Gives the specified user in specified guild a case and the case key."""
-        if guild and guild != ctx.guild and not ctx.author.id in OWNERS_IDS: raise NotOwner
-        if guild and guild == ctx.guild and not ctx.author.guild_permissions.administrator: raise MissingPermissions(Permissions.administrator)
-
-        container: Case()
-        if container:
-            guild = guild or ctx.guild
-            user = user or ctx.author
-            amount = amount if amount > 1 else 1
-            msg = f"Took **x{abs(amount)} {container}** from **{guild.id or ctx.guild.id}/{user.id or ctx.author}**"
-            return await _alter_case(ctx, -amount, container, msg, guild.id, user.id)
-        await ctx.send('Specified case could not be found')
-
-    @max_concurrency(1, commands.BucketType.default, wait=True)
-    @user.command()
     async def ban(self, ctx:Context, guild:Optional[Guild], user:Optional[Guild]):
         """Applies a permanent trade-ban to player in specified guild"""
-        if guild and guild != ctx.guild and not ctx.author.id in OWNERS_IDS: raise NotOwner
-        if guild and guild == ctx.guild and not ctx.author.guild_permissions.administrator: raise MissingPermissions(Permissions.administrator)
+
+        if not await has_admin_in_cheats_enabled_server_or_owner(guild or ctx.guild, ctx): return
 
         guild = guild or ctx.guild
         user = user or ctx.author
@@ -105,8 +90,8 @@ class UsersCog(commands.Cog, name='Users'):
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()
     async def unban(self, ctx:Context, guild:Optional[Guild], user:Optional[User]):
-        if guild and guild != ctx.guild and not ctx.author.id in OWNERS_IDS: raise NotOwner
-        if guild and guild == ctx.guild and not ctx.author.guild_permissions.administrator: raise MissingPermissions(Permissions.administrator)
+        
+        if not await has_admin_in_cheats_enabled_server_or_owner(guild or ctx.guild, ctx): return
 
         """Removes trade restrictions from a player"""
         async with SafePlayer(user.id or ctx.author.id, guild.id or ctx.guild.id) as player:
@@ -125,7 +110,6 @@ class UsersCog(commands.Cog, name='Users'):
             await player.delete()
         await ctx.send(f"**{guild_id or ctx.guild.id}/{user_id or ctx.author.id}** has been deleted from database.")
 
-    @commands.is_owner()
     @user.command()
     async def info(self, ctx, user:Optional[User]):
         user = user or ctx.author
