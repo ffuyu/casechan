@@ -334,11 +334,11 @@ class CoreCog(commands.Cog, name='Core'):
             cases_opened = 0
             
 
-    @log_stats.before_loop()
+    @log_stats.before_loop
     async def before_log_stats(self):
         # start logging after 60 seconds after bot is ready
         await self.bot.wait_until_ready()
-        asyncio.sleep(60)
+        await asyncio.sleep(60)
         
 
 
