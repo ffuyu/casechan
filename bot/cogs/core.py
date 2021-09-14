@@ -46,7 +46,6 @@ from dpytools.embeds import Embed
 from dpytools.embeds import paginate_to_embeds
 
 allowed_characters = "ABCDEFGHJKLMNPRSTUVXYZ23456789"
-images_cache = SqliteDict('local_db.sqlite', tablename='images', autocommit=True)
 uuid_gen = ShortUUID()
 log = logging.getLogger(__name__)
 last_opening_durations = list()
@@ -126,14 +125,15 @@ class CoreCog(commands.Cog, name='Core'):
 
                 with Timer() as t:
                     items = [await player.open_case(container) for _ in range(amount)]
-                    last_opening_durations.append(t.t)
-                    item_objects = sort_items([k for k, *_ in items])
+                    
+                last_opening_durations.append(t.t)
+                item_objects = sort_items([k for k, *_ in items])
 
                 
                 await asyncio.sleep(max(sleep_duration - t.t, 0))
 
                 # Displaying results based on amount
-                if amount != 1:
+                if amount > 1:
                     results = Embed(
                         color=Colour.random()
                     )
@@ -333,6 +333,12 @@ class CoreCog(commands.Cog, name='Core'):
             last_opening_duration = {}
             cases_opened = 0
             
+
+    @log_stats.before_loop()
+    async def before_log_stats(self):
+        # start logging after 60 seconds after bot is ready
+        await self.bot.wait_until_ready()
+        asyncio.sleep(60)
         
 
 
