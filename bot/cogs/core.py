@@ -327,8 +327,8 @@ class CoreCog(commands.Cog, name='Core'):
         global last_opening_duration
         global cases_opened
         if last_opening_durations or cases_opened: 
-            log.info(f'{cases_opened} cases opened in the last 10 minutes,')
-            log.info(f'Average case opening duration in the last 10 minutes: {sum([last_opening_durations])/len(last_opening_durations):.6f}')
+            print(f'{cases_opened} cases opened in the last 10 minutes,')
+            print(f'Average case opening duration in the last 10 minutes: {sum([last_opening_durations])/len(last_opening_durations):.6f}')
 
             last_opening_duration = {}
             cases_opened = 0

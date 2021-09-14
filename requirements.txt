@@ -11,3 +11,4 @@ humanize
 shortuuid
 topggpy
 pyyaml
+sqlitedict
