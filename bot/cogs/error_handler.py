@@ -73,12 +73,12 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
 
         elif isinstance(error, CommandOnCooldown):
             embed.description = "Slow down! You can run this command in {:.2f}s".format(error.retry_after)
-
-        elif isinstance(error, (InvalidDocument, AttributeError, TypeError)):
-            embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
-
         else:
             embed.description = str(error)
+
+
+        if isinstance(error, (InvalidDocument, AttributeError, TypeError)):
+            embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
 
         try:
             await ctx.send(embed=embed)
