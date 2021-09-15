@@ -1,4 +1,5 @@
-from modules.errors import UnableToBuy, UnableToOpen, UnableToSell
+from modules.config import OWNERS_IDS
+from modules.errors import NotAllowed, UnableToBuy, UnableToOpen, UnableToSell
 from modules.cases import Capsule, Case, Container, Key, Package
 
 from modules.database import Player, Item
@@ -72,6 +73,9 @@ def able_to_opencontainer(player:Player, container:Union[Case, Package, Capsule]
     elif isinstance(container, Package):
         container_amount = player.packages.get(container.name, 0)
     elif isinstance(container, Capsule):
+        if player.member_id not in OWNERS_IDS:
+            raise NotAllowed('You are not allowed to open this container')
+
         container_amount = player.capsules.get(container.name, 0)
     
     # if container requires a key

@@ -2,9 +2,9 @@ from discord.errors import NotFound
 from modules.errors import (
     AlreadyClaimed, BetTooLow, CheatsDisabled, 
     CodeClaimed, CodeExpired, CodeInvalid, 
-    ExistingCode, ForbiddenAmount, InsufficientBalance, 
+    ExistingCode, FailedItemGen, ForbiddenAmount, InsufficientBalance, 
     InvalidBet, ItemNotFound, MissingItem, 
-    MissingSpace, RewardsError, TradeNotAllowed, UnableToBuy, 
+    MissingSpace, NotAllowed, RewardsError, TradeNotAllowed, UnableToBuy, 
     UnableToOpen, UnableToSell, ItemNotFound, 
     MissingItem, MissingSpace, TradeNotAllowed,
     MissingCase, MissingKey
@@ -39,7 +39,8 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             ItemNotFound, RewardsError, MissingSpace, InsufficientBalance,
             NotOwner, TradeNotAllowed, CodeExpired, CodeClaimed, CodeInvalid, AlreadyClaimed, ExistingCode,
             InvalidBet, BetTooLow, Forbidden, UnableToBuy, UnableToOpen, UnableToSell, MissingKey, MissingCase, 
-            NotFound, BadStatusLine, MissingPermissions, CheatsDisabled, ForbiddenAmount
+            NotFound, BadStatusLine, MissingPermissions, CheatsDisabled, ForbiddenAmount, FailedItemGen,
+            NotAllowed
             }
             
         embed = Embed(
@@ -77,7 +78,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             embed.description = str(error)
 
 
-        if isinstance(error, (InvalidDocument, AttributeError, TypeError)):
+        if isinstance(error, (InvalidDocument, AttributeError, TypeError, FailedItemGen)):
             embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
 
         try:

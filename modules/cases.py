@@ -10,12 +10,14 @@ from .errors import FailedItemGen
 
 log = logging.getLogger(__name__)
 
-with open('etc/containers.json') as f:
+with open('etc/containers.json', 'r', encoding='utf-8') as f:
     json         = json.loads(f.read())
     
-    all_cases    = json.get('cases',    [])
-    all_packages = json.get('packages', [])
-    all_capsules = json.get('capsules', [])
+    all_cases    = json.get('cases',    {})
+    all_packages = json.get('packages', {})
+    # all_capsules = json.get('capsules', {})
+    # unloaded capsules, load while debugging
+    all_capsules = {}
 
 _rarities = {  # grade weight, st weight 1 & 2
     "Mil-Spec Grade": (79.92327, 92.00767, 7.99233),
@@ -138,9 +140,14 @@ class Case(Container):
         return Key(f'{self.name} Key')
 
 class Package(Container): pass
-        
 
-class Capsule(Container): pass
+class Capsule(Container): 
+    @property
+    def key(self):
+        if all_capsules.get(self.name).get('key'):
+            return Key(f'{self.name} Key')
+ 
+        return None
 
 class Key:
     def __init__(self, name):

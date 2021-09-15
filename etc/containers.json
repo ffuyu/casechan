@@ -2575,7 +2575,56 @@
       "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsS091PDtH5O_1FAthwfTNP2kTvomzzYHdlqLxZb7XlW4IuJwk3u2S8NWl3QS1_EA6YT2iddeXdgIgIQaHHJc2aVo/360fx360f"
     }
   },
-  "Capsules": {
-
+  "capsules": {
+    "Krakow 2017 Legends Autograph Capsule": {
+      "name": "Krakow 2017 Legends Autograph Capsule",
+      "price": 21.41,
+      "items": {
+        "Mil-Spec Grade": [
+          "device (Nicolai Reedtz)",
+          "dupreeh (Peter Rasmussen)",
+          "gla1ve (Lukas Rossander)",
+          "Kjaerbye (Markus Kjærbye)",
+          "Xyp9x (Andreas Højsleth)",
+          "byali (Pawel Bielinsky)",
+          "NEO (Filip Kubski)",
+          "pashaBiceps (Jarosław Jarząbkowski)",
+          "Snax (Janusz Pogorzelski)",
+          "TaZ (Wiktor Wojtas)",
+          "dennis (Dennis Edman)",
+          "flusha (Robin Rönnquist)",
+          "JW (Jesper Wecksell)",
+          "KRIMZ (Lars Freddy Johansson)",
+          "olofmeister (Olof Kajbjer)",
+          "coldzera (Marcelo David)",
+          "FalleN (Gabriel Toledo)",
+          "felps (Joao Vasconcellos Cabral)",
+          "fer (Fernando Alvarenga)",
+          "TACO (Tacio Filho)",
+          "Edward (Ioann Sukhariev)",
+          "flamie (Egor Vasilyev)",
+          "GuardiaN (Ladislav Kovács)",
+          "s1mple (Oleksandr Kostyliev)",
+          "seized (Denis Kostin)",
+          "AdreN (Dauren Kystaubayev)",
+          "Dosia (Mikhail Stoliarov)",
+          "Hobbit (Abay Khassenov)",
+          "mou (Rustem Telepov)",
+          "Zeus (Danylo Teslenko)",
+          "aizy (Philip Aistrup Larsen)",
+          "cajunb (René Borg)",
+          "k0nfig (Kristian Wienecke)",
+          "Magisk (Emil Hoffmann Reif)",
+          "MSL (Mathias Sommer Lauridsen)",
+          "allu (Aleksi Jalli)",
+          "karrigan (Finn Andersen)",
+          "kioShiMa (Fabien Fiey)",
+          "NiKo (Nikola Kovač)",
+          "rain (Håvard Nygaard)"
+        ]
+      },
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PjacDZN-47mxde0kOX7JqvuxCVU7JUmjO_C89un0QbjrRU-NWn2doPGIAE8MlGG_gTrlbq705e775ud1zI97TuorcB0/360fx360f" 
+    }
   }
 }

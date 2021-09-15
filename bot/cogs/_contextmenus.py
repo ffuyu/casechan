@@ -12,7 +12,7 @@ from modules.database.promos import Promo
 from modules.database.items import sort_items
 from modules.database.players import Player, SafePlayer
 
-class Cog(commands.Cog, name='Context Menu Commands'):
+class ContextMenusCog(commands.Cog, name='Context Menu Commands'):
     """Cog containing all context menu commands."""
     def __init__(self, bot):
         self.bot = bot
@@ -21,8 +21,8 @@ class Cog(commands.Cog, name='Context Menu Commands'):
     def cog_unload(self):
         print(f'Cog: {self.qualified_name} unloaded')
 
-    @inter_client.user_command(name="Cases")
-    async def user_cases(inter:ContextMenuInteraction):
+    @application_commands.user_command(name="Cases")
+    async def user_cases(self, inter:ContextMenuInteraction):
         """List cases"""
         try:
             if inter.author.bot:
@@ -43,8 +43,8 @@ class Cog(commands.Cog, name='Context Menu Commands'):
         except:
             pass
 
-    @inter_client.user_command(name="Keys")
-    async def user_keys(inter:ContextMenuInteraction):
+    @application_commands.user_command(name="Keys")
+    async def user_keys(self, inter:ContextMenuInteraction):
         """List keys"""
         try:
             if inter.author.bot:
@@ -65,8 +65,8 @@ class Cog(commands.Cog, name='Context Menu Commands'):
         except:
             pass
 
-    @inter_client.user_command(name="Inventory")
-    async def user_inv(inter:ContextMenuInteraction):
+    @application_commands.user_command(name="Inventory")
+    async def user_inv(self, inter:ContextMenuInteraction):
         """View inventory"""
         try:
             if inter.author.bot:
@@ -89,8 +89,8 @@ class Cog(commands.Cog, name='Context Menu Commands'):
         except:
             pass
 
-    @inter_client.message_command(name="Claim")
-    async def promo_claim(inter:ContextMenuInteraction):
+    @application_commands.message_command(name="Claim")
+    async def promo_claim(self, inter:ContextMenuInteraction):
         """View your inventory"""
         try:
             promo = await Promo.get(code=inter.message.content)
@@ -118,4 +118,4 @@ class Cog(commands.Cog, name='Context Menu Commands'):
 
     
 def setup(bot):
-    bot.add_cog(Cog(bot))
+    bot.add_cog(ContextMenusCog(bot))
