@@ -81,6 +81,10 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
         if isinstance(error, (InvalidDocument, AttributeError, TypeError, FailedItemGen)):
             embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
 
+        if isinstance(error, RewardsError):
+            embed.description = str(error)
+            embed.footer.text = 'Use the command c.profile to view all rewards and timers'
+
         try:
             await ctx.send(embed=embed)
         except:
