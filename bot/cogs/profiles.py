@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional
 
 from discord.ext import commands
@@ -33,6 +34,12 @@ class ProfilesCog(commands.Cog, name='Profiles'):
         profile_embed.set_author(name=user)
         profile_embed.set_thumbnail(url=user.avatar_url)
         profile_embed.set_footer(text=player.id)
+        profile_embed.add_field(name=ctx.guild, value=
+        f'''
+        Hourly: {'**READY**' if player.hourly_available else f'<t:{int((player.hourly_remaining.timestamp()))}:R>'}
+        Daily: {'**READY**' if player.daily_available else f'<t:{int((player.daily_remaining.timestamp()))}:R>'}
+        Weekly: {'**READY**' if player.weekly_available else f'<t:{int((player.weekly_remaining.timestamp()))}:R>'}
+        ''', inline=False)
         if userdata.acknowledgements:
             profile_embed.add_field(name="Acknowledgements:", value='\n'.join(userdata.acknowledgements), inline=False)
 

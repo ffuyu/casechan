@@ -83,6 +83,19 @@ class Player(ModelPlus, Model):
         return sum([self.item_count(x) for x in self.inventory])
 
     @property
+    def hourly_available(self) -> bool: return (datetime.utcnow() - self.hourly) > timedelta(hours=1)
+    @property
+    def hourly_remaining(self) -> datetime: return self.hourly + timedelta(hours=4)
+    @property
+    def daily_available(self) -> bool: return (datetime.utcnow() - self.daily) > timedelta(days=1)
+    @property
+    def daily_remaining(self) -> datetime: return self.daily + timedelta(days=1, hours=3)
+    @property
+    def weekly_available(self) -> bool: return (datetime.utcnow() - self.weekly) > timedelta(weeks=1)
+    @property
+    def weekly_remaining(self) -> datetime: return self.weekly + timedelta(weeks=1, hours=4)
+
+    @property
     async def fees(self):
         user = await UserData.get(True, user_id=self.member_id)
         return user.fees
