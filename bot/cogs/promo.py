@@ -1,7 +1,7 @@
 import asyncio
 from bot.cogs.core import disable_row
 
-from discord.ext.commands.errors import MissingPermissions
+from discord.ext.commands.errors import MissingPermissions, NotOwner
 from modules.emojis import Emojis
 from datetime import datetime, timedelta
 from modules.config import OWNERS_IDS
@@ -193,10 +193,11 @@ class PromoCog(commands.Cog, name='Promo Codes'):
         raise CodeInvalid('Promo code not found.')
         
     @promo.command()
-    async def info(self, ctx, code:str, show_users:Optional[bool]):
+    async def info(self, ctx, code:str):
         """Shows information about the given promo"""
         promo = await Promo.get(code=code)
         if promo:
+            if promo.is_global and ctx.author.id not in OWNERS_IDS: raise NotOwner('You are not allowed to view global promotion codes')
             embed = Embed(color=Colour.random())
             embed.add_fields(inline=False, **{k:', '.join([str(uid) for uid in v]) if isinstance(v, list) else v for k, v in {k:v for k, v in promo if v}.items()})
             await ctx.send(embed=embed)
