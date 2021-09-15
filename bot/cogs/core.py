@@ -126,6 +126,8 @@ class CoreCog(commands.Cog, name='Core'):
                 stop = time.perf_counter()
             
                 last_opening_durations.append(stop-start)
+                global cases_opened
+                cases_opened += 1
                 item_objects = sort_items([k for k, *_ in items])
 
                 await asyncio.sleep(max(sleep_duration - (stop-start), 0))
