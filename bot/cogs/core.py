@@ -126,7 +126,6 @@ class CoreCog(commands.Cog, name='Core'):
                 items = [await player.open_case(container) for _ in range(amount)]
                 stop = time.perf_counter()
             
-                    
                 last_opening_durations.append(stop-start)
                 item_objects = sort_items([k for k, *_ in items])
 
@@ -338,7 +337,7 @@ class CoreCog(commands.Cog, name='Core'):
     async def before_log_stats(self):
         # start logging after 60 seconds after bot is ready
         await self.bot.wait_until_ready()
-        await asyncio.sleep(60)
+        await asyncio.sleep(10)
         
 
 
