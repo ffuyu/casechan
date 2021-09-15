@@ -49,3 +49,4 @@ class InsufficientBalance(BetError): pass
 
 class NotAllowed(CommandError): pass
 class CheatsDisabled(NotAllowed): pass
+class ForbiddenAmount(NotAllowed): pass

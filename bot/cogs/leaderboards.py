@@ -91,6 +91,8 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
 
         for player in players:
             if player.guild_id in [g.id for g in self.bot.guilds]:
+                guild = await Guild_.get(True, guild_id=player.guild_id)
+                if guild.excluded_from_leaderboards or guild.server_cheats_enabled: continue
                 guilds[filter(self.bot.get_guild(player.guild_id).name)]+=await player.inv_total()
                 
         if guilds.get('fuyu\'s development server', None): guilds['**[casechan support server](https://casechan.com/discord)**'] = guilds.pop('fuyu\'s development server')

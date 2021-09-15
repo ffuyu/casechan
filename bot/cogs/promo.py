@@ -59,7 +59,7 @@ class PromoCog(commands.Cog, name='Promo Codes'):
             except asyncio.TimeoutError: pass
             if response:
                 responded = True
-                if str(response.content).isdigit(): funds = float(response.content)
+                if str(response.content).isdigit(): funds = min(10000, float(response.content))
 
                 else: return await ctx.send('Invalid input')
 

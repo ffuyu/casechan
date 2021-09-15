@@ -110,7 +110,7 @@ class Cog(commands.Cog, name='Misc'):
         if action is None:
             await ctx.send(f'Your server has cheats {"enabled" if guild.server_cheats_enabled else "disabled"}. Re-run this command with `on or off` to change.')
         else:
-            if ctx.author != ctx.guild.owner: return CommandError(f'This setting can only be changed by the server owner, **{ctx.guild.owner}**')
+            if ctx.author != ctx.guild.owner: raise CommandError(f'This setting can only be changed by the server owner, **{ctx.guild.owner}**')
             if action is True:
                 if guild.server_cheats_enabled: return await ctx.send('You have cheats enabled!')
                 confirmation_embed = Embed(

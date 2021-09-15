@@ -1,3 +1,4 @@
+from modules.errors import ForbiddenAmount
 from discord.colour import Colour
 from discord.embeds import Embed
 from discord.ext import commands
@@ -63,6 +64,7 @@ class UsersCog(commands.Cog, name='Users'):
         """Gives the specified user in specified guild a case and the case key."""
         
         if not await has_admin_in_cheats_enabled_server_or_owner(guild or ctx.guild, ctx): return
+        if not ctx.author.id in OWNERS_IDS and amount > 1000: raise ForbiddenAmount('You can only give 1000 cases at once')
 
         container: Case()
         if container:
@@ -72,6 +74,7 @@ class UsersCog(commands.Cog, name='Users'):
             msg = f"Gave **x{amount} {container}** to **{guild.id or ctx.guild.id}/{user.id or ctx.author}**"
             return await _alter_case(ctx, amount, container, msg, guild.id, user.id)
         await ctx.send('Specified case could not be found')
+        
 
     @max_concurrency(1, commands.BucketType.default, wait=True)
     @user.command()

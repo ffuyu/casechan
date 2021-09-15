@@ -2,7 +2,7 @@ from discord.errors import NotFound
 from modules.errors import (
     AlreadyClaimed, BetTooLow, CheatsDisabled, 
     CodeClaimed, CodeExpired, CodeInvalid, 
-    ExistingCode, InsufficientBalance, 
+    ExistingCode, ForbiddenAmount, InsufficientBalance, 
     InvalidBet, ItemNotFound, MissingItem, 
     MissingSpace, RewardsError, TradeNotAllowed, UnableToBuy, 
     UnableToOpen, UnableToSell, ItemNotFound, 
@@ -39,7 +39,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             ItemNotFound, RewardsError, MissingSpace, InsufficientBalance,
             NotOwner, TradeNotAllowed, CodeExpired, CodeClaimed, CodeInvalid, AlreadyClaimed, ExistingCode,
             InvalidBet, BetTooLow, Forbidden, UnableToBuy, UnableToOpen, UnableToSell, MissingKey, MissingCase, 
-            NotFound, BadStatusLine, MissingPermissions, CheatsDisabled
+            NotFound, BadStatusLine, MissingPermissions, CheatsDisabled, ForbiddenAmount
             }
             
         embed = Embed(
