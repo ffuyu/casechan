@@ -83,7 +83,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
 
         if isinstance(error, RewardsError):
             embed.description = str(error)
-            embed.footer.text = 'Use the command c.profile to view all rewards and timers'
+            embed.set_footer(text='Use the command c.profile to view all the rewards and timers')
 
         try:
             await ctx.send(embed=embed)
