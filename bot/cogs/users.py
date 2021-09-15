@@ -97,7 +97,9 @@ class UsersCog(commands.Cog, name='Users'):
         if not await has_admin_in_cheats_enabled_server_or_owner(guild or ctx.guild, ctx): return
 
         """Removes trade restrictions from a player"""
-        async with SafePlayer(user.id or ctx.author.id, guild.id or ctx.guild.id) as player:
+        guild = guild or ctx.guild
+        user = user or ctx.author
+        async with SafePlayer(user.id, guild.id) as player:
             player.trade_banned = False
             await player.save()
         await ctx.send(f"Removed trade restrictions from **{guild.id or ctx.guild.id}/{user.id or ctx.author}**.")
