@@ -8,7 +8,8 @@ __all__ = (
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-with open(os.path.join(BASE_DIR, 'config.yml')) as f: config = yaml.safe_load(f)
+with open(os.path.join(BASE_DIR, 'config.yml')) as f:
+    config = yaml.safe_load(f)
 
 config: dict
 

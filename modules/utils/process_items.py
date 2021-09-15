@@ -29,7 +29,7 @@ def _select_items_to_persist(items_, db_items_) -> list:
         for nitem in items_:
             it = next(
                 (i for i in db_items_ if i.name == nitem['name'] and i.rarity == nitem['rarity']),
-                Item(name=nitem['name'], rarity=nitem['rarity'], icon_url=nitem.get('icon_url'))
+                Item(name=nitem['name'], rarity=nitem['rarity'], icon_url=nitem.get('icon_url'), type=nitem['type'])
             )
             if it.price != nitem['price']:
                 it.price = nitem['price']
@@ -59,10 +59,13 @@ async def update_item_database():
         raw_items = list(res['items_list'].values())
         with Timer() as t:
             for raw_item in raw_items:
-                if raw_item.get('type') not in _relevant_types:
+                if not raw_item.get('sticker') and raw_item.get('type') not in _relevant_types:
                     continue
+                _type = 'sticker' if raw_item.get('sticker') else raw_item.get('type')
+
                 # debug
                 item = {k: v for k, v in raw_item.items() if k in _relevant_keys}
+                item['type'] = _type
                 # get price
                 rprice = raw_item.get('price')
 
@@ -87,6 +90,7 @@ async def update_item_database():
         log.info(f'Finished processing items Time: {t.t:.4f} seconds. Items: {len(items)}')
         with Timer() as t:
             db_items = await engine.find(Item)
+
         log.info(f'Getting old items from database took {t.t:.2f} seconds')
 
         loop = asyncio.get_running_loop()
