@@ -31,6 +31,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
         profile_embed = Embed(color=Colour.random())
         profile_embed.add_field(name=f'Selling fees:', value=f'{"5" if userdata.is_boosted else "15"}%', inline=True)
         profile_embed.add_field(name=f'Total votes:', value=f'{userdata.total_votes}', inline=True)
+        profile_embed.add_field(name=f'Cases opened:', value=f'{player.stats.get("cases").get("opened")}', inline=True)
         profile_embed.set_author(name=user)
         profile_embed.set_thumbnail(url=user.avatar_url)
         profile_embed.set_footer(text=player.id)
