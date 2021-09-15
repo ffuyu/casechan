@@ -45,6 +45,7 @@ def generate_stats(exterior: str):
 
 class Item(ModelPlus, Model):
     name: str
+    type: str
     icon_url: Optional[str]
     rarity: Optional[str]
     price: Optional[float]
