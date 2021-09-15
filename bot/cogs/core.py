@@ -47,7 +47,6 @@ allowed_characters = "ABCDEFGHJKLMNPRSTUVXYZ23456789"
 uuid_gen = ShortUUID()
 log = logging.getLogger(__name__)
 last_opening_durations = []
-last_opening_durations: list
 cases_opened = 0
 uuid_gen.set_alphabet(''.join(list(allowed_characters)))
 
@@ -329,7 +328,7 @@ class CoreCog(commands.Cog, name='Core'):
             
         if cases_opened: print(f'{cases_opened} cases opened in the last 10 minutes,')
             
-        last_opening_durations = {}
+        last_opening_durations = []
         cases_opened = 0
             
 
