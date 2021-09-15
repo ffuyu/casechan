@@ -119,7 +119,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
     async def vote(self, ctx):
         """Vote for casechan and get perks"""
         embed = Embed(
-            description="Vote for **casechan** and reduce your selling fees down to 5% for 12 hours!",
+            description="Vote for **casechan** and reduce your selling fees down to 5% for 12 hours and open cases **2X faster**!",
             color=Colour.random()
         )
         embed.set_footer(text='Login once on our site to appear on our vote leaderboards at casechan.com/bot/votes')
