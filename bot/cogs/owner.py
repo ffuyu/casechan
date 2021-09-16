@@ -67,17 +67,17 @@ class OwnerCog(commands.Cog, name='owner'):
     async def uinfo(self, ctx, user:Optional[User]):
         user = user or ctx.author
         if user:
-            player = await Player.get(True, player_id=user.id)
-            userdata = await UserData.get(True, player_id=user.id)
-            await player.save()
+            player = await Player.get(member_id=user.id, guild_id=ctx.guild.id)
+            userdata = await UserData.get(True, user_id=user.id)
             await userdata.save()
+
             embed = Embed(
                 title = user,
                 description = f'```json{userdata.doc()}```'
             )
             embed.set_footer(text=user.id)
             row = ActionRow(
-                Button(style=ButtonStyle.link, url=f'https://casechan.com/admin/bot/botplayer/{player.id}', label="Edit Player"),
+                Button(style=ButtonStyle.link, url=f'https://casechan.com/admin/bot/botplayer/{player.id}', label="Edit Player", disabled=not player),
                 Button(style=ButtonStyle.link, url=f'https://casechan.com/admin/bot/botuser/{userdata.id}', label="Edit User")
             )
             await ctx.send(embed=embed, components=[row])
