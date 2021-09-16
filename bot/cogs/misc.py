@@ -32,11 +32,12 @@ class Cog(commands.Cog, name='Misc'):
     async def stats(self, ctx):
         """Shows some info on the bot"""
         guilds = self.bot.guilds
+        players = await engine.find(Player)
         embed = Embed(
             title=f'{self.bot.user.name} stats:',
             description=f'Number of guilds: {len(guilds)}\n'
                         f'Number of users: {len([m for g in guilds for m in g.members])}\n'
-                        f'Age: {naturaldelta(dt.utcnow() - self.bot.user.created_at)}'
+                        f'Number of players: {len(players)}'
         )
         await ctx.send(embed=embed)
 
