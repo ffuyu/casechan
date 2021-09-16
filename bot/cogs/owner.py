@@ -49,6 +49,7 @@ class OwnerCog(commands.Cog, name='owner'):
     async def svinfo(self, ctx, *, guild:Optional[Guild]):
         guild = guild or ctx.guild
         g = await Guild_.get(True, guild_id=guild.id)
+        await g.save()
         embed = Embed(
             title = guild,
             description = f'```json{g.doc()}```'
