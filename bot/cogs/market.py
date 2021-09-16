@@ -148,7 +148,6 @@ class MarketCog(commands.Cog, name='Market'):
 
                 elif isinstance(item, Container):
                     if isinstance(item, Case):
-                        print(player.cases)
                         player.mod_case(item.name, -amount)
                     elif isinstance(item, Package):
                         player.mod_package(item.name, -amount)
