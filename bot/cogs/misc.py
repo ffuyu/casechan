@@ -37,7 +37,8 @@ class Cog(commands.Cog, name='Misc'):
             title=f'{self.bot.user.name} stats:',
             description=f'Number of guilds: {len(guilds)}\n'
                         f'Number of users: {len([m for g in guilds for m in g.members])}\n'
-                        f'Number of players: {len(players)}'
+                        f'Number of players: {len(players)}\n'
+                        f'Age: <t:{int(self.bot.user.created_at.timestamp())}:R>'
         )
         await ctx.send(embed=embed)
 
