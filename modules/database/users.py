@@ -13,7 +13,7 @@ all = {
 class UserData(ModelPlus, Model):
     user_id: int
     last_voted: Optional[datetime] = None
-    supporter: Optional[bool] = True
+    supporter: Optional[bool] = False
     total_votes: int = 0
     acknowledgements: List[str] = []
     created_at: Optional[datetime] = datetime.utcnow()

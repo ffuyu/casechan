@@ -10,6 +10,8 @@ class Emojis(Enum):
     COVERT = "<:covert:874985682970488872>"
     CONTRABAND = "<:contraband:874985682924339270>"
 
+    SUPPORTER = "<:supporter:888033002700034078>"
+
 
 emojis = {
     "Base Grade": Emojis.BASE_GRADE.value,
@@ -22,4 +24,5 @@ emojis = {
     "Extraordinary": Emojis.COVERT.value,
     "Exceedingly Rare Item": Emojis.COVERT.value,
     "Contraband": Emojis.CONTRABAND.value,
+    "Supporter": Emojis.SUPPORTER.value
 }

@@ -32,7 +32,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
         profile_embed.add_field(name=f'Selling fees:', value=f'{"5" if userdata.is_boosted else "15"}%', inline=True)
         profile_embed.add_field(name=f'Total votes:', value=f'{userdata.total_votes}', inline=True)
         profile_embed.add_field(name=f'Cases opened:', value=f'{player.stats.get("cases", {}).get("opened", 0)}', inline=True)
-        profile_embed.set_author(name=user)
+        profile_embed.set_author(name=user, icon_url="https://cdn.discordapp.com/emojis/888033002700034078.png?v=1" if userdata.is_supporter else Embed.Empty)
         profile_embed.set_thumbnail(url=user.avatar_url)
         profile_embed.set_footer(text=player.id)
         profile_embed.add_field(name=ctx.guild, value=
