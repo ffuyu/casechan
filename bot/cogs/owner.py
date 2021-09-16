@@ -1,5 +1,8 @@
+from modules.database.players import Player
+from modules.database.users import UserData
 from typing import Optional
 from discord import Embed, Guild
+from discord.abc import User
 from discord.activity import Game
 from discord.ext import commands
 from discord.ext.commands.context import Context
@@ -59,6 +62,26 @@ class OwnerCog(commands.Cog, name='owner'):
             Button(style=ButtonStyle.link, url=f'https://casechan.com/admin/bot/botguildconfig/{g.id}', label="Edit")
         )
         await ctx.send(embed=embed, components=[row])
+
+    @owner.command()
+    async def uinfo(self, ctx, user:Optional[User]):
+        user = user or ctx.author
+        if user:
+            player = await Player.get(True, player_id=user.id)
+            userdata = await UserData.get(True, player_id=user.id)
+            await player.save()
+            await userdata.save()
+            embed = Embed(
+                title = user,
+                description = f'```json{userdata.doc()}```'
+            )
+            embed.set_footer(text=user.id)
+            row = ActionRow(
+                Button(style=ButtonStyle.link, url=f'https://casechan.com/admin/bot/botplayer/{player.id}', label="Edit Player"),
+                Button(style=ButtonStyle.link, url=f'https://casechan.com/admin/bot/botuser/{userdata.id}', label="Edit User")
+            )
+            await ctx.send(embed=embed, components=[row])
+        else: await ctx.send('User unreachable')
 
 def setup(bot):
     bot.add_cog(OwnerCog(bot))

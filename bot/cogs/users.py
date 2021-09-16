@@ -115,16 +115,6 @@ class UsersCog(commands.Cog, name='Users'):
             await player.delete()
         await ctx.send(f"**{guild_id or ctx.guild.id}/{user_id or ctx.author.id}** has been deleted from database.")
 
-    @user.command()
-    async def info(self, ctx, user:Optional[User]):
-        user = user or ctx.author
-        if user:
-            await ctx.send(embed=Embed(
-                color = Colour.random()
-            ).set_author(name=str(user))\
-            .add_field(name='Created at', value=user.created_at)\
-            .set_thumbnail(url=user.avatar_url))
-        else: await ctx.send('User unreachable')
 
 def setup(bot):
     bot.add_cog(UsersCog(bot))
