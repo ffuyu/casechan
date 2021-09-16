@@ -1,4 +1,4 @@
-from discord import Embed
+from discord import Embed, Guild
 from discord.activity import Game
 from discord.ext import commands
 from discord.ext.commands.context import Context
@@ -9,7 +9,8 @@ from dpytools.checks import only_these_users
 
 from modules.config import OWNERS_IDS
 from modules.utils import update_item_database
-
+from modules.database import Guild as Guild_
+from dislash import *
 
 class OwnerCog(commands.Cog, name='owner'):
     def __init__(self, bot):
@@ -42,6 +43,20 @@ class OwnerCog(commands.Cog, name='owner'):
     @owner.command()
     async def status(self, ctx: Context, *, name: str):
         await self.bot.change_presence(activity=Game(name=name))
+
+    @owner.command()
+    async def svinfo(self, ctx, guild:Guild):
+        guild = guild or ctx.guild
+        g = await Guild_.get(True, guild_id=guild.id)
+        embed = Embed(
+            title = guild,
+            description = f'```json{g.doc()}```'
+        )
+        embed.set_footer(text=guild.id)
+        row = ActionRow(
+            Button(style=ButtonStyle.link, url=f'https://casechan.com/admin/bot/botguildconfig/{g.id}')
+        )
+        await ctx.send(embed=embed, components=[row])
 
 def setup(bot):
     bot.add_cog(OwnerCog(bot))

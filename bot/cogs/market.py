@@ -148,11 +148,12 @@ class MarketCog(commands.Cog, name='Market'):
 
                 elif isinstance(item, Container):
                     if isinstance(item, Case):
-                        player.mod_case(item.name, amount)
+                        print(player.cases)
+                        player.mod_case(item.name, -amount)
                     elif isinstance(item, Package):
-                        player.mod_package(item.name, amount)
+                        player.mod_package(item.name, -amount)
                     elif isinstance(item, Capsule):
-                        player.mod_capsule(item.name, amount)
+                        player.mod_capsule(item.name, -amount)
                     elif isinstance(item, Key):
                         return await ctx.send('You can\'t sell keys')
 
