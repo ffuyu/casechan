@@ -1,3 +1,4 @@
+from typing import Optional
 from discord import Embed, Guild
 from discord.activity import Game
 from discord.ext import commands
@@ -45,7 +46,7 @@ class OwnerCog(commands.Cog, name='owner'):
         await self.bot.change_presence(activity=Game(name=name))
 
     @owner.command()
-    async def svinfo(self, ctx, guild:Guild):
+    async def svinfo(self, ctx, *, guild:Optional[Guild]):
         guild = guild or ctx.guild
         g = await Guild_.get(True, guild_id=guild.id)
         embed = Embed(
@@ -54,7 +55,7 @@ class OwnerCog(commands.Cog, name='owner'):
         )
         embed.set_footer(text=guild.id)
         row = ActionRow(
-            Button(style=ButtonStyle.link, url=f'https://casechan.com/admin/bot/botguildconfig/{g.id}')
+            Button(style=ButtonStyle.link, url=f'https://casechan.com/admin/bot/botguildconfig/{g.id}', label="Edit")
         )
         await ctx.send(embed=embed, components=[row])
 
