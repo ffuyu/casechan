@@ -81,8 +81,8 @@ class Item(ModelPlus, Model):
     @property
     def color(self):
         """Returns the color of the item"""
-        if self.rarity == 'Extraordinary':
-            r = 'Exceedingly Rare Item'
+        if self.rarity in ['Extraordinary', 'Remarkable']:
+            r = 'Covert'
         else:
             r = self.rarity
 
