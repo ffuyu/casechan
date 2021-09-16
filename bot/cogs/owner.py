@@ -64,10 +64,11 @@ class OwnerCog(commands.Cog, name='owner'):
         await ctx.send(embed=embed, components=[row])
 
     @owner.command()
-    async def uinfo(self, ctx, user:Optional[User]):
+    async def uinfo(self, ctx, user:Optional[User], guild:Optional[Guild]):
         user = user or ctx.author
+        guild = guild or ctx.guild
         if user:
-            player = await Player.get(member_id=user.id, guild_id=ctx.guild.id)
+            player = await Player.get(member_id=user.id, guild_id=guild.id)
             userdata = await UserData.get(True, user_id=user.id)
             await userdata.save()
 
