@@ -57,7 +57,7 @@ class OwnerCog(commands.Cog, name='owner'):
             title = guild,
             description = f'```json{g.doc()}```'
         )
-        embed.set_footer(text=guild.id)
+        embed.set_footer(text=f'{guild.id} | {guild.owner_id}')
         row = ActionRow(
             Button(style=ButtonStyle.link, url=f'https://casechan.com/admin/bot/botguildconfig/{g.id}', label="Edit")
         )
