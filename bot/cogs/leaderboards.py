@@ -95,7 +95,7 @@ class LeaderboardsCog(commands.Cog, name='Leaderboards'):
                 if guild.excluded_from_leaderboards or guild.server_cheats_enabled: continue
                 guilds[filter(self.bot.get_guild(player.guild_id).name)]+=await player.inv_total()
                 
-        if guilds.get('fuyu\'s development server', None): guilds['**[casechan support server](https://casechan.com/discord)**'] = guilds.pop('fuyu\'s development server')
+        if guilds.get('fuyu\'s server', None): guilds['**[casechan support server](https://casechan.com/discord)**'] = guilds.pop('fuyu\'s development server')
         
         cached_lb = dict(sorted(guilds.items(), key=lambda item: item[1], reverse=True))
 
