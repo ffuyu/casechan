@@ -12,7 +12,7 @@ all = {
 
 class UserData(ModelPlus, Model):
     user_id: int
-    last_voted: Optional[datetime] = None
+    last_voted: Optional[datetime] = datetime.utcnow() - timedelta(hours=6)
     supporter: Optional[bool] = False
     total_votes: int = 0
     acknowledgements: List[str] = []
@@ -45,6 +45,13 @@ class UserData(ModelPlus, Model):
     def is_supporter(self) -> bool:
         """Boolean that tells if this user is currently a supporter"""
         return self.supporter
+
+    @property
+    def can_vote_at(self):
+        if self.last_voted:
+            return self.last_voted + timedelta(hours=12)
+
+        return datetime.utcnow()
 
     @property
     def fees(self) -> float:

@@ -5,6 +5,7 @@ from discord.ext import commands
 from discord.ext.commands.core import guild_only, is_owner
 
 from discord import Embed, Colour, User
+import humanize
 
 from modules.database.players import Player
 from modules.database.users import UserData
@@ -36,11 +37,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
         profile_embed.set_thumbnail(url=user.avatar_url)
         profile_embed.set_footer(text=player.id)
         profile_embed.add_field(name=ctx.guild, value=
-        f'''
-        Hourly: {'**READY**' if player.hourly_available else f'<t:{int((player.hourly_remaining.timestamp()))}:R>'}
-        Daily: {'**READY**' if player.daily_available else f'<t:{int((player.daily_remaining.timestamp()))}:R>'}
-        Weekly: {'**READY**' if player.weekly_available else f'<t:{int((player.weekly_remaining.timestamp()))}:R>'}
-        ''', inline=False)
+        f"Hourly: {'**READY**' if player.hourly_available else f'<t:{int((player.hourly_remaining.timestamp()))}:R>'}\nDaily: {'**READY**' if player.daily_available else f'<t:{int((player.daily_remaining.timestamp()))}:R>'}\nWeekly: {'**READY**' if player.weekly_available else f'<t:{int((player.weekly_remaining.timestamp()))}:R>'}\n\nVote: {'READY' if userdata.is_boosted else f'<t:{int(userdata.vote_remaining.timestamp())}:R>'}", inline=False)
         if userdata.acknowledgements:
             profile_embed.add_field(name="Acknowledgements:", value='\n'.join(userdata.acknowledgements), inline=False)
 

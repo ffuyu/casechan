@@ -16,6 +16,7 @@ __all__ = (
 
 rarity = {
     "Contraband": (9, 0xe4ae39),
+    "Remarkable": (8, 0xEB4B4B),
     "Exceedingly Rare Item": (8, 0xEB4B4B),
     "Covert": (7, 0xEB4B4B),
     "Classified": (6, 0xD32CE6),
@@ -45,7 +46,7 @@ def generate_stats(exterior: str):
 
 class Item(ModelPlus, Model):
     name: str
-    type: str
+    type: Optional[str]
     icon_url: Optional[str]
     rarity: Optional[str]
     price: Optional[float]
@@ -81,7 +82,7 @@ class Item(ModelPlus, Model):
     @property
     def color(self):
         """Returns the color of the item"""
-        if self.rarity in ['Extraordinary', 'Remarkable']:
+        if self.rarity == 'Extraordinary':
             r = 'Covert'
         else:
             r = self.rarity
