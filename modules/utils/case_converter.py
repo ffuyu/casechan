@@ -1,9 +1,10 @@
+from typing import Union
 from modules.utils.misc import first
 from modules.constants import ButtonTypes
 from discord.ext.commands import Converter
 from dislash.interactions.message_components import ActionRow, Button
 
-from ..cases import Capsule, Case, Package, all_cases, all_packages, all_capsules
+from ..cases import Capsule, Case, Key, Package, all_cases, all_packages, all_capsules
 
 __all__ = (
     'ContainerConverter',
@@ -18,7 +19,7 @@ class ContainerConverter(Converter):
     Also converts key names to case key names
     """
 
-    async def convert(self, ctx, argument:str):
+    async def convert(self, ctx, argument:str) -> Union[Case, Package, Capsule, Key]:
         first_argument = argument.lower()
         argument = argument.lower().replace(' key', '')
 

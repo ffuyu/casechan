@@ -12,3 +12,4 @@ shortuuid
 topggpy
 pyyaml
 sqlitedict
+colorama

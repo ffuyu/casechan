@@ -10,6 +10,7 @@ from modules.errors import (
     MissingCase, MissingKey
 )
 
+from colorama import Fore
 from bson.errors import InvalidDocument
 from discord import Forbidden
 from discord.ext import commands
@@ -21,6 +22,10 @@ from discord.ext.commands import (
 from discord.ext.commands.errors import BadUnionArgument, BotMissingPermissions, CommandError, MissingPermissions, NotOwner
 from dpytools import Embed, Color
 from aiohttp.http_exceptions import BadStatusLine
+
+from sqlitedict import SqliteDict
+
+error_causes = SqliteDict('error_causes.sqlite', tablename='error_causes', autocommit=True)
 
 class ErrorHandlerCog(commands.Cog, name='Error Handler'):
     def __init__(self, bot):
@@ -79,6 +84,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
 
 
         if isinstance(error, (InvalidDocument, AttributeError, TypeError, FailedItemGen)):
+            print(f'{Fore.RED}COMMAND THAT CAUSED THIS ERROR: {ctx.message}{Fore.RESET}')
             embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
 
         if isinstance(error, RewardsError):

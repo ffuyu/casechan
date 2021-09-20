@@ -23,7 +23,7 @@ from modules.utils.paginate import dict_paginator
 from modules.utils.checks import able_to_opencontainer, emojify
 from modules.database.items import Item, sort_items
 from modules.database.players import Player
-from modules.cases import Capsule, Case, Container, Package
+from modules.cases import Capsule, Case, Container, Key, Package
 from modules.database import Player, SafePlayer
 from modules.database.users import UserData
 from modules.utils.case_converter import ContainerConverter
@@ -98,7 +98,7 @@ class CoreCog(commands.Cog, name='Core'):
         """
         Opens a case from your cases
         """
-        if not container:
+        if not container and not isinstance(container, Key):
             return await ctx.send('Not a valid case name!')
 
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
