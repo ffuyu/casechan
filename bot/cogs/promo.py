@@ -49,21 +49,19 @@ class PromoCog(commands.Cog, name='Promo Codes'):
         
         messages = []
         responses = []
-        responded = False
         code = code if code and ctx.author.id in OWNERS_IDS else uuid_gen.random(length=8)
         def check(m): return m.author == ctx.author and m.channel == ctx.channel
 
-        messages.append(await ctx.send('Please reply with amount of funds you want for this promo'))
-        while not responded:
-            try:response = await self.bot.wait_for('message', timeout=30, check=check)
-            except asyncio.TimeoutError: pass
-            if response:
-                responded = True
-                if str(response.content).isdigit(): funds = min(10000, float(response.content))
+        
+        messages.append(await ctx.send('Please reply with amount of funds you want for this promo code (Max.: $10000)'))
 
-                else: return await ctx.send('Invalid input')
+        try:response = await self.bot.wait_for('message', timeout=30, check=check)
+        except asyncio.TimeoutError: return
 
-        responded = False
+        if response:
+            if str(response.content).replace('-', '').isdigit(): funds = max(1, min(10000, float(response.content)))
+            else: return await ctx.send('Invalid input')
+
         responses.append(response)
         row = ActionRow(Button(style=ButtonStyle.blurple, label='Global', emoji='🌎', disabled=not ctx.author.id in OWNERS_IDS), Button(style=ButtonStyle.green, label='Server', emoji='🌕'))
         messages.append(await ctx.send('Is this a global promo code or a server promo code?', components=[row]))
@@ -74,53 +72,46 @@ class PromoCog(commands.Cog, name='Promo Codes'):
         finally: await messages[-1].delete()
 
         messages.append(await ctx.send('How many times this promo code can be used?'))
-        while not responded:
-            try:response = await self.bot.wait_for('message', timeout=30, check=check)
-            except asyncio.TimeoutError: pass
-            finally: responses.append(response)
-            if response:
-                responded = True
-                if str(response.content).isdigit(): max_uses=int(response.content)
-            else: return await ctx.send('Invalid input')
 
-        responded = False
+        try:response = await self.bot.wait_for('message', timeout=30, check=check)
+        except asyncio.TimeoutError: return
+        finally: responses.append(response)
+
+        if response:
+            if str(response.content).replace('-', '').isdigit(): max_uses=max(1, int(response.content))
+
+        else: return await ctx.send('Invalid input')
+
         responses.append(response)
 
-
         messages.append(await ctx.send('In how many hours will this promo code expire?'))
-        while not responded:
-            try:response = await self.bot.wait_for('message', timeout=30, check=check)
-            except asyncio.TimeoutError: pass
-            finally: responses.append(response)
-            if response:
-                responded = True
-                if str(response.content).isdigit(): 
-                    expire_hours = float(response.content)
-                    expiration = datetime.now() + timedelta(hours=expire_hours)
-                else: return await ctx.send('Invalid input')
-
-
+        try: response = await self.bot.wait_for('message', timeout=30, check=check)
+        except asyncio.TimeoutError: return
+        finally: responses.append(response)
+        if response:
+            if str(response.content).replace('-', '').isdigit(): 
+                expire_hours = max(0, float(response.content))
+                expiration = datetime.now() + timedelta(hours=expire_hours)
             else: return await ctx.send('Invalid input')
+        else: return await ctx.send('Invalid input')
             
-        responded = False
+
         row = ActionRow(Button(style=ButtonStyle.blurple, label='Yes'), Button(style=ButtonStyle.blurple, label='No'))
         messages.append(await ctx.send('Do you want to restrict usage of this promo code to certain users?', components=[row]))
 
 
         try: inter = await messages[-1].wait_for_button_click(check=check, timeout=30)
-        except asyncio.TimeoutError: pass
+        except asyncio.TimeoutError: return
         else:
             await messages[-1].delete()
             is_restricted = inter.clicked_button.label == 'Yes'
             if is_restricted:
                 messages.append(await ctx.send('Which users can use this promo code? Please specify user IDs separated by commas, (e.g. 123, 456, 789)'))
-                while not responded:
-                    try:response = await self.bot.wait_for('message', timeout=30, check=check)
-                    except asyncio.TimeoutError: return await messages[-1].edit(components=[disable_row(row)])
-                    if response:
-                        responded = True
-                        available_to = response.content.replace(' ', '').split(',')
-                        available_to = [int(uid) for uid in available_to if isinstance(uid, int)]
+                try:response = await self.bot.wait_for('message', timeout=30, check=check)
+                except asyncio.TimeoutError: return await messages[-1].edit(components=[disable_row(row)])
+                if response:
+                    available_to = response.content.replace(' ', '').split(',')
+                    available_to = [int(uid) for uid in available_to if isinstance(uid, int)]
             else:
                 available_to = list()
         finally: 

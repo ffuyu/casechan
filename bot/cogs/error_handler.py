@@ -25,8 +25,6 @@ from aiohttp.http_exceptions import BadStatusLine
 
 from sqlitedict import SqliteDict
 
-error_causes = SqliteDict('error_causes.sqlite', tablename='error_causes', autocommit=True)
-
 class ErrorHandlerCog(commands.Cog, name='Error Handler'):
     def __init__(self, bot):
         self.bot = bot
