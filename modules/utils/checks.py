@@ -24,7 +24,7 @@ def able_to_buy(player:Player, item:Union[Item, Case, Key], amount:int=1):
         raise UnableToBuy(
             message='You can\'t complete this purchase, your inventory is full!'
         )
-    elif not item.price and isinstance(item, (Item, Key)):
+    elif not item.price:
         raise UnableToBuy(
             message='You can\'t purchase this item as it has no price data.'
         )
@@ -32,7 +32,7 @@ def able_to_buy(player:Player, item:Union[Item, Case, Key], amount:int=1):
         raise UnableToBuy(
             message=f'You are missing ${total_price - player.balance:.2f} to buy this item.'
         )
-        
+
     return True
 
 def able_to_sell(player:Player, item:Union[Item, Case, Key], amount:int=1):   
