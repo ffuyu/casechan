@@ -2564,7 +2564,7 @@
       "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsVk5kKhZDpYX3e1Y07ODdfDBH_pKzwdfSkqTyZLjQxjsF7sEoiLyQ9I2ljgHt_EZlYzr6J4DHIA9oZ1-D5BHglkR7Cs6C/360fx360f"
     },
     "Operation Riptide Case": {
-      "name": "eSports 2014 Summer Case",
+      "name": "Operation Riptide Case",
       "price": 4.13,
       "items": {
         "Mil-Spec Grade": [
@@ -2630,7 +2630,7 @@
         ]
       },
       "key": "Operation Riptide Case Key",
-      "asset": "https://csgostash.com/img/items/containers/c321.png"
+      "asset": "https://casechan.com/static/assets/riptide.png"
     }
   },
   "packages": {
