@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
 _relevant_types = ['Weapon', 'Knife', 'Container', 'Gloves']
 
 _relevant_keys = ['name', 'icon_url', 'rarity']
-_price_periods = ['7_days', '24_hours', '30_days']
+_price_periods = ['30_days', '7_days', '24_hours']
 _all_time_stats = ['highest_price', 'average', 'median']
 
 
