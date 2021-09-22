@@ -16,4 +16,4 @@ __all__ = (
 
 client = AsyncIOMotorClient(DATABASE_URL) if config.get('DEBUG') is not True and DATABASE_URL else None
 
-engine = AIOEngine(motor_client=client, database='casechan')
+engine = AIOEngine(motor_client=client, database=config.get('database-name'))
