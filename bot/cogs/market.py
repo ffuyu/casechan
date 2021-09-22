@@ -83,8 +83,6 @@ class MarketCog(commands.Cog, name='Market'):
                 content='Item not found or not marketable.',
                 mention_author=False
             )
-        else:
-            print(item)
         amount = amount if amount > 0 else 1
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             if able_to_buy(player, item, amount):
