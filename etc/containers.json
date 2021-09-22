@@ -2562,6 +2562,75 @@
       },
       "key": "eSports 2014 Summer Case Key",
       "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsVk5kKhZDpYX3e1Y07ODdfDBH_pKzwdfSkqTyZLjQxjsF7sEoiLyQ9I2ljgHt_EZlYzr6J4DHIA9oZ1-D5BHglkR7Cs6C/360fx360f"
+    },
+    "Operation Riptide Case": {
+      "name": "eSports 2014 Summer Case",
+      "price": 4.13,
+      "items": {
+        "Mil-Spec Grade": [
+          "PP-Bizon | Lumen",
+          "G3SG1 | Keeping Tabs",
+          "MP7 | Guerrilla",
+          "XM1014 | Watchdog",
+          "Dual Berettas | Tread",
+          "AUG | Plague",
+          "USP-S | Black Lotus"
+        ],
+        "Restricted": [
+          "MAG-7 | BI83 Spectrum",
+          "Five-SeveN | Boost Protocol",
+          "MP9 | Mount Fuji",
+          "FAMAS | ZX Spectron",
+          "M4A4 | Spider Lily"
+        ],
+        "Classified": [
+          "MAC-10 | Toybox",
+          "SSG 08 | Turbo Peek",
+          "Glock-18 | Snack Attack"
+        ],
+        "Covert": [
+          "Desert Eagle | Ocean Drive",
+          "AK-47 | Leet Museo"
+        ],
+        "Exceedingly Rare Item": [
+          "Bowie Knife | Gamma Doppler",
+          "Bowie Knife | Autotronic",
+          "Bowie Knife | Lore",
+          "Bowie Knife | Bright Water",
+          "Bowie Knife | Freehand",
+          "Bowie Knife | Black Laminate",
+
+          "Butterfly Knife | Lore",
+          "Butterfly Knife | Autotronic",
+          "Butterfly Knife | Bright Water",
+          "Butterfly Knife | Gamma Doppler",
+          "Butterfly Knife | Freehand",
+          "Butterfly Knife | Black Laminate",
+
+          "Falchion Knife | Lore",
+          "Falchion Knife | Autotronic",
+          "Falchion Knife | Bright Water",
+          "Falchion Knife | Gamma Doppler",
+          "Falchion Knife | Freehand",
+          "Falchion Knife | Black Laminate",
+
+          "Huntsman Knife | Lore",
+          "Huntsman Knife | Autotronic",
+          "Huntsman Knife | Bright Water",
+          "Huntsman Knife | Gamma Doppler",
+          "Huntsman Knife | Freehand",
+          "Huntsman Knife | Black Laminate",
+
+          "Shadow Daggers | Lore",
+          "Shadow Daggers | Autotronic",
+          "Shadow Daggers | Bright Water",
+          "Shadow Daggers | Gamma Doppler",
+          "Shadow Daggers | Freehand",
+          "Shadow Daggers | Black Laminate"
+        ]
+      },
+      "key": "Operation Riptide Case Key",
+      "asset": "https://csgostash.com/img/items/containers/c321.png"
     }
   },
   "packages": {
