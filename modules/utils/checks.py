@@ -1,5 +1,5 @@
 from modules.config import OWNERS_IDS
-from modules.errors import NotAllowed, UnableToBuy, UnableToOpen, UnableToSell
+from modules.errors import MarketError, NotAllowed, UnableToBuy, UnableToOpen, UnableToSell
 from modules.cases import Capsule, Case, Container, Key, Package
 
 from modules.database import Player, Item
@@ -20,7 +20,7 @@ def able_to_buy(player:Player, item:Union[Item, Case, Key], amount:int=1):
         raise UnableToBuy(
             message='You can\'t buy more than 1000 items at once.'
         )
-    elif not remaining_inv >= amount and not isinstance(item, (Case, Key)):
+    elif not remaining_inv >= amount and not isinstance(item, (Container, Key)):
         raise UnableToBuy(
             message='You can\'t complete this purchase, your inventory is full!'
         )
@@ -32,7 +32,7 @@ def able_to_buy(player:Player, item:Union[Item, Case, Key], amount:int=1):
         raise UnableToBuy(
             message=f'You are missing ${total_price - player.balance:.2f} to buy this item.'
         )
-    
+        
     return True
 
 def able_to_sell(player:Player, item:Union[Item, Case, Key], amount:int=1):   
