@@ -39,6 +39,7 @@ class PromoCog(commands.Cog, name='Promo Codes'):
     async def promo(self, ctx):
         pass
     
+    @guild_only()
     @commands.cooldown(10, 60, BucketType.user)
     @promo.command()
     async def create(self, ctx, code:Optional[str.upper]):
