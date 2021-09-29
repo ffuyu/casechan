@@ -50,9 +50,7 @@ def able_to_sell(player:Player, item:Union[Item, Case, Key], amount:int=1):
         raise UnableToSell(
             message=f'The item you are trying to sell cannot be sold in the market.'
         )
-
     else:
-
         if isinstance(item, Item):
             if not player.item_count(item.name) >= amount:
                 raise UnableToSell(
@@ -61,6 +59,18 @@ def able_to_sell(player:Player, item:Union[Item, Case, Key], amount:int=1):
 
         elif isinstance(item, Case):
             if not player.cases.get(item.name, 0) >= amount:
+                raise UnableToSell(
+                    message=f'You are missing {missing_items}x {item.name}.'
+                )
+
+        elif isinstance(item, Capsule):
+            if not player.capsules.get(item.name, 0) >= amount:
+                raise UnableToSell(
+                    message=f'You are missing {missing_items}x {item.name}.'
+                )
+
+        elif isinstance(item, Package):
+            if not player.packages.get(item.name, 0) >= amount:
                 raise UnableToSell(
                     message=f'You are missing {missing_items}x {item.name}.'
                 )
