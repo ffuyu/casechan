@@ -82,7 +82,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
 
 
         if isinstance(error, (InvalidDocument, AttributeError, TypeError, FailedItemGen)):
-            print(f'{Fore.RED}COMMAND THAT CAUSED THIS ERROR: {ctx.message}{Fore.RESET}')
+            print(f'{Fore.RED}COMMAND THAT CAUSED THIS ERROR: {ctx.message.content}{Fore.RESET}')
             embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
 
         if isinstance(error, RewardsError):
