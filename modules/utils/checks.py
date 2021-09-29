@@ -46,7 +46,7 @@ def able_to_sell(player:Player, item:Union[Item, Case, Key], amount:int=1):
         raise UnableToSell(
             message='This item cannot be sold as it has no price.'
         )
-    elif not isinstance(item, (Case, Item)):
+    elif not isinstance(item, (Container, Item)):
         raise UnableToSell(
             message=f'The item you are trying to sell cannot be sold in the market.'
         )
