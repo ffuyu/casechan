@@ -100,6 +100,8 @@ def able_to_opencontainer(player:Player, container:Union[Case, Package, Capsule]
 
     elif inv_lim_amount < amount:raise UnableToOpen(message=f'You can\'t open more cases, your inventory is full!')
 
+    elif amount > 1000: raise UnableToOpen('You cannot open more than 1000 cases at once!')
+
     return True
 
 def emojify(ctx, text:str) -> str:
