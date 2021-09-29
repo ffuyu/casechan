@@ -10,10 +10,20 @@ class Emojis(Enum):
     COVERT = "<:covert:874985682970488872>"
     CONTRABAND = "<:contraband:874985682924339270>"
 
+    EXOTIC = CLASSIFIED
+    REMARKABLE = RESTRICTED
+    HIGH_GRADE = MILSPEC_GRADE
+
     SUPPORTER = "<:supporter:888033002700034078>"
 
 
 emojis = {
+
+    # STICKERS
+    "Exotic": Emojis.EXOTIC.value,
+    "Remarkable": Emojis.REMARKABLE.value,
+    "High Grade": Emojis.HIGH_GRADE.value,
+
     "Base Grade": Emojis.BASE_GRADE.value,
     "Industrial Grade": Emojis.INDUSTRIAL_GRADE.value,
     "Consumer Grade": Emojis.CONSUMER_GRADE.value,
@@ -24,5 +34,7 @@ emojis = {
     "Extraordinary": Emojis.COVERT.value,
     "Exceedingly Rare Item": Emojis.COVERT.value,
     "Contraband": Emojis.CONTRABAND.value,
+
+
     "Supporter": Emojis.SUPPORTER.value
 }

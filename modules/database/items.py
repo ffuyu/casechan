@@ -16,7 +16,6 @@ __all__ = (
 
 rarity = {
     "Contraband": (9, 0xe4ae39),
-    "Remarkable": (8, 0xEB4B4B),
     "Exceedingly Rare Item": (8, 0xEB4B4B),
     "Covert": (7, 0xEB4B4B),
     "Classified": (6, 0xD32CE6),
@@ -24,7 +23,12 @@ rarity = {
     "Mil-Spec Grade": (4, 0x4B69FF),
     "Consumer Grade": (3, 0xb0c3d9),
     "Industrial Grade": (2, 0x5e98d9),
-    "Base Grade": (1, 0xb0c3d9)
+    "Base Grade": (1, 0xb0c3d9),
+
+    "Extraordinary": (7, 0xEB4B4B),
+    "Exotic": (6, 0xD32CE6),
+    "Remarkable": (5, 0x8847FF),
+    "High Grade": (3, 0x4B69FF),
 }
 
 _item_cache = set()
