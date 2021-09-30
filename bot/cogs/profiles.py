@@ -46,7 +46,8 @@ class ProfilesCog(commands.Cog, name='Profiles'):
         row = ActionRow(
             Button(
                 style=ButtonStyle.link,
-                label='View at casechan.com'
+                label='View at casechan.com',
+                url='https://casechan.com/profile/{user.id}/{ctx.guild.id}'
             )
         )
 
