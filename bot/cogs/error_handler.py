@@ -19,7 +19,7 @@ from discord.ext.commands import (
     MissingRequiredArgument, MaxConcurrencyReached, RoleNotFound, CommandOnCooldown
 )
 
-from discord.ext.commands.errors import BadUnionArgument, BotMissingPermissions, CommandError, MissingPermissions, NotOwner
+from discord.ext.commands.errors import BadUnionArgument, BotMissingPermissions, CommandError, CommandInvokeError, MissingPermissions, NotOwner
 from dpytools import Embed, Color
 from aiohttp.http_exceptions import BadStatusLine
 
@@ -43,7 +43,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             NotOwner, TradeNotAllowed, CodeExpired, CodeClaimed, CodeInvalid, AlreadyClaimed, ExistingCode,
             InvalidBet, BetTooLow, Forbidden, UnableToBuy, UnableToOpen, UnableToSell, MissingKey, MissingCase, 
             NotFound, BadStatusLine, MissingPermissions, CheatsDisabled, ForbiddenAmount, FailedItemGen,
-            NotAllowed
+            NotAllowed, CommandInvokeError
             }
             
         embed = Embed(
@@ -81,7 +81,7 @@ class ErrorHandlerCog(commands.Cog, name='Error Handler'):
             embed.description = str(error)
 
 
-        if isinstance(error, (InvalidDocument, AttributeError, TypeError, FailedItemGen)):
+        if isinstance(error, (InvalidDocument, AttributeError, TypeError, FailedItemGen, CommandInvokeError)):
             print(f'{Fore.RED}COMMAND THAT CAUSED THIS ERROR: {ctx.message.content}{Fore.RESET}')
             embed.description = "Something went wrong! Please [contact us](https://discord.gg/hjH9AQVmyW) if this issue persists."
 
