@@ -47,7 +47,7 @@ class ProfilesCog(commands.Cog, name='Profiles'):
             Button(
                 style=ButtonStyle.link,
                 label='View at casechan.com',
-                url='https://casechan.com/profile/{user.id}/{ctx.guild.id}'
+                url=f'https://casechan.com/profile/{user.id}/{ctx.guild.id}'
             )
         )
 
