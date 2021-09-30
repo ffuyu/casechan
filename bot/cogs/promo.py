@@ -184,6 +184,12 @@ class PromoCog(commands.Cog, name='Promo Codes'):
             return
         raise CodeInvalid('Promo code not found.')
         
+    @guild_only()
+    @max_concurrency(1, BucketType.default, wait=True)
+    @commands.command()
+    async def redeem(self, ctx, code:str.upper):
+        await self.use(ctx, code)
+
     @promo.command()
     async def info(self, ctx, code:str):
         """Shows information about the given promo"""
