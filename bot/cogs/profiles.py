@@ -11,6 +11,8 @@ from modules.database.players import Player
 from modules.database.users import UserData
 from modules.database import engine
 
+from dislash import *
+
 from humanize import naturaldate
 from humanize.time import naturaltime
 
@@ -41,7 +43,14 @@ class ProfilesCog(commands.Cog, name='Profiles'):
         if userdata.acknowledgements:
             profile_embed.add_field(name="Acknowledgements:", value='\n'.join(userdata.acknowledgements), inline=False)
 
-        await ctx.send(embed=profile_embed)
+        row = ActionRow(
+            Button(
+                style=ButtonStyle.link,
+                label='View at casechan.com'
+            )
+        )
+
+        await ctx.send(embed=profile_embed, components=[row])
 
     @is_owner()
     @commands.group(aliases=["ack"], hidden=True)
