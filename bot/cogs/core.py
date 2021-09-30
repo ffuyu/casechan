@@ -122,7 +122,11 @@ class CoreCog(commands.Cog, name='Core'):
                 # Opening cases
 
                 start = time.perf_counter()
-                items = [await player.open_case(container) for _ in range(amount)]
+                try: 
+                    items = [await player.open_case(container) for _ in range(amount)]
+                except:
+                    await message.delete()
+                    return
                 stop = time.perf_counter()
             
                 last_opening_durations.append(stop-start)
