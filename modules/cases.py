@@ -71,8 +71,8 @@ def _get_valid_item(item_name, rarity, valid_items, valid_exteriors):
         item = next((i for i in valid_items if item_n == i.name), None)
         if not item:
             i += 1
-            log.warning(f'Failed to generate item (try {i}): "{item_name}" converted to "{item_n}"')
             if i == 10:
+                log.warning(f'Item generation failed: "{item_name}" converted to "{item_n}"')
                 raise FailedItemGen(f'Failed to generate item after 10 trials: '
                                     f'"{item_name}" | {rarity} | {valid_items} | '
                                     f'{valid_exteriors} converted to "{item_n}"')
