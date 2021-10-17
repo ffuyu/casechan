@@ -15,7 +15,7 @@ from modules.config import config
 
 TOPGG_API = os.environ.get("TOPGG_API")
 WEBHOOK = os.environ.get("WEBHOOK")
-DEBUG = config.get('debug') == True
+DEBUG = config.get('DEBUG') == True
 
 bot.topggpy = topgg.DBLClient(bot, TOPGG_API, autopost=DEBUG, post_shard_count=DEBUG)
 

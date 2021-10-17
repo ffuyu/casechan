@@ -8,7 +8,7 @@ class StatcordPost(commands.Cog):
         self.bot = bot
         self.key = "statcord.com-lu75a7K50G3U3AymRYrn"
         self.api = statcord.Client(self.bot,self.key)
-        if config.get('debug') == False:
+        if config.get('DEBUG') == False:
             self.api.start_loop()
 
 
