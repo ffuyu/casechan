@@ -3,7 +3,7 @@ import json
 
 from odmantic import field
 
-from modules.cases import all_cases, case_assets
+from modules.containers import all_cases, case_assets
 from modules.database import Item
 from modules.database import engine
 

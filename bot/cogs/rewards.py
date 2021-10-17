@@ -13,7 +13,7 @@ from dislash.interactions.message_components import ActionRow, Button, ButtonSty
 
 from humanize import naturaldelta
 
-from modules.cases import Case, all_cases
+from modules.containers import Case, all_cases
 from modules.database.players import SafePlayer
 from modules.errors import RewardsError
 

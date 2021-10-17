@@ -1,4 +1,4 @@
-DEBUG: false
+DEBUG: true
 default_prefix: 'c.'
 owners_ids:
   - 717747572076314745

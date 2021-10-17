@@ -17,7 +17,7 @@ with open('etc/containers.json', 'r', encoding='utf-8') as f:
     all_packages = json.get('packages', {})
     # all_capsules = json.get('capsules', {})
     # unloaded capsules, load while debugging
-    all_capsules = {}
+    all_capsules = json.get('capsules', {})
 
 _rarities = {  # grade weight, st weight 1 & 2
     "Mil-Spec Grade": (79.92327, 92.00767, 7.99233),
@@ -28,11 +28,11 @@ _rarities = {  # grade weight, st weight 1 & 2
 }
 
 _exterior_dist = {  # weight, uniform a, uniform b.
-    "Factory New": (3, 0.00, 0.069),
-    "Minimal Wear": (24, 0.07, 0.149),
-    "Field-Tested": (33, 0.15, 0.369),
-    "Well-Worn": (24, 0.37, 0.439),
-    "Battle-Scarred": (16, 0.44, 1),
+    "Factory New"    : (3, 0.00, 0.069),
+    "Minimal Wear"   : (24, 0.07, 0.149),
+    "Field-Tested"   : (33, 0.15, 0.369),
+    "Well-Worn"      : (24, 0.37, 0.439),
+    "Battle-Scarred" : (16, 0.44, 1),
 }
 
 
@@ -73,7 +73,7 @@ def _get_valid_item(item_name, rarity, valid_items, valid_exteriors):
             i += 1
             if i == 10:
                 log.warning(f'Item generation failed: "{item_name}" converted to "{item_n}"')
-                raise FailedItemGen(f'Failed to generate item after 10 trials: '
+                raise FailedItemGen(f'Failed to generate item after 10 tries: '
                                     f'"{item_name}" | {rarity} | {valid_items} | '
                                     f'{valid_exteriors} converted to "{item_n}"')
     return item, float_, seed
@@ -92,6 +92,11 @@ class Container:
         self.item_names = {item for rarity in self.items.values() for item in rarity}
         self.item_rarities = {*self.items}
         self._key = None
+        self._display_stats = True
+
+    @property
+    def display_stats(self):
+        return self._display_stats
 
     @property
     def key(self):
@@ -141,13 +146,53 @@ class Case(Container):
 
 class Package(Container): pass
 
-class Capsule(Container): 
+class Capsule(Container):
+    @property
+    def display_stats(self):
+        return False
+
+    @property
+    def has_suffix(self):
+        return all_capsules.get(self.name).get('has_suffix', False)
+
+    @property
+    def suffix(self):
+        if self.has_suffix:
+            return ' '.join(self.name.split()[:2])
+
     @property
     def key(self):
         if all_capsules.get(self.name).get('key'):
             return Key(f'{self.name} Key')
  
         return None
+
+    async def open(self):
+        """
+        Opens this capsule and returns a sticker
+        Overrides the default open method for the Container class
+        """
+        rarities, weights = zip(*((k, v[0]) for k, v in _rarities.items() if k in self.item_rarities))
+        rarity = random.choices(population=rarities, weights=weights, k=1)[0]
+
+        
+        if self.has_suffix:
+            item_name = f'Sticker | {random.choice(self.items[rarity])} | {self.suffix}'
+        else:
+            item_name = f'Sticker | {random.choice(self.items[rarity])}'
+
+        valid_items = {item for item 
+                       in await self.get_items()
+                       if item_name in item.name}
+
+        exteriors = {}
+
+        result = await asyncio.get_running_loop().run_in_executor(
+            None,
+            partial(_get_valid_item, item_name, rarity, valid_items, exteriors)
+        )
+        
+        return result
 
 class Key:
     def __init__(self, name):
@@ -163,4 +208,3 @@ class Key:
 
     async def use(self):
         return await self.case.open()
-

@@ -4,7 +4,7 @@ from typing import Optional, Union
 
 from modules.utils.case_converter import ContainerConverter
 from modules.database.players import SafePlayer
-from modules.cases import Case, Key
+from modules.containers import Case, Key
 from modules.errors import BetTooLow, InsufficientBalance, InvalidBet, MissingCase, MissingKey
 
 from discord.ext import commands

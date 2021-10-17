@@ -13,3 +13,4 @@ topggpy
 pyyaml
 sqlitedict
 colorama
+statcord.py

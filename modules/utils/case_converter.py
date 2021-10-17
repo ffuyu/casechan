@@ -1,10 +1,7 @@
 from typing import Union
-from modules.utils.misc import first
-from modules.constants import ButtonTypes
 from discord.ext.commands import Converter
-from dislash.interactions.message_components import ActionRow, Button
 
-from ..cases import Capsule, Case, Key, Package, all_cases, all_packages, all_capsules
+from ..containers import Capsule, Case, Key, Package, all_cases, all_packages, all_capsules
 
 __all__ = (
     'ContainerConverter',
@@ -20,7 +17,7 @@ class ContainerConverter(Converter):
     """
 
     async def convert(self, ctx, argument:str) -> Union[Case, Package, Capsule, Key]:
-        first_argument = argument.lower()
+        key = ' key' in argument.lower()
         argument = argument.lower().replace(' key', '')
 
         if len(argument) < 4:
@@ -41,13 +38,13 @@ class ContainerConverter(Converter):
             ]
 
             if any(primary):
-                return Case(case) if not 'key' in first_argument else Case(case).key
+                return Case(case) if not key else Case(case).key
         
             if any([
                 any([x.isdigit() for x in argument]) and any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('case', '') in lwcs),
                 not any([x.isdigit() for x in argument]) and not any([x.isdigit() for x in lwcs]) and (argument in lwcs or argument.replace('case', '') in lwcs),
             ]):
-                return Case(case) if not 'key' in first_argument else Case(case).key
+                return Case(case) if not key else Case(case).key
 
                 
         # packages
@@ -70,8 +67,7 @@ class ContainerConverter(Converter):
 
         # capsules
         for capsule in [*all_capsules]:
-            print(capsule, argument, sep=' > ')
             if capsule.lower() == argument:
-                return Capsule(capsule) if not 'key' in first_argument else Capsule(case).key
+                return Capsule(capsule) if not key else Capsule(case).key
 
         raise ValueError(f'No container, package, capsule or key with name "{argument}"')

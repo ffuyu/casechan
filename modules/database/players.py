@@ -15,7 +15,7 @@ __all__ = (
     'SafePlayer'
 )
 
-from ..cases import Capsule, Case, Container, Package
+from ..containers import Capsule, Case, Container, Package
 
 stats_dict = {
     "cases": {

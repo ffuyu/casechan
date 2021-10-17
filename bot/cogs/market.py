@@ -19,7 +19,7 @@ from dpytools.embeds import paginate_to_embeds
 
 from modules.utils.checks import able_to_buy, able_to_sell
 from modules.constants import ButtonTypes
-from modules.cases import Capsule, Case, Container, Key, Package, all_cases
+from modules.containers import Capsule, Case, Container, Key, Package, all_cases
 from modules.database.items import Item, generate_stats
 from modules.database.players import SafePlayer
 from modules.utils.case_converter import ContainerConverter
@@ -73,7 +73,7 @@ class MarketCog(commands.Cog, name='Market'):
     async def buy(self, ctx:Context, amount: Optional[int] = 1, *,
                   item: Optional[Union[ContainerConverter, ItemConverter]]):
         """
-        Buy a skin from the market using your balance
+        Buy an item from the market using your balance
         Args:
             amount: quantity of the item you want to buy
             item: item you want to buy, it can be a case, key or an item
@@ -85,6 +85,12 @@ class MarketCog(commands.Cog, name='Market'):
             )
         amount = amount if amount > 0 else 1
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
+
+            if isinstance(item, (Container, Key)):
+                item_info = await Item.get(False, name=item.name)
+            else: 
+                item_info = item
+
             if able_to_buy(player, item, amount):
 
                 if isinstance(item, (Container, Key)):
@@ -104,10 +110,10 @@ class MarketCog(commands.Cog, name='Market'):
                     for stats in generated_stats:
                         player.add_item(item.name, stats) 
 
-                player.balance -= item.price * amount
+                player.balance -= item_info.price * amount
                 await player.save()
                 return await ctx.reply(
-                    content=f'Purchased {item.name} for ${item.price:.2f}.' if amount == 1 else f'Purchased {amount}x {item.name} for ${item.price * amount:.2f}.',
+                    content=f'Purchased {item.name} for ${item_info.price:.2f}.' if amount == 1 else f'Purchased {amount}x {item.name} for ${item.price * amount:.2f}.',
                     mention_author=False
                 )
 
@@ -262,9 +268,9 @@ class MarketCog(commands.Cog, name='Market'):
     async def caseprices(self, ctx: Context):
         """Lists all the cases with their prices next to them"""
         for case in [*all_cases]:
-            c = Case(case)
-            if c:
-                case_prices[case] = c.price
+            i = await Item.get(name=case)
+            if i:
+                case_prices[case] = i.price
         pages = paginate_to_embeds(description='\n'.join(
             f'{k[:20] + "..." if len(k) > 22 else k}: **${v:.2f}**' for k, v in case_prices.items()),
             title='Case Prices', max_size=200, color=Colour.random())

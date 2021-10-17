@@ -23,7 +23,7 @@ from modules.utils.paginate import dict_paginator
 from modules.utils.checks import able_to_opencontainer, emojify
 from modules.database.items import Item, sort_items
 from modules.database.players import Player
-from modules.cases import Capsule, Case, Container, Key, Package
+from modules.containers import Capsule, Case, Container, Key, Package
 from modules.database import Player, SafePlayer
 from modules.database.users import UserData
 from modules.utils.case_converter import ContainerConverter
@@ -149,13 +149,18 @@ class CoreCog(commands.Cog, name='Core'):
                 else:
                     item, *stats = items[0]
                     results = Embed(
-                        description=emojify(
-                            ctx, f'{emojis.get(item.rarity)} **{item.name}**'),
+                        description=emojify(ctx, f'{emojis.get(item.rarity)} **{item.name}**'),
                         color=item.color,
                         image=f'https://community.akamai.steamstatic.com/economy/image/{item.icon_url}'
-                    ).set_footer(text='Float %f | Paint Seed: %d | Price: $%.2f' % (stats[0], stats[1], item.price)) \
-                        .set_author(name=container, icon_url=container.asset)
+                    ).set_author(name=container, icon_url=container.asset)
 
+                    if container.display_stats:
+                        results.set_footer(text='Float: %f | Paint Seed: %d | Price: $%.2f' % (stats[0], stats[1], item.price))
+                    else:
+                        results.set_footer(text='Price: $%.2f' % (item.price))
+                
+                
+                    
                 results.set_author(name=container.name, icon_url=container.asset)
                 row = results_row(player, amount)
                 await message.delete()

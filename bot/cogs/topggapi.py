@@ -11,11 +11,13 @@ import topgg, os
 from ..bot import bot
 
 from modules.database.users import UserData
+from modules.config import config
 
 TOPGG_API = os.environ.get("TOPGG_API")
 WEBHOOK = os.environ.get("WEBHOOK")
+DEBUG = config.get('debug') == True
 
-bot.topggpy = topgg.DBLClient(bot, TOPGG_API, autopost=True, post_shard_count=True)
+bot.topggpy = topgg.DBLClient(bot, TOPGG_API, autopost=DEBUG, post_shard_count=DEBUG)
 
 bot.topgg_webhook = topgg.WebhookManager(bot).dbl_webhook("/upvote", WEBHOOK)
 bot.topgg_webhook.run(5000)

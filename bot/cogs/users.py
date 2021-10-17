@@ -14,7 +14,7 @@ from typing import Optional
 from modules.config import OWNERS_IDS
 
 from modules.utils.case_converter import ContainerConverter
-from modules.cases import Case
+from modules.containers import Case
 from modules.database.players import SafePlayer
 from modules.database import Guild as Guild_
 

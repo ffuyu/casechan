@@ -1,6 +1,6 @@
 from modules.config import OWNERS_IDS
 from modules.errors import MarketError, NotAllowed, UnableToBuy, UnableToOpen, UnableToSell
-from modules.cases import Capsule, Case, Container, Key, Package
+from modules.containers import Capsule, Case, Container, Key, Package
 
 from modules.database import Player, Item
 
