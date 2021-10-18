@@ -86,7 +86,7 @@ class MarketCog(commands.Cog, name='Market'):
         amount = amount if amount > 0 else 1
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
 
-            if isinstance(item, (Container, Key)):
+            if isinstance(item, Container):
                 item_info = await Item.get(False, name=item.name)
             else: 
                 item_info = item
