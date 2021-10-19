@@ -4,6 +4,8 @@ import logging
 import random
 from functools import partial
 
+from discord.colour import Colour
+
 from .constants import KEY_PRICE
 from .database import Item
 from .errors import FailedItemGen
@@ -93,6 +95,7 @@ class Container:
         self.item_rarities = {*self.items}
         self._key = None
         self._display_stats = True
+        self._color = data.get('color')
 
     @property
     def display_stats(self):
@@ -101,6 +104,14 @@ class Container:
     @property
     def key(self):
         return self._key
+
+    @property
+    def color(self):
+        if self._color:
+            c = Colour.from_rgb(*self._color)
+            return c
+        else:
+            return Colour.random()
 
     async def open(self):
         """Opens this container and returns an item and its stats"""

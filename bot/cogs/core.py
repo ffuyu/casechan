@@ -111,7 +111,7 @@ class CoreCog(commands.Cog, name='Core'):
 
                 opening_embed = Embed(
                     description=emojify(ctx, f'**<a:casechanloading:874960632187879465> {container}**'),
-                    color=Colour.random(),
+                    color=container.color,
                     image=container.asset
                 )
 
