@@ -2631,6 +2631,91 @@
       },
       "key": "eSports 2014 Summer Case Key",
       "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsVk5kKhZDpYX3e1Y07ODdfDBH_pKzwdfSkqTyZLjQxjsF7sEoiLyQ9I2ljgHt_EZlYzr6J4DHIA9oZ1-D5BHglkR7Cs6C/360fx360f"
+    },
+    "Spooky Case": {
+      "name": "Spooky Case",
+      "price": 0.00,
+      "items": {
+        "Mil-Spec Grade": [
+          "MP7 | Skulls",
+          "MAC-10 | Ultraviolet",
+          "USP-S | Blood Tiger",
+          "Negev | Infrastructure"
+        ],
+        "Restricted": [
+          "UMP-45 | Exposure",
+          "MP5-SD | Lab Rats",
+          "MP9 | Goo",
+          "MAC-10 | Curse",
+          "Desert Eagle | Crimson Web"
+        ],
+        "Classified": [
+          "UMP-45 | Primal Saber",
+          "G3SG1 | The Executioner",
+          "P90 | Shallow Grave",
+          "M4A4 | Tooth Fairy"
+        ],
+        "Covert": [
+          "Galil AR | Chatterbox",
+          "USP-S | Kill Confirmed"
+        ],
+        "Exceedingly Rare Item": [
+          "Nomad Knife",
+          "Nomad Knife | Slaughter",
+          "Nomad Knife | Blue Steel",
+          "Nomad Knife | Crimson Web",
+          "Nomad Knife | Case Hardened",
+          "Nomad Knife | Forest DDPAT",
+          "Nomad Knife | Stained",
+          "Nomad Knife | Boreal Forest",
+          "Nomad Knife | Safari Mesh",
+          "Nomad Knife | Urban Masked",
+          "Nomad Knife | Scorched",
+          "Nomad Knife | Night Stripe",
+          "Nomad Knife | Fade",
+          "Paracord Knife",
+          "Paracord Knife | Slaughter",
+          "Paracord Knife | Blue Steel",
+          "Paracord Knife | Crimson Web",
+          "Paracord Knife | Case Hardened",
+          "Paracord Knife | Forest DDPAT",
+          "Paracord Knife | Stained",
+          "Paracord Knife | Boreal Forest",
+          "Paracord Knife | Safari Mesh",
+          "Paracord Knife | Urban Masked",
+          "Paracord Knife | Scorched",
+          "Paracord Knife | Night Stripe",
+          "Paracord Knife | Fade",
+          "Skeleton Knife",
+          "Skeleton Knife | Slaughter",
+          "Skeleton Knife | Blue Steel",
+          "Skeleton Knife | Crimson Web",
+          "Skeleton Knife | Case Hardened",
+          "Skeleton Knife | Forest DDPAT",
+          "Skeleton Knife | Stained",
+          "Skeleton Knife | Boreal Forest",
+          "Skeleton Knife | Safari Mesh",
+          "Skeleton Knife | Urban Masked",
+          "Skeleton Knife | Scorched",
+          "Skeleton Knife | Night Stripe",
+          "Skeleton Knife | Fade",
+          "Survival Knife",
+          "Survival Knife | Slaughter",
+          "Survival Knife | Blue Steel",
+          "Survival Knife | Crimson Web",
+          "Survival Knife | Case Hardened",
+          "Survival Knife | Forest DDPAT",
+          "Survival Knife | Stained",
+          "Survival Knife | Boreal Forest",
+          "Survival Knife | Safari Mesh",
+          "Survival Knife | Urban Masked",
+          "Survival Knife | Scorched",
+          "Survival Knife | Night Stripe",
+          "Survival Knife | Fade"
+        ]
+      },
+      "key": "Halloween Case Key",
+      "asset": "https://casechan.com/static/assets/halloween.png"
     }
   },
   "packages": {
