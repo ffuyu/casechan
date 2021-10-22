@@ -82,9 +82,9 @@ def able_to_opencontainer(player:Player, container:Union[Case, Package, Capsule]
         container_amount = player.cases.get(container.name, 0)
     elif isinstance(container, Package):
         container_amount = player.packages.get(container.name, 0)
-    # elif isinstance(container, Capsule):
-    #     if player.member_id not in OWNERS_IDS:
-    #         raise NotAllowed('You are not allowed to open this container')
+    elif isinstance(container, Capsule):
+        # if player.member_id not in OWNERS_IDS:
+        #     raise NotAllowed('You are not allowed to open this container')
 
         container_amount = player.capsules.get(container.name, 0)
     
