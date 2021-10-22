@@ -33,6 +33,7 @@ _replacements = {
     "ibp": "ibuypower",
     "ruby": "doppler",
     "sapphire": "doppler",
+    "emerald": "gamma doppler",
     "ak": "ak-47",
     "scout": "ssg08",
     "deagle": "desert eagle",
