@@ -2959,7 +2959,7 @@
     },
     "Enfu Sticker Capsule": {
       "name": "Enfu Sticker Capsule",
-      "price": 1.01,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Chabo",
@@ -2989,7 +2989,7 @@
     },
     "Pinups Capsule": {
       "name": "Pinups Capsule",
-      "price": 1.01,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Ivette",
@@ -3014,7 +3014,7 @@
     },
     "Team Roles Capsule": {
       "name": "Team Roles Capsule",
-      "price": 1.05,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "The Awper",
@@ -3038,7 +3038,7 @@
     },
     "Slid3 Capsule": {
       "name": "Slid3 Capsule",
-      "price": 1.05,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Boom",
@@ -3068,7 +3068,7 @@
     },
     "Sugarface Capsule": {
       "name": "Sugarface Capsule",
-      "price": 1.01,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Boris",
@@ -3095,7 +3095,7 @@
     },
     "Bestiary Capsule": {
       "name": "Bestiary Capsule",
-      "price": 1.01,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Basilisk",
@@ -3124,7 +3124,7 @@
     },
     "Perfect World Sticker Capsule 1": {
       "name": "Perfect World Sticker Capsule 1",
-      "price": 1.01,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Hotpot",
@@ -3154,7 +3154,7 @@
     },
     "Perfect World Sticker Capsule 2": {
       "name": "Perfect World Sticker Capsule 2",
-      "price": 1.05,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "God of Fortune",
@@ -3184,7 +3184,7 @@
     },
     "Skill Groups Capsule": {
       "name": "Skill Groups Capsule",
-      "price": 1.01,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Silver",
@@ -3217,7 +3217,7 @@
     },
     "Feral Predators Capsule": {
       "name": "Feral Predators Capsule",
-      "price": 1.01,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Baited",
@@ -3250,7 +3250,7 @@
     },
     "Chicken Capsule": {
       "name": "Chicken Capsule",
-      "price": 1.01,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Big Clucks",
@@ -3282,7 +3282,7 @@
     },
     "CS20 Sticker Capsule": {
       "name": "CS20 Sticker Capsule",
-      "price": 0.93,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Too Old for This",
@@ -3317,7 +3317,7 @@
     },
     "Halo Capsule": {
       "name": "Halo Capsule",
-      "price": 1.01,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Assassin",
@@ -3349,7 +3349,7 @@
     },
     "Half-Life: Alyx Sticker Capsule": {
       "name": "Half-Life: Alyx Sticker Capsule",
-      "price": 1.01,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Last Vance",
@@ -3377,7 +3377,7 @@
     },
     "Poorly Drawn Capsule": {
       "name": "Poorly Drawn Capsule",
-      "price": 0.71,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Poorly Drawn Ava",
@@ -3410,7 +3410,7 @@
     },
     "Warhammer 40,000 Sticker Capsule": {
       "name": "Warhammer 40,000 Sticker Capsule",
-      "price": 1.05,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Adepta Sororitas",
@@ -3442,7 +3442,7 @@
     },
     "2021 Community Sticker Capsule": {
       "name": "2021 Community Sticker Capsule",
-      "price": 0.94,
+      "price": 0.99,
       "items": {
         "Mil-Spec Grade": [
           "Clutch Or Kick",
@@ -3480,7 +3480,7 @@
 
     "EMS Katowice 2014 Challengers": {
       "name": "EMS Katowice 2014 Challengers",
-      "price": 0.00,
+      "price": 10.165,
       "items": {
         "Mil-Spec Grade": [
           "3DMAX",
