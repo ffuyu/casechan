@@ -169,7 +169,14 @@ class Capsule(Container):
     @property
     def suffix(self):
         if self.has_suffix:
-            return ' '.join(self.name.split()[:2])
+            values = self.name.split()
+            suffix = []
+            for value in values:
+                suffix.append(value)
+                if value.isdigit():
+                    break
+
+            return ' '.join(suffix[-2:])
 
     @property
     def key(self):
