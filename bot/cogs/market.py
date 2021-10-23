@@ -84,16 +84,14 @@ class MarketCog(commands.Cog, name='Market'):
                 mention_author=False
             )
         amount = amount if amount > 0 else 1
+        if isinstance(item, Container):
+            item_info = await Item.get(False, name=item.name)
+            if not item_info: item_info = item
+        else: 
+            item_info = item
+
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
-
-            if isinstance(item, Container):
-                item_info = await Item.get(False, name=item.name)
-                if not item_info: item_info = item
-            else: 
-                item_info = item
-
-            if able_to_buy(player, item, amount):
-
+            if able_to_buy(player, item_info, amount):
                 if isinstance(item, (Container, Key)):
                     if isinstance(item, Case):
                         player.mod_case(item.name, amount)
@@ -140,9 +138,11 @@ class MarketCog(commands.Cog, name='Market'):
         if isinstance(item, Container):
             item_info = await Item.get(False, name=item.name)
             if not item_info: item_info = item
-        else: 
+            price = item_info.price
+        else:
             item_info = item
-            
+            price = item_info.price
+
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             if able_to_sell(player, item, amount):
 
@@ -166,7 +166,7 @@ class MarketCog(commands.Cog, name='Market'):
                     elif isinstance(item, Key):
                         return await ctx.send('You can\'t sell keys')
 
-                earning = (item.price * fees) * amount
+                earning = (price * fees) * amount
                 player.balance += earning
 
                 await player.save()
