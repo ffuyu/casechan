@@ -137,7 +137,12 @@ class MarketCog(commands.Cog, name='Market'):
             )
 
         amount = amount if amount > 0 else 1
-
+        if isinstance(item, Container):
+            item_info = await Item.get(False, name=item.name)
+            if not item_info: item_info = item
+        else: 
+            item_info = item
+            
         async with SafePlayer(ctx.author.id, ctx.guild.id) as player:
             if able_to_sell(player, item, amount):
 
