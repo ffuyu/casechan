@@ -2863,6 +2863,1898 @@
       "has_suffix": true,
       "key": null,
       "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PjacDZN-47mxde0kOX7JqvuxCVU7JUmjO_C89un0QbjrRU-NWn2doPGIAE8MlGG_gTrlbq705e775ud1zI97TuorcB0/360fx360f" 
+    },
+    "Sticker Capsule": {
+      "name": "Sticker Capsule",
+      "price": 0.55,
+      "items": {
+        "Mil-Spec Grade": [
+          "Lucky 13",
+          "Aces High",
+          "I Conquered",
+          "Seek & Destroy",
+          "Black Dog",
+          "Fearsome",
+          "Cerberus",
+          "Easy Peasy",
+          "Luck Skill",
+          "Vigilance"
+        ],
+        "Restricted": [
+          "Aces High (Holo)",
+          "Fearsome (Holo)",
+          "Vigilance (Holo)"
+        ],
+        "Classified": [
+          "Lucky 13 (Foil)",
+          "Luck Skill (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": "CS:GO Capsule Key",
+      "asset": "https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRrg6KGIWgS6Izhl4Xfw6XwMOiDwG0Cu8dziLiR9Ijw3lCy8kdtYmr1doKSexh-Pw9cMjR1vQ/256fx256f" 
+    },
+    "Sticker Capsule 2": {
+      "name": "Sticker Capsule 2",
+      "price": 16.42,
+      "items": {
+        "Mil-Spec Grade": [
+          "Banana",
+          "Bomb Code",
+          "Chicken Lover",
+          "Good Game",
+          "Good Luck",
+          "Have Fun",
+          "Let's Roll-oll",
+          "Metal",
+          "Nice Shot",
+          "Welcome to the Clutch"
+        ],
+        "Restricted": [
+          "Bish (Holo)",
+          "Bash (Holo)",
+          "Bosh (Holo)",
+          "Let's Roll-oll (Holo)"
+        ],
+        "Classified": [
+          "Crown (Foil)",
+          "Stupid Banana (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": "CS:GO Capsule Key",
+      "asset": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRrg6GGJWRBtI-ykYTak6WhN76JlWgFsJN1j72SotWiigbi-0BqYjuncdDDdRh-Pw9UqwY-SA/360fx360f" 
+    },
+    "Community Sticker Capsule 1": {
+      "name": "Community Sticker Capsule 1",
+      "price": 3.42,
+      "items": {
+        "Mil-Spec Grade": [
+          "Backstab",
+          "Pocket BBQ",
+          "Bomb Doge",
+          "Burn Them All",
+          "Llama Cannon",
+          "My Other Awp",
+          "Shave Master",
+          "Rising Skull",
+          "Sneaky Beaky Like",
+          "To B or not to B",
+          "Death Comes"
+        ],
+        "Restricted": [
+          "Teamwork (Holo)",
+          "Rekt (Holo)"
+        ],
+        "Classified": [
+          "Headhunter (Foil)",
+          "Flammable (Foil)",
+          "New Sheriff (Foil)",
+          "Swag (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": "CS:GO Capsule Key",
+      "asset": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PDHfDBX4tWijdDa2a-iZ-2ClT8J6ZMo2uqY8Yql0AHn_kJsMjyhLdCRcQQ5ZAqBq1PqxefxxcjruizdAMI/360fx360f" 
+    },
+    "Enfu Sticker Capsule": {
+      "name": "Enfu Sticker Capsule",
+      "price": 1.01,
+      "items": {
+        "Mil-Spec Grade": [
+          "Chabo",
+          "Bombsquad",
+          "Skulltorgeist",
+          "The Guru",
+          "Silent Ninja",
+          "The Samurai",
+          "Skull Troop",
+          "Salute!",
+          "The Spartan",
+          "Unicorn",
+          "Skull Lil Boney",
+          "The Zombie"
+        ],
+        "Restricted": [
+          "Unicorn (Holo)"
+        ],
+        "Classified": [
+          "Bombsquad (Foil)",
+          "Silent Ninja (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PbGdyh9792mh5WHksj4MqnWkyUBupNz3ruYod_2i1fsqBI-ZWzycdTGIFQ4NFiBrlK7l7zs0ZO_78mf1zI97ZyIySKo/360fx360f" 
+    },
+    "Pinups Capsule": {
+      "name": "Pinups Capsule",
+      "price": 1.01,
+      "items": {
+        "Mil-Spec Grade": [
+          "Ivette",
+          "Kimberly",
+          "Martha",
+          "Merietta",
+          "Sherry",
+          "Tamara"
+        ],
+        "Restricted": [
+          "Ivette (Holo)",
+          "Kimberly (Holo)",
+          "Martha (Holo)",
+          "Merietta (Holo)",
+          "Sherry (Holo)",
+          "Tamara (Holo)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7OPBfyhS_-O1lZCYgvvxDLfQhGxUppZ1jrnA9Nqj0AC2-Ec-YGrxJIaSJA5qN1_T_1C8wezq0Ze46JudzXN9-n51xkfXmAU/360fx360f" 
+    },
+    "Team Roles Capsule": {
+      "name": "Team Roles Capsule",
+      "price": 1.05,
+      "items": {
+        "Mil-Spec Grade": [
+          "The Awper",
+          "The Baiter",
+          "The Bomber",
+          "The Bot",
+          "The Fragger",
+          "The Leader",
+          "The Lurker",
+          "The 'Nader",
+          "The Ninja",
+          "Support"
+        ],
+        "Classified": [
+          "The Pro (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7OfNcDB9_tO6kZO0lPbkIK7dk1Rd6dd2j6fD9Nj32wSx80o5Z2ynJNWRIwE9YFmEq1nrwbvvgZK0787AyCM1vXF2-z-DyMssPzKO/360fx360f" 
+    },
+    "Slid3 Capsule": {
+      "name": "Slid3 Capsule",
+      "price": 1.05,
+      "items": {
+        "Mil-Spec Grade": [
+          "Boom",
+          "Countdown",
+          "Don't Worry",
+          "Hard Cluck Life",
+          "Move It"
+        ],
+        "Restricted": [
+          "Boom (Holo)",
+          "Countdown (Holo)",
+          "Don't Worry (Holo)",
+          "Hard Cluck Life (Holo)",
+          "Move It (Holo)"
+        ],
+        "Classified": [
+          "Boom (Foil)",
+          "Countdown (Foil)",
+          "Don't Worry (Foil)",
+          "Hard Cluck Life (Foil)",
+          "Move It (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7ODEeDkR09-3hJOem_LLP7rDkW4fuMZz2ujHo9v03FKy-EVrZWugcYXBdwVoYlHT8wDtlbrogcLt7p7JwGwj5HdCz_FKnA/360fx360f" 
+    },
+    "Sugarface Capsule": {
+      "name": "Sugarface Capsule",
+      "price": 1.01,
+      "items": {
+        "Mil-Spec Grade": [
+          "Boris",
+          "Max",
+          "Stan",
+          "Jack",
+          "Perry",
+          "Viggo",
+          "Joan"
+        ],
+        "Restricted": [
+          "Boris (Holo)",
+          "Max (Holo)",
+          "Stan (Holo)",
+          "Jack (Holo)",
+          "Perry (Holo)",
+          "Viggo (Holo)",
+          "Joan (Holo)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7ODddjxQ6t21kb-IlufnJrfUqWdQ-sJ0xLiV942i2wPt-xA4amrxdoecdlc4ZQmFr1e7x--615Hq6Jycy3o36CQ8pSGK_nEdxOg/360fx360f" 
+    },
+    "Bestiary Capsule": {
+      "name": "Bestiary Capsule",
+      "price": 1.01,
+      "items": {
+        "Mil-Spec Grade": [
+          "Basilisk",
+          "Dragon",
+          "Hippocamp",
+          "Manticore",
+          "Pegasus",
+          "Phoenix Reborn",
+          "Sphinx"
+        ],
+        "Restricted": [
+          "Hippocamp (Holo)",
+          "Manticore (Holo)",
+          "Pegasus (Holo)",
+          "Sphinx (Holo)"
+        ],
+        "Classified": [
+          "Basilisk (Foil)",
+          "Dragon (Foil)",
+          "Phoenix Reborn (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PHNYilL7c6vq4OKh-ThP77ummpD78A_ibrD8N2g2AHn8ko-Mm31I4eXdwFsMw6D-lW6yO7mhZ_utczMyHcw7z5iuygpUzRPEA/360fx360f" 
+    },
+    "Perfect World Sticker Capsule 1": {
+      "name": "Perfect World Sticker Capsule 1",
+      "price": 1.01,
+      "items": {
+        "Mil-Spec Grade": [
+          "Hotpot",
+          "Noodles",
+          "Rice Bomb",
+          "Terror Rice",
+          "Water Gun",
+          "Cheongsam",
+          "Fancy Koi",
+          "Guardian Dragon",
+          "Mahjong Fa",
+          "Mahjong Rooster",
+          "Mahjong Zhong",
+          "Toy Tiger"
+        ],
+        "Restricted": [
+          "Cheongsam (Holo)"
+        ],
+        "Classified": [
+          "Guardian Dragon (Foil)",
+          "Fancy Koi (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PrEfShP5dK3gIW0lPbkIK7dk1QBufp9i_vG8MKm0AHlqUFlZ27yJNWRJ1RoaA2FrFPowOjs0ZC97p7IzSAyvyMl432JgVXp1loShoHD/360fx360f" 
+    },
+    "Perfect World Sticker Capsule 2": {
+      "name": "Perfect World Sticker Capsule 2",
+      "price": 1.05,
+      "items": {
+        "Mil-Spec Grade": [
+          "God of Fortune",
+          "Huaji",
+          "Nezha",
+          "Rage",
+          "Longevity",
+          "Non-Veg",
+          "Pixiu",
+          "Twin Koi",
+          "Shaolin",
+          "Green Swallow",
+          "Blue Swallow",
+          "Zombie Hop"
+        ],
+        "Restricted": [
+          "Twin Koi (Holo)"
+        ],
+        "Classified": [
+          "Longevity (Foil)",
+          "Pixiu (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PrEfShP5dK3gIW0lPbkIK7dk1QBuvp9i_vG8MKsiwy3_hc_Mj2ncoScJAY8YlzX-QC3l73t0ZW96MzIwSRi6yQr4H-IgVXp1jnLKI95/360fx360f" 
+    },
+    "Skill Groups Capsule": {
+      "name": "Skill Groups Capsule",
+      "price": 1.01,
+      "items": {
+        "Mil-Spec Grade": [
+          "Silver",
+          "Gold Nova",
+          "Master Guardian",
+          "Master Guardian Elite",
+          "Distinguished Master Guardian",
+          "Legendary Eagle",
+          "Legendary Eagle Master",
+          "Supreme Master First Class",
+          "Global Elite"
+        ],
+        "Restricted": [
+          "Gold Nova (Holo)",
+          "Master Guardian (Holo)",
+          "Master Guardian Elite (Holo)",
+          "Distinguished Master Guardian (Holo)",
+          "Legendary Eagle (Holo)",
+          "Legendary Eagle Master (Holo)",
+          "Supreme Master First Class (Holo)"
+        ],
+        "Classified": [
+          "Silver (Foil)",
+          "Global Elite (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7ODDeDFO6865gZC0lPbkIK7dk1Rd6dd2j6eS89Ss3QXh_BBkMmqnLYbAelQ3YQrQqFXswebsg5e-uZ_LznE1v3J2-z-DyKHmRQ2o/360fx360f" 
+    },
+    "Feral Predators Capsule": {
+      "name": "Feral Predators Capsule",
+      "price": 1.01,
+      "items": {
+        "Mil-Spec Grade": [
+          "Baited",
+          "Bite Me",
+          "Cluck",
+          "First Blood",
+          "Free Hugs",
+          "Lurker",
+          "One Sting",
+          "Scavenger",
+          "Toxic"
+        ],
+        "Restricted": [
+          "Baited (Holo)",
+          "Cluck (Holo)",
+          "First Blood (Holo)",
+          "Free Hugs (Holo)",
+          "One Sting (Holo)",
+          "Scavenger (Holo)"
+        ],
+        "Classified": [
+          "Bite Me (Foil)",
+          "Lurker (Foil)",
+          "Toxic (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PXNYzxO08ykkYSKg_jmIITSl3tC_cl0xOrEp4mt2wLnrhY_a233ctfEdFc2Z1zU_gLrxLrs05Tv6pXPnHI26XU8pSGK3mblAzQ/360fx360f" 
+    },
+    "Chicken Capsule": {
+      "name": "Chicken Capsule",
+      "price": 1.01,
+      "items": {
+        "Mil-Spec Grade": [
+          "Big Clucks",
+          "Bonehead",
+          "BukAWP",
+          "Double Dip",
+          "Fowl Play",
+          "Heads Up",
+          "Hot Wings",
+          "Nest Egg",
+          "Roosty Boosty",
+          "What What"
+        ],
+        "Restricted": [
+          "Bonehead (Holo)",
+          "Double Dip (Holo)",
+          "Fowl Play (Holo)",
+          "Hot Wings (Holo)",
+          "Nest Egg (Holo)"
+        ],
+        "Classified": [
+          "Big Clucks (Foil)",
+          "Roosty Boosty (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PDAeD5J6dKJl4GbhOL4NvWHxm9VsZ13ie2ToIih3gHs_0VqZD_2J4TAclBsaA7Y8gfsxOu-hJe6ot2Xnuoj7nNf/360fx360f" 
+    },
+    "CS20 Sticker Capsule": {
+      "name": "CS20 Sticker Capsule",
+      "price": 0.93,
+      "items": {
+        "Mil-Spec Grade": [
+          "Too Old for This",
+          "Pixel Avenger",
+          "Aztec",
+          "Too Late",
+          "Friend Code",
+          "Obey SAS",
+          "Nuke Beast",
+          "Mondays",
+          "Separate Pixels",
+          "Surf's Up",
+          "Temperance"
+        ],
+        "Restricted": [
+          "CS20 Classic (Holo)",
+          "Clutchman (Holo)",
+          "Guinea Pig (Holo)",
+          "Fire in the Hole (Holo)",
+          "Boost (Holo)",
+          "Rush 4x20 (Holo)"
+        ],
+        "Classified": [
+          "All Hail the King (Foil)",
+          "Door Stuck (Foil)",
+          "Dragon Lore (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PDbI219792mh5WHkrn1NeLTwTxSu8QmiLvEptumiwW1rRE-MGD1JI_AIAA7ZliCqAS9wOzsm9bi65vhLWPP/360fx360f" 
+    },
+    "Halo Capsule": {
+      "name": "Halo Capsule",
+      "price": 1.01,
+      "items": {
+        "Mil-Spec Grade": [
+          "Assassin",
+          "Chief",
+          "Dirty Money",
+          "Extermination",
+          "Incineration",
+          "Killjoy",
+          "Legendary",
+          "Mister Chief",
+          "Noble",
+          "Spartan"
+        ],
+        "Restricted": [
+          "Assassin (Holo)",
+          "Chief (Holo)",
+          "Incineration (Holo)",
+          "Killjoy (Holo)",
+          "Noble (Holo)"
+        ],
+        "Classified": [
+          "Chief (Foil)",
+          "Legendary (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PvJfTJ9792mh5WHksj4MqnWkyVTvcMgjriWrdms2le3_0A4MW7zLNLGcg85Yl2E_FLtlerp1pbpuZia1zI97aXmd-Zf/360fx360f" 
+    },
+    "Half-Life: Alyx Sticker Capsule": {
+      "name": "Half-Life: Alyx Sticker Capsule",
+      "price": 1.01,
+      "items": {
+        "Mil-Spec Grade": [
+          "Last Vance",
+          "Vortigaunt the Painter",
+          "Big Hugs",
+          "Combine Helmet",
+          "Gnome Mercy",
+          "Greetings",
+          "Lambda"
+        ],
+        "Restricted": [
+          "Vortigaunt (Holo)",
+          "Big Hugs (Holo)",
+          "Combine Helmet (Holo)",
+          "Lambda (Holo)"
+        ],
+        "Classified": [
+          "Last Vance (Gold)",
+          "Health (Gold)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PvEcDFb9OO1lZCYgvvxDLfQhGxUppcp3bHCrYjz3w2y80JlY2zxJ9DHJgQ7YlHW_VG2xOzqg8W7uM-ayyR9-n51PY2K7uk/360fx360f" 
+    },
+    "Poorly Drawn Capsule": {
+      "name": "Poorly Drawn Capsule",
+      "price": 0.71,
+      "items": {
+        "Mil-Spec Grade": [
+          "Poorly Drawn Ava",
+          "Poorly Drawn Balkan",
+          "Poorly Drawn Bloody Darryl",
+          "Poorly Drawn Chicken",
+          "Poorly Drawn FBI",
+          "Poorly Drawn IDF",
+          "Poorly Drawn Leet Crew",
+          "Poorly Drawn Number K",
+          "Poorly Drawn SAS",
+          "Poorly Drawn Terrorist"
+        ],
+        "Restricted": [
+          "Poorly Drawn Ava (Holo)",
+          "Poorly Drawn Balkan (Holo)",
+          "Poorly Drawn Bloody Darryl (Holo)",
+          "Poorly Drawn Chicken (Holo)",
+          "Poorly Drawn FBI (Holo)",
+          "Poorly Drawn IDF (Holo)",
+          "Poorly Drawn Leet Crew (Holo)",
+          "Poorly Drawn Number K (Holo)",
+          "Poorly Drawn SAS (Holo)",
+          "Poorly Drawn Terrorist (Holo)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7OPHfi9O9eOyhoGcmcj3MqvCg2dU18lwmO7Eu42hjVfi_UU5MWvwddfAJwRqaFDR8lS-xLzr1pa06ZTMnXJmvnEq7X7D30vgNJp29DY/360fx360f" 
+    },
+    "Warhammer 40,000 Sticker Capsule": {
+      "name": "Warhammer 40,000 Sticker Capsule",
+      "price": 1.05,
+      "items": {
+        "Mil-Spec Grade": [
+          "Adepta Sororitas",
+          "Aeldari Avatar",
+          "Full Buy",
+          "Heresy",
+          "Necron",
+          "Ork Waaagh!",
+          "Primaris Keychain",
+          "Repulsor",
+          "Space Marine",
+          "Tyranids Ravener"
+        ],
+        "Restricted": [
+          "Heresy (Holo)",
+          "Lord of Skulls (Holo)",
+          "Space Marine (Holo)",
+          "Tyranids Hive Tyrant (Holo)"
+        ],
+        "Classified": [
+          "Bloodthirster (Foil)",
+          "Chaos Marine (Foil)",
+          "Emperor (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7OTJYzVD4dGzhr-IlufnJrfUqWdQ-sJ0xLjCpo6m2wbi-Bdsajr7LYeVIFdtNQ7Q8lK-k-rs0ce1vZ2fynRj73U8pSGKARleYHk/360fx360f" 
+    },
+    "2021 Community Sticker Capsule": {
+      "name": "2021 Community Sticker Capsule",
+      "price": 0.94,
+      "items": {
+        "Mil-Spec Grade": [
+          "Clutch Or Kick",
+          "Dr. Dazzles",
+          "EZ",
+          "Fast Banana",
+          "Hard Carry",
+          "Kitted Out",
+          "Nademan",
+          "No Time",
+          "Retro Leet",
+          "Speedy T",
+          "This Is Fine (CT)",
+          "War"
+        ],
+        "Restricted": [
+          "Cyber Romanov (Holo)",
+          "Eye Contact (Holo)",
+          "Handle With Care (Holo)",
+          "I See You (Holo)",
+          "Nice Clutch (Holo)",
+          "Runtime (Holo)"
+        ],
+        "Classified": [
+          "Ace Devil (Foil)",
+          "Bullet Hell (Foil)",
+          "Purrurists (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PDHfDBX4tWijdLbxabLMLrBhX5d7fp9i_vG8MLzjFHn-RE6Zjz0dtecclI_MFiCr1Dskrvth5W56pXAzHJq6CV0sX3dgVXp1kq2sQWj/360fx360f" 
+    },
+
+
+    "EMS Katowice 2014 Challengers": {
+      "name": "EMS Katowice 2014 Challengers",
+      "price": 0.00,
+      "items": {
+        "Mil-Spec Grade": [
+          "3DMAX",
+          "iBUYPOWER",
+          "mousesports",
+          "Clan-Mystik",
+          "Natus Vincere",
+          "Reason Gaming",
+          "Virtus.Pro",
+          "Vox Eminor"
+        ],
+        "Restricted": [
+          "3DMAX (Holo)",
+          "iBUYPOWER (Holo)",
+          "mousesports (Holo)",
+          "Clan-Mystik (Holo)",
+          "Natus Vincere (Holo)",
+          "Reason Gaming (Holo)",
+          "Virtus.Pro (Holo)",
+          "Vox Eminor (Holo)"
+        ],
+        "Classified": [
+          "ESL Wolf (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PjJZW8SvYiJxNHFxaajauOClG1SucYo3bqQotWl21Xm_hE5Mjv1Io6QdANvNVzR_QToyfCv28GZlomvBA/360fx360f" 
+    },
+    "ESL One Cologne 2014 Legends": {
+      "name": "ESL One Cologne 2014 Legends",
+      "price": 47.50,
+      "items": {
+        "Mil-Spec Grade": [
+          "Cloud9",
+          "Fnatic",
+          "HellRaisers",
+          "Ninjas in Pyjamas",
+          "Team Dignitas",
+          "Team LDLC.com",
+          "Virtus.Pro"
+        ],
+        "Restricted": [
+          "Cloud9 (Holo)",
+          "Fnatic (Holo)",
+          "HellRaisers (Holo)",
+          "Ninjas in Pyjamas (Holo)",
+          "Team Dignitas (Holo)",
+          "Team LDLC.com (Holo)",
+          "Virtus.Pro (Holo)"
+        ],
+        "Classified": [
+          "ESL One Cologne 2014 (Blue)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PDHfTJF4tnkxNHfqKelfemGxj8Fv5Ai07mY9t6migex_kQ-NW2gLYTBclI2N1nRqFDtx-ju1pSi_MOeXQ8hmeg/360fx360f" 
+    },
+    "ESL One Cologne 2014 Challengers": {
+      "name": "ESL One Cologne 2014 Challengers",
+      "price": 47.24,
+      "items": {
+        "Mil-Spec Grade": [
+          "Copenhagen Wolves",
+          "dAT team",
+          "Epsilon eSports",
+          "iBUYPOWER",
+          "London Conspiracy",
+          "Natus Vincere",
+          "Titan",
+          "Vox Eminor",
+          "MTS GameGod Wolf"
+        ],
+        "Restricted": [
+          "Copenhagen Wolves (Holo)",
+          "dAT team (Holo)",
+          "Epsilon eSports (Holo)",
+          "iBUYPOWER (Holo)",
+          "London Conspiracy (Holo)",
+          "Natus Vincere (Holo)",
+          "Titan (Holo)",
+          "Vox Eminor (Holo)",
+          "MTS GameGod Wolf (Holo)"
+        ],
+        "Classified": [
+          "ESL One Cologne 2014 (Red)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PDHfTJF4tnkxNHfqKelfemGxj8Fv5Ai07mY9t6migex_kQ-NW2gLYTBclI2N1nRqFDtx-ju1pSi_MOeXQ8hmeg/360fx360f" 
+    },
+    "DreamHack 2014 Legends (Holo/Foil)": {
+      "name": "DreamHack 2014 Legends (Holo/Foil)",
+      "price": 106.09,
+      "items": {
+        "Restricted": [
+          "Fnatic (Holo)",
+          "Cloud9 (Holo)",
+          "Virtus.Pro (Holo)",
+          "Ninjas in Pyjamas (Holo)",
+          "Natus Vincere (Holo)",
+          "Team Dignitas (Holo)"
+        ],
+        "Classified": [
+          "Fnatic (Foil)",
+          "Cloud9 (Foil)",
+          "Virtus.Pro (Foil)",
+          "Ninjas in Pyjamas (Foil)",
+          "Natus Vincere (Foil)",
+          "Team Dignitas (Foil)",
+          "DreamHack Winter 2014 (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PfAZm8SvYiJxNG0m_bmNL6fkjkCscAhi-3A8dij21Ky80dpMWz2ctKRegA6ZFzTrgO7ku7qjcPquoOJlyXv9bXSKA/256fx256f" 
+    },
+    "ESL One Katowice 2015 Legends (Holo/Foil)": {
+      "name": "ESL One Katowice 2015 Legends (Holo/Foil)",
+      "price": 225.76,
+      "items": {
+        "Restricted": [
+          "Fnatic (Holo)",
+          "HellRaisers (Holo)",
+          "Natus Vincere (Holo)",
+          "Ninjas in Pyjamas (Holo)",
+          "PENTA Sports (Holo)",
+          "Team EnVyUs (Holo)",
+          "TSM Kinguin (Holo)",
+          "Virtus.pro (Holo)"
+        ],
+        "Classified": [
+          "Fnatic (Foil)",
+          "HellRaisers (Foil)",
+          "Natus Vincere (Foil)",
+          "Ninjas in Pyjamas (Foil)",
+          "PENTA Sports (Foil)",
+          "Team EnVyUs (Foil)",
+          "TSM Kinguin (Foil)",
+          "Virtus.pro (Foil)",
+          "ESL One (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PbbfTZD-NOhnYOOxaelZoSBxyUE65Ih377H99jx3lHm-xJlazigJIGWI1NsZFyC_AW2xefo0ZfuuJ6Y1zI97Q8etil9/360fx360f" 
+    },
+    "ESL One Katowice 2015 Challangers (Holo/Foil)": {
+      "name": "ESL One Katowice 2015 Challangers (Holo/Foil)",
+      "price": 633.72,
+      "items": {
+        "Restricted": [
+          "3DMAX (Holo)",
+          "Cloud9 G2A (Holo)",
+          "Counter Logic Gaming (Holo)",
+          "Flipsid3 Tactics (Holo)",
+          "Keyd Stars (Holo)",
+          "LGB eSports (Holo)",
+          "Titan (Holo)",
+          "Vox Eminor (Holo)"
+        ],
+        "Classified": [
+          "3DMAX (Foil)",
+          "Cloud9 G2A (Foil)",
+          "Counter Logic Gaming (Foil)",
+          "Flipsid3 Tactics (Foil)",
+          "Keyd Stars (Foil)",
+          "LGB eSports (Foil)",
+          "Titan (Foil)",
+          "Vox Eminor (Foil)",
+          "ESL One (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PbbfTZD-NOhnYOOxaelZoSBxCUGvpcn277EptXz0VDi_kdpMG33IoSWIwQ5YF_YrlbvwOft08O0u86a1zI97ZiV9vtb/360fx360f" 
+    },
+    "ESL One Cologne 2015 Legends (Foil)": {
+      "name": "ESL One Cologne 2015 Legends (Foil)",
+      "price": 11.88,
+      "items": {
+        "Classified": [
+          "Fnatic (Foil)",
+          "Virtus.Pro (Foil)",
+          "mousesports (Foil)",
+          "Natus Vincere (Foil)",
+          "Ninjas in Pyjamas (Foil)",
+          "Team EnVyUs (Foil)",
+          "Luminosity Gaming (Foil)",
+          "Team SoloMid (Foil)",
+          "ESL (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PbbfT5N4NOxmoXZx6ahDOuA2DgGsJIl3bGU9Irziw3h_kU6amD7IdCXdFc2NVrYrgLsw-3ojJO9v53XiSw0ZQ4SdRI/360fx360f" 
+    },
+    "ESL One Cologne 2015 Challengers (Foil)": {
+      "name": "ESL One Cologne 2015 Challengers (Foil)",
+      "price": 20.12,
+      "items": {
+        "Classified": [
+          "Renegades (Foil)",
+          "Team Kinguin (Foil)",
+          "Team eBettle (Foil)",
+          "Cloud9 G2A (Foil)",
+          "Team Immunity (Foil)",
+          "Flipsid3 Tactics (Foil)",
+          "Titan (Foil)",
+          "Counter Logic Gaming (Foil)",
+          "ESL (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PbbfT5N4NOxmoXZx6ahDOuD2DoIuZdy3OuZpNv33ATg_EptMGGiJ9KUIAJvaFiBqQTslO7vhsS87pjXiSw0-620_EI/360fx360f" 
+    },
+    "DreamHack Cluj-Napoca 2015 Legends (Foil)": {
+      "name": "DreamHack Cluj-Napoca 2015 Legends (Foil)",
+      "price": 10.71,
+      "items": {
+        "Classified": [
+          "Ninjas in Pyjamas (Foil)",
+          "Natus Vincere (Foil)",
+          "Virtus.Pro (Foil)",
+          "G2 Esports (Foil)",
+          "Team SoloMid (Foil)",
+          "Team EnVyUs (Foil)",
+          "Fnatic (Foil)",
+          "Luminosity Gaming (Foil)",
+          "DreamHack (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PDEZDcQvI3jq9Da2fWhMrqBkD9TsZx1ib3F9o332QDlrRJqNzqnIIOdcAU_ZVjS8gW2ye3xxcjrugDBGBI/360fx360f" 
+    },
+    "DreamHack Cluj-Napoca 2015 Challengers (Foil)": {
+      "name": "DreamHack Cluj-Napoca 2015 Challengers (Foil)",
+      "price": 34.92,
+      "items": {
+        "Classified": [
+          "Team Dignitas (Foil)",
+          "Counter Logic Gaming (Foil)",
+          "Vexed Gaming (Foil)",
+          "Flipsid3 Tactics (Foil)",
+          "Team Liquid (Foil)",
+          "mousesports (Foil)",
+          "Cloud9 (Foil)",
+          "Titan (Foil)",
+          "DreamHack (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PDEZDcQvI3jq9DZ2aSjYL3XxmlQv5Qj0rDFrduh2wbiqUptMWulcoHBdQNvY1zR_gXrwuzxxcjrwLuzW3c/360fx360f" 
+    },
+    "MLG Columbus 2016 Legends (Holo/Foil)": {
+      "name": "MLG Columbus 2016 Legends (Holo/Foil)",
+      "price": 11.86,
+      "items": {
+        "Restricted": [
+          "Ninjas in Pyjamas (Holo)",
+          "Natus Vincere (Holo)",
+          "Virtus.Pro (Holo)",
+          "FaZe Clan (Holo)",
+          "Astralis (Holo)",
+          "Team EnVyUs (Holo)",
+          "Fnatic (Holo)",
+          "Luminosity Gaming (Holo)",
+          "MLG (Holo)"
+        ],
+        "Classified": [
+          "Ninjas in Pyjamas (Foil)",
+          "Natus Vincere (Foil)",
+          "Virtus.Pro (Foil)",
+          "FaZe Clan (Foil)",
+          "Astralis (Foil)",
+          "Team EnVyUs (Foil)",
+          "Fnatic (Foil)",
+          "Luminosity Gaming (Foil)",
+          "MLG (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PDHfShP7smlxtDawcikYvWIlzhVsMYm2rvCpI-l3VWwrRJkMW_wJ9LBdwFsMF_ZqFm7wL_sjMK1ot2Xng_ruz67/360fx360f" 
+    },
+    "MLG Columbus 2016 Challengers (Holo/Foil)": {
+      "name": "MLG Columbus 2016 Challengers (Holo/Foil)",
+      "price": 12.28,
+      "items": {
+        "Restricted": [
+          "Splyce (Holo)",
+          "Counter Logic Gaming (Holo)",
+          "Gambit Gaming (Holo)",
+          "Flipsid3 Tactics (Holo)",
+          "Team Liquid (Holo)",
+          "mousesports (Holo)",
+          "Cloud9 (Holo)",
+          "G2 Esports (Holo)",
+          "MLG (Holo)"
+        ],
+        "Classified": [
+          "Splyce (Foil)",
+          "Counter Logic Gaming (Foil)",
+          "Gambit Gaming (Foil)",
+          "Flipsid3 Tactics (Foil)",
+          "Team Liquid (Foil)",
+          "mousesports (Foil)",
+          "Cloud9 (Foil)",
+          "G2 Esports (Foil)",
+          "MLG (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PDHfShP7smlxtDawcikYfWJxDlV7p1107HE9NXz3QTg8xc5Y2z0INSRJFI5NFHQ_QS5xenqgpfuot2XnlZlF8Wr/360fx360f" 
+    },
+    "Cologne 2016 Legends (Holo/Foil)": {
+      "name": "Cologne 2016 Legends (Holo/Foil)",
+      "price": 14.88,
+      "items": {
+        "Restricted": [
+          "Ninjas in Pyjamas (Holo)",
+          "Counter Logic Gaming (Holo)",
+          "Team Liquid (Holo)",
+          "Natus Vincere (Holo)",
+          "Virtus.Pro (Holo)",
+          "SK Gaming (Holo)",
+          "Astralis (Holo)",
+          "Fnatic (Holo)",
+          "ESL (Holo)"
+        ],
+        "Classified": [
+          "Ninjas in Pyjamas (Foil)",
+          "Counter Logic Gaming (Foil)",
+          "Team Liquid (Foil)",
+          "Natus Vincere (Foil)",
+          "Virtus.Pro (Foil)",
+          "SK Gaming (Foil)",
+          "Astralis (Foil)",
+          "Fnatic (Foil)",
+          "ESL (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PDHfTJF4tnkxNHdqKelfeyAxT8AsJAljLiYoo7wigyxrxc4MWqicNOQJAJrMlCFq1O7k7jugMOi_MOedI-b88c/360fx360f" 
+    },
+    "Cologne 2016 Challangers (Holo/Foil)": {
+      "name": "Cologne 2016 Challangers (Holo/Foil)",
+      "price": 15.12,
+      "items": {
+        "Restricted": [
+          "OpTic Gaming (Holo)",
+          "Gambit Gaming (Holo)",
+          "Flipsid3 Tactics (Holo)",
+          "mousesports (Holo)",
+          "G2 Esports (Holo)",
+          "FaZe Clan (Holo)",
+          "Team EnVyUs (Holo)",
+          "Team Dignitas (Holo)",
+          "ESL (Holo)"
+        ],
+        "Classified": [
+          "OpTic Gaming (Foil)",
+          "Gambit Gaming (Foil)",
+          "Flipsid3 Tactics (Foil)",
+          "mousesports (Foil)",
+          "G2 Esports (Foil)",
+          "FaZe Clan (Foil)",
+          "Team EnVyUs (Foil)",
+          "Team Dignitas (Foil)",
+          "ESL (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PDHfTJF4tnkxNHdqKemfeLUwD1Susck2rzDoYj20Qfn_xdra2v3IoSUdQI4YgqG-wS_xezrg5Ci_MOexJHJZWE/360fx360f" 
+    },
+    "Atlanta 2017 Legends (Holo/Foil)": {
+      "name": "Atlanta 2017 Legends (Holo/Foil)",
+      "price": 63.18,
+      "items": {
+        "Restricted": [
+          "Astralis (Holo)",
+          "Flipsid3 Tactics (Holo)",
+          "Fnatic (Holo)",
+          "Gambit Gaming (Holo)",
+          "Natus Vincere (Holo)",
+          "SK Gaming (Holo)",
+          "Team Liquid (Holo)",
+          "Virtus.Pro (Holo)",
+          "ELEAGUE (Holo)"
+        ],
+        "Classified": [
+          "Astralis (Foil)",
+          "Flipsid3 Tactics (Foil)",
+          "Fnatic (Foil)",
+          "Gambit Gaming (Foil)",
+          "Natus Vincere (Foil)",
+          "SK Gaming (Foil)",
+          "Team Liquid (Foil)",
+          "Virtus.Pro (Foil)",
+          "ELEAGUE (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PLcfTxM-N3kxNHcqKelfeqFlzlXsJZyibyX846h2VfhrhE_NzyhJY7AcABraQ7WqwC8ku_ogZWi_MOel85Xbwg/360fx360f" 
+    },
+    "Atlanta 2017 Challangers (Holo/Foil)": {
+      "name": "Atlanta 2017 Challangers (Holo/Foil)",
+      "price": 47.73,
+      "items": {
+        "Restricted": [
+          "Team EnVyUs (Holo)",
+          "FaZe Clan (Holo)",
+          "G2 Esports (Holo)",
+          "GODSENT (Holo)",
+          "HellRaisers (Holo)",
+          "mousesports (Holo)",
+          "North (Holo)",
+          "OpTic Gaming (Holo)",
+          "ELEAGUE (Holo)"
+        ],
+        "Classified": [
+          "Team EnVyUs (Foil)",
+          "FaZe Clan (Foil)",
+          "G2 Esports (Foil)",
+          "GODSENT (Foil)",
+          "HellRaisers (Foil)",
+          "mousesports (Foil)",
+          "North (Foil)",
+          "OpTic Gaming (Foil)",
+          "ELEAGUE (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PLcfTxM-N3kxNHcqKemfb6DkzoJ7Z11ibnC94jw0VCwrxdpNmz6JYKXcgc9NAzR8gfvwObogpKi_MOe622M7IM/360fx360f" 
+    },
+    "Krakow 2017 Legends (Holo/Foil)": {
+      "name": "Krakow 2017 Legends (Holo/Foil)",
+      "price": 14.42,
+      "items": {
+        "Restricted": [
+          "Astralis (Holo)",
+          "Virtus.Pro (Holo)",
+          "Fnatic (Holo)",
+          "SK Gaming (Holo)",
+          "Natus Vincere (Holo)",
+          "Gambit (Holo)",
+          "North (Holo)",
+          "FaZe Clan (Holo)",
+          "PGL (Holo)"
+        ],
+        "Classified": [
+          "Astralis (Foil)",
+          "Virtus.Pro (Foil)",
+          "Fnatic (Foil)",
+          "SK Gaming (Foil)",
+          "Natus Vincere (Foil)",
+          "Gambit (Foil)",
+          "North (Foil)",
+          "FaZe Clan (Foil)",
+          "PGL (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PjacDZN-47mxde0x6a6N-iFlGkJuJN30-2SpNyk3wKy_kA-ZTumJdKUdFNvYA3YrFftxenm1oj84sq7iLFE1Q/360fx360f" 
+    },
+    "Krakow 2017 Challangers (Holo/Foil)": {
+      "name": "Krakow 2017 Challangers (Holo/Foil)",
+      "price": 11.64,
+      "items": {
+        "Restricted": [
+          "mousesports (Holo)",
+          "G2 Esports (Holo)",
+          "BIG (Holo)",
+          "Cloud9 (Holo)",
+          "PENTA Sports (Holo)",
+          "Flipsid3 Tactics (Holo)",
+          "Immortals (Holo)",
+          "Vega Squadron (Holo)",
+          "PGL (Holo)"
+        ],
+        "Classified": [
+          "mousesports (Foil)",
+          "G2 Esports (Foil)",
+          "BIG (Foil)",
+          "Cloud9 (Foil)",
+          "PENTA Sports (Foil)",
+          "Flipsid3 Tactics (Foil)",
+          "Immortals (Foil)",
+          "Vega Squadron (Foil)",
+          "PGL (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PjacDZN-47mxde0x6W6Mu6Awj5UvcYi2brC9NX33wfhr0s9Y27zIdSUcVc5MwuF-1e9yO3sjYj84sq389ewEg/360fx360f" 
+    },
+    "Boston 2018 Legends (Holo/Foil)": {
+      "name": "Boston 2018 Legends (Holo/Foil)",
+      "price": 133.88,
+      "items": {
+        "Restricted": [
+          "Gambit Esports (Holo)",
+          "100 Thieves (Holo)",
+          "Astralis (Holo)",
+          "Virtus.Pro (Holo)",
+          "Fnatic (Holo)",
+          "SK Gaming (Holo)",
+          "BIG (Holo)",
+          "North (Holo)",
+          "ELEAGUE (Holo)"
+        ],
+        "Classified": [
+          "Gambit Esports (Foil)",
+          "100 Thieves (Foil)",
+          "Astralis (Foil)",
+          "Virtus.Pro (Foil)",
+          "Fnatic (Foil)",
+          "SK Gaming (Foil)",
+          "BIG (Foil)",
+          "North (Foil)",
+          "ELEAGUE (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PHHYilN4o7mxdi0m_LzNrXVhSUD7sNw0uqUoN3wjQzh_UFrN2qnINLDIFBoZ12B-lHqwbrpgMO8tJzK1zI97VTh2LSE/360fx360f" 
+    },
+    "Boston 2018 Returning Challangers (Holo/Foil)": {
+      "name": "Boston 2018 Challangers (Holo/Foil)",
+      "price": 20.07,
+      "items": {
+        "Restricted": [
+          "G2 Esports (Holo)",
+          "Cloud9 (Holo)",
+          "Flipsid3 Tactics (Holo)",
+          "Natus Vincere (Holo)",
+          "mousesports (Holo)",
+          "Sprout Esports (Holo)",
+          "FaZe Clan (Holo)",
+          "Vega Squadron (Holo)",
+          "ELEAGUE (Holo)"
+        ],
+        "Classified": [
+          "G2 Esports (Foil)",
+          "Cloud9 (Foil)",
+          "Flipsid3 Tactics (Foil)",
+          "Natus Vincere (Foil)",
+          "mousesports (Foil)",
+          "Sprout Esports (Foil)",
+          "FaZe Clan (Foil)",
+          "Vega Squadron (Foil)",
+          "ELEAGUE (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PHHYilN4o7mxdi0lP_1P7fUmGxU-tY_jLrF94jz3wW38hJsajr0d4SUe1A-N13Q-VW9xu_qhMLo6Zydznc3vz5iuyi7p2ixww/360fx360f" 
+    },
+    "Boston 2018 Minor Challengers (Holo/Foil)": {
+      "name": "Boston 2018 Minor Challengers (Holo/Foil)",
+      "price": 103.33,
+      "items": {
+        "Restricted": [
+          "Space Soldiers (Holo)",
+          "Team Liquid (Holo)",
+          "Avangar (Holo)",
+          "Renegades (Holo)",
+          "Team EnVyUs (Holo)",
+          "Misfits Gaming (Holo)",
+          "Quantum Bellator Fire (Holo)",
+          "Tyloo (Holo)",
+          "ELEAGUE (Holo)"
+        ],
+        "Classified": [
+          "Space Soldiers (Foil)",
+          "Team Liquid (Foil)",
+          "Avangar (Foil)",
+          "Renegades (Foil)",
+          "Team EnVyUs (Foil)",
+          "Misfits Gaming (Foil)",
+          "Quantum Bellator Fire (Foil)",
+          "Tyloo (Foil)",
+          "ELEAGUE (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PHHYilN4o7mxdi0lPj6J77fkm5D-4t327qQoNqn3AHk8kBuN277doKQcwZoYwuBq1G8xefsjZ-4vczLnyFnpGB8sr6XNmhy/360fx360f" 
+    },
+    "Community Capsule 2018": {
+      "name": "Community Capsule 2018",
+      "price": 1.01,
+      "items": {
+        "Mil-Spec Grade": [
+          "Bullet Rain",
+          "Camper",
+          "Dessert Eagle",
+          "Devouring Flame",
+          "Entry Fragger",
+          "Friendly Fire",
+          "Retake Expert",
+          "Small Arms"
+        ],
+        "Restricted": [
+          "Devouring Flame (Holo)",
+          "Friendly Fire (Holo)",
+          "Retake Expert (Holo)",
+          "Small Arms (Holo)"
+        ],
+        "Classified": [
+          "Bullet Rain (Foil)",
+          "Camper (Foil)"
+        ]
+      },
+      "has_suffix": false,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PDHfDAQvI3uq9DaqPT1I6jEmm5u5MRjjeyP9o3z2Abs-ks6Nm3zI4-XelM9NAvR_VK6xui60ZW46MmYyCdluiBwt2GdwUJeXg834g/360fx360f" 
+    },
+    "Boston 2018 Minor Challengers with Flash Gaming (Holo/Foil)": {
+      "name": "Boston 2018 Minor Challengers with Flash Gaming (Holo/Foil)",
+      "price": 15.66,
+      "items": {
+        "Restricted": [
+          "Space Soldiers (Holo)",
+          "Team Liquid (Holo)",
+          "Avangar (Holo)",
+          "Renegades (Holo)",
+          "Team EnVyUs (Holo)",
+          "Misfits Gaming (Holo)",
+          "Quantum Bellator Fire (Holo)",
+          "Flash Gaming (Holo)",
+          "ELEAGUE (Holo)"
+        ],
+        "Classified": [
+          "Space Soldiers (Foil)",
+          "Team Liquid (Foil)",
+          "Avangar (Foil)",
+          "Renegades (Foil)",
+          "Team EnVyUs (Foil)",
+          "Misfits Gaming (Foil)",
+          "Quantum Bellator Fire (Foil)",
+          "Flash Gaming (Foil)",
+          "ELEAGUE (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PHHYilN4o7mxdi0lPj6J77fkm5D-_p3hu6P94ik3Ae1rRc9MW71cYSWewZoZFrS81fqyO_v0JW07Z2fnCFq6yQksGGdwULLEHgFvg/360fx360f" 
+    },
+    "Boston 2018 Attending Legends (Holo/Foil)": {
+      "name": "Boston 2018 Attending Legends (Holo/Foil)",
+      "price": 15.00,
+      "items": {
+        "Restricted": [
+          "Gambit Esports (Holo)",
+          "Astralis (Holo)",
+          "Virtus.Pro (Holo)",
+          "Fnatic (Holo)",
+          "SK Gaming (Holo)",
+          "BIG (Holo)",
+          "North (Holo)",
+          "ELEAGUE (Holo)"
+        ],
+        "Classified": [
+          "Gambit Esports (Foil)",
+          "Astralis (Foil)",
+          "Virtus.Pro (Foil)",
+          "Fnatic (Foil)",
+          "SK Gaming (Foil)",
+          "BIG (Foil)",
+          "North (Foil)",
+          "ELEAGUE (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PHHYilN4o7mxdi0m_LzNrXVhVRf_NM_jL-ZodXw3gHsrUJoMjjxLNKce1A9ZgrZrlXvxuztg5K77szPmHFg6D5iuyi8zpij-w/360fx360f" 
+    },
+    "London 2018 Legends (Holo/Foil)": {
+      "name": "London 2018 Legends (Holo/Foil)",
+      "price": 9.15,
+      "items": {
+        "Restricted": [
+          "Cloud9 (Holo)",
+          "FaZe Clan (Holo)",
+          "Natus Vincere (Holo)",
+          "MIBR (Holo)",
+          "mousesports (Holo)",
+          "Winstrike Team (Holo)",
+          "G2 Esports (Holo)",
+          "Fnatic (Holo)",
+          "FACEIT (Holo)"
+        ],
+        "Classified": [
+          "Cloud9 (Foil)",
+          "FaZe Clan (Foil)",
+          "Natus Vincere (Foil)",
+          "MIBR (Foil)",
+          "mousesports (Foil)",
+          "Winstrike Team (Foil)",
+          "G2 Esports (Foil)",
+          "Fnatic (Foil)",
+          "FACEIT (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7P_HfzlN4o7mxdi0m_LzNrXVhSUI7Z102LiUotSh3FbnrkduMW3yJdXAclI-YV_SqwTql-7o05Hu7cvA1zI97S1tAvDr/360fx360f" 
+    },
+    "London 2018 Returning Challengers (Holo/Foil)": {
+      "name": "London 2018 Returning Challengers (Holo/Foil)",
+      "price": 9.54,
+      "items": {
+        "Restricted": [
+          "Gambit Esports (Holo)",
+          "Vega Squadron (Holo)",
+          "Space Soldiers (Holo)",
+          "BIG (Holo)",
+          "Astralis (Holo)",
+          "Team Liquid (Holo)",
+          "North (Holo)",
+          "Virtus.Pro (Holo)",
+          "FACEIT (Holo)"
+        ],
+        "Classified": [
+          "Gambit Esports (Foil)",
+          "Vega Squadron (Foil)",
+          "Space Soldiers (Foil)",
+          "BIG (Foil)",
+          "Astralis (Foil)",
+          "Team Liquid (Foil)",
+          "North (Foil)",
+          "Virtus.Pro (Foil)",
+          "FACEIT (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7P_HfzlN4o7mxdi0lP_1P7fUmGxU-tY_37qSrNql2A3k-UFtajr0cdCVIw9oNF3X-AS_x-rm157vvprNmyRr6D5iuyivYw18Tg/360fx360f" 
+    },
+    "London 2018 Minor Challengers (Holo/Foil)": {
+      "name": "London 2018 Minor Challengers (Holo/Foil)",
+      "price": 6.16,
+      "items": {
+        "Restricted": [
+          "Ninjas in Pyjamas (Holo)",
+          "compLexity Gaming (Holo)",
+          "HellRaisers (Holo)",
+          "Renegades (Holo)",
+          "OpTic Gaming (Holo)",
+          "Rogue (Holo)",
+          "Team Spirit (Holo)",
+          "Tyloo (Holo)",
+          "FACEIT (Holo)"
+        ],
+        "Classified": [
+          "Ninjas in Pyjamas (Foil)",
+          "compLexity Gaming (Foil)",
+          "HellRaisers (Foil)",
+          "Renegades (Foil)",
+          "OpTic Gaming (Foil)",
+          "Rogue (Foil)",
+          "Team Spirit (Foil)",
+          "Tyloo (Foil)",
+          "FACEIT (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7P_HfzlN4o7mxdi0lPj6J77fkm5D-4spj7qZrY6l2Vfi-kI_amnyIYWcJwdraFvY81jtlOe70MfouZTJmno3pGB8sqAq1NrI/360fx360f" 
+    },
+    "Katowice 2019 Legends (Holo/Foil)": {
+      "name": "Katowice 2019 Legends (Holo/Foil)",
+      "price": 6.82,
+      "items": {
+        "Restricted": [
+          "Astralis (Holo)",
+          "BIG (Holo)",
+          "compLexity Gaming (Holo)",
+          "FaZe Clan (Holo)",
+          "HellRaisers (Holo)",
+          "MIBR (Holo)",
+          "Natus Vincere (Holo)",
+          "Team Liquid (Holo)",
+          "IEM (Holo)"
+        ],
+        "Classified": [
+          "Astralis (Foil)",
+          "BIG (Foil)",
+          "compLexity Gaming (Foil)",
+          "FaZe Clan (Foil)",
+          "HellRaisers (Foil)",
+          "MIBR (Foil)",
+          "Natus Vincere (Foil)",
+          "Team Liquid (Foil)",
+          "IEM (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PjJZTJV5d-zxtDazsj4NrzUmG9C18lwmO7Eu47221XsqEc_Z2z3d9SUdQc7NFvQqQS_wrrojZHq7cyanScyuikhtCvD30vggYzdAQY/360fx360f" 
+    },
+    "Katowice 2019 Returning Challengers (Holo/Foil)": {
+      "name": "Katowice 2019 Returning Challengers (Holo/Foil)",
+      "price": 8.65,
+      "items": {
+        "Restricted": [
+          "Cloud9 (Holo)",
+          "Fnatic (Holo)",
+          "G2 Esports (Holo)",
+          "Ninjas in Pyjamas (Holo)",
+          "Tyloo (Holo)",
+          "Vega Squadron (Holo)",
+          "IEM (Holo)"
+        ],
+        "Classified": [
+          "Cloud9 (Foil)",
+          "Fnatic (Foil)",
+          "G2 Esports (Foil)",
+          "Ninjas in Pyjamas (Foil)",
+          "Tyloo (Foil)",
+          "Vega Squadron (Foil)",
+          "IEM (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PjJZTJV5d-zxtDazsj3O7rdmm5f78BjmdbN9J7yjRrnr0Y9YDqhINOWcwU7MlzW-Fi8lers18C86pzKwHVmuHJw4nbUlhXhn1gSORm6KwsJ/360fx360f" 
+    },
+    "Katowice 2019 Minor Challengers (Holo/Foil)": {
+      "name": "Katowice 2019 Minor Challengers (Holo/Foil)",
+      "price": 8.00,
+      "items": {
+        "Restricted": [
+          "Avangar (Holo)",
+          "ENCE (Holo)",
+          "FURIA (Holo)",
+          "Grayhound Gaming (Holo)",
+          "NRG (Holo)",
+          "Renegades (Holo)",
+          "Team Spirit (Holo)",
+          "ViCi Gaming (Holo)",
+          "Vitality (Holo)",
+          "Winstrike Team (Holo)",
+          "IEM (Holo)"
+        ],
+        "Classified": [
+          "Avangar (Foil)",
+          "ENCE (Foil)",
+          "FURIA (Foil)",
+          "Grayhound Gaming (Foil)",
+          "NRG (Foil)",
+          "Renegades (Foil)",
+          "Team Spirit (Foil)",
+          "ViCi Gaming (Foil)",
+          "Vitality (Foil)",
+          "Winstrike Team (Foil)",
+          "IEM (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PjJZTJV5d-zxtDazsj3PLXFk2VV7dditeXA54vwxgfj8hZqNm6gcdWRewY5YV6C_AC-lO7tgp7o6JmdzyM26CFw4H6LnUGpwUYb0x5w5XQ/360fx360f" 
+    },
+    "Berlin 2019 Legends (Holo/Foil)": {
+      "name": "Berlin 2019 Legends (Holo/Foil)",
+      "price": 2.04,
+      "items": {
+        "Restricted": [
+          "Astralis (Holo)",
+          "ENCE (Holo)",
+          "MIBR (Holo)",
+          "Natus Vincere (Holo)",
+          "Ninjas in Pyjamas (Holo)",
+          "FaZe Clan (Holo)",
+          "Team Liquid (Holo)",
+          "Renegades (Holo)",
+          "StarLadder (Holo)"
+        ],
+        "Classified": [
+          "Astralis (Foil)",
+          "ENCE (Foil)",
+          "MIBR (Foil)",
+          "Natus Vincere (Foil)",
+          "Ninjas in Pyjamas (Foil)",
+          "FaZe Clan (Foil)",
+          "Team Liquid (Foil)",
+          "Renegades (Foil)",
+          "StarLadder (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PHNYzFL4o7mxdm0m_LzNrXVhVRd6dd2j6eSpt6l2wa3qBY9ZGryJISVcgY3Yg2G-1Lokui80ZS97ZTOySNmvick-z-DyHhpzwaN/360fx360f" 
+    },
+    "Berlin 2019 Returning Challengers (Holo/Foil)": {
+      "name": "Berlin 2019 Returning Challengers (Holo/Foil)",
+      "price": 1.54,
+      "items": {
+        "Restricted": [
+          "compLexity Gaming (Holo)",
+          "HellRaisers (Holo)",
+          "Avangar (Holo)",
+          "G2 Esports (Holo)",
+          "Vitality (Holo)",
+          "StarLadder (Holo)"
+        ],
+        "Classified": [
+          "compLexity Gaming (Foil)",
+          "HellRaisers (Foil)",
+          "Avangar (Foil)",
+          "G2 Esports (Foil)",
+          "Vitality (Foil)",
+          "StarLadder (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PHNYzFL4o7mxdm0lP_1P7fUmGxU-tZOhujT8om72QXh_hE-YDzzLY_HcVJtaAyCr1K-lOa7hcS07c_KzHFkuCEk5X3czAv330_5MjkhaQ/360fx360f" 
+    },
+    "Berlin 2019 Minor Challengers (Holo/Foil)": {
+      "name": "Berlin 2019 Minor Challengers (Holo/Foil)",
+      "price": 1.08,
+      "items": {
+        "Restricted": [
+          "Grayhound Gaming (Holo)",
+          "mousesports (Holo)",
+          "forZe eSports (Holo)",
+          "NRG (Holo)",
+          "Tyloo (Holo)",
+          "FURIA (Holo)",
+          "CR4ZY (Holo)",
+          "Syman Gaming (Holo)",
+          "North (Holo)",
+          "DreamEaters (Holo)",
+          "INTZ E-SPORTS CLUB (Holo)",
+          "StarLadder (Holo)"
+        ],
+        "Classified": [
+          "Grayhound Gaming (Foil)",
+          "mousesports (Foil)",
+          "forZe eSports (Foil)",
+          "NRG (Foil)",
+          "Tyloo (Foil)",
+          "FURIA (Foil)",
+          "CR4ZY (Foil)",
+          "Syman Gaming (Foil)",
+          "North (Foil)",
+          "DreamEaters (Foil)",
+          "INTZ E-SPORTS CLUB (Foil)",
+          "StarLadder (Foil)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7PHNYzFL4o7mxdm0lPj6J77fkm5D-_p9i_vG8MKs3wW2-kBtZGClcYfDdFNqM1CB81C3lei80ZHuu5-bynJluHR05yqMgVXp1v9P5g4k/360fx360f" 
+    },
+    "2020 RMR Legends": {
+      "name": "2020 RMR Legends",
+      "price": 0.29,
+      "items": {
+        "Mil-Spec Grade": [
+          "Vitality",
+          "Heroic",
+          "Ninjas in Pyjamas",
+          "Spirit",
+          "Natus Vincere",
+          "Evil Geniuses",
+          "100 Thieves",
+          "FURIA"
+        ],
+        "Restricted": [
+          "Vitality (Holo)",
+          "Heroic (Holo)",
+          "Ninjas in Pyjamas (Holo)",
+          "Spirit (Holo)",
+          "Natus Vincere (Holo)",
+          "Evil Geniuses (Holo)",
+          "100 Thieves (Holo)",
+          "FURIA (Holo)"
+        ],
+        "Classified": [
+          "Vitality (Foil)",
+          "Heroic (Foil)",
+          "Ninjas in Pyjamas (Foil)",
+          "Spirit (Foil)",
+          "Natus Vincere (Foil)",
+          "Evil Geniuses (Foil)",
+          "100 Thieves (Foil)",
+          "FURIA (Foil)"
+        ],
+        "Covert": [
+          "Vitality (Gold)",
+          "Heroic (Gold)",
+          "Ninjas in Pyjamas (Gold)",
+          "Spirit (Gold)",
+          "Natus Vincere (Gold)",
+          "Evil Geniuses (Gold)",
+          "100 Thieves (Gold)",
+          "FURIA (Gold)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7OHFY28SvoyJmIWMkvnwIITdl3lW7Yt00u3H8Nzz3QOxrRE4ammgco_HI1I7YVyE-wO3kru8hsK17ZXMziRipGB8snn0xlTa/360fx360f" 
+    },
+    "2020 RMR Challangers": {
+      "name": "2020 RMR Challengers",
+      "price": 0.23,
+      "items": {
+        "Mil-Spec Grade": [
+          "Astralis",
+          "BIG",
+          "Fnatic",
+          "G2",
+          "OG",
+          "GODSENT",
+          "Nemiga",
+          "Liquid"
+        ],
+        "Restricted": [
+          "Astralis (Holo)",
+          "BIG (Holo)",
+          "Fnatic (Holo)",
+          "G2 (Holo)",
+          "OG (Holo)",
+          "GODSENT (Holo)",
+          "Nemiga (Holo)",
+          "Liquid (Holo)"
+        ],
+        "Classified": [
+          "Astralis (Foil)",
+          "BIG (Foil)",
+          "Fnatic (Foil)",
+          "G2 (Foil)",
+          "OG (Foil)",
+          "GODSENT (Foil)",
+          "Nemiga (Foil)",
+          "Liquid (Foil)"
+        ],
+        "Covert": [
+          "Astralis (Gold)",
+          "BIG (Gold)",
+          "Fnatic (Gold)",
+          "G2 (Gold)",
+          "OG (Gold)",
+          "GODSENT (Gold)",
+          "Nemiga (Gold)",
+          "Liquid (Gold)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7OHFY28SvoyJl4iKm_vxPbzUhHhu5MRjjeyPpNik21Hh-0Jlamv7ddLBdQI6NVDQqAe5wr3thMXp6M6bmHIyuiUn5mGdwUIhAwMIWw/360fx360f" 
+    },
+    "2020 RMR Contenders": {
+      "name": "2020 RMR Contenders",
+      "price": 0.23,
+      "items": {
+        "Mil-Spec Grade": [
+          "FaZe",
+          "North",
+          "Virtus.pro",
+          "ESPADA",
+          "Gen.G",
+          "Boom",
+          "Renegades",
+          "TYLOO"
+        ],
+        "Restricted": [
+          "FaZe (Holo)",
+          "North (Holo)",
+          "Virtus.pro (Holo)",
+          "ESPADA (Holo)",
+          "Gen.G (Holo)",
+          "Boom (Holo)",
+          "Renegades (Holo)",
+          "TYLOO (Holo)"
+        ],
+        "Classified": [
+          "FaZe (Foil)",
+          "North (Foil)",
+          "Virtus.pro (Foil)",
+          "ESPADA (Foil)",
+          "Gen.G (Foil)",
+          "Boom (Foil)",
+          "Renegades (Foil)",
+          "TYLOO (Foil)"
+        ],
+        "Covert": [
+          "FaZe (Gold)",
+          "North (Gold)",
+          "Virtus.pro (Gold)",
+          "ESPADA (Gold)",
+          "Gen.G (Gold)",
+          "Boom (Gold)",
+          "Renegades (Gold)",
+          "TYLOO (Gold)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://community.akamai.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsQEl9Jg9SpIW1KgRr7OHFY28SvoyJl4-Fg_L6N77DhVRd6dd2j6eVrI6ki1LjqkVqZWvyddXGJANvaVmG-ge_wO7rgJG5tZTAySdiuCYr-z-DyHRDHHHn/360fx360f" 
+    },
+    "Stockholm 2021 Legends Sticker Capsule": {
+      "name": "Stockholm 2021 Legends Sticker Capsule",
+      "price": 0.99,
+      "items": {
+        "Mil-Spec Grade": [
+          "Evil Geniuses",
+          "Ninjas in Pyjamas",
+          "Vitality",
+          "G2 Esports",
+          "PGL",
+          "FURIA",
+          "Team Liquid",
+          "Gambit Gaming",
+          "Natus Vincere"
+        ],
+        "Restricted": [
+          "PGL (Holo)",
+          "Evil Geniuses (Holo)",
+          "Ninjas in Pyjamas (Holo)",
+          "Gambit Gaming (Holo)",
+          "G2 Esports (Holo)",
+          "Team Liquid (Holo)",
+          "Vitality (Holo)",
+          "Natus Vincere (Holo)",
+          "FURIA (Holo)"
+        ],
+        "Classified": [
+          "Evil Geniuses (Foil)",
+          "PGL (Foil)",
+          "Ninjas in Pyjamas (Foil)",
+          "Vitality (Foil)",
+          "FURIA (Foil)",
+          "Gambit Gaming (Foil)",
+          "G2 Esports (Foil)",
+          "Team Liquid (Foil)",
+          "Natus Vincere (Foil)"
+        ],
+        "Covert": [
+          "Evil Geniuses (Gold)",
+          "PGL (Gold)",
+          "Ninjas in Pyjamas (Gold)",
+          "Vitality (Gold)",
+          "FURIA (Gold)",
+          "Gambit Gaming (Gold)",
+          "G2 Esports (Gold)",
+          "Team Liquid (Gold)",
+          "Natus Vincere (Gold)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://csgostash.com/img/items/containers/c324.png" 
+    },
+    "Stockholm 2021 Challengers Sticker Capsule": {
+      "name": "Stockholm 2021 Challengers Sticker Capsule",
+      "price": 0.99,
+      "items": {
+        "Mil-Spec Grade": [
+          "PGL",
+          "BIG",
+          "Heroic",
+          "paiN Gaming",
+          "Team Spirit",
+          "ENCE",
+          "MOUZ",
+          "Movistar Riders",
+          "Astralis"
+        ],
+        "Restricted": [
+          "PGL (Holo)",
+          "BIG (Holo)",
+          "Heroic (Holo)",
+          "paiN Gaming (Holo)",
+          "Team Spirit (Holo)",
+          "ENCE (Holo)",
+          "MOUZ (Holo)",
+          "Movistar Riders (Holo)",
+          "Astralis (Holo)"
+        ],
+        "Classified": [
+          "PGL (Foil)",
+          "BIG (Foil)",
+          "Heroic (Foil)",
+          "paiN Gaming (Foil)",
+          "Team Spirit (Foil)",
+          "ENCE (Foil)",
+          "MOUZ (Foil)",
+          "Movistar Riders (Foil)",
+          "Astralis (Foil)"
+        ],
+        "Covert": [
+          "PGL (Gold)",
+          "BIG (Gold)",
+          "Heroic (Gold)",
+          "paiN Gaming (Gold)",
+          "Team Spirit (Gold)",
+          "ENCE (Gold)",
+          "MOUZ (Gold)",
+          "Movistar Riders (Gold)",
+          "Astralis (Gold)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://csgostash.com/img/items/containers/c325.png" 
+    },
+    "Stockholm 2021 Contenders Sticker Capsule": {
+      "name": "Stockholm 2021 Contenders Sticker Capsule",
+      "price": 0.99,
+      "items": {
+        "Mil-Spec Grade": [
+          "Renegades",
+          "PGL",
+          "GODSENT",
+          "Sharks Esports",
+          "Copenhagen Flames",
+          "Virtus.Pro",
+          "Tyloo",
+          "Entropiq",
+          "FaZe Clan"
+        ],
+        "Restricted": [
+          "Renegades (Holo)",
+          "PGL (Holo)",
+          "GODSENT (Holo)",
+          "Sharks Esports (Holo)",
+          "Copenhagen Flames (Holo)",
+          "Virtus.Pro (Holo)",
+          "Tyloo (Holo)",
+          "Entropiq (Holo)",
+          "FaZe Clan (Holo)"
+        ],
+        "Classified": [
+          "Renegades (Foil)",
+          "PGL (Foil)",
+          "GODSENT (Foil)",
+          "Sharks Esports (Foil)",
+          "Copenhagen Flames (Foil)",
+          "Virtus.Pro (Foil)",
+          "Tyloo (Foil)",
+          "Entropiq (Foil)",
+          "FaZe Clan (Foil)"
+        ],
+        "Covert": [
+          "Renegades (Gold)",
+          "PGL (Gold)",
+          "GODSENT (Gold)",
+          "Sharks Esports (Gold)",
+          "Copenhagen Flames (Gold)",
+          "Virtus.Pro (Gold)",
+          "Tyloo (Gold)",
+          "Entropiq (Gold)",
+          "FaZe Clan (Gold)"
+        ]
+      },
+      "has_suffix": true,
+      "key": null,
+      "asset": "https://csgostash.com/img/items/containers/c326.png" 
     }
+
   }
 }

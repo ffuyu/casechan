@@ -173,8 +173,8 @@ class Capsule(Container):
 
     @property
     def key(self):
-        if all_capsules.get(self.name).get('key'):
-            return Key(f'{self.name} Key')
+        if keyname := all_capsules.get(self.name).get('key'):
+            return Key(keyname)
  
         return None
 
@@ -207,7 +207,6 @@ class Capsule(Container):
 
 class Key:
     def __init__(self, name):
-        self.case = Case(name[:-4])
         self.name = name
         self.price = KEY_PRICE
 
@@ -216,6 +215,3 @@ class Key:
 
     def __repr__(self):
         return f'Key(name={self.name})'
-
-    async def use(self):
-        return await self.case.open()

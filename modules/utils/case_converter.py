@@ -68,6 +68,10 @@ class ContainerConverter(Converter):
         # capsules
         for capsule in [*all_capsules]:
             if capsule.lower() == argument:
-                return Capsule(capsule) if not key else Capsule(case).key
+                if not key:
+                    return Capsule(capsule)
+                
+        if argument == 'cs:go capsule' and key:
+            return Key('CS:GO Capsule Key')
 
         raise ValueError(f'No container, package, capsule or key with name "{argument}"')

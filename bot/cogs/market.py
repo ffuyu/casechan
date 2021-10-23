@@ -88,6 +88,7 @@ class MarketCog(commands.Cog, name='Market'):
 
             if isinstance(item, Container):
                 item_info = await Item.get(False, name=item.name)
+                if not item_info: item_info = item
             else: 
                 item_info = item
 
