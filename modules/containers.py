@@ -16,6 +16,7 @@ with open('etc/containers.json', 'r', encoding='utf-8') as f:
     json         = json.loads(f.read())
     
     all_cases    = json.get('cases',    {})
+    drop_pool    = [case for case in all_cases if case.get('drop', False)]
     all_packages = json.get('packages', {})
     # all_capsules = json.get('capsules', {})
     # unloaded capsules, load while debugging

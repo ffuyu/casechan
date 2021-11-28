@@ -2635,7 +2635,8 @@
     "Spooky Case": {
       "name": "Spooky Case",
       "price": 0.00,
-      "color": [235, 107, 52],  
+      "color": [235, 107, 52],
+      "drop": false,
       "items": {
         "Mil-Spec Grade": [
           "MP7 | Skulls",
