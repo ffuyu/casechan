@@ -194,21 +194,28 @@ class Capsule(Container):
         rarity = random.choices(population=rarities, weights=weights, k=1)[0]
 
         
-        if self.has_suffix:
-            item_name = f'Sticker | {random.choice(self.items[rarity])} | {self.suffix}'
-        else:
-            item_name = f'Sticker | {random.choice(self.items[rarity])}'
+        while True:
+            sticker = random.choice(self.items[rarity])
 
-        valid_items = {item for item 
-                       in await self.get_items()
-                       if item_name in item.name}
+            if self.has_suffix:
+                item_name = f'Sticker | {sticker} | {self.suffix}'
+            else:
+                item_name = f'Sticker | {sticker}'
 
-        exteriors = {}
+            valid_items = {item for item 
+                        in await self.get_items()
+                        if item_name in item.name}
 
-        result = await asyncio.get_running_loop().run_in_executor(
-            None,
-            partial(_get_valid_item, item_name, rarity, valid_items, exteriors)
-        )
+            exteriors = {}
+
+            try:
+                result = await asyncio.get_running_loop().run_in_executor(
+                None,
+                partial(_get_valid_item, item_name, rarity, valid_items, exteriors))
+            except FailedItemGen:
+                continue
+            else:
+                break
         
         return result
 

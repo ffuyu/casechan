@@ -298,7 +298,7 @@ class CoreCog(commands.Cog, name='Core'):
                     components=[ActionRow(Button(
                         style=ButtonStyle.link,
                         label='View at casechan.com',
-                        url=f'https://casechan.com/profiles/{ctx.author.id}/{ctx.guild.id}#inventory'
+                        url=f'https://casechan.com/profile/{ctx.author.id}/{ctx.guild.id}#inventory'
                     )
                     )]
                 )

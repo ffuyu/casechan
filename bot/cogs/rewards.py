@@ -102,8 +102,8 @@ class RewardsCog(commands.Cog, name='Rewards'):
             if (datetime.datetime.utcnow() - player.weekly) > datetime.timedelta(weeks=1):
                 player.weekly = datetime.datetime.utcnow()
                 range_ = \
-                    random.choices([(75, 100), (100, 150), (200, 300), (300, 500), (500, 1000)],
-                                weights=[50, 25, 20, 4.9, 0.1],
+                    random.choices([(150, 200), (250, 300), (300, 400), (400, 500), (500, 1000)],
+                                weights=[40, 30, 25, 4.9, 0.1],
                                 k=1)[0]
                 amount = random.randint(range_[0], range_[1])
 
