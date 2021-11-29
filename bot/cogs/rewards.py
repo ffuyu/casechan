@@ -13,7 +13,7 @@ from dislash.interactions.message_components import ActionRow, Button, ButtonSty
 
 from humanize import naturaldelta
 
-from modules.containers import Case, all_cases
+from modules.containers import Case, drop_pool
 from modules.database.players import SafePlayer
 from modules.errors import RewardsError
 
@@ -22,7 +22,7 @@ async def _reward_cases(player, to_give):
     given = 0
     cases = defaultdict(int)
     while given < to_give:
-        case = Case(random.choice([*all_cases]))
+        case = Case(random.choice([*drop_pool]))
         n = random.randint(0, to_give - given)
         given += n
         player.mod_case(case.name, n)

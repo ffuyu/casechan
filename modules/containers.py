@@ -15,11 +15,9 @@ log = logging.getLogger(__name__)
 with open('etc/containers.json', 'r', encoding='utf-8') as f:
     json         = json.loads(f.read())
     
-    all_cases    = json.get('cases',    {})
-    drop_pool    = [case for case in all_cases if case.get('drop', False)]
+    all_cases    = json.get('cases', {})
+    drop_pool    = {case: data for case, data in all_cases.items() if data.get('drop', True)}
     all_packages = json.get('packages', {})
-    # all_capsules = json.get('capsules', {})
-    # unloaded capsules, load while debugging
     all_capsules = json.get('capsules', {})
 
 _rarities = {  # grade weight, st weight 1 & 2
