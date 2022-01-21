@@ -2718,6 +2718,76 @@
       },
       "key": "Halloween Case Key",
       "asset": "https://casechan.com/static/assets/halloween.png"
+    },
+    "Dreams & Nightmares Case": {
+      "name": "Dreams & Nightmares Case",
+      "price": 7.55,
+      "drop": true,
+      "items": {
+        "Mil-Spec Grade": [
+          "Five-SeveN | Scrawl",
+          "MAC-10 | Ensnared",
+          "MAG-7 | Foresight",
+          "MP5-SD | Necro Jr.",
+          "P2000 | Lifted Spirits",
+          "SCAR-20 | Poultrygeist",
+          "Sawed-Off | Spirit Board"
+        ],
+        "Restricted": [
+          "PP-Bizon | Space Cat",
+          "G3SG1 | Dream Glade",
+          "M4A1-S | Night Terror",
+          "XM1014 | Zombie Offensive",
+          "USP-S | Ticket to Hell"
+        ],
+        "Classified": [
+          "Dual Berettas | Melondrama",
+          "FAMAS | Rapid Eye Movement",
+          "MP7 | Abyssal Apparition"
+        ],
+        "Covert": [
+          "AK-47 | Nightwish",
+          "MP9 | Starlight Protector"
+        ],
+        "Exceedingly Rare Item": [
+          "Bowie Knife | Gamma Doppler",
+          "Bowie Knife | Autotronic",
+          "Bowie Knife | Lore",
+          "Bowie Knife | Bright Water",
+          "Bowie Knife | Freehand",
+          "Bowie Knife | Black Laminate",
+
+          "Butterfly Knife | Lore",
+          "Butterfly Knife | Autotronic",
+          "Butterfly Knife | Bright Water",
+          "Butterfly Knife | Gamma Doppler",
+          "Butterfly Knife | Freehand",
+          "Butterfly Knife | Black Laminate",
+
+          "Falchion Knife | Lore",
+          "Falchion Knife | Autotronic",
+          "Falchion Knife | Bright Water",
+          "Falchion Knife | Gamma Doppler",
+          "Falchion Knife | Freehand",
+          "Falchion Knife | Black Laminate",
+
+          "Huntsman Knife | Lore",
+          "Huntsman Knife | Autotronic",
+          "Huntsman Knife | Bright Water",
+          "Huntsman Knife | Gamma Doppler",
+          "Huntsman Knife | Freehand",
+          "Huntsman Knife | Black Laminate",
+
+          "Shadow Daggers | Lore",
+          "Shadow Daggers | Autotronic",
+          "Shadow Daggers | Bright Water",
+          "Shadow Daggers | Gamma Doppler",
+          "Shadow Daggers | Freehand",
+          "Shadow Daggers | Black Laminate"
+        ]
+      },
+      "key": "Dreams & Nightmares Case Key",
+      "asset": "https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFQwnfCcJmxDv9rhwIHZwqP3a-uGwz9Xv8F0j-qQrI3xiVLkrxVuZW-mJoWLMlhpWhFkc9M/360fx360f"
     }
   },
   "packages": {

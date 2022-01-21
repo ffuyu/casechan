@@ -3,5 +3,6 @@ default_prefix: 'c.'
 owners_ids:
   - 717747572076314745
   - 365957462333063170
+  - 928415316558635018
 
 database-name: casechan

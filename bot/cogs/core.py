@@ -40,6 +40,8 @@ from dislash.interactions.message_components import ActionRow, Button, ButtonSty
 from dpytools.embeds import Embed
 from dpytools.embeds import paginate_to_embeds
 
+
+
 allowed_characters = "ABCDEFGHJKLMNPRSTUVXYZ23456789"
 uuid_gen = ShortUUID()
 log = logging.getLogger(__name__)
