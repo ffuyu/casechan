@@ -6,7 +6,7 @@ import statcord
 class StatcordPost(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.key = "statcord.com-lu75a7K50G3U3AymRYrn"
+        self.key = "statcord.com-xAFUE1mTcPYIxaEC72sD"
         self.api = statcord.Client(self.bot,self.key)
         if config.get('DEBUG') == False:
             self.api.start_loop()
