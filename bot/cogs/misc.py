@@ -48,7 +48,7 @@ class Cog(commands.Cog, name='Misc'):
         Invite this bot to your server with this command
         """
         invite_url = ("https://discord.com/api/oauth2/authorize?"
-                      "client_id=864925623826120714&"
+                      "client_id=934748366997454859&"
                       "permissions=84032"
                       "&scope=bot%20applications.commands")
         await ctx.send(embed=Embed(
