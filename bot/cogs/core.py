@@ -31,7 +31,7 @@ from etc.emojis import emojis
 from typing import Optional
 
 from DiscordUtils.Pagination import CustomEmbedPaginator
-from discord import Member, Colour, PartialEmoji, SlashCommand, Option, OptionChoice, SelectMenu, SelectOption
+from discord import Member, Colour, PartialEmoji
 from discord.ext import commands, tasks
 from discord.ext.commands.context import Context
 from discord.ext.commands.cooldowns import BucketType
@@ -84,14 +84,14 @@ class CoreCog(commands.Cog, name='Core'):
 
     def __init__(self, bot):
         self.bot = bot
-        self.bot.application_command(name="open", cls=SlashCommand, guild_ids = [919978068435664916])(self._open_slash)
         self.log_stats.start()
         print(f'Cog: {self.qualified_name} loaded')
 
     def cog_unload(self):
         print(f'Cog: {self.qualified_name} unloaded')
 
-
+    @guild_only()
+    @max_concurrency(number=1, per=commands.BucketType.member, wait=True)
     @commands.command(name='open')
     async def _open(self, ctx: Context, amount: Optional[int] = 1, *, container: Optional[ContainerConverter]):
         """
@@ -213,9 +213,6 @@ class CoreCog(commands.Cog, name='Core'):
                 finally:
                     await player.save()
                     
-    async def _open_slash(self, ctx, container: Option(str, "Container", required=True), amount: Option(int, "Amount", required=False)):
-        await self._open(ctx, amount, container)
-    
 
     @commands.cooldown(10, 60, BucketType.member)
     @commands.command()
