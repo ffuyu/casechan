@@ -126,7 +126,7 @@ class RewardsCog(commands.Cog, name='Rewards'):
         rows = ActionRow(
             Button(
                 style=ButtonStyle.link,
-                url="https://top.gg/bot/864925623826120714/vote",
+                url="https://top.gg/bot/934748366997454859/vote",
                 label="Vote now"
             ),
             Button(
